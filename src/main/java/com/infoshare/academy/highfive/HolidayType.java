@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum HolidayType {
+
     @JsonProperty("National holiday")
     NATIONAL_HOLIDAY("National holiday", true),
+
     @JsonProperty("Observance")
     OBSERVANCE("Observance", false),
+
     @JsonProperty("Season")
     SEASON("Season", false);
 

@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ApiJsonParser {
+
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static List<Holiday> parseFromFile(String fileName) throws IOException {
@@ -43,6 +44,5 @@ public class ApiJsonParser {
             objectMapper.writer().withRootName("holidays").writeValue(new File(fileName),holidays);
             stdout.info("JSON file created!");
     }
-
 
 }

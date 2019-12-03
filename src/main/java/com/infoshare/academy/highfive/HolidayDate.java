@@ -60,5 +60,5 @@ public class HolidayDate {
                 ", #dayInyear=" + getDayInYear() +
                 " \n";
     }
-}
 
+}

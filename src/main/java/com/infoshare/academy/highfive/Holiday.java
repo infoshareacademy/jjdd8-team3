@@ -41,8 +41,6 @@ public class Holiday {
         this.types = types;
     }
 
-
-    
     @Override
     public String toString() {
         return "Holidays{" +
@@ -52,4 +50,5 @@ public class Holiday {
                ", enumType=" + Arrays.toString(types) +
                 '}'+"\n";
     }
+
 }

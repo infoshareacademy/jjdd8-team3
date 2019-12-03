@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class HolidaysSingleton {
+
     private static HolidaysSingleton instance;
     private List<Holiday> holidayArrayList;
+
     private HolidaysSingleton() {
     }
 
@@ -35,4 +37,5 @@ public class HolidaysSingleton {
     public void initSaveToFile(String filename) throws Exception {
        ApiJsonParser.saveToFile(filename,holidayArrayList);
     }
+
 }
