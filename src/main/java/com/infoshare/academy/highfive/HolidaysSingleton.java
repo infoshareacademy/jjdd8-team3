@@ -1,13 +1,11 @@
 package com.infoshare.academy.highfive;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HolidaysSingleton {
     private static HolidaysSingleton instance;
     private List<Holiday> holidayArrayList;
-    //private ApiJsonParser apiJsonParser = new ApiJsonParser();
     private HolidaysSingleton() {
     }
 

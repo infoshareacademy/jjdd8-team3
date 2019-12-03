@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class HolidayDate {
     @JsonAlias({ "date", "iso" })
-   @JsonIgnoreProperties(value = {"date"})
+    @JsonIgnoreProperties(value = {"date"})
     private Date date;
 
     public HolidayDate() {
@@ -26,6 +26,7 @@ public class HolidayDate {
     public void setDate(Date date) {
         this.date = date;
     }
+
     public Integer getYear() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy");
         return Integer.parseInt(format.format(date));

@@ -1,13 +1,13 @@
 package com.infoshare.academy.highfive;
 
-import java.util.List;
+import java.util.Arrays;
+
 public class Holiday {
 
     private String name;
     private String description;
     private HolidayDate date;
-    private List<String> type = null;
-
+    private HolidayType[] types;
 
     public String getName() {
         return name;
@@ -33,26 +33,23 @@ public class Holiday {
         this.date = date;
     }
 
-    public List<String> getType() {
-        return type;
+    public HolidayType[] getTypes() {
+        return types;
     }
 
-    public boolean isfree() {
-        return type.contains("National holiday");
+    public void setTypes(HolidayType[] types) {
+        this.types = types;
     }
 
-    public void setType(List<String> type) {
-        this.type = type;
-    }
 
+    
     @Override
     public String toString() {
         return "Holidays{" +
                 "name= " + name  +
                 ", description= " + description  +
                 ", date=" + date +
-                ", type=" + type +
-                ", free=" + isfree() +
+               ", enumType=" + Arrays.toString(types) +
                 '}'+"\n";
     }
 }
