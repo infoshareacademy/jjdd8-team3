@@ -1,5 +1,7 @@
 package com.infoshare.academy.highfive;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.util.Arrays;
 
 public class Holiday {
@@ -7,6 +9,8 @@ public class Holiday {
     private String name;
     private String description;
     private HolidayDate date;
+
+    @JsonAlias({ "types", "type" })
     private HolidayType[] types;
 
     public String getName() {
