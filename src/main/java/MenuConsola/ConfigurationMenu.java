@@ -9,12 +9,12 @@ package MenuConsola;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HolidaysPlanningMenu extends MainMenu{
+public class ConfigurationMenu extends MainMenu{
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void main() throws Exception {
 
-        HolidaysPlanningMenu holidaysPlanningMenu = new HolidaysPlanningMenu();
+        ConfigurationMenu holidaysPlanningMenu = new ConfigurationMenu();
         holidaysPlanningMenu.menuOptionsDisplay();
         holidaysPlanningMenu.userChooses();
     }

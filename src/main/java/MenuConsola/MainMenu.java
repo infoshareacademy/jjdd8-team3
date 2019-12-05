@@ -67,8 +67,12 @@ public class MainMenu {
 
        switch (userChoice){
             case 1 :
-                HolidaysSingleton.getInstance().getHolidays();
+                HolidaysPlanningMenu.main();
+                break;
 
+           case 2 :
+               HolidaysSingleton.getInstance().getHolidays();
+               break;
 
        }
         return userChoice;
