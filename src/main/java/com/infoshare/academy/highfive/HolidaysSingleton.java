@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HolidaysSingleton {
@@ -18,12 +19,37 @@ public class HolidaysSingleton {
         return instance;
     }
 
-    public List<Holiday> getHolidays() throws Exception {
-        if(holidayArrayList == null) {
+    private void validateHolidays() {
+        if (holidayArrayList == null) {
             throw new InitException();
-        } else {
-            return this.holidayArrayList;
         }
+    }
+
+    public List<Holiday> getAllHolidays() {
+        validateHolidays();
+        return this.holidayArrayList;
+    }
+
+    public List<Holiday>  getHolidaysFilteredByName(String filter) {
+        validateHolidays();
+        List<Holiday> filteredByName = new ArrayList<>();
+        for (Holiday holiday : holidayArrayList) {
+            if (holiday.getName().toLowerCase().contains(filter)) {
+                filteredByName.add(holiday);
+            }
+        }
+        return filteredByName;
+    }
+
+    public List<Holiday> getHolidaysFilteredByDate(String filter) {
+        validateHolidays();
+        List<Holiday> filteredByDate = new ArrayList<>();
+        for (Holiday holiday : holidayArrayList) {
+            if (holiday.getDate().getDateInPattern("yyyy-MM-dd").contains(filter)) {
+                filteredByDate.add(holiday);
+            }
+        }
+        return filteredByDate;
     }
 
     public void initFromFile(String fileName) throws IOException {
@@ -35,7 +61,7 @@ public class HolidaysSingleton {
     }
 
     public void initSaveToFile(String filename) throws Exception {
-       ApiJsonParser.saveToFile(filename,holidayArrayList);
+        ApiJsonParser.saveToFile(filename, holidayArrayList);
     }
 
 }
