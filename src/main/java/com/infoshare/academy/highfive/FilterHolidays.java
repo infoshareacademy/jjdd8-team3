@@ -21,14 +21,26 @@ public class FilterHolidays {
         Scanner scanner = new Scanner(System.in);
 
         do {
-            stdout.info("Enter Holiday Name(min. 3 char.): ");
+            stdout.info("Type Holiday Name(min. 3 char.) or type [0] to exit: ");
             inputTxt = scanner.nextLine().strip();
+
+            if (inputTxt.length() == 1 && inputTxt.equals("0")) {
+                break;
+            }
 
         } while (inputTxt.length() < 3);
 
-        stdout.info("You entered: " + inputTxt + "\n");
+        stdout.info("You typed: " + inputTxt + "\n");
 
         queryResults(inputTxt.toLowerCase(), "byName");
+
+        stdout.info("Type [1] to search again or something else to exit: ");
+
+        inputTxt = scanner.nextLine();
+
+        if (inputTxt.length() == 1 && inputTxt.equals("1")) {
+            searchByName();
+        }
 
         return inputTxt;
     }
@@ -41,25 +53,38 @@ public class FilterHolidays {
         Scanner scanner;
 
         do {
-            stdout.info("Enter Date yyyy-mm-dd: ");
+            stdout.info("Type Date in format yyyy-mm-dd or type [0] to exit: ");
             scanner = new Scanner(System.in);
             matchPattern = scanner.hasNext(datePattern);
+            inputTxt = scanner.nextLine();
+            if (inputTxt.length() == 1 && inputTxt.equals("0")) {
+                matchPattern = false;
+                break;
+            }
 
         } while (!matchPattern);
 
-        inputTxt = scanner.nextLine();
+        stdout.info("You typed: " + inputTxt + "\n");
 
-        stdout.info("You entered: " + inputTxt + "\n");
-        stdout.info("It's: " + new SimpleDateFormat("EEEE").format(new SimpleDateFormat("yyyy-MM-dd").parse(inputTxt)) + "\n");
+        if (matchPattern) {
+            stdout.info("It's: " + new SimpleDateFormat("EEEE").format(new SimpleDateFormat("yyyy-MM-dd").parse(inputTxt)) + "\n");
+            queryResults(inputTxt, "byDate");
 
-        queryResults(inputTxt, "byDate");
+            stdout.info("Type [1] to search again or something else to exit: ");
+
+            inputTxt = scanner.nextLine();
+
+            if (inputTxt.length() == 1 && inputTxt.equals("1")) {
+                searchByDate();
+            }
+        }
 
         return inputTxt;
     }
 
     public static void queryResults(String filter, String filterType) {
 
-        List<Holiday> resultHolidayList = null;
+        List<Holiday> resultHolidayList;
 
         if (filterType.equals("byDate")) {
             resultHolidayList = HolidaysSingleton.getInstance().getHolidaysFilteredByDate(filter);
@@ -67,6 +92,7 @@ public class FilterHolidays {
             resultHolidayList = HolidaysSingleton.getInstance().getHolidaysFilteredByName(filter);
         } else {
             stdout.info("Operation not supported!!");
+            return;
         }
 
         List<HolidayView> viewList = new ArrayList<>();
@@ -81,6 +107,11 @@ public class FilterHolidays {
             stdout.info(holidayView.toString());
 
             viewList.add(holidayView);
+        }
+        if (viewList.size() > 0) {
+            stdout.info("______\n" + viewList.size() + " result(s) found for this query!\n------\n");
+        } else {
+            stdout.info("______\nNo result(s) found for this query!\n------\n");
         }
 
     }

@@ -34,7 +34,7 @@ public class HolidayView {
 
     @Override
     public String toString() {
-        return "Name Of Holiday " + name + " - " + description + ", " + date + ", Type " + types[0].getType() + ";\n";
+        return date + " | Type " + types[0].getType() + ", Name Of Holiday: " + name + " - " + description + ";\n";
     }
 
 }
