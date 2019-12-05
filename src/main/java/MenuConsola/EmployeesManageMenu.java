@@ -1,9 +1,9 @@
 package MenuConsola;
 
-//    PLANOWANIE URLOPÓW
-//       Wyszukiwarka świąt
-//       dodaj urlop
-//       anuluj urlop
+//    ZARZĄDZANIE PRACOWNIKAMI
+//       wyświetl listę pracowników
+//       dodaj pracownika
+//       usun pracownika
 //       powrót do poprzedniego menu
 
 import org.slf4j.Logger;
@@ -22,11 +22,11 @@ public class EmployeesManageMenu extends MainMenu{
     @Override
     public void menuOptionsDisplay() {
 
-        String menuHeadline = "PLANOWANIE URLOPÓW";
+        String menuHeadline = "ZARZĄDZANIE PRACOWNIKAMI";
 
         menuOptions.add("Wyszukiwarka świąt");
-        menuOptions.add("Dodaj urlop");
-        menuOptions.add("Anuluj urlop");
+        menuOptions.add("Wyświetl listę pracowników");
+        menuOptions.add("Dodaj pracownika");
         menuOptions.add("Powrót do poprzedniego menu");
 
         stdout.info(menuHeadline + "\n" + "\n");

@@ -10,24 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 
 //    PLANOWANIE URLOPÓW
-//       Wyszukiwarka świąt
-//       dodaj urlop
-//       anuluj urlop
-//       powrót do poprzedniego menu
+
 //    PRZEGLĄDANIE URLOPÓW
-//       pracownika
-//       zespołu
-//       powrót do poprzedniego menu
+
 //    ZARZĄDZANIE PRACOWNIKAMI
-//       wyświetl listę pracowników
-//       dodaj pracownika
-//       usun pracownika
-//       powrót do poprzedniego menu
+
 //    KONFIGURACJA PROGRAMU
-//       Zmień format daty
-//       Zmień sposob sortowania pracowników
-//       Zmiana konfiguracji pliku zewnętrznego
-//       powrót do poprzedniego menu
+
 
 public class MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -69,9 +58,14 @@ public class MainMenu {
             case 1 :
                 HolidaysPlanningMenu.main();
                 break;
-
            case 2 :
-               HolidaysSingleton.getInstance().getHolidays();
+               HolidaysReviewMenu.main();
+               break;
+           case 3 :
+               EmployeesManageMenu.main();
+               break;
+           case 4 :
+               ConfigurationMenu.main();
                break;
 
        }

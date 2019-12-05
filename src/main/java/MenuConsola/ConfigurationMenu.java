@@ -1,9 +1,9 @@
 package MenuConsola;
 
-//    PLANOWANIE URLOPÓW
-//       Wyszukiwarka świąt
-//       dodaj urlop
-//       anuluj urlop
+//    KONFIGURACJA PROGRAMU
+//       Zmień format daty
+//       Zmień sposob sortowania pracowników
+//       Zmiana konfiguracji pliku zewnętrznego
 //       powrót do poprzedniego menu
 
 import org.slf4j.Logger;
@@ -22,11 +22,11 @@ public class ConfigurationMenu extends MainMenu{
     @Override
     public void menuOptionsDisplay() {
 
-        String menuHeadline = "PLANOWANIE URLOPÓW";
+        String menuHeadline = "KONFIGURACJA PROGRAMU";
 
-        menuOptions.add("Wyszukiwarka świąt");
-        menuOptions.add("Dodaj urlop");
-        menuOptions.add("Anuluj urlop");
+        menuOptions.add("Zmień format daty");
+        menuOptions.add("Zmień sposob sortowania pracowników");
+        menuOptions.add("Zmiana konfiguracji pliku zewnętrznego");
         menuOptions.add("Powrót do poprzedniego menu");
 
         stdout.info(menuHeadline + "\n" + "\n");
