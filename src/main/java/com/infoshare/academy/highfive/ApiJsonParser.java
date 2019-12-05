@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ApiJsonParser {
 
-    private static final Logger stdout = LoggerFactory.getLogger(ApiJsonParser.class);
+    private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static List<Holiday> parseFromFile(String fileName) throws IOException {
 
