@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ApiJsonParser {
 
-    private static final Logger log = LoggerFactory.getLogger(ApiJsonParser.class);
+    private static final Logger stdout = LoggerFactory.getLogger(ApiJsonParser.class);
 
     public static List<Holiday> parseFromFile(String fileName) throws IOException {
 
@@ -24,7 +24,7 @@ public class ApiJsonParser {
         JsonNode jsonNode = objectMapper.readTree(new File(fileName));
         JsonNode jsonData = jsonNode.findPath("holidays");
         Holiday[] holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-        log.info("JSON imported!");
+        stdout.info("JSON imported!");
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
 
@@ -33,7 +33,7 @@ public class ApiJsonParser {
         JsonNode jsonNode = objectMapper.readTree(new URL(urlPath));
         JsonNode jsonData = jsonNode.findPath("holidays");
         Holiday[] holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-        log.info("JSON imported!");
+        stdout.info("JSON imported!");
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
 
@@ -42,7 +42,7 @@ public class ApiJsonParser {
         objectMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
         objectMapper.writer().withRootName("holidays").writeValue(new File(fileName), holidays);
-        log.info("JSON file created!");
+        stdout.info("JSON file created!");
     }
 
 }
