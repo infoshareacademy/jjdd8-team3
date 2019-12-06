@@ -24,7 +24,7 @@ public class ApiJsonParser {
         JsonNode jsonNode = objectMapper.readTree(new File(fileName));
         JsonNode jsonData = jsonNode.findPath("holidays");
         Holiday[] holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-        stdout.info("JSON imported!");
+        stdout.info("JSON imported!\n");
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
 
@@ -33,7 +33,7 @@ public class ApiJsonParser {
         JsonNode jsonNode = objectMapper.readTree(new URL(urlPath));
         JsonNode jsonData = jsonNode.findPath("holidays");
         Holiday[] holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-        stdout.info("JSON imported!");
+        stdout.info("JSON imported!\n");
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
 
@@ -42,7 +42,7 @@ public class ApiJsonParser {
         objectMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
         objectMapper.writer().withRootName("holidays").writeValue(new File(fileName), holidays);
-        stdout.info("JSON file created!");
+        stdout.info("JSON file created!\n");
     }
 
 }

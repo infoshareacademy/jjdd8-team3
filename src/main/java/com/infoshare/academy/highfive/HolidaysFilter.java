@@ -32,16 +32,17 @@ public class HolidaysFilter {
 
         stdout.info("You typed: " + inputTxt + "\n");
 
-        queryResults(inputTxt.toLowerCase(), "byName");
+        if (!inputTxt.equals("0")) {
+            queryResults(inputTxt.toLowerCase(), "byName");
 
-        stdout.info("Type [1] to search again or something else to exit: ");
+            stdout.info("Type [1] to search again or something else to exit: ");
 
-        inputTxt = scanner.nextLine();
+            inputTxt = scanner.nextLine();
 
-        if (inputTxt.length() == 1 && inputTxt.equals("1")) {
-            searchByName();
+            if (inputTxt.length() == 1 && inputTxt.equals("1")) {
+                searchByName();
+            }
         }
-
         return inputTxt;
     }
 
@@ -55,13 +56,12 @@ public class HolidaysFilter {
         do {
             stdout.info("Type Date in format yyyy-mm-dd or type [0] to exit: ");
             scanner = new Scanner(System.in);
-            matchedToDatePattern = scanner.hasNext(datePattern);
-            inputTxt = scanner.nextLine();
-            if (inputTxt.length() == 1 && inputTxt.equals("0")) {
+            inputTxt = scanner.nextLine().strip();
+            matchedToDatePattern = inputTxt.matches(datePattern);
+            if (inputTxt.equals("0")) {
                 matchedToDatePattern = false;
                 break;
             }
-
         } while (!matchedToDatePattern);
 
         stdout.info("You typed: " + inputTxt + "\n");
