@@ -10,7 +10,16 @@ public class Holiday {
     private String description;
     private HolidayDate date;
 
-    @JsonAlias({ "types", "type" })
+    public Holiday() {
+    }
+
+    public Holiday(String name, String description, HolidayDate date) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+    }
+
+    @JsonAlias({"types", "type"})
     private HolidayType[] types;
 
     public String getName() {
@@ -48,11 +57,11 @@ public class Holiday {
     @Override
     public String toString() {
         return "Holidays{" +
-                "name= " + name  +
-                ", description= " + description  +
+                "name= " + name +
+                ", description= " + description +
                 ", date=" + date +
-               ", enumType=" + Arrays.toString(types) +
-                '}'+"\n";
+                ", enumType=" + Arrays.toString(types) +
+                '}' + "\n";
     }
 
 }
