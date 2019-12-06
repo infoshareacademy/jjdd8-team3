@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FilterHolidays {
+public class HolidaysFilter {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
@@ -48,25 +48,25 @@ public class FilterHolidays {
     public static String searchByDate() throws ParseException {
 
         String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
-        boolean matchPattern;
+        boolean matchedToDatePattern;
         String inputTxt;
         Scanner scanner;
 
         do {
             stdout.info("Type Date in format yyyy-mm-dd or type [0] to exit: ");
             scanner = new Scanner(System.in);
-            matchPattern = scanner.hasNext(datePattern);
+            matchedToDatePattern = scanner.hasNext(datePattern);
             inputTxt = scanner.nextLine();
             if (inputTxt.length() == 1 && inputTxt.equals("0")) {
-                matchPattern = false;
+                matchedToDatePattern = false;
                 break;
             }
 
-        } while (!matchPattern);
+        } while (!matchedToDatePattern);
 
         stdout.info("You typed: " + inputTxt + "\n");
 
-        if (matchPattern) {
+        if (matchedToDatePattern) {
             stdout.info("It's: " + new SimpleDateFormat("EEEE").format(new SimpleDateFormat("yyyy-MM-dd").parse(inputTxt)) + "\n");
             queryResults(inputTxt, "byDate");
 

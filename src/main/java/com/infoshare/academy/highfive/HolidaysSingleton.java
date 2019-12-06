@@ -7,7 +7,7 @@ import java.util.List;
 public class HolidaysSingleton {
 
     private static HolidaysSingleton instance;
-    private List<Holiday> holidayArrayList;
+    private List<Holiday> holidaysList;
 
     private HolidaysSingleton() {
     }
@@ -20,20 +20,20 @@ public class HolidaysSingleton {
     }
 
     private void validateHolidays() {
-        if (holidayArrayList == null) {
+        if (holidaysList == null) {
             throw new InitException();
         }
     }
 
     public List<Holiday> getAllHolidays() {
         validateHolidays();
-        return this.holidayArrayList;
+        return this.holidaysList;
     }
 
     public List<Holiday>  getHolidaysFilteredByName(String filter) {
         validateHolidays();
         List<Holiday> filteredByName = new ArrayList<>();
-        for (Holiday holiday : holidayArrayList) {
+        for (Holiday holiday : holidaysList) {
             if (holiday.getName().toLowerCase().contains(filter)) {
                 filteredByName.add(holiday);
             }
@@ -44,7 +44,7 @@ public class HolidaysSingleton {
     public List<Holiday> getHolidaysFilteredByDate(String filter) {
         validateHolidays();
         List<Holiday> filteredByDate = new ArrayList<>();
-        for (Holiday holiday : holidayArrayList) {
+        for (Holiday holiday : holidaysList) {
             if (holiday.getDate().getDateInPattern("yyyy-MM-dd").contains(filter)) {
                 filteredByDate.add(holiday);
             }
@@ -53,15 +53,15 @@ public class HolidaysSingleton {
     }
 
     public void initFromFile(String fileName) throws IOException {
-        holidayArrayList = ApiJsonParser.parseFromFile(fileName);
+        holidaysList = ApiJsonParser.parseFromFile(fileName);
     }
 
     public void initFromURL(String urlPath) throws IOException {
-        holidayArrayList = ApiJsonParser.parseFromURL(urlPath);
+        holidaysList = ApiJsonParser.parseFromURL(urlPath);
     }
 
     public void initSaveToFile(String filename) throws Exception {
-        ApiJsonParser.saveToFile(filename, holidayArrayList);
+        ApiJsonParser.saveToFile(filename, holidaysList);
     }
 
 }
