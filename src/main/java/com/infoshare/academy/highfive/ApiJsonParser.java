@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,32 +18,42 @@ import java.util.List;
 public class ApiJsonParser {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final String HOLIDAYS = "holidays";
+    private ObjectMapper objectMapper;
 
-    public static List<Holiday> parseFromFile(String fileName) throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        JsonNode jsonNode = objectMapper.readTree(new File(fileName));
-        JsonNode jsonData = jsonNode.findPath("holidays");
-        Holiday[] holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-        stdout.info("JSON imported!\n");
-        return new ArrayList<>(Arrays.asList(holidayImport));
-    }
-
-    public static List<Holiday> parseFromURL(String urlPath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        JsonNode jsonNode = objectMapper.readTree(new URL(urlPath));
-        JsonNode jsonData = jsonNode.findPath("holidays");
-        Holiday[] holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-        stdout.info("JSON imported!\n");
-        return new ArrayList<>(Arrays.asList(holidayImport));
-    }
-
-    public static void saveToFile(String fileName, List<Holiday> holidays) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+    public ApiJsonParser() {
+        objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
-        objectMapper.writer().withRootName("holidays").writeValue(new File(fileName), holidays);
-        stdout.info("JSON file created!\n");
+    }
+
+    public List<Holiday> parseFromFile(String fileName) throws IOException {
+        return parseJson(objectMapper.readTree(new File(fileName)));
+    }
+
+    public List<Holiday> parseFromURL(String urlPath) throws IOException {
+        return parseJson(objectMapper.readTree(new URL(urlPath)));
+    }
+
+    private List<Holiday> parseJson(JsonNode jsonNodeBase) {
+        Holiday[] holidayImport = {};
+        try {
+            JsonNode jsonData = jsonNodeBase.findPath(HOLIDAYS);
+            holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
+            stdout.info("JSON imported!\n");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(Arrays.asList(holidayImport));
+    }
+
+    public void saveToFile(String fileName, List<Holiday> holidays) {
+        try {
+            objectMapper.writer().withRootName(HOLIDAYS).writeValue(new File(fileName), holidays);
+            stdout.info("JSON file created!\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

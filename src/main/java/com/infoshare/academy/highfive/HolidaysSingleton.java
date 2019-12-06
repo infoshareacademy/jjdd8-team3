@@ -6,10 +6,13 @@ import java.util.List;
 
 public class HolidaysSingleton {
 
+    private ApiJsonParser apiJsonParser;
+
     private static HolidaysSingleton instance;
     private List<Holiday> holidaysList;
 
     private HolidaysSingleton() {
+        apiJsonParser = new ApiJsonParser();
     }
 
     public static synchronized HolidaysSingleton getInstance() {
@@ -53,15 +56,15 @@ public class HolidaysSingleton {
     }
 
     public void initFromFile(String fileName) throws IOException {
-        holidaysList = ApiJsonParser.parseFromFile(fileName);
+        holidaysList = apiJsonParser.parseFromFile(fileName);
     }
 
     public void initFromURL(String urlPath) throws IOException {
-        holidaysList = ApiJsonParser.parseFromURL(urlPath);
+        holidaysList = apiJsonParser.parseFromURL(urlPath);
     }
 
-    public void initSaveToFile(String filename) throws Exception {
-        ApiJsonParser.saveToFile(filename, holidaysList);
+    public void initSaveToFile(String filename) {
+        apiJsonParser.saveToFile(filename, holidaysList);
     }
 
 }
