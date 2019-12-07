@@ -1,67 +1,75 @@
 package MenuConsola;
 
-//    PLANOWANIE URLOPÓW
-//       Wyszukiwarka świąt
-//       dodaj urlop
-//       anuluj urlop
-//       powrót do poprzedniego menu
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Scanner;
+import java.util.List;
 
-public class HolidaysPlanningMenu extends MainMenu{
+public class HolidaysPlanningMenu extends MenuBuilder {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main() throws Exception {
-
-        HolidaysPlanningMenu holidaysPlanningMenu = new HolidaysPlanningMenu();
-        holidaysPlanningMenu.menuOptionsDisplay();
-        holidaysPlanningMenu.userChooses();
+    @Override
+    public void menuDisplay() {
+        super.menuDisplay();
     }
 
     @Override
-    public void menuOptionsDisplay() {
-
-        String menuHeadline = "PLANOWANIE URLOPÓW";
-
-        menuOptions.add("Wyszukiwarka świąt");
-        menuOptions.add("Dodaj urlop");
-        menuOptions.add("Anuluj urlop");
-        menuOptions.add("Powrót do poprzedniego menu");
-
-        stdout.info(menuHeadline + "\n" + "\n");
-
-        for (int i = 0; i < menuOptions.size(); i++) {
-
-            stdout.info((i + 1) + ": " + menuOptions.get(i) + "\n");
-        }
-    }
-
-    @Override
-    public int userChooses() throws Exception {
-
-        stdout.info("\n" + "Wybierz opcję od 1 do " + menuOptions.size() + "\n");
-
-        Scanner scanner = new Scanner(System.in);
-        int userChoice = scanner.nextInt();
-
-        switch (userChoice){
-            case 1 :
-                stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
-                break;
-            case 2 :
-                stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
-                break;
-            case 3 :
-                stdout.info("Anuluj urlop - under construction" + "\n" + "\n");
-                break;
-            case 4 :
-               break;
-
-        }
+    public int getUserChoice() {
+        super.getUserChoice();
         return userChoice;
     }
 
+    private static List<String> setMenuOptions() {
+
+        String menuHeadLine = "HOLIDAY PLANNING";
+        String menuOption1 = "Search holiday by DATE";
+        String menuOption2 = "Search holiday by NAME";
+        String menuOption3 = "Add vacation";
+        String menuOption4 = "Cancel vacation";
+        String menuOption5 = "Previous menu";
+
+        menuOptions.add(menuHeadLine);
+        menuOptions.add(menuOption1);
+        menuOptions.add(menuOption2);
+        menuOptions.add(menuOption3);
+        menuOptions.add(menuOption4);
+        menuOptions.add(menuOption5);
+
+        return menuOptions;
+    }
+
+    private static void executeUserChoice() {
+
+        switch (userChoice) {
+            case 0:
+                break;
+            case 1:
+//                HolidaysPlanningMenu.main();
+                break;
+            case 2:
+//                HolidaysReviewMenu.main();
+                break;
+            case 3:
+//                EmployeesManageMenu.main();
+                break;
+            case 4:
+//                ConfigurationMenu.main();
+                break;
+            case 5:
+                break;
+
+            default:
+                stdout.info("Wrong number - try again");
+
+        }
+    }
+
+    public static void main() {
+
+        setMenuOptions();
+        HolidaysPlanningMenu menu = new HolidaysPlanningMenu();
+        menu.menuDisplay();
+        menu.getUserChoice();
+        executeUserChoice();
+    }
 }

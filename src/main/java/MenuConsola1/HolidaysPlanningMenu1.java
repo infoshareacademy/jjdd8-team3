@@ -1,9 +1,9 @@
-package MenuConsola;
+package MenuConsola1;
 
-//    ZARZĄDZANIE PRACOWNIKAMI
-//       wyświetl listę pracowników
-//       dodaj pracownika
-//       usun pracownika
+//    PLANOWANIE URLOPÓW
+//       Wyszukiwarka świąt
+//       dodaj urlop
+//       anuluj urlop
 //       powrót do poprzedniego menu
 
 import org.slf4j.Logger;
@@ -11,12 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class EmployeesManageMenu extends MainMenu {
+public class HolidaysPlanningMenu1 extends MainMenu1 {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void main() throws Exception {
 
-        EmployeesManageMenu holidaysPlanningMenu = new EmployeesManageMenu();
+        HolidaysPlanningMenu1 holidaysPlanningMenu = new HolidaysPlanningMenu1();
         holidaysPlanningMenu.menuOptionsDisplay();
         holidaysPlanningMenu.userChooses();
     }
@@ -24,11 +24,11 @@ public class EmployeesManageMenu extends MainMenu {
     @Override
     public void menuOptionsDisplay() {
 
-        String menuHeadline = "ZARZĄDZANIE PRACOWNIKAMI";
+        String menuHeadline = "PLANOWANIE URLOPÓW";
 
-        menuOptions.add("Wyświetl listę pracowników");
-        menuOptions.add("Dodaj pracownika");
-        menuOptions.add("Usuń pracownika");
+        menuOptions.add("Wyszukiwarka świąt");
+        menuOptions.add("Dodaj urlop");
+        menuOptions.add("Anuluj urlop");
         menuOptions.add("Powrót do poprzedniego menu");
 
         stdout.info(menuHeadline + "\n" + "\n");
@@ -47,19 +47,21 @@ public class EmployeesManageMenu extends MainMenu {
         Scanner scanner = new Scanner(System.in);
         int userChoice = scanner.nextInt();
 
-        switch (userChoice) {
-            case 1:
-                stdout.info("Wyświetl listę pracowników - under construction" + "\n" + "\n");
+        switch (userChoice){
+            case 1 :
+                stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
                 break;
-            case 2:
-                stdout.info("Dodaj pracownika - under construction" + "\n" + "\n");
+            case 2 :
+                stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
                 break;
-            case 3:
-                stdout.info("Usuń pracownika - under construction" + "\n" + "\n");
+            case 3 :
+                stdout.info("Anuluj urlop - under construction" + "\n" + "\n");
                 break;
-            case 4:
+            case 4 :
                 break;
+
         }
         return userChoice;
     }
+
 }

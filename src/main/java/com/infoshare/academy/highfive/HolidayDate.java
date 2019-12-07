@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class HolidayDate {
+public class
+
+
+HolidayDate {
     @JsonAlias({ "date", "iso" })
     @JsonIgnoreProperties(value = {"date"})
     private Date date;

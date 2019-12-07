@@ -1,64 +1,73 @@
 package MenuConsola;
 
-//    KONFIGURACJA PROGRAMU
-//       Zmień format daty
-//       Zmień sposob sortowania pracowników
-//       Zmiana konfiguracji pliku zewnętrznego
-//       powrót do poprzedniego menu
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Scanner;
+import java.util.List;
 
-public class ConfigurationMenu extends MainMenu{
+public class ConfigurationMenu extends MenuBuilder {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main() throws Exception {
-
-        ConfigurationMenu holidaysPlanningMenu = new ConfigurationMenu();
-        holidaysPlanningMenu.menuOptionsDisplay();
-        holidaysPlanningMenu.userChooses();
+    @Override
+    public void menuDisplay() {
+        super.menuDisplay();
     }
 
     @Override
-    public void menuOptionsDisplay() {
-
-        String menuHeadline = "KONFIGURACJA PROGRAMU";
-
-        menuOptions.add("Zmień format daty");
-        menuOptions.add("Zmień sposób sortowania pracowników");
-        menuOptions.add("Zmiana konfiguracji pliku zewnętrznego");
-        menuOptions.add("Powrót do poprzedniego menu");
-
-        stdout.info(menuHeadline + "\n" + "\n");
-
-        for (int i = 0; i < menuOptions.size(); i++) {
-
-            stdout.info((i + 1) + ": " + menuOptions.get(i) + "\n");
-        }
+    public int getUserChoice() {
+        super.getUserChoice();
+        return userChoice;
     }
-    @Override
-    public int userChooses() throws Exception {
 
-        stdout.info("\n" + "Wybierz opcję od 1 do " + menuOptions.size() + "\n");
+    private static List<String> setMenuOptions() {
 
-        Scanner scanner = new Scanner(System.in);
-        int userChoice = scanner.nextInt();
+        String menuHeadLine = "CONFIGURATION";
+        String menuOption1 = "Change DATE format";
+        String menuOption2 = "Change employees SORTING mode";
+        String menuOption3 = "Change configuration of external file";
+        String menuOption4 = "Previous menu";
+
+        menuOptions.add(menuHeadLine);
+        menuOptions.add(menuOption1);
+        menuOptions.add(menuOption2);
+        menuOptions.add(menuOption3);
+        menuOptions.add(menuOption4);
+
+        return menuOptions;
+    }
+
+    private static void executeUserChoice() {
 
         switch (userChoice) {
+            case 0:
+                break;
             case 1:
-                stdout.info("Zmień format daty - under construction" + "\n" + "\n");
+//                HolidaysPlanningMenu.main();
                 break;
             case 2:
-                stdout.info("Sposób sortowania - under construction" + "\n" + "\n");
+//                HolidaysReviewMenu.main();
                 break;
             case 3:
-                stdout.info("Konfig pliku zewnętrznego - under construction" + "\n" + "\n");
+//                EmployeesManageMenu.main();
                 break;
             case 4:
+//                ConfigurationMenu.main();
                 break;
+            case 5:
+                break;
+
+            default:
+                stdout.info("Wrong number - try again");
+
         }
-        return userChoice;
+    }
+
+    public static void main() {
+
+        setMenuOptions();
+        ConfigurationMenu menu = new ConfigurationMenu();
+        menu.menuDisplay();
+        menu.getUserChoice();
+        executeUserChoice();
     }
 }

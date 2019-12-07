@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class MainMenu extends MenuBuilder {
+public class EmployeesManagingMenu extends MenuBuilder {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     @Override
-    protected void menuDisplay() {
+    public void menuDisplay() {
         super.menuDisplay();
     }
 
@@ -21,11 +21,11 @@ public class MainMenu extends MenuBuilder {
 
     private static List<String> setMenuOptions() {
 
-        String menuHeadLine = "MAIN MENU";
-        String menuOption1 = "HOLIDAY PLANNING";
-        String menuOption2 = "HOLIDAYS REVIEW";
-        String menuOption3 = "EMPLOYEES MANAGING";
-        String menuOption4 = "CONFIGURATION";
+        String menuHeadLine = "EMPLOYEES MANAGING";
+        String menuOption1 = "Display emploees list";
+        String menuOption2 = "Add new employee";
+        String menuOption3 = "Remove an employee";
+        String menuOption4 = "Previous menu";
 
         menuOptions.add(menuHeadLine);
         menuOptions.add(menuOption1);
@@ -36,39 +36,38 @@ public class MainMenu extends MenuBuilder {
         return menuOptions;
     }
 
-    static void executeUserChoice() {
-
-        menuOptions.clear();
+    private static void executeUserChoice() {
 
         switch (userChoice) {
             case 0:
                 break;
             case 1:
-                HolidaysPlanningMenu.main();
+//                HolidaysPlanningMenu.main();
                 break;
             case 2:
-                HolidaysReviewMenu.main();
+//                HolidaysReviewMenu.main();
                 break;
             case 3:
-                EmployeesManagingMenu.main();
+//                EmployeesManageMenu.main();
                 break;
             case 4:
-                ConfigurationMenu.main();
+//                ConfigurationMenu.main();
                 break;
-//                default:
-//                    stdout.info("Wrong number - try again");
-        }
+            case 5:
+                break;
 
+            default:
+                stdout.info("Wrong number - try again");
+
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main() {
 
         setMenuOptions();
-        MainMenu menu = new MainMenu();
+        EmployeesManagingMenu menu = new EmployeesManagingMenu();
         menu.menuDisplay();
         menu.getUserChoice();
         executeUserChoice();
-
-
     }
 }
