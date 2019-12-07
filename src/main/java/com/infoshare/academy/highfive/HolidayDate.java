@@ -11,9 +11,6 @@ public class HolidayDate {
     @JsonIgnoreProperties(value = {"date"})
     private Date date;
 
-    public HolidayDate() {
-    }
-
     public String getIso() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
