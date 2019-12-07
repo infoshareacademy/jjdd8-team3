@@ -42,7 +42,7 @@ public class ApiJsonParser {
             holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
             stdout.info("JSON imported!\n");
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            stdout.info("There is a little problem with JSON Import!\n",e);
         }
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
@@ -52,7 +52,7 @@ public class ApiJsonParser {
             objectMapper.writer().withRootName(HOLIDAYS).writeValue(new File(fileName), holidays);
             stdout.info("JSON file created!\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            stdout.info("There is a little problem with file Saving!\n",e);
         }
     }
 

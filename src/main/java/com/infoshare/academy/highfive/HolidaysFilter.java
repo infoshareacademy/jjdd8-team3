@@ -11,9 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class HolidaysFilter {
+final class HolidaysFilter {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
+
+    private HolidaysFilter() {
+        throw new IllegalStateException("Utility filter class");
+    }
 
     public static String searchByName() {
 
@@ -82,7 +86,7 @@ public class HolidaysFilter {
         return inputTxt;
     }
 
-    public static void queryResults(String filter, String filterType) {
+    private static void queryResults(String filter, String filterType) {
 
         List<Holiday> resultHolidayList;
 
@@ -108,7 +112,7 @@ public class HolidaysFilter {
 
             viewList.add(holidayView);
         }
-        if (viewList.size() > 0) {
+        if (!viewList.isEmpty()) {
             stdout.info("______\n" + viewList.size() + " result(s) found for this query!\n------\n");
         } else {
             stdout.info("______\nNo result(s) found for this query!\n------\n");
