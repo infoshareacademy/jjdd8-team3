@@ -6,23 +6,23 @@ import org.slf4j.LoggerFactory;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConfigurationMenu1 extends MainMenu1 {
+public class EmploeesManagingMenu1 extends MainMenu1 {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void main() throws Exception {
 
-        ConfigurationMenu1 configurationMenu1 = new ConfigurationMenu1();
-        configurationMenu1.menuOptionsDisplay();
-        configurationMenu1.getUserChoice();
+        EmploeesManagingMenu1 emploeesManagingMenu1 = new EmploeesManagingMenu1();
+        emploeesManagingMenu1.menuOptionsDisplay();
+        emploeesManagingMenu1.getUserChoice();
     }
 
     @Override
     public void menuOptionsDisplay() {
 
-        menuOptions.add("CONFIGURATION");
-        menuOptions.add("Change DATE format");
-        menuOptions.add("Change employees SORTING mode");
-        menuOptions.add("Change configuration of external file");
+        menuOptions.add("EMPLOYEES MANAGING");
+        menuOptions.add("Display employees list");
+        menuOptions.add("Add new employee");
+        menuOptions.add("Remove an employee");
         menuOptions.add("Previous menu");
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
@@ -45,13 +45,16 @@ public class ConfigurationMenu1 extends MainMenu1 {
 
             switch (userChoice) {
                 case 1:
-                    stdout.info("Change DATE format - UNDER CONSTRUCTION\n\n");
+                    stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
                     break;
                 case 2:
-                    stdout.info("Change employees SORTING mode - UNDER CONSTRUCTION\n\n");
+                    stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
                     break;
                 case 3:
-                    stdout.info("Change configuration of external file - UNDER CONSTRUCTION\n\n");
+                    stdout.info("Add vacation- UNDER CONSTRUCTION\n\n");
+                    break;
+                case 4:
+                    stdout.info("Cancel vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     break;

@@ -1,25 +1,17 @@
 package MenuConsola1;
 
+import MenuConsola.EmployeesManagingMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-//  MENU GŁÓWNE
-//    PLANOWANIE URLOPÓW
-//    PRZEGLĄDANIE URLOPÓW
-//    ZARZĄDZANIE PRACOWNIKAMI
-//    KONFIGURACJA PROGRAMU
-
 public class MainMenu1 {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     public static int userChoice;
     List<String> menuOptions = new ArrayList<>();
-
-//    public boolean hasNextInt(){};
 
     public static void main(String[] args) throws Exception {
 
@@ -27,39 +19,38 @@ public class MainMenu1 {
 
         do {
             mainMenu1.menuOptionsDisplay();
-            userChoice = mainMenu1.userChooses();
+            userChoice = mainMenu1.getUserChoice();
         }
         while (userChoice != 0);
     }
 
     public void menuOptionsDisplay() {
 
-        String menuHeadline = "MENU GŁÓWNE";
-
         menuOptions.clear();
-        menuOptions.add("PLANOWANIE URLOPÓW");
-        menuOptions.add("PRZEGLĄDANIE URLOPÓW");
-        menuOptions.add("ZARZĄDZANIE PRACOWNIKAMI");
-        menuOptions.add("KONFIGURACJA PROGRAMU");
+        menuOptions.add("MAIN MENU");
+        menuOptions.add("HOLIDAY PLANNING");
+        menuOptions.add("HOLIDAYS REVIEW");
+        menuOptions.add("EMPLOYEES MANAGING");
+        menuOptions.add("CONFIGURATION");
 
-        stdout.info(menuHeadline + "\n" + "\n");
+        stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
 
-        for (int i = 0; i < menuOptions.size(); i++) {
+        for (int i = 1; i < menuOptions.size(); i++) {
 
-            stdout.info((i + 1) + ": " + menuOptions.get(i) + "\n");
+            stdout.info(i + ": " + menuOptions.get(i) + "\n");
         }
-        stdout.info("\n" + "0: Wyjście z programu" + "\n");
+        stdout.info("\n" + "0: Exit" + "\n");
     }
 
-    public int userChooses() throws Exception {
+    public int getUserChoice() throws Exception {
 
-        stdout.info("\n" + "Wybierz opcję od 0 do " + menuOptions.size() + "\n");
+        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
         try {
             Scanner scanner = new Scanner(System.in);
-            int userChoice = scanner.nextInt();
+            scanner.useRadix(menuOptions.size());
+            userChoice = scanner.nextInt();
 
             switch (userChoice) {
-                case 0: break;
                 case 1:
                     HolidaysPlanningMenu1.main();
                     break;
@@ -67,19 +58,18 @@ public class MainMenu1 {
                     HolidaysReviewMenu1.main();
                     break;
                 case 3:
-                    EmployeesManageMenu1.main();
+                    EmployeesManagingMenu.main();
                     break;
                 case 4:
                     ConfigurationMenu1.main();
                     break;
                 default:
-                    stdout.info("Wrong number - try again");
-                    userChooses();
+                    break;
             }
         } catch (InputMismatchException e) {
-            stdout.info("Not a number - try again");
-            userChooses();
+        stdout.info("Wrong input - try again\n");
+        getUserChoice();
         }
         return userChoice;
-    }
+        }
 }

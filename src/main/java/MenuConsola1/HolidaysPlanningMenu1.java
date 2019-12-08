@@ -1,14 +1,8 @@
 package MenuConsola1;
 
-//    PLANOWANIE URLOPÓW
-//       Wyszukiwarka świąt
-//       dodaj urlop
-//       anuluj urlop
-//       powrót do poprzedniego menu
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HolidaysPlanningMenu1 extends MainMenu1 {
@@ -18,48 +12,57 @@ public class HolidaysPlanningMenu1 extends MainMenu1 {
 
         HolidaysPlanningMenu1 holidaysPlanningMenu = new HolidaysPlanningMenu1();
         holidaysPlanningMenu.menuOptionsDisplay();
-        holidaysPlanningMenu.userChooses();
+        holidaysPlanningMenu.getUserChoice();
     }
 
     @Override
     public void menuOptionsDisplay() {
 
-        String menuHeadline = "PLANOWANIE URLOPÓW";
+        menuOptions.add("HOLIDAY PLANNING");
+        menuOptions.add("Search holiday by DATE");
+        menuOptions.add("Search holiday by NAME");
+        menuOptions.add("Add vacation");
+        menuOptions.add("Cancel vacation");
+        menuOptions.add("Previous menu");
 
-        menuOptions.add("Wyszukiwarka świąt");
-        menuOptions.add("Dodaj urlop");
-        menuOptions.add("Anuluj urlop");
-        menuOptions.add("Powrót do poprzedniego menu");
+        stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
 
-        stdout.info(menuHeadline + "\n" + "\n");
+        for (int i = 1; i < menuOptions.size(); i++) {
 
-        for (int i = 0; i < menuOptions.size(); i++) {
-
-            stdout.info((i + 1) + ": " + menuOptions.get(i) + "\n");
+            stdout.info(i + ": " + menuOptions.get(i) + "\n");
         }
     }
 
     @Override
-    public int userChooses() throws Exception {
+    public int getUserChoice() throws Exception {
 
-        stdout.info("\n" + "Wybierz opcję od 1 do " + menuOptions.size() + "\n");
+        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
 
-        Scanner scanner = new Scanner(System.in);
-        int userChoice = scanner.nextInt();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            scanner.useRadix(menuOptions.size());
+            userChoice = scanner.nextInt();
 
-        switch (userChoice){
-            case 1 :
-                stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
-                break;
-            case 2 :
-                stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
-                break;
-            case 3 :
-                stdout.info("Anuluj urlop - under construction" + "\n" + "\n");
-                break;
-            case 4 :
-                break;
+            switch (userChoice) {
+                case 1:
+                    stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                    break;
+                case 2:
+                    stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
+                    break;
+                case 3:
+                    stdout.info("Add vacation- UNDER CONSTRUCTION\n\n");
+                    break;
+                case 4:
+                    stdout.info("Cancel vacation - UNDER CONSTRUCTION\n\n");
+                    break;
+                default:
+                    break;
+            }
 
+        } catch (InputMismatchException e) {
+            stdout.info("Wrong input - try again\n");
+            getUserChoice();
         }
         return userChoice;
     }
