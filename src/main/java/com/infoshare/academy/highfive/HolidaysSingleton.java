@@ -1,14 +1,18 @@
 package com.infoshare.academy.highfive;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HolidaysSingleton {
 
+    private ApiJsonParser apiJsonParser;
+
     private static HolidaysSingleton instance;
-    private List<Holiday> holidayArrayList;
+    private List<Holiday> holidaysList;
 
     private HolidaysSingleton() {
+        apiJsonParser = new ApiJsonParser();
     }
 
     public static synchronized HolidaysSingleton getInstance() {
@@ -18,24 +22,49 @@ public class HolidaysSingleton {
         return instance;
     }
 
-    public List<Holiday> getHolidays() throws Exception {
-        if(holidayArrayList == null) {
+    private void validateHolidays() {
+        if (holidaysList == null) {
             throw new InitException();
-        } else {
-            return this.holidayArrayList;
         }
     }
 
+    public List<Holiday> getAllHolidays() {
+        validateHolidays();
+        return this.holidaysList;
+    }
+
+    public List<Holiday>  getHolidaysFilteredByName(String filter) {
+        validateHolidays();
+        List<Holiday> filteredByName = new ArrayList<>();
+        for (Holiday holiday : holidaysList) {
+            if (holiday.getName().toLowerCase().contains(filter)) {
+                filteredByName.add(holiday);
+            }
+        }
+        return filteredByName;
+    }
+
+    public List<Holiday> getHolidaysFilteredByDate(String filter) {
+        validateHolidays();
+        List<Holiday> filteredByDate = new ArrayList<>();
+        for (Holiday holiday : holidaysList) {
+            if (holiday.getDate().getDateInPattern("yyyy-MM-dd").contains(filter)) {
+                filteredByDate.add(holiday);
+            }
+        }
+        return filteredByDate;
+    }
+
     public void initFromFile(String fileName) throws IOException {
-        holidayArrayList = ApiJsonParser.parseFromFile(fileName);
+        holidaysList = apiJsonParser.parseFromFile(fileName);
     }
 
     public void initFromURL(String urlPath) throws IOException {
-        holidayArrayList = ApiJsonParser.parseFromURL(urlPath);
+        holidaysList = apiJsonParser.parseFromURL(urlPath);
     }
 
-    public void initSaveToFile(String filename) throws Exception {
-       ApiJsonParser.saveToFile(filename,holidayArrayList);
+    public void initSaveToFile(String filename) {
+        apiJsonParser.saveToFile(filename, holidaysList);
     }
 
 }
