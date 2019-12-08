@@ -1,28 +1,25 @@
-package MenuConsola1;
+package com.infoshare.academy.highfive.MenuConsola;
 
-import com.infoshare.academy.highfive.MenuConsola.ConfigurationMenu;
-import com.infoshare.academy.highfive.MenuConsola.EmployeesManagingMenu;
-import com.infoshare.academy.highfive.MenuConsola.HolidaysPlanningMenu;
-import com.infoshare.academy.highfive.MenuConsola.HolidaysReviewMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
-public class MainMenu1 {
+public class MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     public static int userChoice;
     List<String> menuOptions = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
 
-        MainMenu1 mainMenu1 = new MainMenu1();
+        MainMenu mainMenu = new MainMenu();
 
         do {
-            mainMenu1.menuOptionsDisplay();
-            userChoice = mainMenu1.getUserChoice();
+            mainMenu.menuOptionsDisplay();
+            userChoice = mainMenu.getUserChoice();
         }
         while (userChoice != 0);
     }
