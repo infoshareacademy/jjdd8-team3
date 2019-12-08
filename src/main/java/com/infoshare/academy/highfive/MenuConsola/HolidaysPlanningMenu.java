@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.MenuConsola;
 
+import com.infoshare.academy.highfive.HolidaysFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

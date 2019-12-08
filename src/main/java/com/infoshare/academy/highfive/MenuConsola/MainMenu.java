@@ -13,7 +13,7 @@ public class MainMenu {
     public static int userChoice;
     List<String> menuOptions = new ArrayList<>();
 
-    public static void main(String[] args) throws Exception {
+    public static void runMenu() throws Exception {
 
         MainMenu mainMenu = new MainMenu();
 
