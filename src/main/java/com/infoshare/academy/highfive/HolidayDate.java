@@ -2,17 +2,14 @@ package com.infoshare.academy.highfive;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HolidayDate {
-    @JsonAlias({ "date", "iso" })
+
+    @JsonAlias({"date", "iso"})
     @JsonIgnoreProperties(value = {"date"})
     private Date date;
-
-    public HolidayDate() {
-    }
 
     public String getIso() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -56,8 +53,7 @@ public class HolidayDate {
     public String toString() {
         return "HolidayDate: " +
                 " #date=" + getDateInPattern("yyyy-MM-dd") +
-                ", #dateInt=" + getDay() +" "+ getMonth() +" "+  getYear() +
-                ", #dayInyear=" + getDayInYear() +
+                ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
     }
 
