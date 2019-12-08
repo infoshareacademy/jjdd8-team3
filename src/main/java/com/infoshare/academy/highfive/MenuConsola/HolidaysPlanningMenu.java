@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class HolidaysPlanningMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main() throws Exception {
+    public static void runSubmenu() throws Exception {
 
         HolidaysPlanningMenu holidaysPlanningMenu = new HolidaysPlanningMenu();
         holidaysPlanningMenu.menuOptionsDisplay();
@@ -47,11 +47,11 @@ public class HolidaysPlanningMenu extends MainMenu {
             userChoice = scanner.nextInt();
 
             switch (userChoice) {
-                case 1:    //form class HolidaysFilter
-                    stdout.info("\nWyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                case 1:
+                    HolidaysFilter.searchByDate();
                     break;
-                case 2:   //form class HolidaysFilter
-                    stdout.info("\nWyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                case 2:
+                        HolidaysFilter.searchByName();
                     break;
                 case 3:
                     stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class EmployeesManagingMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main() throws Exception {
+    public static void runSubmenu() throws Exception {
 
         EmployeesManagingMenu employeesManagingMenu = new EmployeesManagingMenu();
         employeesManagingMenu.menuOptionsDisplay();

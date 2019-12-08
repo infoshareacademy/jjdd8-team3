@@ -52,16 +52,16 @@ public class MainMenu {
 
             switch (userChoice) {
                 case 1:
-                    HolidaysPlanningMenu.main();
+                    HolidaysPlanningMenu.runSubmenu();
                     break;
                 case 2:
-                    HolidaysReviewMenu.main();
+                    HolidaysReviewMenu.runSubmenu();
                     break;
                 case 3:
-                    EmployeesManagingMenu.main();
+                    EmployeesManagingMenu.runSubmenu();
                     break;
                 case 4:
-                    ConfigurationMenu.main();
+                    ConfigurationMenu.runSubmenu();
                     break;
                 default:
                     break;
