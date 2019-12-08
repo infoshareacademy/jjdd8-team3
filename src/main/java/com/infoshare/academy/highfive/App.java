@@ -16,7 +16,6 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        stdout.info("Start");
         singletonInitialization();
         MainMenu.runMenu();
     }
