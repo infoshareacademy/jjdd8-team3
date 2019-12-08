@@ -20,7 +20,7 @@ public class HolidaysReviewMenu extends MainMenu {
     public void menuOptionsDisplay() {
 
         menuOptions.add("HOLIDAYS REVIEW");
-        menuOptions.add("Display employee vacation review");
+        menuOptions.add("Display employee vacation");
         menuOptions.add("Display team vacations");
         menuOptions.add("Previous menu");
 
@@ -45,10 +45,10 @@ public class HolidaysReviewMenu extends MainMenu {
 
             switch (userChoice) {
                 case 1:
-                    stdout.info("Display employee vacation - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nDisplay employee vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 case 2:
-                    stdout.info("Display team vacations - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nDisplay team vacations - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     break;

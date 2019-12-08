@@ -46,13 +46,13 @@ public class ConfigurationMenu extends MainMenu {
 
             switch (userChoice) {
                 case 1:
-                    stdout.info("Change DATE format - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nChange DATE format - UNDER CONSTRUCTION\n\n");
                     break;
                 case 2:
-                    stdout.info("Change employees SORTING mode - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nChange employees SORTING mode - UNDER CONSTRUCTION\n\n");
                     break;
                 case 3:
-                    stdout.info("Change configuration of external file - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nChange configuration of external file - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     break;

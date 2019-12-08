@@ -46,17 +46,17 @@ public class HolidaysPlanningMenu extends MainMenu {
             userChoice = scanner.nextInt();
 
             switch (userChoice) {
-                case 1:
-                    stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                case 1:    //form class HolidaysFilter
+                    stdout.info("\nWyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
                     break;
-                case 2:
-                    stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
+                case 2:   //form class HolidaysFilter
+                    stdout.info("\nWyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
                     break;
                 case 3:
-                    stdout.info("Add vacation- UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
                     break;
                 case 4:
-                    stdout.info("Cancel vacation - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     break;

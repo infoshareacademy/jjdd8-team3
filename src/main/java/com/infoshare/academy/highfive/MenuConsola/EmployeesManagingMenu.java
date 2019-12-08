@@ -46,16 +46,13 @@ public class EmployeesManagingMenu extends MainMenu {
 
             switch (userChoice) {
                 case 1:
-                    stdout.info("Wyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                    stdout.info("\nDisplay employees list - UNDER CONSTRUCTION\n\n");
                     break;
                 case 2:
-                    stdout.info("Dodaj urlop - under construction" + "\n" + "\n");
+                    stdout.info("\nAdd new employee - UNDER CONSTRUCTION\n\n");
                     break;
                 case 3:
-                    stdout.info("Add vacation- UNDER CONSTRUCTION\n\n");
-                    break;
-                case 4:
-                    stdout.info("Cancel vacation - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nRemove an employee - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     break;
