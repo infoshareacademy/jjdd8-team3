@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ConfigurationMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main() throws Exception {
+    public static void runSubmenu() throws Exception {
 
         ConfigurationMenu configurationMenu = new ConfigurationMenu();
         configurationMenu.menuOptionsDisplay();
