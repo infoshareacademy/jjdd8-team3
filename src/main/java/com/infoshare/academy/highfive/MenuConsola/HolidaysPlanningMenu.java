@@ -49,9 +49,11 @@ public class HolidaysPlanningMenu extends MainMenu {
             switch (userChoice) {
                 case 1:    //form class HolidaysFilter
                     stdout.info("\nWyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                    HolidaysFilter.searchByDate();
                     break;
                 case 2:   //form class HolidaysFilter
                     stdout.info("\nWyszukiwarka Świąt - PODPIĄĆ !!!!!" + "\n" + "\n");
+                    HolidaysFilter.searchByName();
                     break;
                 case 3:
                     stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
