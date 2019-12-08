@@ -45,12 +45,13 @@ public class MainMenu {
     public int getUserChoice() throws Exception {
 
         stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
+
         try {
             Scanner scanner = new Scanner(System.in);
-            scanner.useRadix(menuOptions.size());
             userChoice = scanner.nextInt();
 
             switch (userChoice) {
+                case 0: break;
                 case 1:
                     HolidaysPlanningMenu.runSubmenu();
                     break;
@@ -64,7 +65,8 @@ public class MainMenu {
                     ConfigurationMenu.runSubmenu();
                     break;
                 default:
-                    break;
+                    stdout.info("Wrong input - try again\n");
+                    getUserChoice();
             }
         } catch (InputMismatchException e) {
         stdout.info("Wrong input - try again\n");

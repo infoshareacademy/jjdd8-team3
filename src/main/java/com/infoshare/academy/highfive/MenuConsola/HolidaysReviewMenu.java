@@ -36,14 +36,12 @@ public class HolidaysReviewMenu extends MainMenu {
     @Override
     public int getUserChoice() throws Exception {
 
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
-
         try {
             Scanner scanner = new Scanner(System.in);
-            scanner.useRadix(menuOptions.size());
             userChoice = scanner.nextInt();
 
             switch (userChoice) {
+                case 0: break;
                 case 1:
                     stdout.info("\nDisplay employee vacation - UNDER CONSTRUCTION\n\n");
                     break;
@@ -51,7 +49,8 @@ public class HolidaysReviewMenu extends MainMenu {
                     stdout.info("\nDisplay team vacations - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
-                    break;
+                    stdout.info("Wrong input - try again\n");
+                    getUserChoice();
             }
 
         } catch (InputMismatchException e) {

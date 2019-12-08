@@ -43,10 +43,10 @@ public class HolidaysPlanningMenu extends MainMenu {
 
         try {
             Scanner scanner = new Scanner(System.in);
-            scanner.useRadix(menuOptions.size());
             userChoice = scanner.nextInt();
 
             switch (userChoice) {
+                case 0: break;
                 case 1:
                     HolidaysFilter.searchByDate();
                     break;
@@ -60,7 +60,8 @@ public class HolidaysPlanningMenu extends MainMenu {
                     stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
-                    break;
+                    stdout.info("Wrong input - try again\n");
+                    getUserChoice();
             }
 
         } catch (InputMismatchException e) {

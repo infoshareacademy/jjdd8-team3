@@ -38,13 +38,14 @@ public class ConfigurationMenu extends MainMenu {
     public int getUserChoice() throws Exception {
 
         stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
+        stdout.info("\nvsize of menuOptions ="+String.valueOf(menuOptions.size())+"\n");
 
         try {
             Scanner scanner = new Scanner(System.in);
-            scanner.useRadix(menuOptions.size());
             userChoice = scanner.nextInt();
 
             switch (userChoice) {
+                case 0: break;
                 case 1:
                     stdout.info("\nChange DATE format - UNDER CONSTRUCTION\n\n");
                     break;
@@ -55,7 +56,8 @@ public class ConfigurationMenu extends MainMenu {
                     stdout.info("\nChange configuration of external file - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
-                    break;
+                    stdout.info("Wrong input - try again\n");
+                    getUserChoice();
             }
 
         } catch (InputMismatchException e) {
