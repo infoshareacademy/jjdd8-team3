@@ -44,14 +44,18 @@ public class MainMenu {
 
     public int getUserChoice() throws Exception {
 
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
-
-        try {
-            Scanner scanner = new Scanner(System.in);
-            userChoice = scanner.nextInt();
-
+        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
+        Scanner scanner = new Scanner(System.in);
+        if (!scanner.hasNextInt()) {
+            stdout.info("Wrong input - try again\n");
+            getUserChoice();
+        }
+        userChoice = scanner.nextInt();
+        if (userChoice > menuOptions.size() - 1) {
+            stdout.info("Wrong input - try again\n");
+            getUserChoice();
+        } else {
             switch (userChoice) {
-                case 0: break;
                 case 1:
                     HolidaysPlanningMenu.runSubmenu();
                     break;
@@ -65,13 +69,9 @@ public class MainMenu {
                     ConfigurationMenu.runSubmenu();
                     break;
                 default:
-                    stdout.info("Wrong input - try again\n");
-                    getUserChoice();
+                    break;
             }
-        } catch (InputMismatchException e) {
-        stdout.info("Wrong input - try again\n");
-        getUserChoice();
         }
         return userChoice;
-        }
+    }
 }

@@ -33,25 +33,29 @@ public class HolidaysPlanningMenu extends MainMenu {
 
             stdout.info(i + ": " + menuOptions.get(i) + "\n");
         }
-        stdout.info("\n" + "0: Exit" + "\n");
+
     }
 
     @Override
     public int getUserChoice() throws Exception {
 
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size()-1) + "\n");
-
-        try {
-            Scanner scanner = new Scanner(System.in);
-            userChoice = scanner.nextInt();
-
+        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
+        Scanner scanner = new Scanner(System.in);
+        if (!scanner.hasNextInt()) {
+            stdout.info("Wrong input - try again\n");
+            getUserChoice();
+        }
+        userChoice = scanner.nextInt();
+        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
+            stdout.info("Wrong input - try again\n");
+            getUserChoice();
+        } else {
             switch (userChoice) {
-                case 0: break;
                 case 1:
                     HolidaysFilter.searchByDate();
                     break;
                 case 2:
-                        HolidaysFilter.searchByName();
+                    HolidaysFilter.searchByName();
                     break;
                 case 3:
                     stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
@@ -60,15 +64,9 @@ public class HolidaysPlanningMenu extends MainMenu {
                     stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
-                    stdout.info("Wrong input - try again\n");
-                    getUserChoice();
+                    MainMenu.runMenu();
             }
-
-        } catch (InputMismatchException e) {
-            stdout.info("Wrong input - try again\n");
-            getUserChoice();
         }
         return userChoice;
     }
-
 }
