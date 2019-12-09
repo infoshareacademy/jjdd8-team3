@@ -36,13 +36,18 @@ public class ConfigurationMenu extends MainMenu {
     @Override
     public int getUserChoice() throws Exception {
 
-        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
+        boolean matchedToPattern;
+        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
-        if (!scanner.hasNextInt()) {
+        String numberPattern = "[0-9]";
+        userChoiceString = scanner.nextLine();
+        matchedToPattern = userChoiceString.matches(numberPattern);
+        if (!matchedToPattern) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = scanner.nextInt();
+        userChoice = Integer.parseInt(userChoiceString);
+
         if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();

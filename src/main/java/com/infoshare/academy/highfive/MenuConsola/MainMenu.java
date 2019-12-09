@@ -12,6 +12,8 @@ public class MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     public static int userChoice;
     List<String> menuOptions = new ArrayList<>();
+    public String userChoiceString;
+
 
     public static void runMenu() throws Exception {
 
@@ -44,13 +46,18 @@ public class MainMenu {
 
     public int getUserChoice() throws Exception {
 
+        boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
-        if (!scanner.hasNextInt()) {
+        String numberPattern = "[0-9]";
+        userChoiceString = scanner.nextLine();
+        matchedToPattern = userChoiceString.matches(numberPattern);
+        if (!matchedToPattern) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = scanner.nextInt();
+        userChoice = Integer.parseInt(userChoiceString);
+
         if (userChoice > menuOptions.size() - 1) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
