@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-final class HolidaysFilter {
+public final class HolidaysFilter {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
