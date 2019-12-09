@@ -56,6 +56,7 @@ public class MainMenu {
             getUserChoice();
         } else {
             switch (userChoice) {
+                case 0: System.exit(0);
                 case 1:
                     HolidaysPlanningMenu.runSubmenu();
                     break;
