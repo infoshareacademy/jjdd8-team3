@@ -1,28 +1,27 @@
-package com.infoshare.academy.highfive.MenuConsola;
+package com.infoshare.academy.highfive.menuconsola;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class EmployeesManagingMenu extends MainMenu {
+public class ConfigurationMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void runSubmenu() throws Exception {
 
-        EmployeesManagingMenu employeesManagingMenu = new EmployeesManagingMenu();
-        employeesManagingMenu.menuOptionsDisplay();
-        employeesManagingMenu.getUserChoice();
+        ConfigurationMenu configurationMenu = new ConfigurationMenu();
+        configurationMenu.menuOptionsDisplay();
+        configurationMenu.getUserChoice();
     }
 
     @Override
     public void menuOptionsDisplay() {
 
-        menuOptions.add("EMPLOYEES MANAGING");
-        menuOptions.add("Display employees list");
-        menuOptions.add("Add new employee");
-        menuOptions.add("Remove an employee");
+        menuOptions.add("CONFIGURATION");
+        menuOptions.add("Change DATE format");
+        menuOptions.add("Change employees SORTING mode");
+        menuOptions.add("Change configuration of external file");
         menuOptions.add("Previous menu");
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
@@ -54,13 +53,13 @@ public class EmployeesManagingMenu extends MainMenu {
         } else {
             switch (userChoice) {
                 case 1:
-                    stdout.info("\nDisplay employees list - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nChange DATE format - UNDER CONSTRUCTION\n\n");
                     break;
                 case 2:
-                    stdout.info("\nAdd new employee - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nChange employees SORTING mode - UNDER CONSTRUCTION\n\n");
                     break;
                 case 3:
-                    stdout.info("\nRemove an employee - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nChange configuration of external file - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     MainMenu.runMenu();

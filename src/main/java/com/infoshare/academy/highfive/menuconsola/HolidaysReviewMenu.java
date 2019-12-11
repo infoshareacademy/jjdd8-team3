@@ -1,39 +1,27 @@
-package com.infoshare.academy.highfive.MenuConsola;
+package com.infoshare.academy.highfive.menuconsola;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-public class MainMenu {
+public class HolidaysReviewMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static int userChoice;
-    List<String> menuOptions = new ArrayList<>();
-    public String userChoiceString;
 
+    public static void runSubmenu() throws Exception {
 
-    public static void runMenu() throws Exception {
-
-        MainMenu mainMenu = new MainMenu();
-
-        do {
-            mainMenu.menuOptionsDisplay();
-            userChoice = mainMenu.getUserChoice();
-        }
-        while (userChoice != 0);
+        HolidaysReviewMenu holidaysReviewMenu = new HolidaysReviewMenu();
+        holidaysReviewMenu.menuOptionsDisplay();
+        holidaysReviewMenu.getUserChoice();
     }
 
+    @Override
     public void menuOptionsDisplay() {
 
-        menuOptions.clear();
-        menuOptions.add("MAIN MENU");
-        menuOptions.add("HOLIDAY PLANNING");
         menuOptions.add("HOLIDAYS REVIEW");
-        menuOptions.add("EMPLOYEES MANAGING");
-        menuOptions.add("CONFIGURATION");
+        menuOptions.add("Display employee vacation");
+        menuOptions.add("Display team vacations");
+        menuOptions.add("Previous menu");
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
 
@@ -41,9 +29,9 @@ public class MainMenu {
 
             stdout.info(i + ": " + menuOptions.get(i) + "\n");
         }
-        stdout.info("\n" + "0: Exit" + "\n");
-    }
+     }
 
+    @Override
     public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
@@ -58,26 +46,19 @@ public class MainMenu {
         }
         userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1) {
+        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
             switch (userChoice) {
-                case 0: System.exit(0);
                 case 1:
-                    HolidaysPlanningMenu.runSubmenu();
+                    stdout.info("\nDisplay employee vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 case 2:
-                    HolidaysReviewMenu.runSubmenu();
-                    break;
-                case 3:
-                    EmployeesManagingMenu.runSubmenu();
-                    break;
-                case 4:
-                    ConfigurationMenu.runSubmenu();
+                    stdout.info("\nDisplay team vacations - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
-                    break;
+                    MainMenu.runMenu();
             }
         }
         return userChoice;

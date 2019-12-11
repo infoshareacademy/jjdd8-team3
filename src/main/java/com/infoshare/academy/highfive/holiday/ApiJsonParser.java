@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive;
+package com.infoshare.academy.highfive.holiday;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -40,9 +40,9 @@ public class ApiJsonParser {
         try {
             JsonNode jsonData = jsonNodeBase.findPath(HOLIDAYS);
             holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-            stdout.info("JSON imported!\n");
+            stdout.info("\u001B[36m" + "\nJSON imported!\nDatabase ready to use!" + "\u001B[0m" + "\n");
         } catch (JsonProcessingException e) {
-            stdout.info("There is a little problem with JSON Import!\n",e);
+            stdout.info("There is a little problem with JSON Import!\n", e);
         }
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
@@ -52,7 +52,7 @@ public class ApiJsonParser {
             objectMapper.writer().withRootName(HOLIDAYS).writeValue(new File(fileName), holidays);
             stdout.info("JSON file created!\n");
         } catch (IOException e) {
-            stdout.info("There is a little problem with file Saving!\n",e);
+            stdout.info("There is a little problem with file Saving!\n", e);
         }
     }
 

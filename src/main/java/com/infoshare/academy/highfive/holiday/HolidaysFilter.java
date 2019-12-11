@@ -1,15 +1,19 @@
-package com.infoshare.academy.highfive;
+package com.infoshare.academy.highfive.holiday;
 
+import com.infoshare.academy.highfive.mapper.HolidayMapper;
+import com.infoshare.academy.highfive.mapper.ParseStringToIsoDate;
+import com.infoshare.academy.highfive.tool.CleanTerminal;
 import com.infoshare.academy.highfive.view.HolidayDateView;
 import com.infoshare.academy.highfive.view.HolidayView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public final class HolidaysFilter {
 
@@ -19,12 +23,36 @@ public final class HolidaysFilter {
         throw new IllegalStateException("Utility filter class");
     }
 
-    public static String searchByName() {
+
+    private static List<HolidayView> getHolidayViews() {
+        HolidayMapper holidayMapper = new HolidayMapper();
+        return HolidaysSingleton.getInstance().getAllHolidays().stream().map(holidayMapper::mapEntityToView).collect(Collectors.toList());
+    }
+
+    private static HolidayDateView getHolidayDateViewMinDate() {
+        return getHolidayViews().stream().map(HolidayView::getDate).min(Comparator.comparing(HolidayDateView::getDateIso)).orElse(null);
+    }
+
+    private static HolidayDateView getHolidayDateViewMaxDate() {
+        return getHolidayViews().stream().map(HolidayView::getDate).max(Comparator.comparing(HolidayDateView::getDateIso)).orElse(null);
+    }
+
+    public static void showMaxMinDateInfo() {
+        stdout.info("\u001B[33m" + "Database entry's in scope of " + getHolidayDateViewMinDate().toString() + " to " + getHolidayDateViewMaxDate().toString() + "\u001B[0m\n");
+    }
+
+    private static boolean isInputDateInScope(String inputTxt) throws ParseException {
+        return ParseStringToIsoDate.parseStringToDate(inputTxt).after(getHolidayDateViewMaxDate().getDate())
+                || ParseStringToIsoDate.parseStringToDate(inputTxt).before(getHolidayDateViewMinDate().getDate());
+    }
+
+    public static String searchByName(){
 
         String inputTxt;
         Scanner scanner = new Scanner(System.in);
-
         do {
+            CleanTerminal.cleanTerminal();
+            showMaxMinDateInfo();
             stdout.info("Type Holiday Name(min. 3 char.) or type [0] to exit: ");
             inputTxt = scanner.nextLine().strip();
 
@@ -57,11 +85,19 @@ public final class HolidaysFilter {
         String inputTxt;
         Scanner scanner;
 
+
         do {
+            CleanTerminal.cleanTerminal();
+            showMaxMinDateInfo();
             stdout.info("Type Date in format yyyy-mm-dd or type [0] to exit: ");
             scanner = new Scanner(System.in);
             inputTxt = scanner.nextLine().strip();
             matchedToDatePattern = inputTxt.matches(datePattern);
+            if (matchedToDatePattern && isInputDateInScope(inputTxt)) {
+                matchedToDatePattern = false;
+                stdout.info("\nDate out of scope!\n");
+                continue;
+            }
             if (inputTxt.equals("0")) {
                 matchedToDatePattern = false;
                 break;
@@ -71,7 +107,7 @@ public final class HolidaysFilter {
         stdout.info("You typed: " + inputTxt + "\n");
 
         if (matchedToDatePattern) {
-            stdout.info("It's: " + new SimpleDateFormat("EEEE").format(new SimpleDateFormat("yyyy-MM-dd").parse(inputTxt)) + "\n");
+
             queryResults(inputTxt, "byDate");
 
             stdout.info("Type [1] to search again or something else to exit: ");
@@ -108,11 +144,10 @@ public final class HolidaysFilter {
                 stdout.info("For this day you will be able to take extra holiday!\n");
             }
 
-            stdout.info(holidayView.toString());
-
             viewList.add(holidayView);
         }
         if (!viewList.isEmpty()) {
+            viewList.forEach(i -> stdout.info(i.toString()));
             stdout.info("______\n" + viewList.size() + " result(s) found for this query!\n------\n");
         } else {
             stdout.info("______\nNo result(s) found for this query!\n------\n");

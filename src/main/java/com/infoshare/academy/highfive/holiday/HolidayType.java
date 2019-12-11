@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive;
+package com.infoshare.academy.highfive.holiday;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;

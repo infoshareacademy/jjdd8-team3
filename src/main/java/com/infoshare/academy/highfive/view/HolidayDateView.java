@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.view;
 
-import com.infoshare.academy.highfive.Holiday;
+import com.infoshare.academy.highfive.holiday.Holiday;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

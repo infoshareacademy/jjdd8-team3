@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive;
+package com.infoshare.academy.highfive.holiday;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -55,6 +55,9 @@ public class HolidayDate {
                 " #date=" + getDateInPattern("yyyy-MM-dd") +
                 ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
+    }
+    public String toString2() {
+        return getDateInPattern("yyyy-MM-dd");
     }
 
 }
