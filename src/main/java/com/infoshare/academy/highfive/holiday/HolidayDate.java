@@ -56,8 +56,5 @@ public class HolidayDate {
                 ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
     }
-    public String toString2() {
-        return getDateInPattern("yyyy-MM-dd");
-    }
 
 }
