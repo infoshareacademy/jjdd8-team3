@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//import com.infoshare.academy.highfive.employeemgmt.Employee;
+import com.infoshare.academy.highfive.employeemgmt.Employee;
 
 public class ApiJsonParser {
 
@@ -58,7 +58,7 @@ public class ApiJsonParser {
             stdout.info("There is a little problem with file Saving!\n", e);
         }
     }
-/*
+
     public List<Employee> parseEmployeeFile(String fileName) throws IOException {
         return parseEmployee(objectMapper.readTree(new File(fileName)));
     }
@@ -72,5 +72,5 @@ public class ApiJsonParser {
             stdout.info("There is a little problem with JSON Import!\n", e);
         }
         return new ArrayList<>(Arrays.asList(employeeImport));
-    }*/
+    }
 }
