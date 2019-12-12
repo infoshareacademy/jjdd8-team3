@@ -56,5 +56,4 @@ public class ApiJsonParser {
             stdout.info("There is a little problem with file Saving!\n", e);
         }
     }
-
 }

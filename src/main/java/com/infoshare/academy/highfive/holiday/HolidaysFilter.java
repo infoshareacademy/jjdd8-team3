@@ -51,7 +51,8 @@ public final class HolidaysFilter {
     public static void showMaxMinDateInfo() {
         stdout.info(ColorsSet.ANSI_YELLOW + "Database entry's in scope of "
                 + getHolidayDateViewMinDate().toString() + " to "
-                + getHolidayDateViewMaxDate().toString() + ColorsSet.ANSI_RESET);
+                + getHolidayDateViewMaxDate().toString() + ColorsSet.ANSI_RESET
+                + "\n");
     }
 
     private static boolean isInputDateInScope(String inputTxt) throws ParseException {
