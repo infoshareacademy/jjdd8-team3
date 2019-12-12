@@ -39,7 +39,7 @@ public class HolidaysPlanningMenu extends MainMenu {
     public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
+        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
         String numberPattern = "[0-9]";
         userChoiceString = scanner.nextLine();
