@@ -5,9 +5,10 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.infoshare.academy.highfive.employeemgmt.Employee;
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +41,7 @@ public class ApiJsonParser {
         try {
             JsonNode jsonData = jsonNodeBase.findPath(HOLIDAYS);
             holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-            stdout.info("\u001B[36m" + "\nJSON imported!\nDatabase ready to use!" + "\u001B[0m" + "\n");
+            stdout.info(ColorsSet.ANSI_CYAN  + "\nHolidays from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
         } catch (JsonProcessingException e) {
             stdout.info("There is a little problem with JSON Import!\n", e);
         }
@@ -54,6 +55,20 @@ public class ApiJsonParser {
         } catch (IOException e) {
             stdout.info("There is a little problem with file Saving!\n", e);
         }
+    }
+    public List<Employee> parseEmployeeFile(String fileName) throws IOException {
+        return parseEmployee(objectMapper.readTree(new File(fileName)));
+    }
+    private List<Employee> parseEmployee(JsonNode jsonNodeBase) {
+        Employee[] employeeImport = {};
+        try {
+            JsonNode jsonData = jsonNodeBase.findPath("employee");
+            employeeImport = objectMapper.treeToValue(jsonData, Employee[].class);
+            stdout.info(ColorsSet.ANSI_CYAN + "\nEmployees from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
+        } catch (JsonProcessingException e) {
+            stdout.info("There is a little problem with JSON Import!\n", e);
+        }
+        return new ArrayList<>(Arrays.asList(employeeImport));
     }
 
 }

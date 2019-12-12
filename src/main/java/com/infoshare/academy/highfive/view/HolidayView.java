@@ -36,7 +36,10 @@ public class HolidayView {
 
     @Override
     public String toString() {
-        return date + " | " + new SimpleDateFormat("EEEE").format(date.getDate()) + " | Type " + types[0].getType() + ", Name Of Holiday: " + name + " - " + description + "\n";
+        return date + " | "
+                + new SimpleDateFormat("EEEE").format(date.getDate())
+                + " | Type " + types[0].getType()
+                + ", Name Of Holiday: " + name + " - " + description + "\n";
     }
 
 }

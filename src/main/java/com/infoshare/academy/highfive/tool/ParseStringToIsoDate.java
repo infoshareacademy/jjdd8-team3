@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.mapper;
+package com.infoshare.academy.highfive.tool;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

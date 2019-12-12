@@ -2,10 +2,9 @@ package com.infoshare.academy.highfive.tool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 
-public class CleanTerminal {
+public class TerminalCleaner {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String checker = System.getProperty("os.name").toLowerCase();

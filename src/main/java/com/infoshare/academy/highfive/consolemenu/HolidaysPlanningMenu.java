@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.menuconsola;
+package com.infoshare.academy.highfive.consolemenu;
 
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
 import org.slf4j.Logger;

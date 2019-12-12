@@ -1,13 +1,13 @@
 package com.infoshare.academy.highfive.holiday;
 
 import com.infoshare.academy.highfive.mapper.HolidayMapper;
-import com.infoshare.academy.highfive.mapper.ParseStringToIsoDate;
-import com.infoshare.academy.highfive.tool.CleanTerminal;
+import com.infoshare.academy.highfive.tool.ColorsSet;
+import com.infoshare.academy.highfive.tool.ParseStringToIsoDate;
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import com.infoshare.academy.highfive.view.HolidayDateView;
 import com.infoshare.academy.highfive.view.HolidayView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
 public final class HolidaysFilter {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final String byName = "byName";
+    private static final String byDate = "byDate";
+
 
     private HolidaysFilter() {
         throw new IllegalStateException("Utility filter class");
@@ -26,19 +29,29 @@ public final class HolidaysFilter {
 
     private static List<HolidayView> getHolidayViews() {
         HolidayMapper holidayMapper = new HolidayMapper();
-        return HolidaysSingleton.getInstance().getAllHolidays().stream().map(holidayMapper::mapEntityToView).collect(Collectors.toList());
+        return HolidaysSingleton.getInstance().getAllHolidays().stream()
+                .map(holidayMapper::mapEntityToView)
+                .collect(Collectors.toList());
     }
 
     private static HolidayDateView getHolidayDateViewMinDate() {
-        return getHolidayViews().stream().map(HolidayView::getDate).min(Comparator.comparing(HolidayDateView::getDateIso)).orElse(null);
+        return getHolidayViews().stream()
+                .map(HolidayView::getDate)
+                .min(Comparator.comparing(HolidayDateView::getDateIso))
+                .orElse(null);
     }
 
     private static HolidayDateView getHolidayDateViewMaxDate() {
-        return getHolidayViews().stream().map(HolidayView::getDate).max(Comparator.comparing(HolidayDateView::getDateIso)).orElse(null);
+        return getHolidayViews().stream()
+                .map(HolidayView::getDate)
+                .max(Comparator.comparing(HolidayDateView::getDateIso))
+                .orElse(null);
     }
 
     public static void showMaxMinDateInfo() {
-        stdout.info("\u001B[33m" + "Database entry's in scope of " + getHolidayDateViewMinDate().toString() + " to " + getHolidayDateViewMaxDate().toString() + "\u001B[0m\n");
+        stdout.info(ColorsSet.ANSI_YELLOW + "Database entry's in scope of "
+                + getHolidayDateViewMinDate().toString() + " to "
+                + getHolidayDateViewMaxDate().toString() + ColorsSet.ANSI_RESET);
     }
 
     private static boolean isInputDateInScope(String inputTxt) throws ParseException {
@@ -51,7 +64,7 @@ public final class HolidaysFilter {
         String inputTxt;
         Scanner scanner = new Scanner(System.in);
         do {
-            CleanTerminal.cleanTerminal();
+            TerminalCleaner.cleanTerminal();
             showMaxMinDateInfo();
             stdout.info("Type Holiday Name(min. 3 char.) or type [0] to exit: ");
             inputTxt = scanner.nextLine().strip();
@@ -65,7 +78,7 @@ public final class HolidaysFilter {
         stdout.info("You typed: " + inputTxt + "\n");
 
         if (!inputTxt.equals("0")) {
-            queryResults(inputTxt.toLowerCase(), "byName");
+            queryResults(inputTxt.toLowerCase(), byName);
 
             stdout.info("Type [1] to search again or something else to exit: ");
 
@@ -87,7 +100,7 @@ public final class HolidaysFilter {
 
 
         do {
-            CleanTerminal.cleanTerminal();
+            TerminalCleaner.cleanTerminal();
             showMaxMinDateInfo();
             stdout.info("Type Date in format yyyy-mm-dd or type [0] to exit: ");
             scanner = new Scanner(System.in);
@@ -108,7 +121,7 @@ public final class HolidaysFilter {
 
         if (matchedToDatePattern) {
 
-            queryResults(inputTxt, "byDate");
+            queryResults(inputTxt, byDate);
 
             stdout.info("Type [1] to search again or something else to exit: ");
 
@@ -126,9 +139,9 @@ public final class HolidaysFilter {
 
         List<Holiday> resultHolidayList;
 
-        if (filterType.equals("byDate")) {
+        if (filterType.equals(byDate)) {
             resultHolidayList = HolidaysSingleton.getInstance().getHolidaysFilteredByDate(filter);
-        } else if (filterType.equals("byName")) {
+        } else if (filterType.equals(byName)) {
             resultHolidayList = HolidaysSingleton.getInstance().getHolidaysFilteredByName(filter);
         } else {
             stdout.info("Operation not supported!!");
