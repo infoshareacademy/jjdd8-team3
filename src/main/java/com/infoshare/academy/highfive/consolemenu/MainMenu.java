@@ -1,10 +1,9 @@
-package com.infoshare.academy.highfive.MenuConsola;
+package com.infoshare.academy.highfive.consolemenu;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 

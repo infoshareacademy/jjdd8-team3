@@ -1,6 +1,8 @@
 package com.infoshare.academy.highfive.view;
 
-import com.infoshare.academy.highfive.HolidayType;
+import com.infoshare.academy.highfive.holiday.HolidayType;
+
+import java.text.SimpleDateFormat;
 
 public class HolidayView {
 
@@ -34,7 +36,10 @@ public class HolidayView {
 
     @Override
     public String toString() {
-        return date + " | Type " + types[0].getType() + ", Name Of Holiday: " + name + " - " + description + ";\n";
+        return date + " | "
+                + new SimpleDateFormat("EEEE").format(date.getDate())
+                + " | Type " + types[0].getType()
+                + ", Name Of Holiday: " + name + " - " + description + "\n";
     }
 
 }

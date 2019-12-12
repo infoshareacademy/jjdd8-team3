@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive;
+package com.infoshare.academy.highfive.holiday;
 
 public class InitException extends RuntimeException {
     public InitException() {
