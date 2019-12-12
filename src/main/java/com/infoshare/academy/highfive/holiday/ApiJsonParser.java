@@ -56,19 +56,5 @@ public class ApiJsonParser {
             stdout.info("There is a little problem with file Saving!\n", e);
         }
     }
-    public List<Employee> parseEmployeeFile(String fileName) throws IOException {
-        return parseEmployee(objectMapper.readTree(new File(fileName)));
-    }
-    private List<Employee> parseEmployee(JsonNode jsonNodeBase) {
-        Employee[] employeeImport = {};
-        try {
-            JsonNode jsonData = jsonNodeBase.findPath("employee");
-            employeeImport = objectMapper.treeToValue(jsonData, Employee[].class);
-            stdout.info(ColorsSet.ANSI_CYAN + "\nEmployees from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
-        } catch (JsonProcessingException e) {
-            stdout.info("There is a little problem with JSON Import!\n", e);
-        }
-        return new ArrayList<>(Arrays.asList(employeeImport));
-    }
 
 }
