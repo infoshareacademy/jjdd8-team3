@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.consolemenu;
 
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,8 @@ public class HolidaysPlanningMenu extends MainMenu {
 
     @Override
     public void menuOptionsDisplay() {
+
+        TerminalCleaner.cleanTerminal();
 
         menuOptions.add("HOLIDAY PLANNING");
         menuOptions.add("Search holiday by DATE");

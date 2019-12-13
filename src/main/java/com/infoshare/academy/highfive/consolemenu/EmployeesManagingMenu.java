@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,8 @@ public class EmployeesManagingMenu extends MainMenu {
 
     @Override
     public void menuOptionsDisplay() {
+
+        TerminalCleaner.cleanTerminal();
 
         menuOptions.add("EMPLOYEES MANAGING");
         menuOptions.add("Display employees list");
