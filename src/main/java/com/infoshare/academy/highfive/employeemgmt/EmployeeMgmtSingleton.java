@@ -24,4 +24,20 @@ public class EmployeeMgmtSingleton {
     public void initFromFile(String fileName) throws IOException {
         employeeList = apiJsonParser.parseEmployeeFile(fileName);
     }
+
+    public void initSaveToFile(String filename) {
+        apiJsonParser.saveToFileEmployee(filename, employeeList);
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void insertEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
+
+    public void deleteEmployeeByObj(Employee employee) {
+        employeeList.remove(employee);
+    }
 }
