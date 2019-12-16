@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,8 @@ public class ConfigurationMenu extends MainMenu {
 
     @Override
     public void menuOptionsDisplay() {
+
+        TerminalCleaner.cleanTerminal();
 
         menuOptions.add("CONFIGURATION");
         menuOptions.add("Change DATE format");
@@ -36,7 +39,7 @@ public class ConfigurationMenu extends MainMenu {
     public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
+        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
         String numberPattern = "[0-9]";
         userChoiceString = scanner.nextLine();

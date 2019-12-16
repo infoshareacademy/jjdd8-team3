@@ -3,6 +3,7 @@ package com.infoshare.academy.highfive.consolemenu;
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
 import com.infoshare.academy.highfive.vacation.VacationPlanner;
 import com.infoshare.academy.highfive.vacation.VacationSingleton;
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,8 @@ public class HolidaysPlanningMenu extends MainMenu {
 
     @Override
     public void menuOptionsDisplay() {
+
+        TerminalCleaner.cleanTerminal();
 
         menuOptions.add("HOLIDAY PLANNING");
         menuOptions.add("Search holiday by DATE");
@@ -41,7 +44,7 @@ public class HolidaysPlanningMenu extends MainMenu {
     public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
+        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
         String numberPattern = "[0-9]";
         userChoiceString = scanner.nextLine();
@@ -64,8 +67,7 @@ public class HolidaysPlanningMenu extends MainMenu {
                     HolidaysFilter.searchByName();
                     break;
                 case 3:
-                    VacationPlanner vacationPlanner = new VacationPlanner();
-                    vacationPlanner.planVacation();
+                    stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
                     break;
                 case 4:
                     stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
