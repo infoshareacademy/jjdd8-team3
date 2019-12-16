@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +18,8 @@ public class MainMenu {
     public static void runMenu() throws Exception {
 
         MainMenu mainMenu = new MainMenu();
-
         do {
+
             mainMenu.menuOptionsDisplay();
             userChoice = mainMenu.getUserChoice();
         }
@@ -26,6 +27,8 @@ public class MainMenu {
     }
 
     public void menuOptionsDisplay() {
+
+        TerminalCleaner.cleanTerminal();
 
         menuOptions.clear();
         menuOptions.add("MAIN MENU");
@@ -62,7 +65,8 @@ public class MainMenu {
             getUserChoice();
         } else {
             switch (userChoice) {
-                case 0: System.exit(0);
+                case 0:
+                    System.exit(0);
                 case 1:
                     HolidaysPlanningMenu.runSubmenu();
                     break;
