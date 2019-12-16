@@ -1,13 +1,15 @@
 package com.infoshare.academy.highfive.tool;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ParseStringToIsoDate {
 
-    public static Date parseStringToDate(String dateString) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.parse(dateString);
+    private ParseStringToIsoDate() {
+        throw new IllegalStateException("Utility parse ISO date class");
+    }
+
+    public static LocalDate parseStringToDate(String dateString) {
+        return LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
     }
 }

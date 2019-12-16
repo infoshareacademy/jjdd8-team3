@@ -1,59 +1,40 @@
 package com.infoshare.academy.highfive.holiday;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infoshare.academy.highfive.tool.CustomHolidayDateDeserializer;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+@JsonDeserialize(using = CustomHolidayDateDeserializer.class)
 public class HolidayDate {
 
-    @JsonAlias({"date", "iso"})
-    @JsonIgnoreProperties(value = {"date"})
-    private Date date;
+    private LocalDate date;
 
-    public String getIso() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(date);
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
+    public HolidayDate(LocalDate date) {
         this.date = date;
     }
 
-    public Integer getYear() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy");
-        return Integer.parseInt(format.format(date));
+    public LocalDate getDate() {
+        return date;
     }
 
-    public Integer getMonth() {
-        SimpleDateFormat format = new SimpleDateFormat("MM");
-        return Integer.parseInt(format.format(date));
+    public String getIso() {
+        return date.format(DateTimeFormatter.ISO_DATE);
     }
 
-    public Integer getDay() {
-        SimpleDateFormat format = new SimpleDateFormat("dd");
-        return Integer.parseInt(format.format(date));
-    }
-
-    public Integer getDayInYear() {
-        SimpleDateFormat format = new SimpleDateFormat("DD");
-        return Integer.parseInt(format.format(date));
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getDateInPattern(String datePattern) {
-        SimpleDateFormat format = new SimpleDateFormat(datePattern);
-        return format.format(date);
+        return date.format(DateTimeFormatter.ofPattern(datePattern));
     }
 
     @Override
     public String toString() {
         return "HolidayDate: " +
                 " #date=" + getDateInPattern("yyyy-MM-dd") +
-                ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
     }
 
