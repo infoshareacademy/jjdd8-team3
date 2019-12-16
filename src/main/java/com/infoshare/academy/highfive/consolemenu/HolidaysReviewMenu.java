@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
+import static com.infoshare.academy.highfive.tool.TerminalCleaner.cleanTerminal;
+
 public class HolidaysReviewMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
@@ -33,7 +35,7 @@ public class HolidaysReviewMenu extends MainMenu {
 
     @Override
     public int getUserChoice() throws Exception {
-
+        cleanTerminal();
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
