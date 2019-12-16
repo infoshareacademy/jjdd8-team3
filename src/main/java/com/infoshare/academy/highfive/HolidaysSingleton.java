@@ -48,7 +48,7 @@ public class HolidaysSingleton {
         validateHolidays();
         List<Holiday> filteredByDate = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
-            if (holiday.getDate().getDateInPattern("yyyy-MM-dd").contains(filter)) {
+            if (holiday.getDate().getDateInPattern(ConfiguartionLoader.getDateFormat()).contains(filter)) {
                 filteredByDate.add(holiday);
             }
         }

@@ -12,7 +12,7 @@ public class HolidayDate {
     private Date date;
 
     public String getIso() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat(ConfiguartionLoader.getDateFormat());
         return format.format(date);
     }
 
@@ -52,7 +52,7 @@ public class HolidayDate {
     @Override
     public String toString() {
         return "HolidayDate: " +
-                " #date=" + getDateInPattern("yyyy-MM-dd") +
+                " #date=" + getDateInPattern(ConfiguartionLoader.getDateFormat()) +
                 ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
     }

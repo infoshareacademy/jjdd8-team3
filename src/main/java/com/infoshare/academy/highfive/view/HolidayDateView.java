@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.view;
 
+import com.infoshare.academy.highfive.ConfiguartionLoader;
 import com.infoshare.academy.highfive.Holiday;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +18,7 @@ public class HolidayDateView {
     }
 
     public String getDateIso() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat(ConfiguartionLoader.getDateFormat());
         return format.format(date);
     }
 
