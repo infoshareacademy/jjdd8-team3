@@ -8,6 +8,7 @@ import java.util.List;
 public class EmployeeMgmtSingleton {
     ApiJsonParser apiJsonParser;
     private static EmployeeMgmtSingleton instance;
+    private List<Team> teamList;
     private List<Employee> employeeList;
 
     private EmployeeMgmtSingleton() {
@@ -21,23 +22,29 @@ public class EmployeeMgmtSingleton {
         return instance;
     }
 
-    public void initFromFile(String fileName) throws IOException {
+    public void initFromFileTeam(String fileName) throws IOException {
+        teamList = apiJsonParser.parseTeamFile(fileName);
+    }
+
+    public void initSaveToFileTeam(String filename) {
+        apiJsonParser.saveToFileTeam(filename, teamList);
+    }
+
+    public void initFromFileEmployee(String fileName) throws IOException {
         employeeList = apiJsonParser.parseEmployeeFile(fileName);
     }
 
-    public void initSaveToFile(String filename) {
+    public void initSaveToFileEmployee(String filename) {
         apiJsonParser.saveToFileEmployee(filename, employeeList);
+    }
+
+    public List<Team> getTeamList() {
+        return teamList;
     }
 
     public List<Employee> getEmployeeList() {
         return employeeList;
     }
 
-    public void insertEmployee(Employee employee) {
-        employeeList.add(employee);
-    }
 
-    public void deleteEmployeeByObj(Employee employee) {
-        employeeList.remove(employee);
-    }
 }

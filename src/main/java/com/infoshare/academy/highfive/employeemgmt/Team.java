@@ -38,4 +38,11 @@ public class Team {
         this.teamName = teamName;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "teamName='" + teamName + '\'' +
+                '}';
+    }
 }

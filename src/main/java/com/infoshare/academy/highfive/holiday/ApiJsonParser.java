@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.infoshare.academy.highfive.employeemgmt.Employee;
+import com.infoshare.academy.highfive.employeemgmt.Team;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +32,10 @@ public class ApiJsonParser {
     public ApiJsonParser() {
         objectMapper = new ObjectMapper();
         JavaTimeModule module = new JavaTimeModule();
-        LocalDateTimeDeserializer localDateTimeDeserializer =  new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDateTimeDeserializer localDateTimeDeserializer = new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         module.addDeserializer(LocalDateTime.class, localDateTimeDeserializer);
         objectMapper.registerModule(module);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        //objectMapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
     }
 
@@ -52,7 +52,7 @@ public class ApiJsonParser {
         try {
             JsonNode jsonData = jsonNodeBase.findPath(HOLIDAYS);
             holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-            stdout.info(ColorsSet.ANSI_CYAN  + "\nHolidays from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
+            stdout.info(ColorsSet.ANSI_CYAN + "\nHolidays from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
         } catch (JsonProcessingException e) {
             stdout.info("There is a little problem with JSON Import!\n", e);
         }
@@ -68,6 +68,15 @@ public class ApiJsonParser {
         }
     }
 
+    public void saveToFileTeam(String fileName, List<Team> teamsList) {
+        try {
+            objectMapper.writer().withRootName("teams").writeValue(new File(fileName), teamsList);
+            stdout.info("Saved!\n");
+        } catch (IOException e) {
+            stdout.info("There is a little problem with file Saving!\n", e);
+        }
+    }
+
     public void saveToFileEmployee(String fileName, List<Employee> employeeList) {
         try {
             objectMapper.writer().withRootName(employees).writeValue(new File(fileName), employeeList);
@@ -77,9 +86,26 @@ public class ApiJsonParser {
         }
     }
 
+    public List<Team> parseTeamFile(String fileName) throws IOException {
+        return parseTeam(objectMapper.readTree(new File(fileName)));
+    }
+
+    private List<Team> parseTeam(JsonNode jsonNodeBase) {
+        Team[] teamImport = {};
+        try {
+            JsonNode jsonData = jsonNodeBase.findPath("teams");
+            teamImport = objectMapper.treeToValue(jsonData, Team[].class);
+            stdout.info(ColorsSet.ANSI_CYAN + "\nTeams from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
+        } catch (JsonProcessingException e) {
+            stdout.info("There is a little problem with JSON Import!\n", e);
+        }
+        return new ArrayList<>(Arrays.asList(teamImport));
+    }
+
     public List<Employee> parseEmployeeFile(String fileName) throws IOException {
         return parseEmployee(objectMapper.readTree(new File(fileName)));
     }
+
     private List<Employee> parseEmployee(JsonNode jsonNodeBase) {
         Employee[] employeeImport = {};
         try {
@@ -91,4 +117,5 @@ public class ApiJsonParser {
         }
         return new ArrayList<>(Arrays.asList(employeeImport));
     }
+
 }
