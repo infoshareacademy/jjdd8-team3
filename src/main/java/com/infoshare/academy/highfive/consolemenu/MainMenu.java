@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,11 @@ public class MainMenu {
     public static int userChoice;
     List<String> menuOptions = new ArrayList<>();
     public String userChoiceString;
+    public static String mainMenuTitle = ("MAIN MENU");
+    public static String holidaysPlanningMenuTitle = ("HOLIDAY PLANNING");
+    public static String holidaysReviewMenuTitle = ("HOLIDAYS REVIEW");
+    public static String employeesManagingMenuTitle = ("EMPLOYEES MANAGING");
+    public static String configurationMenuTitle = ("CONFIGURATION");
 
 
     public static void runMenu() throws Exception {
@@ -30,12 +36,14 @@ public class MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
+        stdout.info("\n" + ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / \n" + ColorsSet.ANSI_RESET);
+
         menuOptions.clear();
-        menuOptions.add("MAIN MENU");
-        menuOptions.add("HOLIDAY PLANNING");
-        menuOptions.add("HOLIDAYS REVIEW");
-        menuOptions.add("EMPLOYEES MANAGING");
-        menuOptions.add("CONFIGURATION");
+        menuOptions.add(mainMenuTitle);
+        menuOptions.add(holidaysPlanningMenuTitle);
+        menuOptions.add(holidaysReviewMenuTitle);
+        menuOptions.add(employeesManagingMenuTitle);
+        menuOptions.add(configurationMenuTitle);
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
 

@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,9 @@ public class ConfigurationMenu extends MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
-        menuOptions.add("CONFIGURATION");
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + configurationMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+
+        menuOptions.add(configurationMenuTitle);
         menuOptions.add("Change DATE format");
         menuOptions.add("Change employees SORTING mode");
         menuOptions.add("Change configuration of external file");
