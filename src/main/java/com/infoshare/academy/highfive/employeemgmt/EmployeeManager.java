@@ -1,6 +1,8 @@
 package com.infoshare.academy.highfive.employeemgmt;
 
+import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
+import com.infoshare.academy.highfive.vacation.VacationSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

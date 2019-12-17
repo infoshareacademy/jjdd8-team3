@@ -1,48 +1,60 @@
 package com.infoshare.academy.highfive.vacation;
 
 import com.infoshare.academy.highfive.consolemenu.MainMenu;
+import com.infoshare.academy.highfive.employeemgmt.Employee;
+import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
 import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VacationPlanner {
+
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateValidatorUsingLocalDate validator = new DateValidatorUsingLocalDate(dateFormatter);
+    private List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
+    private static List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
 
     public List<Vacation> planVacation() throws Exception {
 
+        stdout.info("\n" + "Please follow instructions to add employee vacation \n");
+
+        stdout.info(employeeList.toString());
+
         String employeeName = getEmployeeName();
-        int employeeId = returnEmployeeId(employeeName);
+//        Integer employeeId = returnEmployeeId(employeeName);
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
         dateFromPastDateToChecking(dateFrom, dateTo);
-        int holidaysUsed = calculatingDaysAmount(creatingVacationDaysList(dateFrom, dateTo));
+        Integer holidaysUsed = calculatingDaysAmount(creatingVacationDaysList(dateFrom, dateTo));
+
 
         //TODO create function to get holidays entitlement and then save updated entitlement
 
         List<Vacation> vacations = new ArrayList<>();
 
-//        vacations.add(employeeId);
-//        vacations.add(dateFrom);
-//        vacations.add(dateTo);
+        List<String> testList = new LinkedList<>();
+
+//        testList.add(String.valueOf(employeeId));
+        testList.add(dateFrom);
+        testList.add(dateTo);
+        testList.add(String.valueOf(holidaysUsed));
+        stdout.info(testList.toString());
 
         //TODO add save to vacation list and then save to file
 
         return vacations;
     }
+
+
 
 
     String getEmployeeName() throws Exception {
@@ -103,9 +115,23 @@ public class VacationPlanner {
 
     }
 
-    int returnEmployeeId(String employeeName) {
+    private static List<Employee> findEmployeeIdByName(String firstName, String secondName) {
+        return employeeList.stream()
+                .filter(l -> l.getFirstName().toLowerCase().contains(firstName.toLowerCase()))
+                .filter(l -> l.getSurname().toLowerCase().contains(secondName.toLowerCase()))
+                .collect(Collectors.toList());
 
-        int employeeID = 1;
+
+    }
+
+
+    int returnEmployeeId(String firstName, String secondName) {
+
+int employeeID = 0;
+//
+//        return findEmployeeIdByName(firstName, secondName).get(0);
+
+
 
         //TODO create function to get id from employee JSON
 
@@ -127,21 +153,11 @@ public class VacationPlanner {
 
     }
 
-    Date[] datesParser(String dateFrom, String dateTo) throws ParseException {
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedDateFrom =  df.parse(dateFrom);
-        Date parsedDateTo =  df.parse(dateTo);
-
-        return new Date[] {parsedDateFrom, parsedDateTo};
-    }
-
     List<LocalDate> creatingVacationDaysList(String dateFrom, String dateTo) {
-//        long vacationDays = dates[0].getTime() - dates[1].getTime();
 
         LocalDate start = LocalDate.parse(dateFrom);
         LocalDate end = LocalDate.parse(dateTo);
-        List<LocalDate> totalDates = new ArrayList<>();
+        List<LocalDate> totalDates = new LinkedList<>();
         while (!start.isAfter(end)) {
             totalDates.add(start);
             start = start.plusDays(1);
@@ -150,20 +166,23 @@ public class VacationPlanner {
     return totalDates;
     }
 
-    int calculatingDaysAmount(List<LocalDate> totalDates) {
+    Integer calculatingDaysAmount(List<LocalDate> totalDates) {
+
+        List<LocalDate> holidays = new LinkedList<>();
 
         for (LocalDate day:totalDates) {
-            if ("Saturday".equals(day.getDayOfWeek().name())) {
-                totalDates.remove(day);
-            } else if ("Sunday".equals(day.getDayOfWeek().name())) {
-                totalDates.remove(day);
-//            } else if ()
-            //TODO get dates from singleton
+            if ("SATURDAY".equals(day.getDayOfWeek().name())) {
+                holidays.add(day);
+            } else if ("SUNDAY".equals(day.getDayOfWeek().name())) {
+                holidays.add(day);
+            }
+//            else if () {
+                //TODO get dates from singleton
+//                holidays.add(day);
+//            }
         }
 
-        }
-
-        return totalDates.size();
+        return totalDates.size() - holidays.size();
     }
 
 }

@@ -1,12 +1,18 @@
 package com.infoshare.academy.highfive.vacation;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VacationRemoval extends VacationPlanner{
 
+    private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     public List<Vacation> removeVacation() throws Exception {
+
+        stdout.info("\n" + "Please follow instructions to cancel employee vacation \n");
 
         String employeeName = getEmployeeName();
         int employeeId = returnEmployeeId(employeeName);
@@ -21,6 +27,8 @@ public class VacationRemoval extends VacationPlanner{
         List<Vacation> vacations = new ArrayList<>();
         return vacations;
     }
+
+
 
 
 }
