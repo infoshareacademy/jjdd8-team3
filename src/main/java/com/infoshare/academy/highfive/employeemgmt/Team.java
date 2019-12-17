@@ -2,7 +2,10 @@ package com.infoshare.academy.highfive.employeemgmt;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
+//@JsonProperty("rootname")
+@JsonTypeName("empolyess")
 public class Team {
 
     @JsonAlias({"teamId", "team_id"})
@@ -37,5 +40,12 @@ public class Team {
     public Team setTeamName(String teamName) {
         this.teamName = teamName;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "teamName='" + teamName + '\'' +
+                '}';
     }
 }

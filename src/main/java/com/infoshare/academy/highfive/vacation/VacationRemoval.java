@@ -15,7 +15,7 @@ public class VacationRemoval extends VacationPlanner{
         stdout.info("\n" + "Please follow instructions to cancel employee vacation \n");
 
         String employeeName = getEmployeeName();
-        int employeeId = returnEmployeeId(employeeName);
+//        int employeeId = returnEmployeeId(employeeName);
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
         dateFromPastDateToChecking(dateFrom, dateTo);

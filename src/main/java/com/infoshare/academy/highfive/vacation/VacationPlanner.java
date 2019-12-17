@@ -115,29 +115,15 @@ public class VacationPlanner {
 
     }
 
-    private static List<Employee> findEmployeeIdByName(String firstName, String secondName) {
+    private static List<Employee> returnEmployeeId(String nameToSearch) {
         return employeeList.stream()
-                .filter(l -> l.getFirstName().toLowerCase().contains(firstName.toLowerCase()))
-                .filter(l -> l.getSurname().toLowerCase().contains(secondName.toLowerCase()))
+                .filter(l -> (l.getFirstName().toLowerCase() + " " + l.getSurname().toLowerCase()).contains(nameToSearch.toLowerCase()))
                 .collect(Collectors.toList());
 
-
     }
 
+    //TODO create function to get id from employee JSON
 
-    int returnEmployeeId(String firstName, String secondName) {
-
-int employeeID = 0;
-//
-//        return findEmployeeIdByName(firstName, secondName).get(0);
-
-
-
-        //TODO create function to get id from employee JSON
-
-        return employeeID;
-
-    }
 
     void dateFromPastDateToChecking(String dateFrom, String dateTo) throws Exception {
 
