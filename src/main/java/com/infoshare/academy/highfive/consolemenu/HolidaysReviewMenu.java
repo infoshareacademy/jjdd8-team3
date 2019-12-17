@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,9 @@ public class HolidaysReviewMenu extends MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
-        menuOptions.add("HOLIDAYS REVIEW");
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + holidaysReviewMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+
+        menuOptions.add(holidaysReviewMenuTitle);
         menuOptions.add("Display employee vacation");
         menuOptions.add("Display team vacations");
         menuOptions.add("Previous menu");

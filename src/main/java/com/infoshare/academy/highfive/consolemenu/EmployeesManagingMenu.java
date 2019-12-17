@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolemenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,9 @@ public class EmployeesManagingMenu extends MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
-        menuOptions.add("EMPLOYEES MANAGING");
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + employeesManagingMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+
+        menuOptions.add(employeesManagingMenuTitle);
         menuOptions.add("Display employees list");
         menuOptions.add("Add new employee");
         menuOptions.add("Remove an employee");
