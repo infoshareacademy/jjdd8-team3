@@ -1,4 +1,6 @@
-package com.infoshare.academy.highfive;
+package com.infoshare.academy.highfive.holiday;
+
+import com.infoshare.academy.highfive.ConfiguartionLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class HolidaysSingleton {
         return this.holidaysList;
     }
 
-    public List<Holiday>  getHolidaysFilteredByName(String filter) {
+    public List<Holiday> getHolidaysFilteredByName(String filter) {
         validateHolidays();
         List<Holiday> filteredByName = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
@@ -48,7 +50,7 @@ public class HolidaysSingleton {
         validateHolidays();
         List<Holiday> filteredByDate = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
-            if (holiday.getDate().getDateInPattern(ConfiguartionLoader.getDateFormat()).contains(filter)) {
+            if (holiday.getDate().getDateInPattern(ConfiguartionLoader.getDateFormatter()).contains(filter)) {
                 filteredByDate.add(holiday);
             }
         }

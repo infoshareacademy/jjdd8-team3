@@ -1,6 +1,6 @@
 package com.infoshare.academy.highfive.view;
 
-import com.infoshare.academy.highfive.HolidayType;
+import com.infoshare.academy.highfive.holiday.HolidayType;
 
 public class HolidayView {
 
@@ -34,7 +34,10 @@ public class HolidayView {
 
     @Override
     public String toString() {
-        return date + " | Type " + types[0].getType() + ", Name Of Holiday: " + name + " - " + description + ";\n";
+        return date + " | "
+                + date.getDate().getDayOfWeek()
+                + " | Type " + types[0].getType()
+                + ", Name Of Holiday: " + name + " - " + description + "\n";
     }
 
 }

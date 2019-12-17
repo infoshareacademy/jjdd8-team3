@@ -3,6 +3,7 @@ package com.infoshare.academy.highfive;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 public class ConfiguartionLoader {
@@ -23,8 +24,9 @@ public class ConfiguartionLoader {
         return prop;
     }
 
-    public static String getDateFormat(){
-        return properties.getProperty("dateFormat");
+    public static DateTimeFormatter getDateFormatter(){
+        String dateFormat = properties.getProperty("dateFormat");
+        return dateFormat == null ? DateTimeFormatter.ISO_DATE : DateTimeFormatter.ofPattern(dateFormat);
     }
 
     public static String getSortType(){

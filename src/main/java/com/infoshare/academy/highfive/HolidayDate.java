@@ -11,11 +11,6 @@ public class HolidayDate {
     @JsonIgnoreProperties(value = {"date"})
     private Date date;
 
-    public String getIso() {
-        SimpleDateFormat format = new SimpleDateFormat(ConfiguartionLoader.getDateFormat());
-        return format.format(date);
-    }
-
     public Date getDate() {
         return date;
     }
@@ -52,7 +47,7 @@ public class HolidayDate {
     @Override
     public String toString() {
         return "HolidayDate: " +
-                " #date=" + getDateInPattern(ConfiguartionLoader.getDateFormat()) +
+                " #date=" + getDateInPattern(ConfiguartionLoader.getDateFormatter().toString()) +
                 ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
     }
