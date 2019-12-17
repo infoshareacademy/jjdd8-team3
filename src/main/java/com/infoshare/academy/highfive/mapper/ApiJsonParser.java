@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.holiday;
+package com.infoshare.academy.highfive.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.infoshare.academy.highfive.employeemgmt.Employee;
 import com.infoshare.academy.highfive.employeemgmt.Team;
+import com.infoshare.academy.highfive.holiday.Holiday;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,6 @@ public class ApiJsonParser {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String HOLIDAYS = "holidays";
-    private final String employees = "employees";
     private final ObjectMapper objectMapper;
 
     public ApiJsonParser() {
@@ -55,7 +55,7 @@ public class ApiJsonParser {
             holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
             stdout.info(ColorsSet.ANSI_CYAN + "\nHolidays from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
         } catch (JsonProcessingException e) {
-            stdout.info("There is a little problem with JSON Import!\n", e);
+            stdout.info("There is a little problem with JSON Import Holidays!\n", e);
         }
         return new ArrayList<>(Arrays.asList(holidayImport));
     }
@@ -65,38 +65,20 @@ public class ApiJsonParser {
             objectMapper.writer().withRootName(HOLIDAYS).writeValue(new File(fileName), holidays);
             stdout.info("JSON file created!\n");
         } catch (IOException e) {
-            stdout.info("There is a little problem with file Saving!\n", e);
+            stdout.info("There is a little problem with file Saving Holidays!\n", e);
         }
     }
 
-/*    public void saveToFileTeam(String fileName, List<Team> teamsList) {
-        try {
-            objectMapper.writer().withRootName("teams").writeValue(new File(fileName), teamsList);
-            stdout.info("Saved!\n");
-        } catch (IOException e) {
-            stdout.info("There is a little problem with file Saving!\n", e);
-        }
-    }
-
-    public void saveToFileEmployee(String fileName, List<Employee> employeeList) {
-        try {
-            objectMapper.writer().withRootName(employees).writeValue(new File(fileName), employeeList);
-            stdout.info("Saved!\n");
-        } catch (IOException e) {
-            stdout.info("There is a little problem with file Saving!\n", e);
-        }
-    }*/
-
-    public void saveEmployeesDb(String fileName, Map<String, Object> employeeDb) {
+    void saveEmployeesDb(String fileName, Map<String, Object> employeeDb) {
         try {
             objectMapper.writer().withRootName("employees_fdb").writeValue(new File(fileName), employeeDb);
             stdout.info("Saved!\n");
         } catch (IOException e) {
-            stdout.info("There is a little problem with file Saving!\n", e);
+            stdout.info("There is a little problem with file Saving Employees DB!\n", e);
         }
     }
 
-    public List<Team> parseTeamFile(String fileName) throws IOException {
+    List<Team> parseTeamFile(String fileName) throws IOException {
         return parseTeam(objectMapper.readTree(new File(fileName)));
     }
 
@@ -105,14 +87,14 @@ public class ApiJsonParser {
         try {
             JsonNode jsonData = jsonNodeBase.findPath("teams");
             teamImport = objectMapper.treeToValue(jsonData, Team[].class);
-            stdout.info(ColorsSet.ANSI_CYAN + "\nTeams from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
+            stdout.info(ColorsSet.ANSI_CYAN + "\nTeams from JSON imported!" + ColorsSet.ANSI_RESET + "\n");
         } catch (JsonProcessingException e) {
-            stdout.info("There is a little problem with JSON Import!\n", e);
+            stdout.info("There is a little problem with Team JSON Import!\n", e);
         }
         return new ArrayList<>(Arrays.asList(teamImport));
     }
 
-    public List<Employee> parseEmployeeFile(String fileName) throws IOException {
+    List<Employee> parseEmployeeFile(String fileName) throws IOException {
         return parseEmployee(objectMapper.readTree(new File(fileName)));
     }
 
@@ -121,9 +103,9 @@ public class ApiJsonParser {
         try {
             JsonNode jsonData = jsonNodeBase.findPath("employees");
             employeeImport = objectMapper.treeToValue(jsonData, Employee[].class);
-            stdout.info(ColorsSet.ANSI_CYAN + "\nEmployees from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
+            stdout.info(ColorsSet.ANSI_CYAN + "\nEmployees from JSON imported!" + ColorsSet.ANSI_RESET + "\n");
         } catch (JsonProcessingException e) {
-            stdout.info("There is a little problem with JSON Import!\n", e);
+            stdout.info("There is a little problem with Employee JSON Import!\n", e);
         }
         return new ArrayList<>(Arrays.asList(employeeImport));
     }

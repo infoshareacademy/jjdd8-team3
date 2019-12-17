@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.infoshare.academy.highfive.employeemgmt.Employee;
-import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
 import com.infoshare.academy.highfive.employeemgmt.Team;
+import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -14,13 +14,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class CustomEmployeeDeserializer extends StdDeserializer<Employee> {
-    private static List<Team> teamList = EmployeeMgmtSingleton.getInstance().getTeamList();
+    private static List<Team> teamList = EmployeeManagementSingleton.getInstance().getTeamList();
 
     public CustomEmployeeDeserializer() {
         this(null);
     }
 
-    public CustomEmployeeDeserializer(Class<?> vc) {
+    private CustomEmployeeDeserializer(Class<?> vc) {
         super(vc);
     }
 
