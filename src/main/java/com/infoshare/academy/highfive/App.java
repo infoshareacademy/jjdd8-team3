@@ -1,8 +1,10 @@
 package com.infoshare.academy.highfive;
 
 import com.infoshare.academy.highfive.consolemenu.MainMenu;
+import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
+import com.infoshare.academy.highfive.vacation.Vacation;
 import com.infoshare.academy.highfive.vacation.VacationSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,7 @@ public class App {
 
     }
     private static void saveVacationToFileRepository() {
-        HolidaysSingleton.getInstance().initSaveToFile(VACATION_FILENAME_TO_SAVE);
+        VacationSingleton.getInstance().initSaveToFile(VACATION_FILENAME_TO_SAVE);
     }
 
     public static void initRepositoryFromFile() throws IOException {
@@ -42,6 +44,7 @@ public class App {
 
         initRepositoryFromFile();
         initVacationRepositoryFromFile();
+        EmployeeMgmtSingleton.getInstance().initFromFileEmployee("employee_fdb222.json");
         TerminalCleaner.cleanTerminal();
         MainMenu.runMenu();
     }

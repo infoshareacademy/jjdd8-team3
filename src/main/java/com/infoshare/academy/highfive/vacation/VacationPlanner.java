@@ -3,10 +3,13 @@ package com.infoshare.academy.highfive.vacation;
 import com.infoshare.academy.highfive.consolemenu.MainMenu;
 import com.infoshare.academy.highfive.employeemgmt.Employee;
 import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
+import com.infoshare.academy.highfive.holiday.Holiday;
+import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,47 +20,47 @@ public class VacationPlanner {
 
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateValidatorUsingLocalDate validator = new DateValidatorUsingLocalDate(dateFormatter);
     private List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
-    private static List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
+    private static final List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
+    private List<Holiday> holidayList = HolidaysSingleton.getInstance().getAllHolidays();
+    private static boolean matchedToPattern = false;
+    private static final String numberPattern = "[0-9]{1,2}";
 
     public List<Vacation> planVacation() throws Exception {
 
+        Scanner scanner = getScanner();
         stdout.info("\n" + "Please follow instructions to add employee vacation \n");
 
-        stdout.info(employeeList.toString());
-
-        String employeeName = getEmployeeName();
-//        Integer employeeId = returnEmployeeId(employeeName);
+//        String employeeName = getEmployeeName();
+//        String employeeId = getEmployeeIdByScannerInput(scanner); //FIXME not working getemployeeid
+        String employeeId= getEmployeeName();
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
         dateFromPastDateToChecking(dateFrom, dateTo);
         Integer holidaysUsed = calculatingDaysAmount(creatingVacationDaysList(dateFrom, dateTo));
+        addVacation(employeeId, dateFrom,dateTo);
+
+        return null;
+    }
+
+    protected void decreaseVacationEntitlement(String employeeId) {
 
 
         //TODO create function to get holidays entitlement and then save updated entitlement
 
-        List<Vacation> vacations = new ArrayList<>();
-
-        List<String> testList = new LinkedList<>();
-
-//        testList.add(String.valueOf(employeeId));
-        testList.add(dateFrom);
-        testList.add(dateTo);
-        testList.add(String.valueOf(holidaysUsed));
-        stdout.info(testList.toString());
-
-        //TODO add save to vacation list and then save to file
-
-        return vacations;
     }
 
+    protected void addVacation(String employeeId, String dateFrom, String dateTo ) {
 
+        Vacation vacation = new Vacation(employeeId, dateFrom, dateTo);
+        vacationList.add(vacation);
+        saveVacationDb();
 
+    }
 
-    String getEmployeeName() throws Exception {
+    protected String getEmployeeName() throws Exception {
 
         stdout.info("\n" + "Please type employee name or X to exit to Main Menu: \n");
 
@@ -74,7 +77,28 @@ public class VacationPlanner {
 
         }
 
-    String getDateFrom() {
+    protected static String getEmployeeIdByScannerInput(Scanner scanner) {
+        String employeeId;
+        do {
+            stdout.info("Available employees >>>\n");
+            employeeList.forEach(l -> stdout.info(employeeList.indexOf(l) + ". " + l.getEmployeeId() + " | "));
+            stdout.info("\n<<<\nSelect employee: ");
+            employeeId = scanner.nextLine();
+            matchedToPattern = employeeId.matches(numberPattern);
+            if (employeeId.matches(numberPattern) && (Integer.parseInt(employeeId) < employeeList.size())) {
+                matchedToPattern = true;
+            } else {
+                stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
+                matchedToPattern = false;
+            }
+
+        } while (!matchedToPattern);
+
+        return employeeId;
+
+    }
+
+    protected String getDateFrom() {
         stdout.info("\n" + "Please type vacation start date in format YYYY-MM-DD: \n");
 
         Scanner scanner = new Scanner(System.in);
@@ -88,7 +112,7 @@ public class VacationPlanner {
         return dateFrom;
     }
 
-    String getDateTo() {
+    protected String getDateTo() {
         stdout.info("\n" + "Please type vacation end date in format YYYY-MM-DD: \n");
 
         Scanner scanner = new Scanner(System.in);
@@ -115,17 +139,8 @@ public class VacationPlanner {
 
     }
 
-    private static List<Employee> returnEmployeeId(String nameToSearch) {
-        return employeeList.stream()
-                .filter(l -> (l.getFirstName().toLowerCase() + " " + l.getSurname().toLowerCase()).contains(nameToSearch.toLowerCase()))
-                .collect(Collectors.toList());
 
-    }
-
-    //TODO create function to get id from employee JSON
-
-
-    void dateFromPastDateToChecking(String dateFrom, String dateTo) throws Exception {
+    protected void dateFromPastDateToChecking(String dateFrom, String dateTo) throws Exception {
 
         Date dateFromAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateFrom);
         Date dateToAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateTo);
@@ -139,7 +154,7 @@ public class VacationPlanner {
 
     }
 
-    List<LocalDate> creatingVacationDaysList(String dateFrom, String dateTo) {
+    protected List<LocalDate> creatingVacationDaysList(String dateFrom, String dateTo) {
 
         LocalDate start = LocalDate.parse(dateFrom);
         LocalDate end = LocalDate.parse(dateTo);
@@ -152,7 +167,7 @@ public class VacationPlanner {
     return totalDates;
     }
 
-    Integer calculatingDaysAmount(List<LocalDate> totalDates) {
+    protected Integer calculatingDaysAmount(List<LocalDate> totalDates) {
 
         List<LocalDate> holidays = new LinkedList<>();
 
@@ -169,6 +184,54 @@ public class VacationPlanner {
         }
 
         return totalDates.size() - holidays.size();
+    }
+
+    //TODO from employee mgmt
+
+
+    private static List<Employee> findEmployeeByFullName(String nameToSearch) {
+        return employeeList.stream()
+                .filter(l -> (l.getFirstName().toLowerCase() + " " + l.getSurname().toLowerCase()).contains(nameToSearch.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    static Scanner getScanner() {
+        TerminalCleaner.cleanTerminal();
+        return new Scanner(System.in);
+    }
+
+    protected static void saveVacationDb() {
+        VacationSingleton.getInstance().initSaveToFile("Vacation.json");
+
+        //FIXME overwriting file
+    }
+
+
+    protected static String getEmployeeIndexByScannerInput(Scanner scanner, List<Employee> employeeListToAction) {
+        String employeeIdx;
+        do {
+            stdout.info("Enter Employee No.: ");
+            employeeIdx = scanner.nextLine();
+            if (employeeIdx.matches(numberPattern) && (Integer.parseInt(employeeIdx) < employeeListToAction.size())) {
+                matchedToPattern = true;
+            } else {
+                stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
+                matchedToPattern = false;
+            }
+        } while (!matchedToPattern);
+        return employeeIdx;
+    }
+
+    static List<Employee> selectEmployeeByFullName(Scanner scanner) {
+        String nameToSearch;
+        do {
+            stdout.info("Search by Full name: ");
+            nameToSearch = scanner.nextLine().strip();
+        } while (nameToSearch.length() == 0);
+
+        List<Employee> employeeListToAction = findEmployeeByFullName(nameToSearch);
+        employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + ". " + l.getFirstName() + " " + l.getSurname() + " " + l.getTeamName().getTeamName() + "\n"));
+        return employeeListToAction;
     }
 
 }

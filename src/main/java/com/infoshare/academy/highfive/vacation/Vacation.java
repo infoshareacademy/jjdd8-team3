@@ -18,6 +18,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class Vacation {
 
+    public Vacation(String emplyeeID, String datefrom, String dateto) {
+        this.emplyeeID = emplyeeID;
+        this.datefrom = datefrom;
+        this.dateto = dateto;
+    }
+
     @JsonProperty("emplyeeID")
     private String emplyeeID;
     @JsonProperty("datefrom")
