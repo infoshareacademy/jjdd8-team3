@@ -13,11 +13,10 @@ public class EmployeeManager {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final Set<String> CONFIRMS = Set.of("y", "yes");
-    private static String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
-    private static String numberPattern = "[0-9]{1,2}";
+    private static final String numberPattern = "[0-9]{1,2}";
     private static boolean matchedToPattern = false;
-    private static List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
-    private static List<Team> teamList = EmployeeMgmtSingleton.getInstance().getTeamList();
+    private static final List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
+    private static final List<Team> teamList = EmployeeMgmtSingleton.getInstance().getTeamList();
 
     private static Integer maxEmployeeIdNumber() {
         return Objects.requireNonNull(employeeList.stream()
@@ -44,9 +43,8 @@ public class EmployeeManager {
         return new Scanner(System.in);
     }
 
-    private static void saveAllEmployeeMgmt() {
-        EmployeeMgmtSingleton.getInstance().initSaveToFileTeam("team_fdb.json");
-        EmployeeMgmtSingleton.getInstance().initSaveToFileEmployee("employee_fdb.json");
+    private static void saveAllEmployeeDb() {
+        EmployeeMgmtSingleton.getInstance().saveEmployeesDb("employee_fdb222.json");
     }
 
     public static void createEmployee() {
@@ -70,6 +68,7 @@ public class EmployeeManager {
         do {
             stdout.info("Enter hire date (yyyy-mm-dd): ");
             hireDateTemp = scanner.nextLine();
+            String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
             if (hireDateTemp.matches(datePattern)) {
                 matchedToDatePattern = true;
             } else {
@@ -102,6 +101,18 @@ public class EmployeeManager {
             }
         } while (!matchedToPattern);
 
+        String teamIdx = getTeamIndexByScannerInput(scanner);
+
+        stdout.info("Type [Y]es to confirm or something else to exit:? ");
+        String confirm = scanner.nextLine().toLowerCase();
+        if (CONFIRMS.contains(confirm)) {
+            Employee employee = new Employee(maxEmployeeIdNumber() + 1, firstName, surname, hireDate, Integer.parseInt(holidayEntitlement), Integer.parseInt(additionalEntitlement), teamList.get(Integer.parseInt(teamIdx)));
+            employeeList.add(employee);
+            saveAllEmployeeDb();
+        }
+    }
+
+    private static String getTeamIndexByScannerInput(Scanner scanner) {
         String teamIdx;
         do {
             stdout.info("Available Teams for Employee >>>\n");
@@ -117,53 +128,61 @@ public class EmployeeManager {
             }
 
         } while (!matchedToPattern);
-
-        stdout.info("Type [Y]es to confirm or something else to exit:? ");
-        String confirm = scanner.nextLine().toLowerCase();
-        if (CONFIRMS.contains(confirm)) {
-            Employee employee = new Employee(maxEmployeeIdNumber() + 1, firstName, surname, hireDate, Integer.parseInt(holidayEntitlement), Integer.parseInt(additionalEntitlement), teamList.get(Integer.parseInt(teamIdx)));
-            employeeList.add(employee);
-            saveAllEmployeeMgmt();
-        }
+        return teamIdx;
     }
 
     public static void deleteEmployee() {
         Scanner scanner = getScanner();
         stdout.info(">>> Remove Employee <<<\n");
-        String nameToSearch;
-        do {
-            stdout.info("Search by Full name: ");
-            nameToSearch = scanner.nextLine().strip();
-        } while (nameToSearch.length() == 0);
-
-        List<Employee> employeeListToAction = findEmployeeByFullName(nameToSearch);
-        employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + ". " + l.getFirstName() + " " + l.getSurname() + " " + l.getTeamName().getTeamName() + "\n"));
+        List<Employee> employeeListToAction = selectEmployeeByFullName(scanner);
 
         if (employeeListToAction.size() > 0) {
-            String employeeIdx;
-            do {
-                stdout.info("Enter Employee No.: ");
-                employeeIdx = scanner.nextLine();
-                if (employeeIdx.matches(numberPattern) && (Integer.parseInt(employeeIdx) < employeeListToAction.size())) {
-                    matchedToPattern = true;
-                } else {
-                    stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
-                    matchedToPattern = false;
-                }
-            } while (!matchedToPattern);
+            String employeeIdx = getEmployeeIndexByScannerInput(scanner, employeeListToAction);
 
             stdout.info("Type [Y]es to confirm or something else to exit:? ");
             String confirm = scanner.nextLine().toLowerCase();
             if (CONFIRMS.contains(confirm)) {
                 employeeList.remove(employeeListToAction.get(Integer.parseInt(employeeIdx)));
-                saveAllEmployeeMgmt();
+                saveAllEmployeeDb();
             }
         }
+    }
+
+    private static String getEmployeeIndexByScannerInput(Scanner scanner, List<Employee> employeeListToAction) {
+        String employeeIdx;
+        do {
+            stdout.info("Enter Employee No.: ");
+            employeeIdx = scanner.nextLine();
+            if (employeeIdx.matches(numberPattern) && (Integer.parseInt(employeeIdx) < employeeListToAction.size())) {
+                matchedToPattern = true;
+            } else {
+                stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
+                matchedToPattern = false;
+            }
+        } while (!matchedToPattern);
+        return employeeIdx;
     }
 
     public static void moveEmployee() {
         Scanner scanner = getScanner();
         stdout.info(">>> Move Employee <<<\n");
+        List<Employee> employeeListToAction = selectEmployeeByFullName(scanner);
+
+        if (employeeListToAction.size() > 0) {
+            String employeeIdx = getEmployeeIndexByScannerInput(scanner, employeeListToAction);
+
+            String teamIdx = getTeamIndexByScannerInput(scanner);
+            stdout.info("Type [Y]es to confirm or something else to exit:? ");
+            String confirm = scanner.nextLine().toLowerCase();
+            if (CONFIRMS.contains(confirm)) {
+                Employee employee = employeeListToAction.get(Integer.parseInt(employeeIdx));
+                employee.setTeamName(teamList.get(Integer.parseInt(teamIdx)));
+                saveAllEmployeeDb();
+            }
+        }
+    }
+
+    private static List<Employee> selectEmployeeByFullName(Scanner scanner) {
         String nameToSearch;
         do {
             stdout.info("Search by Full name: ");
@@ -172,43 +191,7 @@ public class EmployeeManager {
 
         List<Employee> employeeListToAction = findEmployeeByFullName(nameToSearch);
         employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + ". " + l.getFirstName() + " " + l.getSurname() + " " + l.getTeamName().getTeamName() + "\n"));
-
-        if (employeeListToAction.size() > 0) {
-            String employeeIdx;
-            do {
-                stdout.info("Enter Employee No.: ");
-                employeeIdx = scanner.nextLine();
-                if (employeeIdx.matches(numberPattern) && (Integer.parseInt(employeeIdx) < employeeListToAction.size())) {
-                    matchedToPattern = true;
-                } else {
-                    stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
-                    matchedToPattern = false;
-                }
-            } while (!matchedToPattern);
-
-            String teamIdx;
-            do {
-                stdout.info("Available Teams for Employee >>>\n");
-                teamList.forEach(l -> stdout.info(teamList.indexOf(l) + ". " + l.getTeamName() + " | "));
-                stdout.info("\n<<<\nSelect team: ");
-                teamIdx = scanner.nextLine();
-                matchedToPattern = teamIdx.matches(numberPattern);
-                if (teamIdx.matches(numberPattern) && (Integer.parseInt(teamIdx) < teamList.size())) {
-                    matchedToPattern = true;
-                } else {
-                    stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
-                    matchedToPattern = false;
-                }
-
-            } while (!matchedToPattern);
-            stdout.info("Type [Y]es to confirm or something else to exit:? ");
-            String confirm = scanner.nextLine().toLowerCase();
-            if (CONFIRMS.contains(confirm)) {
-                Employee employee = employeeListToAction.get(Integer.parseInt(employeeIdx));
-                employee.setTeamName(teamList.get(Integer.parseInt(teamIdx)));
-                saveAllEmployeeMgmt();
-            }
-        }
+        return employeeListToAction;
     }
 
     public static void createTeam() {
@@ -224,7 +207,7 @@ public class EmployeeManager {
         String confirm = scanner.nextLine().toLowerCase();
         if (CONFIRMS.contains(confirm)) {
             teamList.add(new Team(maxTeamIdNumber() + 1, teamName));
-            saveAllEmployeeMgmt();
+            saveAllEmployeeDb();
         }
     }
 
@@ -245,7 +228,7 @@ public class EmployeeManager {
             employeeList.stream().filter(l -> l.getTeamName().equals(teamToRemove)).forEach(fl -> fl.setTeamName(defaultTeam));
             teamList.remove(teamToRemove);
             stdout.info("All employees from deleted team moved to " +defaultTeam.getTeamName());
-            saveAllEmployeeMgmt();
+            saveAllEmployeeDb();
         }
     }
 
@@ -269,7 +252,7 @@ public class EmployeeManager {
         if (CONFIRMS.contains(confirm)) {
             Team renamedTeam = teamList.get(Integer.parseInt(teamIdx));
             renamedTeam.setTeamName(teamName);
-            saveAllEmployeeMgmt();
+            saveAllEmployeeDb();
         }
     }
 

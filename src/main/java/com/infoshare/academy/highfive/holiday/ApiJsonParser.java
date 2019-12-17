@@ -21,13 +21,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class ApiJsonParser {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String HOLIDAYS = "holidays";
     private final String employees = "employees";
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     public ApiJsonParser() {
         objectMapper = new ObjectMapper();
@@ -68,7 +69,7 @@ public class ApiJsonParser {
         }
     }
 
-    public void saveToFileTeam(String fileName, List<Team> teamsList) {
+/*    public void saveToFileTeam(String fileName, List<Team> teamsList) {
         try {
             objectMapper.writer().withRootName("teams").writeValue(new File(fileName), teamsList);
             stdout.info("Saved!\n");
@@ -80,6 +81,15 @@ public class ApiJsonParser {
     public void saveToFileEmployee(String fileName, List<Employee> employeeList) {
         try {
             objectMapper.writer().withRootName(employees).writeValue(new File(fileName), employeeList);
+            stdout.info("Saved!\n");
+        } catch (IOException e) {
+            stdout.info("There is a little problem with file Saving!\n", e);
+        }
+    }*/
+
+    public void saveEmployeesDb(String fileName, Map<String, Object> employeeDb) {
+        try {
+            objectMapper.writer().withRootName("employees_fdb").writeValue(new File(fileName), employeeDb);
             stdout.info("Saved!\n");
         } catch (IOException e) {
             stdout.info("There is a little problem with file Saving!\n", e);

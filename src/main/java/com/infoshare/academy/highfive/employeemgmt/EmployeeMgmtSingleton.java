@@ -4,6 +4,8 @@ import com.infoshare.academy.highfive.holiday.ApiJsonParser;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class EmployeeMgmtSingleton {
     ApiJsonParser apiJsonParser;
@@ -22,20 +24,24 @@ public class EmployeeMgmtSingleton {
         return instance;
     }
 
+/*    public void initEmployeesDbFromFile(String fileName) throws IOException {
+
+        Map<String, Object> mapLists = apiJsonParser.parseEmloyeesDb(fileName);
+        teamList = (ArrayList<Team>) mapLists.get("teams");
+        employeeList = (ArrayList<Employee>) mapLists.get("employees");
+    }*/
+
     public void initFromFileTeam(String fileName) throws IOException {
         teamList = apiJsonParser.parseTeamFile(fileName);
-    }
-
-    public void initSaveToFileTeam(String filename) {
-        apiJsonParser.saveToFileTeam(filename, teamList);
     }
 
     public void initFromFileEmployee(String fileName) throws IOException {
         employeeList = apiJsonParser.parseEmployeeFile(fileName);
     }
 
-    public void initSaveToFileEmployee(String filename) {
-        apiJsonParser.saveToFileEmployee(filename, employeeList);
+    public void saveEmployeesDb(String filename) {
+        Map<String, Object> mapLists = new TreeMap<>() {{ put("employees", employeeList); put("teams", teamList); }};
+        apiJsonParser.saveEmployeesDb(filename, mapLists);
     }
 
     public List<Team> getTeamList() {
