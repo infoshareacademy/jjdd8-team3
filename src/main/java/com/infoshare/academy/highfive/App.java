@@ -12,7 +12,7 @@ import java.io.IOException;
 public class App {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final String URL_PATH = "https://calendarific.com/api/v2/holidays?&api_key=c2ddb57bb630fc01911bbcd01ae5907afaaced8e058cc0f33a938f517c0321e3&country=PL&year=2019";
-    private static final String FILENAME_TO_SAVE = "Export_holidays.json";
+    private static final String FILENAME_TO_SAVE = "Holidays.json";
     private static final String FILE_NAME = "Holidays.json";
     public static final String FILE_NAME_FOR_EMPLOYEE = "employee_fdb.json";
 
