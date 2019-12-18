@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.holiday;
 
-import com.infoshare.academy.highfive.ConfiguartionLoader;
+import com.infoshare.academy.highfive.mapper.ApiJsonParser;
+import com.infoshare.academy.highfive.tool.InitException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class HolidaysSingleton {
 
-    private ApiJsonParser apiJsonParser;
+    private final ApiJsonParser apiJsonParser;
 
     private static HolidaysSingleton instance;
     private List<Holiday> holidaysList;
@@ -30,12 +31,12 @@ public class HolidaysSingleton {
         }
     }
 
-    public List<Holiday> getAllHolidays() {
+    List<Holiday> getAllHolidays() {
         validateHolidays();
         return this.holidaysList;
     }
 
-    public List<Holiday> getHolidaysFilteredByName(String filter) {
+    List<Holiday> getHolidaysFilteredByName(String filter) {
         validateHolidays();
         List<Holiday> filteredByName = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
@@ -46,11 +47,11 @@ public class HolidaysSingleton {
         return filteredByName;
     }
 
-    public List<Holiday> getHolidaysFilteredByDate(String filter) {
+    List<Holiday> getHolidaysFilteredByDate(String filter) {
         validateHolidays();
         List<Holiday> filteredByDate = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
-            if (holiday.getDate().getDateInPattern(ConfiguartionLoader.getDateFormatter()).contains(filter)) {
+            if (holiday.getDate().getDateInPattern("yyyy-MM-dd").contains(filter)) {
                 filteredByDate.add(holiday);
             }
         }

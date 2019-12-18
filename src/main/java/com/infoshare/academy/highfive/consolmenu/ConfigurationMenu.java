@@ -1,11 +1,13 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class ConfigurationMenu extends MainMenu {
+class ConfigurationMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void runSubmenu() throws Exception {
@@ -16,9 +18,13 @@ public class ConfigurationMenu extends MainMenu {
     }
 
     @Override
-    public void menuOptionsDisplay() {
+    void menuOptionsDisplay() {
 
-        menuOptions.add("CONFIGURATION");
+        TerminalCleaner.cleanTerminal();
+
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / " + CONFIGURATION_MENU_TITLE +" / \n" + ColorsSet.ANSI_RESET);
+
+        menuOptions.add(CONFIGURATION_MENU_TITLE);
         menuOptions.add("Change DATE format");
         menuOptions.add("Change employees SORTING mode");
         menuOptions.add("Change configuration of external file");
@@ -33,10 +39,10 @@ public class ConfigurationMenu extends MainMenu {
     }
 
     @Override
-    public int getUserChoice() throws Exception {
+    int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
+        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
         String numberPattern = "[0-9]";
         userChoiceString = scanner.nextLine();
@@ -45,13 +51,12 @@ public class ConfigurationMenu extends MainMenu {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
+        if (Integer.parseInt(userChoiceString) > menuOptions.size() - 1 || Integer.parseInt(userChoiceString) == 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
-            switch (userChoice) {
+            switch (Integer.parseInt(userChoiceString)) {
                 case 1:
                     stdout.info("\nChange DATE format - UNDER CONSTRUCTION\n\n");
                     break;
@@ -65,6 +70,6 @@ public class ConfigurationMenu extends MainMenu {
                     MainMenu.runMenu();
             }
         }
-        return userChoice;
+        return Integer.parseInt(userChoiceString);
     }
 }

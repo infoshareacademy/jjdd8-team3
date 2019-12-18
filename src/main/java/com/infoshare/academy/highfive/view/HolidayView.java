@@ -4,10 +4,10 @@ import com.infoshare.academy.highfive.holiday.HolidayType;
 
 public class HolidayView {
 
-    private String name;
-    private String description;
-    private HolidayDateView date;
-    private HolidayType[] types;
+    private final String name;
+    private final String description;
+    private final HolidayDateView date;
+    private final HolidayType[] types;
 
     public HolidayView(String name, String description, HolidayDateView date, HolidayType[] types) {
         this.name = name;

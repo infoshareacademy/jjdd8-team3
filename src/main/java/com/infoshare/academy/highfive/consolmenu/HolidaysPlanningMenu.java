@@ -1,12 +1,14 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
+import com.infoshare.academy.highfive.tool.ColorsSet;
+import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class HolidaysPlanningMenu extends MainMenu {
+class HolidaysPlanningMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void runSubmenu() throws Exception {
@@ -17,9 +19,13 @@ public class HolidaysPlanningMenu extends MainMenu {
     }
 
     @Override
-    public void menuOptionsDisplay() {
+    void menuOptionsDisplay() {
 
-        menuOptions.add("HOLIDAY PLANNING");
+        TerminalCleaner.cleanTerminal();
+
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / " + HOLIDAYS_PLANNING_MENU_TITLE +" / \n" + ColorsSet.ANSI_RESET);
+
+        menuOptions.add(HOLIDAYS_PLANNING_MENU_TITLE);
         menuOptions.add("Search holiday by DATE");
         menuOptions.add("Search holiday by NAME");
         menuOptions.add("Add vacation");
@@ -36,10 +42,10 @@ public class HolidaysPlanningMenu extends MainMenu {
     }
 
     @Override
-    public int getUserChoice() throws Exception {
+    int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
-        stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");
+        stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
         String numberPattern = "[0-9]";
         userChoiceString = scanner.nextLine();
@@ -48,13 +54,12 @@ public class HolidaysPlanningMenu extends MainMenu {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
+        if (Integer.parseInt(userChoiceString) > menuOptions.size() - 1 || Integer.parseInt(userChoiceString) == 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
-            switch (userChoice) {
+            switch (Integer.parseInt(userChoiceString)) {
                 case 1:
                     HolidaysFilter.searchByDate();
                     break;
@@ -71,6 +76,6 @@ public class HolidaysPlanningMenu extends MainMenu {
                     MainMenu.runMenu();
             }
         }
-        return userChoice;
+        return Integer.parseInt(userChoiceString);
     }
 }
