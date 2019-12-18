@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
@@ -11,14 +11,14 @@ import java.util.Scanner;
 
 public class MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static int userChoice;
-    List<String> menuOptions = new ArrayList<>();
-    public String userChoiceString;
-    public static String mainMenuTitle = ("MAIN MENU");
-    public static String holidaysPlanningMenuTitle = ("HOLIDAY PLANNING");
-    public static String holidaysReviewMenuTitle = ("HOLIDAYS REVIEW");
-    public static String employeesManagingMenuTitle = ("EMPLOYEES MANAGING");
-    public static String configurationMenuTitle = ("CONFIGURATION");
+    static int userChoice;
+    final List<String> menuOptions = new ArrayList<>();
+    String userChoiceString;
+    static final String mainMenuTitle = ("MAIN MENU");
+    static final String holidaysPlanningMenuTitle = ("HOLIDAY PLANNING");
+    static final String holidaysReviewMenuTitle = ("HOLIDAYS REVIEW");
+    static final String employeesManagingMenuTitle = ("EMPLOYEES MANAGING");
+    static final String configurationMenuTitle = ("CONFIGURATION");
 
 
     public static void runMenu() throws Exception {
@@ -32,7 +32,7 @@ public class MainMenu {
         while (userChoice != 0);
     }
 
-    public void menuOptionsDisplay() {
+    void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
@@ -54,7 +54,7 @@ public class MainMenu {
         stdout.info("\n" + "0: Exit" + "\n");
     }
 
-    public int getUserChoice() throws Exception {
+    int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");

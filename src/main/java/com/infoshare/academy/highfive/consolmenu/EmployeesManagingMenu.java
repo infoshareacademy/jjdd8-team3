@@ -1,6 +1,6 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
-import com.infoshare.academy.highfive.holiday.HolidaysFilter;
+import com.infoshare.academy.highfive.employeemanager.EmployeeManager;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
@@ -8,28 +8,31 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class HolidaysPlanningMenu extends MainMenu {
+class EmployeesManagingMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void runSubmenu() throws Exception {
 
-        HolidaysPlanningMenu holidaysPlanningMenu = new HolidaysPlanningMenu();
-        holidaysPlanningMenu.menuOptionsDisplay();
-        holidaysPlanningMenu.getUserChoice();
+        EmployeesManagingMenu employeesManagingMenu = new EmployeesManagingMenu();
+        employeesManagingMenu.menuOptionsDisplay();
+        employeesManagingMenu.getUserChoice();
     }
 
     @Override
-    public void menuOptionsDisplay() {
+    void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
-        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + holidaysPlanningMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + employeesManagingMenuTitle + " / \n" + ColorsSet.ANSI_RESET);
 
-        menuOptions.add(holidaysPlanningMenuTitle);
-        menuOptions.add("Search holiday by DATE");
-        menuOptions.add("Search holiday by NAME");
-        menuOptions.add("Add vacation");
-        menuOptions.add("Cancel vacation");
+        menuOptions.add(employeesManagingMenuTitle);
+        menuOptions.add("Display employees list");
+        menuOptions.add("Add new employee");
+        menuOptions.add("Remove an employee");
+        menuOptions.add("Change an employee team");
+        menuOptions.add("Add new team");
+        menuOptions.add("Rename team");
+        menuOptions.add("Remove a team");
         menuOptions.add("Previous menu");
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
@@ -38,11 +41,10 @@ public class HolidaysPlanningMenu extends MainMenu {
 
             stdout.info(i + ": " + menuOptions.get(i) + "\n");
         }
-
     }
 
     @Override
-    public int getUserChoice() throws Exception {
+    int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
@@ -62,16 +64,25 @@ public class HolidaysPlanningMenu extends MainMenu {
         } else {
             switch (userChoice) {
                 case 1:
-                    HolidaysFilter.searchByDate();
+                    EmployeeManager.listAllEmployees();
                     break;
                 case 2:
-                    HolidaysFilter.searchByName();
+                    EmployeeManager.createEmployee();
                     break;
                 case 3:
-                    stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
+                    EmployeeManager.deleteEmployee();
                     break;
                 case 4:
-                    stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
+                    EmployeeManager.moveEmployee();
+                    break;
+                case 5:
+                    EmployeeManager.createTeam();
+                    break;
+                case 6:
+                    EmployeeManager.renameTeam();
+                    break;
+                case 7:
+                    EmployeeManager.removeTeam();
                     break;
                 default:
                     MainMenu.runMenu();

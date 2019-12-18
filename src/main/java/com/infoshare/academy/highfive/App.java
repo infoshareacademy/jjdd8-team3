@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive;
 
-import com.infoshare.academy.highfive.consolemenu.MainMenu;
+import com.infoshare.academy.highfive.consolmenu.MainMenu;
+import com.infoshare.academy.highfive.employeemanager.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
@@ -13,9 +14,11 @@ public class App {
     private static final String URL_PATH = "https://calendarific.com/api/v2/holidays?&api_key=c2ddb57bb630fc01911bbcd01ae5907afaaced8e058cc0f33a938f517c0321e3&country=PL&year=2019";
     private static final String FILENAME_TO_SAVE = "Export_holidays.json";
     private static final String FILE_NAME = "Holidays.json";
+    public static final String FILE_NAME_FOR_EMPLOYEE = "employee_fdb.json";
 
-    public static void initRepositoryFromFile() throws IOException {
+    private static void initRepositoryFromFiles() throws IOException {
         HolidaysSingleton.getInstance().initFromFile(FILE_NAME);
+        EmployeeManagementSingleton.getInstance().initEmployeesDb("employee_fdb.json");
     }
 
     private static void initRepositoryFromURL() throws IOException {
@@ -29,7 +32,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         stdout.info("HIGH-FIVE TEAM \n");
 
-        initRepositoryFromFile();
+        initRepositoryFromFiles();
         TerminalCleaner.cleanTerminal();
         MainMenu.runMenu();
     }

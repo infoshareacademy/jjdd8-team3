@@ -8,7 +8,7 @@ import java.util.List;
 
 public class HolidaysSingleton {
 
-    private ApiJsonParser apiJsonParser;
+    private final ApiJsonParser apiJsonParser;
 
     private static HolidaysSingleton instance;
     private List<Holiday> holidaysList;

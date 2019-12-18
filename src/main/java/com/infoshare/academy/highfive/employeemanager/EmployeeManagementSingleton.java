@@ -1,7 +1,7 @@
-package com.infoshare.academy.highfive.mapper;
+package com.infoshare.academy.highfive.employeemanager;
 
-import com.infoshare.academy.highfive.employeemgmt.Employee;
-import com.infoshare.academy.highfive.employeemgmt.Team;
+
+import com.infoshare.academy.highfive.mapper.ApiJsonParser;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +30,7 @@ public class EmployeeManagementSingleton {
         employeeList = apiJsonParser.parseEmployeeFile(fileName);
     }
 
-    public void saveEmployeesDb(String filename) {
+    void saveEmployeesDb(String filename) {
         Map<String, Object> mapLists = new TreeMap<>();
         mapLists.put("employees", employeeList);
         mapLists.put("teams", teamList);

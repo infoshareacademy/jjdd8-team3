@@ -1,6 +1,6 @@
-package com.infoshare.academy.highfive.employeemgmt;
+package com.infoshare.academy.highfive.employeemanager;
 
-import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
+import com.infoshare.academy.highfive.App;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
@@ -18,6 +18,7 @@ public class EmployeeManager {
     private static final String CONFIRM_MESSAGE = "Type [Y]es to confirm or something else to exit:? ";
     private static final String NUMBER_PATTERN = "[0-9]{1,2}";
     private static final String WRONG_NO_MESSAGE = ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET;
+    private static final String NO_FOUND_MESSAGE = ColorsSet.ANSI_RED + "No result(s) found for this query!" + ColorsSet.ANSI_RESET;
     private static boolean matchedToPattern = false;
     private static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private static final List<Team> teamList = EmployeeManagementSingleton.getInstance().getTeamList();
@@ -48,7 +49,7 @@ public class EmployeeManager {
     }
 
     private static void saveAllEmployeeDb() {
-        EmployeeManagementSingleton.getInstance().saveEmployeesDb("employee_fdb.json");
+       EmployeeManagementSingleton.getInstance().saveEmployeesDb(App.FILE_NAME_FOR_EMPLOYEE);
     }
 
     private static String displayTeamSelect(Scanner scanner) {
@@ -72,6 +73,10 @@ public class EmployeeManager {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    public static void listAllEmployees(){
+        employeeList.forEach(i-> stdout.info(i.toString()));
     }
 
     public static void createEmployee() {
@@ -157,6 +162,18 @@ public class EmployeeManager {
         return teamIdx;
     }
 
+    private static List<Employee> selectEmployeeByFullName(Scanner scanner) {
+        String nameToSearch;
+        do {
+            stdout.info("Search by Full name: ");
+            nameToSearch = scanner.nextLine().strip();
+        } while (nameToSearch.length() == 0);
+
+        List<Employee> employeeListToAction = findEmployeeByFullName(nameToSearch);
+        employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + ". " + l.getFirstName() + " " + l.getSurname() + ", actual team: " + l.getTeamName().getTeamName() + "\n"));
+        return employeeListToAction;
+    }
+
     public static void deleteEmployee() {
         Scanner scanner = getScanner();
         stdout.info(">>> Remove Employee <<<\n");
@@ -171,6 +188,8 @@ public class EmployeeManager {
                 employeeList.remove(employeeListToAction.get(Integer.parseInt(employeeIdx)));
                 saveAllEmployeeDb();
             }
+        } else {
+            stdout.info(NO_FOUND_MESSAGE);
         }
     }
 
@@ -205,19 +224,9 @@ public class EmployeeManager {
                 employee.setTeamName(teamList.get(Integer.parseInt(teamIdx)));
                 saveAllEmployeeDb();
             }
+        } else {
+            stdout.info(NO_FOUND_MESSAGE);
         }
-    }
-
-    private static List<Employee> selectEmployeeByFullName(Scanner scanner) {
-        String nameToSearch;
-        do {
-            stdout.info("Search by Full name: ");
-            nameToSearch = scanner.nextLine().strip();
-        } while (nameToSearch.length() == 0);
-
-        List<Employee> employeeListToAction = findEmployeeByFullName(nameToSearch);
-        employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + ". " + l.getFirstName() + " " + l.getSurname() + " " + l.getTeamName().getTeamName() + "\n"));
-        return employeeListToAction;
     }
 
     public static void createTeam() {
@@ -253,7 +262,7 @@ public class EmployeeManager {
             Team defaultTeam = teamList.get(0);
             employeeList.stream().filter(l -> l.getTeamName().equals(teamToRemove)).forEach(fl -> fl.setTeamName(defaultTeam));
             teamList.remove(teamToRemove);
-            stdout.info("All employees from deleted team moved to " + defaultTeam.getTeamName());
+            stdout.info("All employees from deleted team moved to " + defaultTeam.getTeamName() + "\n");
             saveAllEmployeeDb();
         }
     }
