@@ -17,12 +17,11 @@ public class TerminalCleaner {
     public static void cleanTerminal() {
         try {
             if (OS_CHECKER.contains("win")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start();
             } else {
                 stdout.info("\033[H\033[2J");
-                System.out.flush();
             }
-        } catch (InterruptedException | IOException e) {
+        } catch (IOException e) {
             stdout.info("Error in action of terminal clean!\n", e);
         }
     }
