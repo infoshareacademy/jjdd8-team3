@@ -22,9 +22,9 @@ class ConfigurationMenu extends MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
-        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + configurationMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / " + CONFIGURATION_MENU_TITLE +" / \n" + ColorsSet.ANSI_RESET);
 
-        menuOptions.add(configurationMenuTitle);
+        menuOptions.add(CONFIGURATION_MENU_TITLE);
         menuOptions.add("Change DATE format");
         menuOptions.add("Change employees SORTING mode");
         menuOptions.add("Change configuration of external file");
@@ -51,13 +51,12 @@ class ConfigurationMenu extends MainMenu {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
+        if (Integer.parseInt(userChoiceString) > menuOptions.size() - 1 || Integer.parseInt(userChoiceString) == 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
-            switch (userChoice) {
+            switch (Integer.parseInt(userChoiceString)) {
                 case 1:
                     stdout.info("\nChange DATE format - UNDER CONSTRUCTION\n\n");
                     break;
@@ -71,6 +70,6 @@ class ConfigurationMenu extends MainMenu {
                     MainMenu.runMenu();
             }
         }
-        return userChoice;
+        return Integer.parseInt(userChoiceString);
     }
 }

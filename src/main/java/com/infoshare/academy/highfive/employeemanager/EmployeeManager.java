@@ -7,7 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,10 @@ public class EmployeeManager {
     private static boolean matchedToPattern = false;
     private static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private static final List<Team> teamList = EmployeeManagementSingleton.getInstance().getTeamList();
+
+    private EmployeeManager() {
+        throw new IllegalStateException("Utility Employee Manager class");
+    }
 
     private static Integer maxEmployeeIdNumber() {
         return Objects.requireNonNull(employeeList.stream()
@@ -66,20 +71,12 @@ public class EmployeeManager {
         return teamIdx;
     }
 
-    private static boolean dateValid(String dateString) {
-        try {
-            LocalDate dateCheck = LocalDate.parse(dateString);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
     public static void listAllEmployees(){
         employeeList.forEach(i-> stdout.info(i.toString()));
     }
 
     public static void createEmployee() {
+        String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
         Scanner scanner = getScanner();
         stdout.info(">>> New Employee Form <<<\n");
 
@@ -100,13 +97,13 @@ public class EmployeeManager {
         do {
             stdout.info("Enter hire date (yyyy-mm-dd): ");
             hireDateTemp = scanner.nextLine();
-            if (dateValid(hireDateTemp)) {
+            if (hireDateTemp.matches(datePattern)) {
                 matchedToDatePattern = true;
             } else {
                 stdout.info(WRONG_NO_MESSAGE);
             }
         } while (!matchedToDatePattern);
-        LocalDate hireDate = LocalDate.parse(hireDateTemp);
+        LocalDate hireDate = LocalDate.parse(hireDateTemp, DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.SMART));
 
         String holidayEntitlement;
         do {
