@@ -47,7 +47,7 @@ public class Employee {
     }
 
 
-    Integer getEmployeeId() {
+    public Integer getEmployeeId() {
         return employeeId;
     }
 
@@ -56,7 +56,7 @@ public class Employee {
         return this;
     }
 
-    String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -65,7 +65,7 @@ public class Employee {
         return this;
     }
 
-    String getSurname() {
+    public String getSurname() {
         return surname;
     }
 
@@ -105,7 +105,7 @@ public class Employee {
         return this;
     }
 
-    Team getTeamName() {
+    public Team getTeamName() {
         return teamName;
     }
 

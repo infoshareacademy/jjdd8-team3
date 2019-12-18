@@ -30,12 +30,12 @@ public class HolidaysSingleton {
         }
     }
 
-    List<Holiday> getAllHolidays() {
+    public List<Holiday> getAllHolidays() {
         validateHolidays();
         return this.holidaysList;
     }
 
-    List<Holiday> getHolidaysFilteredByName(String filter) {
+    public List<Holiday> getHolidaysFilteredByName(String filter) {
         validateHolidays();
         List<Holiday> filteredByName = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
@@ -46,7 +46,7 @@ public class HolidaysSingleton {
         return filteredByName;
     }
 
-    List<Holiday> getHolidaysFilteredByDate(String filter) {
+    public List<Holiday> getHolidaysFilteredByDate(String filter) {
         validateHolidays();
         List<Holiday> filteredByDate = new ArrayList<>();
         for (Holiday holiday : holidaysList) {

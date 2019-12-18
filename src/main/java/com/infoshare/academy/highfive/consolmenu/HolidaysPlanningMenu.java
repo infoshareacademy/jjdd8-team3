@@ -2,6 +2,9 @@ package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
 import com.infoshare.academy.highfive.tool.ColorsSet;
+import com.infoshare.academy.highfive.vacation.VacationPlanner;
+import com.infoshare.academy.highfive.vacation.VacationRemoval;
+import com.infoshare.academy.highfive.vacation.VacationSingleton;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,10 +71,13 @@ class HolidaysPlanningMenu extends MainMenu {
                     HolidaysFilter.searchByName();
                     break;
                 case 3:
-                    stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
+                    VacationPlanner vacationPlanner = new VacationPlanner();
+                    vacationPlanner.planVacation();
                     break;
                 case 4:
-                    stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
+                    VacationRemoval vacationRemoval = new VacationRemoval();
+//                    vacationRemoval.cancelVacation();
+
                     break;
                 default:
                     MainMenu.runMenu();
