@@ -12,8 +12,7 @@ import java.util.Scanner;
 public class MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
     final List<String> menuOptions = new ArrayList<>();
-    String userChoiceString;
-    static int userChoice;
+    static String userChoiceString;
     static final String MAIN_MENU_TITLE = ("MAIN MENU");
     static final String HOLIDAYS_PLANNING_MENU_TITLE = ("HOLIDAY PLANNING");
     static final String HOLIDAYS_REVIEW_MENU_TITLE = ("HOLIDAYS REVIEW");
@@ -29,7 +28,7 @@ public class MainMenu {
             mainMenu.menuOptionsDisplay();
             mainMenu.getUserChoice();
         }
-        while (userChoice != 0);
+        while (!userChoiceString.equals("0"));
     }
 
     void menuOptionsDisplay() {
@@ -90,6 +89,6 @@ public class MainMenu {
                     break;
             }
         }
-        return  userChoice = Integer.parseInt(userChoiceString);
+        return Integer.parseInt(userChoiceString);
     }
 }
