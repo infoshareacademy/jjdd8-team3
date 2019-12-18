@@ -28,28 +28,50 @@ public class VacationPlanner {
     private static boolean matchedToPattern = false;
     private static final String numberPattern = "[0-9]{1,2}";
 
-    public List<Vacation> planVacation() throws Exception {
+    public void planVacation() throws Exception {
 
         stdout.info("\n" + "Please follow instructions to add employee vacation \n");
 
         String[] employeeName = getEmployeeName();
         String firstName = employeeName[0];
-        String secondName =employeeName[1];
-        String employeeId = getEmployeeIdByScannerInput(firstName, secondName); //FIXME not working getemployeeid
+        String secondName = employeeName[1];
+        String employeeId = getEmployeeIdByScannerInput(firstName, secondName);
+        String entitlement = entitledDaysOff(employeeId);
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
+        List vacationDays = creatingVacationDaysList(dateFrom, dateTo);
+        Integer daysOff = vacationDays.size();
         dateFromPastDateToChecking(dateFrom, dateTo);
-        Integer holidaysUsed = calculatingDaysAmount(creatingVacationDaysList(dateFrom, dateTo));
+        checkIfEligible(daysOff, entitlement);
         addVacation(employeeId, dateFrom,dateTo);
 
-        return null;
     }
 
-    protected void decreaseVacationEntitlement(String employeeId) {
+    protected String entitledDaysOff(String employeeId) {
 
+        return employeeList.stream()
+                    .filter(e -> e.getEmployeeId().toString().equals(employeeId))
+                    .findFirst().get().getHolidayEntitlement().toString();
+    }
 
+    protected void checkIfEligible(Integer daysOff, String entitlement) throws Exception {
 
-        //TODO create function to get holidays entitlement and then save updated entitlement
+        if (daysOff > Integer.parseInt(entitlement)) {
+
+            stdout.info("Given days are exceeding employee's entitlement, please type correct days. Current entitlement: " + entitlement + " days." );
+            planVacation();
+
+        }
+
+    }
+
+    protected void decreaseVacationEntitlement(String employeeId, Integer daysOff, Integer entitlement) {
+
+             employeeList.stream()
+                .filter(e -> e.getEmployeeId().toString().equals(employeeId))
+                .findFirst().get().setHolidayEntitlement(entitlement - daysOff).toString();
+
+                //TODO create function to save updated entitlement
 
     }
 
@@ -91,8 +113,10 @@ public class VacationPlanner {
                     .filter(employee -> employee.getFirstName().equals(firstName))
                     .filter(employee -> employee.getSurname().equals(secondName))
                     .forEach(employee -> stdout.info(employee.getEmployeeId() + " " + employee.getFirstName()+ " " + employee.getSurname()));
+
             stdout.info("\n<<<\nSelect employee: ");
             employeeId = scanner.nextLine();
+
             matchedToPattern = employeeId.matches(numberPattern);
             if (employeeId.matches(numberPattern) && (Integer.parseInt(employeeId) < employeeList.size())) {
                 matchedToPattern = true;

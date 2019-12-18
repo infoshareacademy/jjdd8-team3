@@ -47,6 +47,14 @@ public class VacationRemoval extends VacationPlanner{
         //FIXME overwriting file
     }
 
+    protected void appendVacationEntitlement(String employeeId) {
+
+
+
+        //TODO create function to get holidays entitlement and then save updated entitlement
+
+    }
+
     //TODO function to update holidays entitlement and save to file
 
 //    protected void cancelVacation(String employeeId, String dateFrom, String dateTo) {
