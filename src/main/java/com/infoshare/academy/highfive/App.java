@@ -8,6 +8,7 @@ import com.infoshare.academy.highfive.vacation.Vacation;
 import com.infoshare.academy.highfive.vacation.VacationSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 
 public class App {
@@ -30,16 +31,9 @@ public class App {
 
     private static void initRepositoryFromFiles() throws IOException {
         HolidaysSingleton.getInstance().initFromFile(FILE_NAME);
-        EmployeeManagementSingleton.getInstance().initEmployeesDb("employee_fdb.json");
+        EmployeeManagementSingleton.getInstance().initEmployeesDb(FILE_NAME_FOR_EMPLOYEE);
     }
 
-    private static void initRepositoryFromURL() throws IOException {
-        HolidaysSingleton.getInstance().initFromURL(URL_PATH);
-    }
-
-    private static void saveToFileRepository() {
-        HolidaysSingleton.getInstance().initSaveToFile(FILENAME_TO_SAVE);
-    }
 
     public static void main(String[] args) throws Exception {
         stdout.info("HIGH-FIVE TEAM \n");

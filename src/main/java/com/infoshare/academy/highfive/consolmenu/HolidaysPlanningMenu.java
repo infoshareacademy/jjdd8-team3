@@ -26,9 +26,9 @@ class HolidaysPlanningMenu extends MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
-        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + holidaysPlanningMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / " + HOLIDAYS_PLANNING_MENU_TITLE +" / \n" + ColorsSet.ANSI_RESET);
 
-        menuOptions.add(holidaysPlanningMenuTitle);
+        menuOptions.add(HOLIDAYS_PLANNING_MENU_TITLE);
         menuOptions.add("Search holiday by DATE");
         menuOptions.add("Search holiday by NAME");
         menuOptions.add("Add vacation");
@@ -57,13 +57,12 @@ class HolidaysPlanningMenu extends MainMenu {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
+        if (Integer.parseInt(userChoiceString) > menuOptions.size() - 1 || Integer.parseInt(userChoiceString) == 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
-            switch (userChoice) {
+            switch (Integer.parseInt(userChoiceString)) {
                 case 1:
                     HolidaysFilter.searchByDate();
                     break;
@@ -83,6 +82,6 @@ class HolidaysPlanningMenu extends MainMenu {
                     MainMenu.runMenu();
             }
         }
-        return userChoice;
+        return Integer.parseInt(userChoiceString);
     }
 }
