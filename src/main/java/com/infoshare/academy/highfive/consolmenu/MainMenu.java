@@ -32,7 +32,7 @@ public class MainMenu {
         while (userChoice != 0);
     }
 
-    void menuOptionsDisplay() {
+    public void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
@@ -54,7 +54,7 @@ public class MainMenu {
         stdout.info("\n" + "0: Exit" + "\n");
     }
 
-    int getUserChoice() throws Exception {
+    public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 0 to " + (menuOptions.size() - 1) + "\n");

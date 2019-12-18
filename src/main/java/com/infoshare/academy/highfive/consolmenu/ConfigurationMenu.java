@@ -18,7 +18,7 @@ class ConfigurationMenu extends MainMenu {
     }
 
     @Override
-    void menuOptionsDisplay() {
+    public void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
@@ -39,7 +39,7 @@ class ConfigurationMenu extends MainMenu {
     }
 
     @Override
-    int getUserChoice() throws Exception {
+    public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");

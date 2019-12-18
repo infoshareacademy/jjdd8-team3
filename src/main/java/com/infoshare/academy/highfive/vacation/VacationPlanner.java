@@ -69,9 +69,7 @@ public class VacationPlanner {
         Scanner scanner = new Scanner(System.in);
         String employee = scanner.nextLine();
         if (employee.equals("X")) {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.menuOptionsDisplay();
-            mainMenu.getUserChoice();
+            MainMenu.runMenu();
         } else {
             nameMatchToPattern(employee);
         }
