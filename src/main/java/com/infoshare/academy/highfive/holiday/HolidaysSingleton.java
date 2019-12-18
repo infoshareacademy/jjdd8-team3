@@ -1,5 +1,7 @@
 package com.infoshare.academy.highfive.holiday;
 
+import com.infoshare.academy.highfive.mapper.ApiJsonParser;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

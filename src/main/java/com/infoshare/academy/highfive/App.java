@@ -1,8 +1,8 @@
 package com.infoshare.academy.highfive;
 
 import com.infoshare.academy.highfive.consolemenu.MainMenu;
-import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
+import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import com.infoshare.academy.highfive.vacation.Vacation;
 import com.infoshare.academy.highfive.vacation.VacationSingleton;
@@ -44,7 +44,7 @@ public class App {
 
         initRepositoryFromFile();
         initVacationRepositoryFromFile();
-        EmployeeMgmtSingleton.getInstance().initFromFileEmployee("employee_fdb222.json");
+        EmployeeManagementSingleton.getInstance().initEmployeesDb("employee_fdb.json");
         TerminalCleaner.cleanTerminal();
         MainMenu.runMenu();
     }

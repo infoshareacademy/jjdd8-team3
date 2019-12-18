@@ -1,14 +1,13 @@
 package com.infoshare.academy.highfive.vacation;
 
 import com.infoshare.academy.highfive.employeemgmt.Employee;
-import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
+;
+import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,27 +17,27 @@ public class VacationRemoval extends VacationPlanner{
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateValidatorUsingLocalDate validator = new DateValidatorUsingLocalDate(dateFormatter);
     private List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
-    private static final List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
+    private static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private static boolean matchedToPattern = false;
     private static final String numberPattern = "[0-9]{1,2}";
-
-    public List<Vacation> cancelVacation() throws Exception {
-
-        Scanner scanner = getScanner();
-        stdout.info("\n" + "Please follow instructions to cancel employee vacation \n");
-
-//        String employeeName = getEmployeeName();
-//        String employeeId = getEmployeeIdByScannerInput(scanner); //FIXME not working getemployeeid
-
-        String employeeId = getEmployeeName();
-        String dateFrom = getDateFrom();
-        String dateTo = getDateTo();
-        dateFromPastDateToChecking(dateFrom, dateTo);
-        Integer holidaysReturned = calculatingDaysAmount(creatingVacationDaysList(dateFrom, dateTo));
-        removeVacationFromDatabase(employeeId, dateFrom,dateTo);
-
-        return null;
-    }
+//
+//    public List<Vacation> cancelVacation() throws Exception {
+//
+//        Scanner scanner = getScanner();
+//        stdout.info("\n" + "Please follow instructions to cancel employee vacation \n");
+//
+////        String employeeName = getEmployeeName();
+////        String employeeId = getEmployeeIdByScannerInput(scanner); //FIXME not working getemployeeid
+//
+//        String[] employeeId = getEmployeeName();
+//        String dateFrom = getDateFrom();
+//        String dateTo = getDateTo();
+//        dateFromPastDateToChecking(dateFrom, dateTo);
+//        Integer holidaysReturned = calculatingDaysAmount(creatingVacationDaysList(dateFrom, dateTo));
+//        removeVacationFromDatabase(employeeId, dateFrom,dateTo);
+//
+//        return null;
+//    }
     protected void removeVacationFromDatabase(String employeeId, String dateFrom, String dateTo ) {
 
         Vacation vacation = new Vacation(employeeId, dateFrom, dateTo);

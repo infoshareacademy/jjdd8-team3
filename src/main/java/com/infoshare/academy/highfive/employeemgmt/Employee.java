@@ -10,32 +10,26 @@ import java.time.LocalDate;
 
 @JsonDeserialize(using = CustomEmployeeDeserializer.class)
 public class Employee {
-    //    @JsonAlias({"employeeId", "employee_id"})
+
     @JsonProperty("employee_id")
     private Integer employeeId;
 
-    //   @JsonAlias({"firstName", "first_name"})
     @JsonProperty("first_name")
     private String firstName;
 
-    //   @JsonAlias({"surname", "surname"})
     @JsonProperty("surname")
     private String surname;
 
-    //   @JsonAlias({"hireDate", "hire_date"})
     @JsonProperty("hire_date")
-     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate hireDate;
 
-    //   @JsonAlias({"holidayEntitlement", "holiday_entitlement"})
     @JsonProperty("holiday_entitlement")
     private Integer holidayEntitlement;
 
-    //  @JsonAlias({"additionalEntitlement", "additional_entitlement"})
     @JsonProperty("additional_entitlement")
     private Integer additionalEntitlement;
 
-    //   @JsonAlias({"teamName", "team"})
     @JsonProperty("team")
     private Team teamName;
 
@@ -116,7 +110,7 @@ public class Employee {
     }
 
 
-    public Employee setTeamName(Team teamName) {
+    Employee setTeamName(Team teamName) {
         this.teamName = teamName;
         return this;
     }

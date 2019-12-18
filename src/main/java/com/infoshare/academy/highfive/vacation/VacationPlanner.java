@@ -2,9 +2,9 @@ package com.infoshare.academy.highfive.vacation;
 
 import com.infoshare.academy.highfive.consolemenu.MainMenu;
 import com.infoshare.academy.highfive.employeemgmt.Employee;
-import com.infoshare.academy.highfive.employeemgmt.EmployeeMgmtSingleton;
 import com.infoshare.academy.highfive.holiday.Holiday;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
+import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
@@ -23,19 +23,19 @@ public class VacationPlanner {
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateValidatorUsingLocalDate validator = new DateValidatorUsingLocalDate(dateFormatter);
     private List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
-    private static final List<Employee> employeeList = EmployeeMgmtSingleton.getInstance().getEmployeeList();
+    private static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private List<Holiday> holidayList = HolidaysSingleton.getInstance().getAllHolidays();
     private static boolean matchedToPattern = false;
     private static final String numberPattern = "[0-9]{1,2}";
 
     public List<Vacation> planVacation() throws Exception {
 
-        Scanner scanner = getScanner();
         stdout.info("\n" + "Please follow instructions to add employee vacation \n");
 
-//        String employeeName = getEmployeeName();
-//        String employeeId = getEmployeeIdByScannerInput(scanner); //FIXME not working getemployeeid
-        String employeeId= getEmployeeName();
+        String[] employeeName = getEmployeeName();
+        String firstName = employeeName[0];
+        String secondName =employeeName[1];
+        String employeeId = getEmployeeIdByScannerInput(firstName, secondName); //FIXME not working getemployeeid
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
         dateFromPastDateToChecking(dateFrom, dateTo);
@@ -48,11 +48,13 @@ public class VacationPlanner {
     protected void decreaseVacationEntitlement(String employeeId) {
 
 
+
         //TODO create function to get holidays entitlement and then save updated entitlement
 
     }
 
     protected void addVacation(String employeeId, String dateFrom, String dateTo ) {
+
 
         Vacation vacation = new Vacation(employeeId, dateFrom, dateTo);
         vacationList.add(vacation);
@@ -60,7 +62,7 @@ public class VacationPlanner {
 
     }
 
-    protected String getEmployeeName() throws Exception {
+    protected String[] getEmployeeName() throws Exception {
 
         stdout.info("\n" + "Please type employee name or X to exit to Main Menu: \n");
 
@@ -73,15 +75,22 @@ public class VacationPlanner {
         } else {
             nameMatchToPattern(employee);
         }
-        return employee;
+        String[] employeeTable = employee.split(" ");
+
+        return employeeTable;
 
         }
 
-    protected static String getEmployeeIdByScannerInput(Scanner scanner) {
+    protected static String getEmployeeIdByScannerInput(String firstName, String secondName) {
         String employeeId;
+        Scanner scanner = getScanner();
+
         do {
             stdout.info("Available employees >>>\n");
-            employeeList.forEach(l -> stdout.info(employeeList.indexOf(l) + ". " + l.getEmployeeId() + " | "));
+            employeeList.stream()
+                    .filter(employee -> employee.getFirstName().equals(firstName))
+                    .filter(employee -> employee.getSurname().equals(secondName))
+                    .forEach(employee -> stdout.info(employee.getEmployeeId() + " " + employee.getFirstName()+ " " + employee.getSurname()));
             stdout.info("\n<<<\nSelect employee: ");
             employeeId = scanner.nextLine();
             matchedToPattern = employeeId.matches(numberPattern);
