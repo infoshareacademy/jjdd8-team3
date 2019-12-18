@@ -1,1 +1,1 @@
-{"vacation":[{"vacation_type":"1","date_from":"2019-12-02","date_to":"2020-12-20"}]}
+{"Vacation.json":{"vacations":[{"emplyeeID":"4","datefrom":"2019-12-20","dateto":"2019-12-25"},{"emplyeeID":"5","datefrom":"2019-12-20","dateto":"2019-12-29"},{"emplyeeID":"5","datefrom":"2020-01-02","dateto":"2020-01-05"}]}}

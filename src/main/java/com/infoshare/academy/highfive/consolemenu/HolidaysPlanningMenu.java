@@ -69,11 +69,11 @@ public class HolidaysPlanningMenu extends MainMenu {
                     break;
                 case 3:
                     VacationPlanner vacationPlanner = new VacationPlanner();
-                    vacationPlanner.planVacation();
+                    vacationPlanner.chooseVacationType();
                     break;
                 case 4:
                     VacationRemoval vacationRemoval = new VacationRemoval();
-//                    vacationRemoval.cancelVacation();
+                    vacationRemoval.chooseVacationType();
 
                     break;
                 default:

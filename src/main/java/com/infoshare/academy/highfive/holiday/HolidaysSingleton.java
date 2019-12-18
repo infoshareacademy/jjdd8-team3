@@ -57,6 +57,8 @@ public class HolidaysSingleton {
         return filteredByDate;
     }
 
+
+
     public void initFromFile(String fileName) throws IOException {
         holidaysList = apiJsonParser.parseFromFile(fileName);
     }

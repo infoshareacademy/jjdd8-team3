@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class VacationJsonParser {
 
@@ -51,5 +52,14 @@ public class VacationJsonParser {
         } catch (IOException e) {
             stdout.info("There is a little problem with file Saving!\n", e);
         }
+    }
+
+       public void saveVacationDb(String fileName, Map<String, Object> vacationDb) {
+            try {
+                objectMapper.writer().withRootName("Vacation.json").writeValue(new File(fileName), vacationDb);
+                stdout.info("Saved!\n");
+            } catch (IOException e) {
+                stdout.info("There is a little problem with file Saving Employees DB!\n", e);
+            }
     }
 }
