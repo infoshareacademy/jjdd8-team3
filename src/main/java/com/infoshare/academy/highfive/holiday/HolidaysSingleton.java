@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.holiday;
 
+import com.infoshare.academy.highfive.ConfigurationLoader;
 import com.infoshare.academy.highfive.mapper.ApiJsonParser;
 import com.infoshare.academy.highfive.tool.InitException;
 
@@ -51,7 +52,7 @@ public class HolidaysSingleton {
         validateHolidays();
         List<Holiday> filteredByDate = new ArrayList<>();
         for (Holiday holiday : holidaysList) {
-            if (holiday.getDate().getDateInPattern("yyyy-MM-dd").contains(filter)) {
+            if (holiday.getDate().getDateInPattern(ConfigurationLoader.getDateFormatter()).contains(filter)) {
                 filteredByDate.add(holiday);
             }
         }

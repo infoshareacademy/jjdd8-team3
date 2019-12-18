@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive;
 
-import com.infoshare.academy.highfive.employeemgmt.Employee;
+
+import com.infoshare.academy.highfive.employeemanager.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,19 +12,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Properties;
 
-public class ConfiguartionLoader {
+public class ConfigurationLoader {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    private static final Comparator<Employee> COMPARATOR_ASC = (left, right) -> {
-        int compareResult = left.getSurname().compareTo(right.getSurname());
-        return compareResult != 0 ? compareResult : left.getFirstName().compareTo(right.getFirstName());
-    };
+    private static final Comparator<Employee> COMPARATOR_ASC = Comparator.comparing(Employee::getSurname).thenComparing(Employee::getFirstName);
 
     private static final Comparator<Employee> COMPARATOR_DESC = (left, right) -> {
         int compareResult = left.getSurname().compareTo(right.getSurname());
         return (-1)*(compareResult != 0 ? compareResult : left.getFirstName().compareTo(right.getFirstName()));
     };
+
     private static Properties properties = null;
 
     private static Properties getProperties(){

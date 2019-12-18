@@ -47,7 +47,7 @@ public class HolidayDate {
     @Override
     public String toString() {
         return "HolidayDate: " +
-                " #date=" + getDateInPattern(ConfiguartionLoader.getDateFormatter().toString()) +
+                " #date=" + getDateInPattern(ConfigurationLoader.getDateFormatter().toString()) +
                 ", #dateInt=" + getDay() + " " + getMonth() + " " + getYear() +
                 " \n";
     }
