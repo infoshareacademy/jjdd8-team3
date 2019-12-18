@@ -1,5 +1,6 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
+import com.infoshare.academy.highfive.holiday.HolidaysFilter;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
@@ -7,27 +8,28 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class EmployeesManagingMenu extends MainMenu {
+class HolidaysPlanningMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void runSubmenu() throws Exception {
 
-        EmployeesManagingMenu employeesManagingMenu = new EmployeesManagingMenu();
-        employeesManagingMenu.menuOptionsDisplay();
-        employeesManagingMenu.getUserChoice();
+        HolidaysPlanningMenu holidaysPlanningMenu = new HolidaysPlanningMenu();
+        holidaysPlanningMenu.menuOptionsDisplay();
+        holidaysPlanningMenu.getUserChoice();
     }
 
     @Override
-    public void menuOptionsDisplay() {
+    void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
-        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + employeesManagingMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + mainMenuTitle + " / " + holidaysPlanningMenuTitle +" / \n" + ColorsSet.ANSI_RESET);
 
-        menuOptions.add(employeesManagingMenuTitle);
-        menuOptions.add("Display employees list");
-        menuOptions.add("Add new employee");
-        menuOptions.add("Remove an employee");
+        menuOptions.add(holidaysPlanningMenuTitle);
+        menuOptions.add("Search holiday by DATE");
+        menuOptions.add("Search holiday by NAME");
+        menuOptions.add("Add vacation");
+        menuOptions.add("Cancel vacation");
         menuOptions.add("Previous menu");
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
@@ -36,10 +38,11 @@ public class EmployeesManagingMenu extends MainMenu {
 
             stdout.info(i + ": " + menuOptions.get(i) + "\n");
         }
+
     }
 
     @Override
-    public int getUserChoice() throws Exception {
+    int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
@@ -59,13 +62,16 @@ public class EmployeesManagingMenu extends MainMenu {
         } else {
             switch (userChoice) {
                 case 1:
-                    stdout.info("\nDisplay employees list - UNDER CONSTRUCTION\n\n");
+                    HolidaysFilter.searchByDate();
                     break;
                 case 2:
-                    stdout.info("\nAdd new employee - UNDER CONSTRUCTION\n\n");
+                    HolidaysFilter.searchByName();
                     break;
                 case 3:
-                    stdout.info("\nRemove an employee - UNDER CONSTRUCTION\n\n");
+                    stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
+                    break;
+                case 4:
+                    stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
                     break;
                 default:
                     MainMenu.runMenu();

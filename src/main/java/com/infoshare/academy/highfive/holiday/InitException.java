@@ -1,7 +1,7 @@
 package com.infoshare.academy.highfive.holiday;
 
-public class InitException extends RuntimeException {
-    public InitException() {
+class InitException extends RuntimeException {
+    InitException() {
         super("SingleTon not initialized");
     }
 }

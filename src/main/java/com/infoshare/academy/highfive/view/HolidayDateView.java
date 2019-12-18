@@ -2,36 +2,28 @@ package com.infoshare.academy.highfive.view;
 
 import com.infoshare.academy.highfive.holiday.Holiday;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class HolidayDateView {
 
-    private Date date;
+    private final LocalDate date;
 
     public HolidayDateView(Holiday holiday) {
         this.date = holiday.getDate().getDate();
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     public String getDateIso() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(date);
+        return date.format(DateTimeFormatter.ISO_DATE);
     }
 
     public int getDayInWeek() {
-        SimpleDateFormat format = new SimpleDateFormat("u");
-        return Integer.parseInt(format.format(date));
+        return date.getDayOfWeek().getValue();
     }
-
-    public String getDateInPattern(String datePattern) {
-        SimpleDateFormat format = new SimpleDateFormat(datePattern);
-        return format.format(date);
-    }
-
 
     @Override
     public String toString() {
