@@ -3,7 +3,6 @@ package com.infoshare.academy.highfive;
 import com.infoshare.academy.highfive.consolmenu.MainMenu;
 import com.infoshare.academy.highfive.employeemanager.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
-import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import com.infoshare.academy.highfive.vacation.Vacation;
 import com.infoshare.academy.highfive.vacation.VacationSingleton;
@@ -45,7 +44,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         stdout.info("HIGH-FIVE TEAM \n");
 
-        initRepositoryFromFile();
+        initRepositoryFromFiles();
         initVacationRepositoryFromFile();
         EmployeeManagementSingleton.getInstance().initEmployeesDb("employee_fdb.json");
         TerminalCleaner.cleanTerminal();
