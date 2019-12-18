@@ -1,8 +1,8 @@
 package com.infoshare.academy.highfive.vacation;
 
-import com.infoshare.academy.highfive.employeemgmt.Employee;
+import com.infoshare.academy.highfive.employeemanager.Employee;
 ;
-import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
+import com.infoshare.academy.highfive.employeemanager.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,10 @@
 package com.infoshare.academy.highfive.vacation;
 
-import com.infoshare.academy.highfive.consolemenu.MainMenu;
-import com.infoshare.academy.highfive.employeemgmt.Employee;
+import com.infoshare.academy.highfive.consolmenu.MainMenu;
+import com.infoshare.academy.highfive.employeemanager.Employee;
 import com.infoshare.academy.highfive.holiday.Holiday;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
-import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
+import com.infoshare.academy.highfive.employeemanager.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
