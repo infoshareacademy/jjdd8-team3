@@ -10,69 +10,72 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "emplyeeID",
-    "datefrom",
-    "dateto"
-})
 public class Vacation {
 
-    public Vacation(String emplyeeID, String datefrom, String dateto) {
-        this.emplyeeID = emplyeeID;
-        this.datefrom = datefrom;
-        this.dateto = dateto;
+
+
+    private String employeeId;
+
+    private String dateFrom;
+
+    private String dateTo;
+
+    private String type;
+
+    private Map<String, Object> additionalProperties = new HashMap<>();
+
+
+
+    public Vacation(){}
+
+    public String getType() {
+        return type;
     }
 
-    public Vacation() {
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @JsonProperty("emplyeeID")
-    private String emplyeeID;
-    @JsonProperty("datefrom")
-    private String datefrom;
-    @JsonProperty("dateto")
-    private String dateto;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("emplyeeID")
-
-    public String getEmplyeeID() {
-        return emplyeeID;
+    public Vacation(String employeeId, String dateFrom, String dateTo, String type) {
+        this.employeeId = employeeId;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.type = type;
     }
 
-    @JsonProperty("emplyeeID")
-    public void setEmplyeeID(String emplyeeID) {
-        this.emplyeeID = emplyeeID;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    @JsonProperty("datefrom")
-    public String getDatefrom() {
-        return datefrom;
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
-    @JsonProperty("datefrom")
-    public void setDatefrom(String datefrom) {
-        this.datefrom = datefrom;
+
+    public String getDateFrom() {
+        return dateFrom;
     }
 
-    @JsonProperty("dateto")
-    public String getDateto() {
-        return dateto;
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    @JsonProperty("dateto")
-    public void setDateto(String dateto) {
-        this.dateto = dateto;
+
+    public String getDateTo() {
+        return dateTo;
     }
 
-    @JsonAnyGetter
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
+
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
-    @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
