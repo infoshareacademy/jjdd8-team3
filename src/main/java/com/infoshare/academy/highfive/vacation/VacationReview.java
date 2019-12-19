@@ -9,88 +9,93 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 import static com.infoshare.academy.highfive.vacation.VacationPlanner.*;
-import com.infoshare.academy.highfive.employeemanager.Team.*;
+
 
 
 public class VacationReview {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-    private List<String> employeesID;
+    private List<Integer> employeesID;
     private final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private final List<Vacation> vacations = VacationSingleton.getInstance().getVacationList();
 
-    public static void displayEmployeeVacation(){
+    public void displayEmployeeVacation() throws Exception {
+
+        getIdByName();
+        displayVacations();
 
     }
-    public static void displayTeamVacation() throws Exception {
+    public void displayTeamVacation() throws Exception {
 
         getEmployeeIdByScannerInput(getTeamName());
         displayVacations();
     }
 
-    List<String> getIdByName() throws Exception {
+    List<Integer> getIdByName() throws Exception {
 
-       employeesID.add(getEmployeeIdByScannerInput(getEmployeeName()));
+       employeesID.add(Integer.parseInt(getEmployeeIdByScannerInput(getEmployeeName())));
        return employeesID;
     }
 
-    //TODO : Get ID by Team
-
-    protected static String getTeamName() throws Exception {
+    private static String getTeamName() throws Exception {
 
         stdout.info("\n" + "Please input team name or X to exit to Main Menu: \n");
         Scanner scanner = new Scanner(System.in);
 
         String teamToSearch;
         do {
-            stdout.info("Search by Full name: ");
+            stdout.info("Search by Team name: ");
             teamToSearch = scanner.nextLine().strip();
         } while (teamToSearch.length() == 0);
         return teamToSearch;
     }
 
-    protected List<String> getEmployeesIdsPerTeamByScannerInput( String teamToSearch) {
+    protected List<Integer> getEmployeesIdsPerTeamByScannerInput(String teamToSearch) {
 
         String employeeId;
         Scanner scanner = getScanner();
 
+    //TODO Make employeeID, matchedtToPattern, numberPattern packege-privet when merging with Vacation planner
+
         do {
             stdout.info("Available employees, please choose employee ID \n");
-
 
             employeeList.stream()
                     .filter(l -> (l.getTeamName().getTeamName())
                     .contains(teamToSearch))
-                    .forEach(employee -> stdout.info("Employee ID: " + employee.getEmployeeId() + " | Employee first name " + employee.getFirstName() + " | Employee second name:  " + employee.getSurname() + " | " + employee.getTeamName() + "\n"));
+                    .forEach(teamName -> stdout.info( "team ID: " + Integer.toString(Team.getTeamId())  + "Team Name: " + teamName + "\n");
+
+                    employeesID.add(Integer.parseInt(getEmployeesIdsPerTeamByScannerInput(getTeamName())));
+
+//            employeesID.add(Integer.parseInt(getEmployeeIdByScannerInput(getEmployeeName())));
+
+//                    .forEach(employee -> stdout.info("Employee ID: " + employee.getEmployeeId() + " | Employee first name " + employee.getFirstName()
+//                            + " | Employee second name:  " + employee.getSurname() + " | " + employee.getTeamName() + "\n"));
 
             employeeId = scanner.nextLine();
-//TODO Make employeeID, matchedtToPattern, numberPattern packege-privet when merging with Vacation planner
             matchedToPattern = employeeId.matches(numberPattern);
+
             if (employeeId.matches(numberPattern) && (Integer.parseInt(employeeId) < employeeList.size())) {
                 matchedToPattern = true;
             } else {
-                stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
+                stdout.info(ColorsSet.ANSI_RED + "No such an ID in data base, please try again!\n" + ColorsSet.ANSI_RESET);
                 matchedToPattern = false;
             }
-
         } while (!matchedToPattern);
 
         return employeesID;
     }
 
-
-
     //TODO : Get vacation list for defined ID(s)
 
-    public void displayVacations(){
+    private void displayVacations(){
 
         employeeList.stream()
                 .filter(employee -> employeesID.contains(employee.getEmployeeId()))
-                .forEach(employee -> stdout.info(employee.getFirstName() + " " + employee.getSurname() + ": "
+                .forEach(employee -> stdout.info(employee.getFirstName() + " " + employee.getSurname() + "'s vacations: "
                 + vacations.contains(employee.getEmployeeId())));
-}
+    }
 
 }
