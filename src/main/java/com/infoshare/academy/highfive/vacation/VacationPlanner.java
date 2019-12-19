@@ -4,64 +4,65 @@ import com.infoshare.academy.highfive.consolmenu.MainMenu;
 import com.infoshare.academy.highfive.employeemanager.Employee;
 import com.infoshare.academy.highfive.employeemanager.EmployeeManagementSingleton;
 import com.infoshare.academy.highfive.holiday.Holiday;
-import com.infoshare.academy.highfive.holiday.HolidayDate;
 import com.infoshare.academy.highfive.holiday.HolidayType;
 import com.infoshare.academy.highfive.holiday.HolidaysSingleton;
 import com.infoshare.academy.highfive.tool.ColorsSet;
-import com.infoshare.academy.highfive.tool.DateValidatorUsingLocalDate;
-import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Array;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class VacationPlanner {
 
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private DateValidatorUsingLocalDate validator = new DateValidatorUsingLocalDate(dateFormatter);
     private List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
-    static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
-    private List<Holiday> holidayList = HolidaysSingleton.getInstance().getAllHolidays();
-    static boolean matchedToPattern = false;
-    static final String numberPattern = "[0-9]{1,2}";
-    String datePattern = "^((?:(?:1[6-9]|2[0-9])\\d{2})(-)(?:(?:(?:0[13578]|1[02])(-)31)|((0[1,3-9]|1[0-2])(-)(29|30))))$|^(?:(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(-)02(-)29)$|^(?:(?:1[6-9]|2[0-9])\\d{2})(-)(?:(?:0[1-9])|(?:1[0-2]))(-)(?:0[1-9]|1\\d|2[0-8])$";
+    private static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
+    private List<Holiday> holidaySingletonList = HolidaysSingleton.getInstance().getAllHolidays();
+    private static boolean matchedToPattern = false;
+    private static final String numberPattern = "[0-9]{1,2}";
+    private String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
 
     public void chooseVacationType() throws Exception {
 
-        stdout.info("\n" + "Please choose vacation type: \n");
-        stdout.info("\n" + "1. Parental leave  \n");
-        stdout.info("\n" + "2. Vacation leave  \n");
+        stdout.info("\n" + "Please choose vacation type number: \n");
+        stdout.info("1. Parental leave \n");
+        stdout.info("2. Vacation leave  \n");
         Scanner scanner = getScanner();
         String vacationType = scanner.nextLine();
-        if (vacationType.equals("1")) {
-            planParentalLeave();
-        } else if (vacationType.equals("2")) {
-            planVacation();
-        } else if (vacationType.equals("X")) {
+        switch (vacationType) {
+            case "1":
+                planParentalLeave();
+                break;
+            case "2":
+                planVacation();
+                break;
+            case "0":
                 startMenu();
-
-        } else {
-            stdout.info("Please choose correct number or X to return to Main Menu");
-            chooseVacationType();
+                break;
+            default:
+                stdout.info("Please choose correct number or 0 to return to Main Menu");
+                chooseVacationType();
+                break;
         }
     }
 
-    public void planParentalLeave() throws Exception {
+
+    private void planParentalLeave() throws Exception {
 
         stdout.info("\n" + "Please follow instructions to add employee vacation \n");
 
+        String type = "Partental";
         String nameToSearch = getEmployeeName();
-//        String firstName = employeeName[0];
-//        String secondName = employeeName[1];
         String employeeId = getEmployeeIdByScannerInput(nameToSearch);
         String entitlement = entitledParentalDaysOff(employeeId);
         String dateFrom = getDateFrom();
@@ -70,18 +71,17 @@ public class VacationPlanner {
         Integer daysOff = calculatingDaysAmount(vacationDays);
         dateFromPastDateToChecking(dateFrom, dateTo);
         checkIfEligible(daysOff, entitlement);
-        addVacation(employeeId, dateFrom,dateTo);
+        addVacation(employeeId, dateFrom, dateTo, type);
         decreaseParentalEntitlement(employeeId, daysOff, entitlement);
 
     }
 
-    public void planVacation() throws Exception {
+    private void planVacation() throws Exception {
 
         stdout.info("\n" + "Please follow instructions to add employee vacation \n");
 
+        String type = "Vacation";
         String nameToSearch = getEmployeeName();
-//        String firstName = employeeName[0];
-//        String secondName = employeeName[1];
         String employeeId = getEmployeeIdByScannerInput(nameToSearch);
         String entitlement = entitledVacationDaysOff(employeeId);
         String dateFrom = getDateFrom();
@@ -90,106 +90,112 @@ public class VacationPlanner {
         Integer daysOff = calculatingDaysAmount(vacationDays);
         dateFromPastDateToChecking(dateFrom, dateTo);
         checkIfEligible(daysOff, entitlement);
-        addVacation(employeeId, dateFrom,dateTo);
+        addVacation(employeeId, dateFrom, dateTo, type);
         decreaseVacationEntitlement(employeeId, daysOff, entitlement);
 
     }
 
-    protected String entitledVacationDaysOff(String employeeId) {
+    String entitledVacationDaysOff(String employeeId) {
 
         return employeeList.stream()
-                    .filter(e -> e.getEmployeeId().toString().equals(employeeId))
-                    .findFirst().get().getHolidayEntitlement().toString();
+                .filter(e -> e.getEmployeeId().toString().equals(employeeId))
+                .findFirst().get().getHolidayEntitlement().toString();
     }
 
-    protected String entitledParentalDaysOff(String employeeId) {
+    String entitledParentalDaysOff(String employeeId) {
 
         return employeeList.stream()
                 .filter(e -> e.getEmployeeId().toString().equals(employeeId))
                 .findFirst().get().getAdditionalEntitlement().toString();
     }
 
-    protected void checkIfEligible(Integer daysOff, String entitlement) throws Exception {
+    void dateFromPastDateToChecking(String dateFrom, String dateTo) throws Exception {
+
+        Date dateFromAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateFrom);
+        Date dateToAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateTo);
+
+        if (dateFromAsDate.after(dateToAsDate)) {
+
+            stdout.info("Start date after end date, please choose correct days.");
+
+            planVacation();
+        }
+    }
+
+    void checkIfEligible(Integer daysOff, String entitlement) throws Exception {
 
         if (daysOff > Integer.parseInt(entitlement)) {
 
-            stdout.info("Given days are exceeding employee's entitlement, please type correct days. Current entitlement: " + entitlement + " days." );
+            stdout.info("Given days are exceeding employee's entitlement, please type correct days. Current entitlement: " + entitlement + " days.");
             planVacation();
-
         }
-
     }
 
-    protected void decreaseVacationEntitlement(String employeeId, Integer daysOff, String entitlement) throws Exception {
-
-             employeeList.stream()
-                .filter(e -> e.getEmployeeId().toString().equals(employeeId))
-                .findFirst().get().setHolidayEntitlement(Integer.parseInt(entitlement) - daysOff).toString();
-
-             saveAllEmployeeDb();
-             startMenu();
-
-    }
-
-    protected void decreaseParentalEntitlement(String employeeId, Integer daysOff, String entitlement) throws Exception {
+    private void decreaseVacationEntitlement(String employeeId, Integer daysOff, String entitlement) throws Exception {
 
         employeeList.stream()
                 .filter(e -> e.getEmployeeId().toString().equals(employeeId))
-                .findFirst().get().setAdditionalEntitlement(Integer.parseInt(entitlement) - daysOff).toString();
+                .findFirst().get().setHolidayEntitlement(Integer.parseInt(entitlement) - daysOff);
 
         saveAllEmployeeDb();
         startMenu();
 
     }
 
-    static void saveAllEmployeeDb() {
-        EmployeeManagementSingleton.getInstance().saveEmployeesDb("employee_fdb.json");}
+    private void decreaseParentalEntitlement(String employeeId, Integer daysOff, String entitlement) throws Exception {
 
-    protected void addVacation(String employeeId, String dateFrom, String dateTo ) {
+        employeeList.stream()
+                .filter(e -> e.getEmployeeId().toString().equals(employeeId))
+                .findFirst().get().setAdditionalEntitlement(Integer.parseInt(entitlement) - daysOff);
+
+        saveAllEmployeeDb();
+        startMenu();
+
+    }
+
+    private void addVacation(String employeeId, String dateFrom, String dateTo, String type) {
 
 
-        Vacation vacation = new Vacation(employeeId, dateFrom, dateTo);
+        Vacation vacation = new Vacation(employeeId, dateFrom, dateTo, type);
         vacationList.add(vacation);
         saveVacationDb();
     }
 
-    protected static String getEmployeeName() throws Exception {
+    String getEmployeeName() throws Exception {
 
-        stdout.info("\n" + "Please type employee name or X to exit to Main Menu: \n");
+        stdout.info("\n" + "Please type employee name or 0 to exit to Main Menu: \n");
         Scanner scanner = new Scanner(System.in);
- /*       String employee = scanner.nextLine();
-        if (employee.equals("X")) {
-            startMenu();
+        String nameToSearch;
 
-        } else {
-            nameMatchToPattern(employee);
+        if (scanner.equals("0")) {
+            startMenu();
         }
 
-        return employee.split(" ");*/
-        String nameToSearch;
         do {
             stdout.info("Search by Full name: ");
             nameToSearch = scanner.nextLine().strip();
         } while (nameToSearch.length() == 0);
-            return nameToSearch;
-        }
+        return nameToSearch;
+    }
 
-    protected static String getEmployeeIdByScannerInput( String nameToSearch) {
+    static String getEmployeeIdByScannerInput(String nameToSearch) throws Exception {
         String employeeId;
         Scanner scanner = getScanner();
 
         do {
-            stdout.info("Available employees, please choose employee ID \n");
+            stdout.info("Available employees, please choose employee ID or type 0 to exit to Main Menu \n");
             employeeList.stream()
-                    //.filter(employee -> employee.getFirstName().equals(firstName))
                     .filter(l -> (l.getFirstName().toLowerCase() + " " + l.getSurname().toLowerCase()).contains(nameToSearch.toLowerCase()))
-                   // .filter(employee -> employee.getSurname().equals(secondName))
-                    .forEach(employee -> stdout.info("Employee ID: " + employee.getEmployeeId() + " | Employee first name " + employee.getFirstName()+ " | Employee second name:  " + employee.getSurname() + " | " + employee.getTeamName() + "\n"));
+                    .forEach(employee -> stdout.info("Employee ID: " + employee.getEmployeeId() + " | Employee first name " + employee.getFirstName() + " | Employee second name:  " + employee.getSurname() + " | " + employee.getTeamName() + "\n"));
 
             employeeId = scanner.nextLine();
 
+            if (employeeId.equals("0")) {
+                startMenu();
+            }
+
             matchedToPattern = employeeId.matches(numberPattern);
-            if (employeeId.matches(numberPattern) && (Integer.parseInt(employeeId) < employeeList.size())) {
+            if (employeeId.matches(numberPattern) && (Integer.parseInt(employeeId) < employeeList.size()+1)) {
                 matchedToPattern = true;
             } else {
                 stdout.info(ColorsSet.ANSI_RED + "Wrong No., please try again!\n" + ColorsSet.ANSI_RESET);
@@ -202,29 +208,23 @@ public class VacationPlanner {
 
     }
 
-    protected String getDateFrom() throws ParseException {
-        stdout.info("\n" + "Please type vacation start date in format YYYY-MM-DD: \n");
+    String getDateFrom() {
 
         Scanner scanner = new Scanner(System.in);
         String hireDateTemp;
         boolean matchedToDatePattern = false;
         do {
-            stdout.info("Enter hire date (yyyy-mm-dd): ");
+            stdout.info("\n" + "Please type vacation start date in format YYYY-MM-DD: \n");
             hireDateTemp = scanner.nextLine();
             if (hireDateTemp.matches(datePattern)) {
                 matchedToDatePattern = true;
             } else {
-                stdout.info("WRONG_NO_MESSAGE");
+                stdout.info("Please type correct date.");
             }
         } while (!matchedToDatePattern);
         LocalDate dateFrom = LocalDate.parse(hireDateTemp, DateTimeFormatter.ofPattern("yyyy-MM-dd").withResolverStyle(ResolverStyle.SMART));
 
         LocalDate localDate = LocalDate.now();
-        //localDate.isBefore(dateFrom)
-
-//        String localDateProperFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
-//        Date localDateProperFormatParsed = new SimpleDateFormat("yyyy-MM-dd").parse(localDateProperFormat);
-//        Date dateFromDateFormat = new SimpleDateFormat("yyyy-MM-dd").parse(dateFrom);
 
         if (localDate.isAfter(dateFrom)) {
             stdout.info("Wrong input - try again\n");
@@ -233,7 +233,7 @@ public class VacationPlanner {
         return dateFrom.format(DateTimeFormatter.ISO_DATE);
     }
 
-    protected String getDateTo() {
+    String getDateTo() {
         stdout.info("\n" + "Please type vacation end date in format YYYY-MM-DD: \n");
 
         Scanner scanner = new Scanner(System.in);
@@ -241,40 +241,21 @@ public class VacationPlanner {
 
         if (dateTo.matches(datePattern)) {
             return dateTo;
-        } else {stdout.info("Wrong input - try again\n");
-                getDateTo();
+        } else {
+            stdout.info("Wrong input - try again\n");
+            getDateTo();
         }
 
         return dateTo;
 
     }
-    private void nameMatchToPattern(String employee) throws Exception {
-        String regexName = "\\p{Upper}(\\p{Lower}+\\s?)";
-        String patternName = "(" + regexName + "){2,3}";
-        boolean matchedToPattern = employee.matches(patternName);
 
-        if (!matchedToPattern) {
-            stdout.info("Wrong input - try again\n");
-            getEmployeeName();
-        }
+    static Scanner getScanner() {
 
+        return new Scanner(System.in);
     }
 
-    protected void dateFromPastDateToChecking(String dateFrom, String dateTo) throws Exception {
-
-        Date dateFromAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateFrom);
-        Date dateToAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateTo);
-
-        if (dateFromAsDate.after(dateToAsDate)) {
-
-            stdout.info("Start date after end date, please choose correct days.");
-
-            planVacation();
-        }
-
-    }
-
-    protected List<LocalDate> creatingVacationDaysList(String dateFrom, String dateTo) {
+    List<LocalDate> creatingVacationDaysList(String dateFrom, String dateTo) {
 
         LocalDate start = LocalDate.parse(dateFrom);
         LocalDate end = LocalDate.parse(dateTo);
@@ -284,20 +265,22 @@ public class VacationPlanner {
             start = start.plusDays(1);
         }
 
-    return totalDates;
+        return totalDates;
     }
 
-    protected Integer calculatingDaysAmount(List<LocalDate> totalDates) {
+    Integer calculatingDaysAmount(List<LocalDate> totalDates) {
 
         List<LocalDate> holidays = new LinkedList<>();
 
-        for (LocalDate day:totalDates) {
+        List<Holiday> publicHolidayList = holidaySingletonList.stream().filter(h -> Array.get(h.getTypes(), 0).equals(HolidayType.NATIONAL_HOLIDAY))
+                .collect(Collectors.toList());
+
+        for (LocalDate day : totalDates) {
             if ("SATURDAY".equals(day.getDayOfWeek().name())) {
                 holidays.add(day);
             } else if ("SUNDAY".equals(day.getDayOfWeek().name())) {
                 holidays.add(day);
-            }
-            else if (publicHolidaysList(holidayList).contains(day)) {
+            } else if (publicHolidayList.contains(day)) {
 
                 holidays.add(day);
             }
@@ -306,38 +289,22 @@ public class VacationPlanner {
         return totalDates.size() - holidays.size();
     }
 
-    private List publicHolidaysList(List<Holiday> holidayList) {
 
-        List<HolidayDate> holidayDates = new LinkedList<>();
-
-        List<Holiday> publicHolidayList= HolidaysSingleton.getInstance().getAllHolidays().stream().filter(h-> Array.get(h.getTypes(),0).equals(HolidayType.NATIONAL_HOLIDAY))
-                .collect(Collectors.toList());
-
-        publicHolidayList.stream().forEach(holiday -> holidayDates.add(holiday.getDate()));
-
-         //FIXME make proper list
-
-//        stdout.info(publicHolidayList.toString());
-
-    return publicHolidayList;
-
-    }
-
-    static Scanner getScanner() {
-        TerminalCleaner.cleanTerminal();
-        return new Scanner(System.in);
-    }
-
-    protected static void saveVacationDb() {
+    static void saveVacationDb() {
         VacationSingleton.getInstance().saveVacationsDb("Vacation.json");
 
     }
-    protected void startMenu() throws Exception {
+
+    static void saveAllEmployeeDb() {
+        EmployeeManagementSingleton.getInstance().saveEmployeesDb("employee_fdb.json");
+    }
+
+    static void startMenu() throws Exception {
         MainMenu mainMenu = new MainMenu();
         mainMenu.menuOptionsDisplay();
         mainMenu.getUserChoice();
 
-}
+    }
 }
 
 

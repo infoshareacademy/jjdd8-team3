@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.holiday;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infoshare.academy.highfive.ConfigurationLoader;
 import com.infoshare.academy.highfive.tool.CustomHolidayDateDeserializer;
 
 import java.time.LocalDate;
@@ -27,14 +28,14 @@ public class HolidayDate {
         this.date = date;
     }
 
-    public String getDateInPattern(String datePattern) {
-        return date.format(DateTimeFormatter.ofPattern(datePattern));
+    public String getDateInPattern(DateTimeFormatter datePattern) {
+        return date.format(datePattern);
     }
 
     @Override
     public String toString() {
         return "HolidayDate: " +
-                " #date=" + getDateInPattern("yyyy-MM-dd") +
+                " #date=" + getDateInPattern(ConfigurationLoader.getDateFormatter()) +
                 " \n";
     }
 
