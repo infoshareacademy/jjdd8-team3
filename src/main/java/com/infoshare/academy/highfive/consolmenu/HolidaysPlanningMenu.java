@@ -5,6 +5,7 @@ import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.vacation.VacationPlanner;
 import com.infoshare.academy.highfive.vacation.VacationRemoval;
 import com.infoshare.academy.highfive.vacation.VacationSingleton;
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,11 +72,11 @@ class HolidaysPlanningMenu extends MainMenu {
                     break;
                 case 3:
                     VacationPlanner vacationPlanner = new VacationPlanner();
-                    vacationPlanner.planVacation();
+                    vacationPlanner.chooseVacationType();
                     break;
                 case 4:
                     VacationRemoval vacationRemoval = new VacationRemoval();
-//                    vacationRemoval.cancelVacation();
+                    vacationRemoval.chooseVacationType();
 
                     break;
                 default:

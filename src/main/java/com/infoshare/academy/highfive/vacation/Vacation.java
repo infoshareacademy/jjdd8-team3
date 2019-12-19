@@ -24,6 +24,9 @@ public class Vacation {
         this.dateto = dateto;
     }
 
+    public Vacation() {
+    }
+
     @JsonProperty("emplyeeID")
     private String emplyeeID;
     @JsonProperty("datefrom")

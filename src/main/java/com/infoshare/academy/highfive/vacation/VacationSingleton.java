@@ -1,14 +1,15 @@
 package com.infoshare.academy.highfive.vacation;
 
-import com.infoshare.academy.highfive.holiday.InitException;
+import com.infoshare.academy.highfive.tool.InitException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class VacationSingleton {
 
         VacationJsonParser vacationJsonParser;
-
         private static VacationSingleton instance;
         private List<Vacation> vacationList;
 
@@ -53,6 +54,12 @@ public class VacationSingleton {
         public void deleteVacation(Integer vacationID){
             vacationList.remove(vacationID);
 
+    }
+
+    public void saveVacationsDb(String filename) {
+        Map<String, Object> mapLists = new TreeMap<>();
+        mapLists.put("vacations", vacationList);
+        vacationJsonParser.saveVacationDb(filename, mapLists);
     }
 
 }
