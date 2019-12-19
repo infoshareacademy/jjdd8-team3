@@ -1,5 +1,6 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +11,13 @@ import java.util.Scanner;
 
 public class MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-    public static int userChoice;
-    List<String> menuOptions = new ArrayList<>();
-    public String userChoiceString;
+    final List<String> menuOptions = new ArrayList<>();
+    static String userChoiceString;
+    static final String MAIN_MENU_TITLE = ("MAIN MENU");
+    static final String HOLIDAYS_PLANNING_MENU_TITLE = ("HOLIDAY PLANNING");
+    static final String HOLIDAYS_REVIEW_MENU_TITLE = ("HOLIDAYS REVIEW");
+    static final String EMPLOYEES_MANAGING_MENU_TITLE = ("EMPLOYEES MANAGING");
+    static final String CONFIGURATION_MENU_TITLE = ("CONFIGURATION");
 
 
     public static void runMenu() throws Exception {
@@ -21,21 +26,23 @@ public class MainMenu {
         do {
 
             mainMenu.menuOptionsDisplay();
-            userChoice = mainMenu.getUserChoice();
+            mainMenu.getUserChoice();
         }
-        while (userChoice != 0);
+        while (!userChoiceString.equals("0"));
     }
 
     public void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
+        stdout.info("\n" + ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / \n" + ColorsSet.ANSI_RESET);
+
         menuOptions.clear();
-        menuOptions.add("MAIN MENU");
-        menuOptions.add("HOLIDAY PLANNING");
-        menuOptions.add("HOLIDAYS REVIEW");
-        menuOptions.add("EMPLOYEES MANAGING");
-        menuOptions.add("CONFIGURATION");
+        menuOptions.add(MAIN_MENU_TITLE);
+        menuOptions.add(HOLIDAYS_PLANNING_MENU_TITLE);
+        menuOptions.add(HOLIDAYS_REVIEW_MENU_TITLE);
+        menuOptions.add(EMPLOYEES_MANAGING_MENU_TITLE);
+        menuOptions.add(CONFIGURATION_MENU_TITLE);
 
         stdout.info("\n\n" + menuOptions.get(0) + "\n\n");
 
@@ -58,13 +65,12 @@ public class MainMenu {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1) {
+        if ( Integer.parseInt(userChoiceString)> menuOptions.size() - 1) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
-            switch (userChoice) {
+            switch (Integer.parseInt(userChoiceString)) {
                 case 0:
                     System.exit(0);
                 case 1:
@@ -83,6 +89,6 @@ public class MainMenu {
                     break;
             }
         }
-        return userChoice;
+        return Integer.parseInt(userChoiceString);
     }
 }

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class HolidayDateView {
 
-    private LocalDate date;
+    private final LocalDate date;
 
     public HolidayDateView(Holiday holiday) {
         this.date = holiday.getDate().getDate();

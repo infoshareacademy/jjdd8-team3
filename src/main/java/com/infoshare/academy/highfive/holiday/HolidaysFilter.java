@@ -48,7 +48,7 @@ public final class HolidaysFilter {
                 .orElse(null);
     }
 
-    public static void showMaxMinDateInfo() {
+    private static void showMaxMinDateInfo() {
         stdout.info(ColorsSet.ANSI_YELLOW + "Database entry's in scope of "
                 + getHolidayDateViewMinDate().toString() + " to "
                 + getHolidayDateViewMaxDate().toString() + ColorsSet.ANSI_RESET
@@ -60,7 +60,7 @@ public final class HolidaysFilter {
                 || ParseStringToIsoDate.parseStringToDate(inputTxt).isBefore(getHolidayDateViewMinDate().getDate());
     }
 
-    public static String searchByName() {
+    public static void searchByName() {
 
         String inputTxt;
         Scanner scanner = new Scanner(System.in);
@@ -89,10 +89,9 @@ public final class HolidaysFilter {
                 searchByName();
             }
         }
-        return inputTxt;
     }
 
-    public static String searchByDate() {
+    public static void searchByDate() {
 
         String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
         boolean matchedToDatePattern;
@@ -133,7 +132,6 @@ public final class HolidaysFilter {
             }
         }
 
-        return inputTxt;
     }
 
     private static void queryResults(String filter, String filterType) {

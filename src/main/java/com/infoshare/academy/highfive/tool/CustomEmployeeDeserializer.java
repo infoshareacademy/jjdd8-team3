@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.infoshare.academy.highfive.employeemgmt.Employee;
-import com.infoshare.academy.highfive.employeemgmt.Team;
-import com.infoshare.academy.highfive.mapper.EmployeeManagementSingleton;
+import com.infoshare.academy.highfive.employeemanager.Employee;
+import com.infoshare.academy.highfive.employeemanager.EmployeeManagementSingleton;
+import com.infoshare.academy.highfive.employeemanager.Team;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class CustomEmployeeDeserializer extends StdDeserializer<Employee> {
-    private static List<Team> teamList = EmployeeManagementSingleton.getInstance().getTeamList();
+    private static final List<Team> teamList = EmployeeManagementSingleton.getInstance().getTeamList();
 
     public CustomEmployeeDeserializer() {
         this(null);
@@ -25,7 +25,7 @@ public class CustomEmployeeDeserializer extends StdDeserializer<Employee> {
     }
 
     @Override
-    public Employee deserialize(JsonParser jp, DeserializationContext ctxt)
+    public Employee deserialize(JsonParser jp, DeserializationContext context)
             throws IOException {
         JsonNode node = jp.getCodec().readTree(jp);
 

@@ -1,7 +1,7 @@
-package com.infoshare.academy.highfive.mapper;
+package com.infoshare.academy.highfive.employeemanager;
 
-import com.infoshare.academy.highfive.employeemgmt.Employee;
-import com.infoshare.academy.highfive.employeemgmt.Team;
+
+import com.infoshare.academy.highfive.mapper.ApiJsonParser;
 
 import java.io.IOException;
 import java.util.List;

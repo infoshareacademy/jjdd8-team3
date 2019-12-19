@@ -18,17 +18,17 @@ public class CustomHolidayDateDeserializer extends StdDeserializer<HolidayDate> 
     }
 
     public CustomHolidayDateDeserializer(Class<?> vc) {
-            super(vc);
-        }
+        super(vc);
+    }
 
-        @Override
-        public HolidayDate deserialize(JsonParser jp, DeserializationContext ctxt)
-                throws IOException {
-            JsonNode node = jp.getCodec().readTree(jp);
-            String isoDate = node.get("iso").asText();
-            LocalDate date = LocalDate.parse(isoDate.substring(0,10), DateTimeFormatter.ISO_DATE);
+    @Override
+    public HolidayDate deserialize(JsonParser jp, DeserializationContext context)
+            throws IOException {
+        JsonNode node = jp.getCodec().readTree(jp);
+        String isoDate = node.get("iso").asText();
+        LocalDate date = LocalDate.parse(isoDate.substring(0, 10), DateTimeFormatter.ISO_DATE);
 
-            return new HolidayDate(date);
-        }
+        return new HolidayDate(date);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.holiday;
 
 import com.infoshare.academy.highfive.mapper.ApiJsonParser;
+import com.infoshare.academy.highfive.tool.InitException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class HolidaysSingleton {
 
-    private ApiJsonParser apiJsonParser;
+    private final ApiJsonParser apiJsonParser;
 
     private static HolidaysSingleton instance;
     private List<Holiday> holidaysList;

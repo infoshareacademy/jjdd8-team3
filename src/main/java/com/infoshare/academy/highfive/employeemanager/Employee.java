@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.employeemgmt;
+package com.infoshare.academy.highfive.employeemanager;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -109,22 +109,19 @@ public class Employee {
         return teamName;
     }
 
-
-    Employee setTeamName(Team teamName) {
+    public void setTeamName(Team teamName) {
         this.teamName = teamName;
-        return this;
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", firstName='" + firstName + '\'' +
-                ", surname='" + surname + '\'' +
-                ", hireDate='" + hireDate + '\'' +
-                ", holidayEntitlement=" + holidayEntitlement +
-                ", additionalEntitlement=" + additionalEntitlement +
-                ", teamName=" + teamName.toString() +
-                '}' + "\n";
+        return  "Id. " + employeeId +
+                ", " + firstName + " " + surname  +
+                ", team: " + teamName.getTeamName() +
+                ", hire date: " + hireDate +
+                ", holiday entitlement: " + holidayEntitlement +
+                ", additional entitlement: " + additionalEntitlement +
+                "\n";
     }
+
 }

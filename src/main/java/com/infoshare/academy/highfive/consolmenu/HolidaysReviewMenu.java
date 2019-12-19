@@ -1,14 +1,13 @@
-package com.infoshare.academy.highfive.consolemenu;
+package com.infoshare.academy.highfive.consolmenu;
 
+import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-import static com.infoshare.academy.highfive.tool.TerminalCleaner.cleanTerminal;
-
-public class HolidaysReviewMenu extends MainMenu {
+class HolidaysReviewMenu extends MainMenu {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public static void runSubmenu() throws Exception {
@@ -23,7 +22,9 @@ public class HolidaysReviewMenu extends MainMenu {
 
         TerminalCleaner.cleanTerminal();
 
-        menuOptions.add("HOLIDAYS REVIEW");
+        stdout.info(ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / " + HOLIDAYS_REVIEW_MENU_TITLE +" / \n" + ColorsSet.ANSI_RESET);
+
+        menuOptions.add(HOLIDAYS_REVIEW_MENU_TITLE);
         menuOptions.add("Display employee vacation");
         menuOptions.add("Display team vacations");
         menuOptions.add("Previous menu");
@@ -38,7 +39,7 @@ public class HolidaysReviewMenu extends MainMenu {
 
     @Override
     public int getUserChoice() throws Exception {
-        cleanTerminal();
+
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
         Scanner scanner = new Scanner(System.in);
@@ -49,13 +50,12 @@ public class HolidaysReviewMenu extends MainMenu {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         }
-        userChoice = Integer.parseInt(userChoiceString);
 
-        if (userChoice > menuOptions.size() - 1 || userChoice == 0) {
+        if (Integer.parseInt(userChoiceString)> menuOptions.size() - 1 || Integer.parseInt(userChoiceString)== 0) {
             stdout.info("Wrong input - try again\n");
             getUserChoice();
         } else {
-            switch (userChoice) {
+            switch (Integer.parseInt(userChoiceString)) {
                 case 1:
                     stdout.info("\nDisplay employee vacation - UNDER CONSTRUCTION\n\n");
                     break;
@@ -66,6 +66,6 @@ public class HolidaysReviewMenu extends MainMenu {
                     MainMenu.runMenu();
             }
         }
-        return userChoice;
+        return Integer.parseInt(userChoiceString);
     }
 }
