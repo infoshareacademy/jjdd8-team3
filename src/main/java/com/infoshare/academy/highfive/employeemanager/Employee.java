@@ -56,7 +56,7 @@ public class Employee {
         return this;
     }
 
-    String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -65,7 +65,7 @@ public class Employee {
         return this;
     }
 
-    String getSurname() {
+    public String getSurname() {
         return surname;
     }
 

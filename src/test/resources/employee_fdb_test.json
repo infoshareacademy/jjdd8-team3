@@ -1,0 +1,40 @@
+{
+  "employees": [
+    {
+      "employee_id": 1,
+      "first_name": "Amya",
+      "surname": "D",
+      "hire_date": "2019-11-19",
+      "holiday_entitlement": 21,
+      "additional_entitlement": 2,
+      "team": {
+        "team_id": 1,
+        "team_name": "Developers"
+      }
+    },
+    {
+      "employee_id": 2,
+      "first_name": "Nylah",
+      "surname": "A",
+      "hire_date": "2010-01-02",
+      "holiday_entitlement": 26,
+      "additional_entitlement": 2,
+      "team": {
+        "team_id": 1,
+        "team_name": "Developers"
+      }
+    },
+    {
+      "employee_id": 3,
+      "first_name": "Itzel",
+      "surname": "Z",
+      "hire_date": "2018-11-19",
+      "holiday_entitlement": 21,
+      "additional_entitlement": null,
+      "team": {
+        "team_id": 2,
+        "team_name": "HR"
+      }
+    }
+  ]
+}

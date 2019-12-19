@@ -1,9 +1,10 @@
 package com.infoshare.academy.highfive.view;
 
+
+import com.infoshare.academy.highfive.ConfigurationLoader;
 import com.infoshare.academy.highfive.holiday.Holiday;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class HolidayDateView {
 
@@ -18,7 +19,7 @@ public class HolidayDateView {
     }
 
     public String getDateIso() {
-        return date.format(DateTimeFormatter.ISO_DATE);
+        return date.format(ConfigurationLoader.getDateFormatter());
     }
 
     public int getDayInWeek() {
