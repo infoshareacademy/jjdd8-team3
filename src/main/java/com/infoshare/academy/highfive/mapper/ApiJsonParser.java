@@ -72,7 +72,7 @@ public class ApiJsonParser {
     public void saveEmployeesDb(String fileName, Map<String, Object> employeeDb) {
         try {
             objectMapper.writer().withRootName("employees_fdb").writeValue(new File(fileName), employeeDb);
-            stdout.info("Saved!\n");
+            stdout.info("Employee Database Saved!\n");
         } catch (IOException e) {
             stdout.info("There is a little problem with file Saving Employees DB!\n", e);
         }

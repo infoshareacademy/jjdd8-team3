@@ -30,7 +30,7 @@ public class EmployeeManagementSingleton {
         employeeList = apiJsonParser.parseEmployeeFile(fileName);
     }
 
-    void saveEmployeesDb(String filename) {
+    public void saveEmployeesDb(String filename) {
         Map<String, Object> mapLists = new TreeMap<>();
         mapLists.put("employees", employeeList);
         mapLists.put("teams", teamList);

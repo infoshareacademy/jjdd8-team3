@@ -47,7 +47,7 @@ public class Employee {
     }
 
 
-    Integer getEmployeeId() {
+    public Integer getEmployeeId() {
         return employeeId;
     }
 
@@ -105,7 +105,7 @@ public class Employee {
         return this;
     }
 
-    Team getTeamName() {
+    public Team getTeamName() {
         return teamName;
     }
 

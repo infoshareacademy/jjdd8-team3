@@ -1,6 +1,9 @@
 package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
+import com.infoshare.academy.highfive.vacation.VacationPlanner;
+import com.infoshare.academy.highfive.vacation.VacationRemoval;
+import com.infoshare.academy.highfive.vacation.VacationSingleton;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
@@ -19,7 +22,7 @@ class HolidaysPlanningMenu extends MainMenu {
     }
 
     @Override
-    void menuOptionsDisplay() {
+    public void menuOptionsDisplay() {
 
         TerminalCleaner.cleanTerminal();
 
@@ -42,7 +45,7 @@ class HolidaysPlanningMenu extends MainMenu {
     }
 
     @Override
-    int getUserChoice() throws Exception {
+    public int getUserChoice() throws Exception {
 
         boolean matchedToPattern;
         stdout.info("\n" + "Choose option from 1 to " + (menuOptions.size() - 1) + "\n");
@@ -67,10 +70,13 @@ class HolidaysPlanningMenu extends MainMenu {
                     HolidaysFilter.searchByName();
                     break;
                 case 3:
-                    stdout.info("\nAdd vacation- UNDER CONSTRUCTION\n\n");
+                    VacationPlanner vacationPlanner = new VacationPlanner();
+                    vacationPlanner.chooseVacationType();
                     break;
                 case 4:
-                    stdout.info("\nCancel vacation - UNDER CONSTRUCTION\n\n");
+                    VacationRemoval vacationRemoval = new VacationRemoval();
+                    vacationRemoval.chooseVacationType();
+
                     break;
                 default:
                     MainMenu.runMenu();
