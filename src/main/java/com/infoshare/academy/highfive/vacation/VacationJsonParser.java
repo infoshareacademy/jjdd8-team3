@@ -20,7 +20,7 @@ import java.util.Map;
 public class VacationJsonParser {
 
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-    private static final String VACATION = "vacation";
+    private static final String VACATION = "Vacation";
     private ObjectMapper objectMapper;
 
     public VacationJsonParser() {
@@ -36,7 +36,7 @@ public class VacationJsonParser {
     private List<Vacation> parseJson(JsonNode jsonNodeBase) {
         Vacation[] vacationImport = {};
         try {
-            JsonNode jsonData = jsonNodeBase.findPath(VACATION);
+            JsonNode jsonData = jsonNodeBase.findPath("vacations");
             vacationImport = objectMapper.treeToValue(jsonData, Vacation[].class);
             stdout.info(ColorsSet.ANSI_CYAN + "\nVacation from JSON imported!\nDatabase ready to use!" + ColorsSet.ANSI_RESET + "\n");
         } catch (JsonProcessingException e) {

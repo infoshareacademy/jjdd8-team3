@@ -48,10 +48,10 @@ public class VacationRemoval extends VacationPlanner{
 
         stdout.info("\n" + "Please follow instructions to cancel employee vacation \n");
 
-        String[] employeeName = getEmployeeName();
-        String firstName = employeeName[0];
-        String secondName = employeeName[1];
-        String employeeId = getEmployeeIdByScannerInput(firstName, secondName);
+        String nameToSearch = getEmployeeName();
+//        String firstName = employeeName[0];
+//        String secondName = employeeName[1];
+        String employeeId = getEmployeeIdByScannerInput(nameToSearch);
         String entitlement = entitledParentalDaysOff(employeeId);
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
@@ -67,10 +67,10 @@ public class VacationRemoval extends VacationPlanner{
 
         stdout.info("\n" + "Please follow instructions to add employee vacation \n");
 
-        String[] employeeName = getEmployeeName();
-        String firstName = employeeName[0];
-        String secondName = employeeName[1];
-        String employeeId = getEmployeeIdByScannerInput(firstName, secondName);
+        String nameToSearch = getEmployeeName();
+//        String firstName = employeeName[0];
+//        String secondName = employeeName[1];
+        String employeeId = getEmployeeIdByScannerInput(nameToSearch);
         String entitlement = entitledVacationDaysOff(employeeId);
         String dateFrom = getDateFrom();
         String dateTo = getDateTo();
@@ -88,7 +88,6 @@ public class VacationRemoval extends VacationPlanner{
         vacationList.remove(vacation);
         saveVacationDb();
 
-        //FIXME overwriting file, add remove vacation
     }
 
     private void increaseParentalEntitlement(String employeeId, Integer daysOff, String entitlement) throws Exception {
