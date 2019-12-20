@@ -34,10 +34,11 @@ public class ConfigurationLoader {
 
     private static Properties initProperties() {
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream("config.properties")) {
+        String configFilePath = "config.properties";
+        try (InputStream input = new FileInputStream(configFilePath)) {
             prop.load(input);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            stdout.info(ex.getMessage());
         }
         return prop;
     }
