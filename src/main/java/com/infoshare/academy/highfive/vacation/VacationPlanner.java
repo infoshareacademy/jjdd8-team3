@@ -28,8 +28,8 @@ public class VacationPlanner {
     private List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
     private static final List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private List<Holiday> holidaySingletonList = HolidaysSingleton.getInstance().getAllHolidays();
-    private static boolean matchedToPattern = false;
-    private static final String numberPattern = "[0-9]{1,2}";
+    static boolean matchedToPattern = false;
+    static final String numberPattern = "[0-9]{1,2}";
     private String datePattern = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
 
     public void chooseVacationType() throws Exception {
@@ -161,7 +161,7 @@ public class VacationPlanner {
         saveVacationDb();
     }
 
-    String getEmployeeName() throws Exception {
+    static String getEmployeeName() throws Exception {
 
         stdout.info("\n" + "Please type employee name or 0 to exit to Main Menu: \n");
         Scanner scanner = new Scanner(System.in);

@@ -2,6 +2,7 @@ package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
+import com.infoshare.academy.highfive.vacation.VacationReview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,10 +58,10 @@ class HolidaysReviewMenu extends MainMenu {
         } else {
             switch (Integer.parseInt(userChoiceString)) {
                 case 1:
-                    stdout.info("\nDisplay employee vacation - UNDER CONSTRUCTION\n\n");
+                    VacationReview.displayEmployeeVacation();
                     break;
                 case 2:
-                    stdout.info("\nDisplay team vacations - UNDER CONSTRUCTION\n\n");
+                    VacationReview.displayTeamVacation();
                     break;
                 default:
                     MainMenu.runMenu();
