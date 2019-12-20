@@ -1,7 +1,9 @@
 package com.infoshare.academy.highfive.consolmenu;
 
+import com.infoshare.academy.highfive.tool.CalendarDisplay;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
+import com.infoshare.academy.highfive.vacation.VacationReview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +59,15 @@ class HolidaysReviewMenu extends MainMenu {
         } else {
             switch (Integer.parseInt(userChoiceString)) {
                 case 1:
-                    stdout.info("\nDisplay employee vacation - UNDER CONSTRUCTION\n\n");
+                  // EmployeeManager.listAllEmployees();
+                    stdout.info("Enter id: ");
+                    CalendarDisplay.printMothsCalendar(VacationReview.getIdByName());
+                    stdout.info("Type [1] to search again or something else to exit: ");
+
+                   String inputTxt = scanner.nextLine();
+                    if (inputTxt.length() == 1 && inputTxt.equals("1")) {
+
+                    }
                     break;
                 case 2:
                     stdout.info("\nDisplay team vacations - UNDER CONSTRUCTION\n\n");

@@ -21,12 +21,9 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class CalendarDisplay {
     private static final Logger stdout = LoggerFactory.getLogger("CONSOLE_OUT");
-/*    private static final String FILE_NAME = "Holidays.json";
-    public static final String FILE_NAME_FOR_EMPLOYEE = "employee_fdb.json";
-    private static final String VACATION_FILENAME = "Vacation.json";*/
 
 
-    private static void printMothsCalendar(Integer employeeId) {
+    public static void printMothsCalendar(Integer employeeId) {
         List<Vacation> vacationList = VacationSingleton.getInstance().getVacationList();
 
         List<LocalDate> vacationDays = new ArrayList<>();
@@ -87,15 +84,5 @@ public class CalendarDisplay {
         stdout.info("\n");
     }
 
-
-/*    public static void main(String[] args) throws IOException {
-
-        HolidaysSingleton.getInstance().initFromFile(FILE_NAME);
-        EmployeeManagementSingleton.getInstance().initEmployeesDb(FILE_NAME_FOR_EMPLOYEE);
-        VacationSingleton.getInstance().initFromFile(VACATION_FILENAME);
-        VacationSingleton.getInstance().getVacationList();
-        printMothsCalendar(1);
-
-    }*/
 }
 

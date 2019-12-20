@@ -161,7 +161,7 @@ public class VacationPlanner {
         saveVacationDb();
     }
 
-    String getEmployeeName() throws Exception {
+    public static String getEmployeeName() throws Exception {
 
         stdout.info("\n" + "Please type employee name or 0 to exit to Main Menu: \n");
         Scanner scanner = new Scanner(System.in);
