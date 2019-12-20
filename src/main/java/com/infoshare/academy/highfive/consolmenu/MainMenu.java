@@ -1,7 +1,6 @@
 package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.tool.ColorsSet;
-import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +32,7 @@ public class MainMenu {
 
     public void menuOptionsDisplay() {
 
-        TerminalCleaner.cleanTerminal();
+       // TerminalCleaner.cleanTerminal();
 
         stdout.info("\n" + ColorsSet.ANSI_YELLOW + ">>>>> " + MAIN_MENU_TITLE + " / \n" + ColorsSet.ANSI_RESET);
 
