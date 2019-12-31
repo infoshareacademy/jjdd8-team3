@@ -59,7 +59,7 @@ public class EmployeeManager {
 
     private static String displayTeamSelect(Scanner scanner) {
         String teamIdx;
-        teamList.forEach(l -> stdout.info(teamList.indexOf(l) + ". " + l.getTeamName() + " | "));
+        teamList.forEach(l -> stdout.info(teamList.indexOf(l) + " " + l.getTeamName() + " | "));
         stdout.info("\n<<<\nSelect team: ");
         teamIdx = scanner.nextLine();
         if (teamIdx.matches(NUMBER_PATTERN) && Integer.parseInt(teamIdx) < teamList.size()) {
@@ -144,7 +144,7 @@ public class EmployeeManager {
         String teamIdx;
         do {
             stdout.info("Available Teams for Employee >>>\n");
-            teamList.forEach(l -> stdout.info(teamList.indexOf(l) + ". " + l.getTeamName() + " | "));
+            teamList.forEach(l -> stdout.info(teamList.indexOf(l) + " " + l.getTeamName() + " | "));
             stdout.info("\n<<<\nSelect team: ");
             teamIdx = scanner.nextLine();
             matchedToPattern = teamIdx.matches(NUMBER_PATTERN);
@@ -167,7 +167,7 @@ public class EmployeeManager {
         } while (nameToSearch.length() == 0);
 
         List<Employee> employeeListToAction = findEmployeeByFullName(nameToSearch);
-        employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + ". " + l.getFirstName() + " " + l.getSurname() + ", actual team: " + l.getTeamName().getTeamName() + "\n"));
+        employeeListToAction.forEach(l -> stdout.info("No " + employeeListToAction.indexOf(l) + " " + l.getFirstName() + " " + l.getSurname() + ", actual team: " + l.getTeamName().getTeamName() + "\n"));
         return employeeListToAction;
     }
 
