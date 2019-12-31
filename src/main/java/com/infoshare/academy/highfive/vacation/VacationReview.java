@@ -21,23 +21,24 @@ public class VacationReview {
     private static List<Employee> employeeList = EmployeeManagementSingleton.getInstance().getEmployeeList();
     private static List<Team> listOfTeams = EmployeeManagementSingleton.getInstance().getTeamList();
     private static List<Vacation> vacations = VacationSingleton.getInstance().getVacationList();
+    private static Integer oneEmployeesID;
 
-    public static void displayEmployeeVacation() throws Exception {
 
-        getIdByName();
-        displayVacations();
-    }
+//    public static void displayEmployeeVacation() throws Exception {
+//
+//       displayVacations(getIdByName());
+//    }
 
     public static void displayTeamVacation() throws Exception {
 
         getEmployeesIdsPerTeamByScannerInput(getTeamName());
-        displayVacations();
+        //2displayVacations();
     }
 
-    static List<Integer> getIdByName() throws Exception {
+    public static Integer getIdByName() throws Exception {
 
-       employeesID.add(Integer.parseInt(getEmployeeIdByScannerInput(getEmployeeName())));
-        return employeesID;
+        employeesID.add(Integer.parseInt(getEmployeeIdByScannerInput(getEmployeeName())));
+        return oneEmployeesID = (Integer) (employeesID.get(0));
     }
 
     private static String getTeamName() throws Exception {
@@ -71,9 +72,9 @@ public class VacationReview {
             teamId = scanner.nextLine();
             matchedToPattern = teamId.matches(numberPattern);
 
-            if (teamId.matches(numberPattern) && (Integer.parseInt(teamId) < listOfTeams.size()+1)) {
+            if (teamId.matches(numberPattern) && (Integer.parseInt(teamId) < listOfTeams.size() + 1)) {
                 matchedToPattern = true;
-            } else{
+            } else {
                 stdout.info(ColorsSet.ANSI_RED + "No such an ID in data base, please try again!\n" + ColorsSet.ANSI_RESET);
                 matchedToPattern = false;
             }
@@ -86,17 +87,38 @@ public class VacationReview {
 
     //TODO : Get vacation list for defined ID(s)
 
-    public static void displayVacations() {
+    //TODO: Zrobić listę pracowników Id do wyświetlania -
+    //TODO:
+    //TODO:
+    //TODO:
+    //TODO:
+    // TODO:
 
-//        listOfTeams.stream()
-//            .filter(team -> employeesID.contains(team.getTeamId()))
-//            .forEach(team -> stdout.info("TEAM: " + team.getTeamName() + " | id: " + team.getTeamId()));
-
-        employeeList.stream()
-                .filter(employee -> employeesID.contains(employee.getEmployeeId()))
-                .forEach(employee -> stdout.info(
-                        "TEAM: " + employee.getTeamName() + " |  NAME: "+ employee.getFirstName() + " " + employee.getSurname() + "VACATION: "
-                        + vacations.contains(employee.getEmployeeId())));
-    }
+//    public static void displayVacations(List employeesID) {
+//
+//        List<String> employeesToDisplay;
+//
+////        listOfTeams.stream()
+////            .filter(team -> employeesID.contains(team.getTeamId()))
+////            .forEach(team -> stdout.info("TEAM: " + team.getTeamName() + " | id: " + team.getTeamId()));
+//
+//        employeeList.stream()
+//                .filter(employee -> employeesID.contains(employee.getEmployeeId()))
+//                .forEach(employee -> stdout.info(
+//                        "\nTEAM: " + employee.getTeamName() + " |  NAME: "+ employee.getFirstName() + " " + employee.getSurname() + "VACATION: "
+//                        +   )  );
+//
+//        vacations.stream()
+//                .filter(v->v.getEmployeeId().equals(employeesID))
+//                .forEach(va->va.getDateFrom()+va.getDateTo()))
+//
+//    }
+//
+//    public void dispVac (List employeesID) {
+//
+//        employeeList.stream()
+//                .filter(employee -> employeesID.contains(employee.getEmployeeId()))
+//                .forEach(employee -> vacations.contains(employee.getEmployeeId()));}
 
 }
+

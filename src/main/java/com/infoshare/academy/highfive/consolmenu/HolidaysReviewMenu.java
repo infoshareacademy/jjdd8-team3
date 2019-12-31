@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.consolmenu;
 
+import com.infoshare.academy.highfive.tool.CalendarDisplay;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
 import com.infoshare.academy.highfive.vacation.VacationReview;
@@ -58,7 +59,7 @@ class HolidaysReviewMenu extends MainMenu {
         } else {
             switch (Integer.parseInt(userChoiceString)) {
                 case 1:
-                    VacationReview.displayEmployeeVacation();
+                    CalendarDisplay.printMothsCalendar(VacationReview.getIdByName());
                     break;
                 case 2:
                     VacationReview.displayTeamVacation();
