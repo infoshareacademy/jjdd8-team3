@@ -8,7 +8,26 @@
         "hire_date": "2019-11-19",
         "holiday_entitlement": 21,
         "additional_entitlement": 2,
-        "team_id": 1
+        "login": "login",
+        "password": "password",
+        "email": "jan@kowalski.pl",
+        "position": "CEO",
+        "team_id": 1,
+        "role_id": 1
+      }
+    ],
+    "roles": [
+      {
+        "role_id": 1,
+        "role": "Admin"
+      },
+      {
+        "role_id": 2,
+        "role": "Manager"
+      },
+      {
+        "role_id": 3,
+        "role": "User"
       }
     ],
     "teams": [
@@ -69,6 +88,38 @@
       {
         "type": "sort type",
         "value": "ASC"
+      }
+    ],
+    "holidays": [
+      {
+        "name": "New Year's Day",
+        "description": "New Year’s Day, on January 1, is the first day of the year and a public holiday in Poland.",
+        "date": {
+          "date": 1546300800000,
+          "year": 2019,
+          "month": 1,
+          "day": 1,
+          "iso": "2019-01-01",
+          "dayInYear": 1
+        },
+        "types": [
+          "National holiday"
+        ]
+      },
+      {
+        "name": "Extra day",
+        "description": "Extra free day for all employees",
+        "date": {
+          "date": 1546300800000,
+          "year": 2019,
+          "month": 1,
+          "day": 1,
+          "iso": "2019-01-01",
+          "dayInYear": 1
+        },
+        "types": [
+          "Extra holiday"
+        ]
       }
     ]
   }
