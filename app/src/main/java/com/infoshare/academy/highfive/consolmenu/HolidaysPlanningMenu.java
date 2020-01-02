@@ -1,11 +1,10 @@
 package com.infoshare.academy.highfive.consolmenu;
 
 import com.infoshare.academy.highfive.holiday.HolidaysFilter;
-import com.infoshare.academy.highfive.vacation.VacationPlanner;
-import com.infoshare.academy.highfive.vacation.VacationRemoval;
-import com.infoshare.academy.highfive.vacation.VacationSingleton;
 import com.infoshare.academy.highfive.tool.ColorsSet;
 import com.infoshare.academy.highfive.tool.TerminalCleaner;
+import com.infoshare.academy.highfive.vacation.VacationPlanner;
+import com.infoshare.academy.highfive.vacation.VacationRemoval;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

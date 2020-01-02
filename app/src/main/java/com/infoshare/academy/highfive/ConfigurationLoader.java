@@ -20,13 +20,13 @@ public class ConfigurationLoader {
 
     private static final Comparator<Employee> COMPARATOR_DESC = (left, right) -> {
         int compareResult = left.getSurname().compareTo(right.getSurname());
-        return (-1)*(compareResult != 0 ? compareResult : left.getFirstName().compareTo(right.getFirstName()));
+        return (-1) * (compareResult != 0 ? compareResult : left.getFirstName().compareTo(right.getFirstName()));
     };
 
     private static Properties properties = null;
 
-    private static Properties getProperties(){
-        if (properties == null){
+    private static Properties getProperties() {
+        if (properties == null) {
             properties = initProperties();
         }
         return properties;
@@ -37,17 +37,17 @@ public class ConfigurationLoader {
         try (InputStream input = new FileInputStream("config.properties")) {
             prop.load(input);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            stdout.info(ex.getMessage());
         }
         return prop;
     }
 
-    public static DateTimeFormatter getDateFormatter(){
+    public static DateTimeFormatter getDateFormatter() {
         String dateFormat = getProperties().getProperty("dateFormat");
         return dateFormat == null ? DateTimeFormatter.ISO_DATE : DateTimeFormatter.ofPattern(dateFormat);
     }
 
-    public static Comparator<Employee> getComparator(){
+    public static Comparator<Employee> getComparator() {
         String sortType = getProperties().getProperty("sortType");
         stdout.debug("sortType={}", sortType);
         return "ASC".equals(sortType) ? COMPARATOR_ASC : COMPARATOR_DESC;
