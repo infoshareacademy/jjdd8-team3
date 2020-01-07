@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <File name="logFile" fileName="high-five.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n"/>
+        </File>
+
+        <Async name="asyncFile">
+            <AppenderRef ref="logFile"/>
+        </Async>
+
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="asyncFile" level="WARN"/>
+        </Root>
+    </Loggers>
+</Configuration>
