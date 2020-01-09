@@ -42,7 +42,6 @@ public class Employee {
 
     @JoinColumn(name = "team_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-//    @Column(name = "team_id", nullable = false)
     private Team teamId;
 
     @JoinColumn(name = "role_id", nullable = false)
