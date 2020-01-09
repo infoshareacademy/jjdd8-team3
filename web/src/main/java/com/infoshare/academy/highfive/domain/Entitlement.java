@@ -7,9 +7,6 @@ import java.time.LocalDate;
 @Table(name = "entitlement")
 public class Entitlement {
 
-    public int getId() {
-        return id;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +28,10 @@ public class Entitlement {
     @Column(name = "on_demand_holiday_left", nullable = false)
     private int onDemandHolidayLeft;
 
+
+    public int getId() {
+        return id;
+    }
 
     public LocalDate getCurrentDate() {
         return currentDate;
