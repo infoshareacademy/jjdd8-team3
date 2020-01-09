@@ -40,13 +40,13 @@ public class Employee {
     @Column(name = "position")
     private String position;
 
-    @JoinColumn
+    @JoinColumn(name = "team_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "team_id", nullable = false)
+//    @Column(name = "team_id", nullable = false)
     private Team teamId;
 
-    @JoinColumn
-    @Column(name = "role_id")
+    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Role roleId;
 
     Employee() {

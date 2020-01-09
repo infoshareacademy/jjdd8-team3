@@ -19,7 +19,6 @@ public class Team {
 
     @OneToMany(
             mappedBy = "teamId",
-            cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @OrderBy("surname asc")
