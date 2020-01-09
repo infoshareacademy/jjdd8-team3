@@ -1,16 +1,39 @@
 package com.infoshare.academy.highfive.domain;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-@Entity
-@Table(name = "holiday_type")
-public class HolidayType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+public enum HolidayType {
 
-    @Column(name="holiday_type", nullable = false)
-    private String holidayType;
+    @JsonProperty("National holiday")
+    NATIONAL_HOLIDAY("National holiday", true),
+
+    @JsonProperty("Observance")
+    OBSERVANCE("Observance", false),
+
+    @JsonProperty("Season")
+    SEASON("Season", false),
+
+    @JsonProperty("Custom")
+    CUSTOM("Custom",true);
+
+    @JsonValue
+    private final String type;
+
+    private final boolean free;
+
+    HolidayType(String type, boolean free) {
+        this.type = type;
+        this.free = free;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public boolean isFree() {
+        return free;
+    }
+
 }

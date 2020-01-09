@@ -45,8 +45,8 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     private Team teamId;
 
-    @JoinColumn(name = "role_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    @Column(name="role_id")
     private Role roleId;
 
     Employee() {
