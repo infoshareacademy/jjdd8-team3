@@ -13,8 +13,8 @@ public class Entitlement {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "current_date", nullable = false)
-    private LocalDate currentDate;
+    @Column(name = "current_year", nullable = false)
+    private LocalDate currentYear;
 
     @Column(name = "previous_year_left", nullable = false)
     private int previousYearLeft;
@@ -34,11 +34,11 @@ public class Entitlement {
     }
 
     public LocalDate getCurrentDate() {
-        return currentDate;
+        return currentYear;
     }
 
     public void setCurrentDate(LocalDate currentDate) {
-        this.currentDate = currentDate;
+        this.currentYear = currentDate;
     }
 
     public int getPreviousYearLeft() {

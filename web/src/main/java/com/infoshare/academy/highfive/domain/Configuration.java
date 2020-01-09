@@ -15,7 +15,7 @@ public class Configuration {
     private String type;
 
     @Column(name = "value", nullable = false)
-    private int value;
+    private String value;
 
     public int getId() {
         return id;
@@ -29,11 +29,11 @@ public class Configuration {
         this.type = type;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }

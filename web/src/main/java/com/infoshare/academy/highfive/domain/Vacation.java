@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,14 +18,16 @@ public class Vacation {
     private Employee employeeId;
 
     @Column (name = "from_date", nullable = false)
-    private Date vacationFrom;
+    private LocalDate vacationFrom;
 
     @Column (name = "to_date", nullable = false)
-    private Date vacationTo;
+    private LocalDate vacationTo;
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "vacation_type")
     private VacationType vacationType;
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "vacation_status")
     private VacationStatus vacationStatus;
 
@@ -34,13 +37,13 @@ public class Vacation {
 
     public void setEmployeeId(Employee employeeId) { this.employeeId = employeeId; }
 
-    public Date getVacationFrom() { return vacationFrom; }
+    public LocalDate getVacationFrom() { return vacationFrom; }
 
-    public void setVacationFrom(Date vacationFrom) { this.vacationFrom = vacationFrom;}
+    public void setVacationFrom(LocalDate vacationFrom) { this.vacationFrom = vacationFrom;}
 
-    public Date getVacationTo() { return vacationTo; }
+    public LocalDate getVacationTo() { return vacationTo; }
 
-    public void setVacationTo(Date vacationTo) { this.vacationTo = vacationTo; }
+    public void setVacationTo(LocalDate vacationTo) { this.vacationTo = vacationTo; }
 
     public VacationType getVacationType() { return vacationType; }
 
