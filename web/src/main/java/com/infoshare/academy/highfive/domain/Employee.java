@@ -3,7 +3,6 @@ package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "employee")
@@ -46,7 +45,7 @@ public class Employee {
     private Team teamId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="role_id")
+    @Column(name = "role_id")
     private Role roleId;
 
     Employee() {

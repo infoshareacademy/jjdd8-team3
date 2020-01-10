@@ -1,8 +1,6 @@
 package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,14 +12,14 @@ public class Team {
     @Column(name = "id")
     private int id;
 
-    @Column(name="team_name", nullable = false)
+    @Column(name = "team_name", nullable = false)
     private String teamName;
 
     @OneToMany(
             mappedBy = "teamId",
             orphanRemoval = true
     )
-    @OrderBy("surname asc")
+
     private Set<Employee> teamEmployeeList;
 
     public int getId() {
