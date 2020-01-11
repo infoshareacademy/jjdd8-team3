@@ -1,0 +1,27 @@
+
+#### Create docker with mysql instance (name of instance mysql-hfv) and Start mysql ######
+docker run -p 0.0.0.0:3306:3306 --name mysql-hfv -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=hfvdb -d mysql
+
+
+#### Connecting to mysql to database hfvdb with terminal (CLI) ######
+mysql -h mysql -uroot -proot -D hfvdb
+
+####helpers commands#####
+# show all deployed dockers instances
+docker ps -a
+
+# Start/Stop mysql-hfv instance
+docker stop/start mysql-hfv
+
+#remove docker mysql-hfv instance with force
+docker rm mysql-hfv -f
+
+### MYSQL DML ####
+SHOW SCHEMAS; SHOW DATABASES;
+
+# Create db;
+CREATE hfvdb;
+#Change DB
+USE hfvdb;
+Show tables;
+
