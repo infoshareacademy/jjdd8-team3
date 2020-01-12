@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%d - %-5level ] %msg%n"/>
+    </Console>
+    <File name="logFile" fileName="/var/tmp/high-five.log">
+      <PatternLayout pattern="%d [%t] %-5level - %msg%n"/>
+    </File>
+
+    <Async name="asyncFile">
+      <AppenderRef ref="logFile"/>
+    </Async>
+
+  </Appenders>
+  <Loggers>
+    <Root level="ALL">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="asyncFile" level="WARN"/>
+    </Root>
+  </Loggers>
+</Configuration>

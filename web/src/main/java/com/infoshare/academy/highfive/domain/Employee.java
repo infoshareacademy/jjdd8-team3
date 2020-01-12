@@ -31,9 +31,6 @@ public class Employee {
     @Column(name = "login")
     private String login;
 
-    @Column(name = "password")
-    private String password;
-
     @Column(name = "email", nullable = false)
     private String email;
 
