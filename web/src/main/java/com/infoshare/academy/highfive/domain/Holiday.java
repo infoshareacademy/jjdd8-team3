@@ -1,10 +1,19 @@
 package com.infoshare.academy.highfive.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infoshare.academy.highfive.parser.CustomHolidayDeserializer;
+import com.infoshare.academy.highfive.tool.CustomHolidayDateDeserializer;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NamedQueries(
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday")
+)
+
 @Entity
 @Table(name = "holiday")
+@JsonDeserialize(using = CustomHolidayDeserializer.class)
 public class Holiday {
 
     @Id
@@ -35,6 +44,16 @@ public class Holiday {
     private HolidayType holidayType;
 
     public Holiday() {
+    }
+
+    public Holiday(String name, String description, LocalDate date, int year, int month, int day, HolidayType holidayType){
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.holidayType = holidayType;
     }
 
     public int getId() {
