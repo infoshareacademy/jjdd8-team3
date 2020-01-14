@@ -2,6 +2,7 @@ package com.infoshare.academy.highfive.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -25,6 +26,7 @@ public class Employee {
     @Column(name = "holiday_entitlement", nullable = false)
     private int holidayEntitlement;
 
+    @NotNull
     @Column(name = "additional_entitlement")
     private int additionalEntitlement;
 

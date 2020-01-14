@@ -64,7 +64,7 @@
             </a>
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="holiday_search.html">Holiday search</a>
+                    <a class="collapse-item" href="holiday-search.html">Holiday search</a>
                     <a class="collapse-item" href="blank.html">Employee vacation</a>
                     <a class="collapse-item" href="blank.html">Team vacation</a>
                 </div>
@@ -267,52 +267,41 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Holiday search</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Define new team</h1>
                     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                 </div>
 
-                <!-- Content Row -->
-                <div class="row">
+                <div class="row justify-content-center">
 
-                    <!-- Current total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Search by Name</div>
-                                        <input type="text" name="name">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Please enter a minimum of 3 letters.</div>
+                    <div class="col-xl-10 col-lg-12 col-md-9">
+
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Define new team</h1>
+                                            </div>
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <input type="team_name" class="form-control form-control-user"
+                                                           id="exampleInputTeamName" placeholder="Enter New Team Name">
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
+<!--                                    TODO-->
+<!--                                    Fit image size and content !!! -->
+                                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Next total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Search by Date</div>
-                                        <input type="date" name="date">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            Please enter the date of the holiday you are looking for.</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
-
             </div>
             <!-- /.container-fluid -->
 
