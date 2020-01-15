@@ -44,7 +44,7 @@ public class Employee {
     private Team teamId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_id")
+    @Column(name = "role")
     private Role roleId;
 
     Employee() {
