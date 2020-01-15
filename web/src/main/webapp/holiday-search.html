@@ -271,44 +271,60 @@
                     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                 </div>
 
-                <!-- Content Row -->
-                <div class="row">
+                <div class="row justify-content-center">
 
-                    <!-- Current total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Search by Name</div>
-                                        <input type="text" name="name">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Please enter a minimum of 3 letters.</div>
+                    <div class="col-xl-10 col-lg-12 col-md-9">
+
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Search by Name</h1>
+                                            </div>
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <input type="holiday_name" class="form-control form-control-user"
+                                                           id="exampleInputHolidayName" placeholder="Please enter a minimum of 3 letters...">
+                                                    <div class="text-center">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">
+                                                        Search
+                                                    </a>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    <div class="col-lg-3">
+                                        <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Search by Date</h1>
+                                        </div>
+                                        <form class="user">
+                                            <div class="form-group">
+                                                <input type="date" name="date" class="form-control form-control-user"
+                                                       id="exampleInputHolidayDate" min="2020-01-01" max="2050-12-31">
+                                            </div>
+                                            <div class="form-group">
+                                                <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">
+                                                    Search
+                                                </a>
+                                            </div>
+                                        </form>
+                                        </div>
                                     </div>
+                                    <!--TODO-->
+                                    <!--Fit image size and content !!! -->
+                                    <div class="col-lg-3 d-none d-lg-block bg-login-image"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Next total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Search by Date</div>
-                                        <input type="date" name="date">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            Please enter the date of the holiday you are looking for.</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
