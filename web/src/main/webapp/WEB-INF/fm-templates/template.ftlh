@@ -18,7 +18,7 @@
     <#if title??>
         <title>${title!}</title>
     <#else>
-        <title>VACATION MANAGER</title>
+        <title>Vacation Manager</title>
     </#if>
 
     <!-- Custom fonts for this template-->
@@ -277,6 +277,10 @@
             </nav>
             <!-- End of Topbar -->
 
+<#--            NASZ SORDEK-->
+
+
+<#--            KONIEC-->
             <!-- Template injection -->
 
           <#include "/${contentTemplate}">
