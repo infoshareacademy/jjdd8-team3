@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Singleton
-@Startup
+//@Startup
 public class StartupBean {
     @EJB
     private HolidayService holidayService;
