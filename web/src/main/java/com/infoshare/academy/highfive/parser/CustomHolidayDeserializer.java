@@ -31,11 +31,16 @@ public class CustomHolidayDeserializer extends StdDeserializer<Holiday> {
 
         String description = node.get("description").asText();
 
+        if (description.equals("null")) {
+
+            description = null;
+        }
+
         String isoDate = node.get("date").findValue("iso").asText();
 
         LocalDate date = LocalDate.parse(isoDate.substring(0, 10), DateTimeFormatter.ISO_DATE);
 
-        int year =  date.getYear();
+        int year = date.getYear();
         int month = date.getMonthValue();
         int day = date.getDayOfMonth();
         String array = node.get("type").get(0).asText();
@@ -53,6 +58,8 @@ public class CustomHolidayDeserializer extends StdDeserializer<Holiday> {
                 break;
         }
 
-        return new Holiday(name,description,date,year,month,day,holidayType);
+        return new
+
+                Holiday(name, description, date, year, month, day, holidayType);
     }
 }

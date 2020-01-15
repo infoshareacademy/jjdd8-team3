@@ -2,7 +2,6 @@ package com.infoshare.academy.highfive.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.infoshare.academy.highfive.parser.CustomHolidayDeserializer;
-import com.infoshare.academy.highfive.tool.CustomHolidayDateDeserializer;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,7 +23,7 @@ public class Holiday {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @Column(name = "date", nullable = false)
@@ -40,13 +39,13 @@ public class Holiday {
     private int day;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="holiday_type")
+    @Column(name = "holiday_type")
     private HolidayType holidayType;
 
     public Holiday() {
     }
 
-    public Holiday(String name, String description, LocalDate date, int year, int month, int day, HolidayType holidayType){
+    public Holiday(String name, String description, LocalDate date, int year, int month, int day, HolidayType holidayType) {
         this.name = name;
         this.description = description;
         this.date = date;

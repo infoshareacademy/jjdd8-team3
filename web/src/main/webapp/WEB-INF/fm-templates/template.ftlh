@@ -1,3 +1,10 @@
+<#--<#function hideNullFromDB x>
+    <#if x == "null">
+        <#return "">
+    <#else>
+        <#return x>
+    </#if>
+</#function>-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="HIGH-FIVE">
-
-    <title>VACATION MANAGER</title>
+    <#if title??>
+        <title>${title!}</title>
+    <#else>
+        <title>VACATION MANAGER</title>
+    </#if>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,8 +27,11 @@
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="/css/sb-admin-2.css" rel="stylesheet">
-
+    <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
+    <#if pluginCssTemplate??>
+    <#include "/${pluginCssTemplate}">
+    </#if>
 </head>
 
 <body id="page-top">
@@ -64,6 +77,7 @@
             </a>
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/blank.html">Holiday search</a>
                     <a class="collapse-item" href="/blank.html">Employee vacation</a>
                     <a class="collapse-item" href="/blank.html">Team vacation</a>
@@ -96,7 +110,7 @@
 
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="/blank.html">
+            <a class="nav-link" href="blank.html">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>
         </li>
@@ -169,6 +183,7 @@
                     <a class="collapse-item" href="/blank.html">Date format</a>
                     <a class="collapse-item" href="/blank.html">Sorting</a>
                     <a class="collapse-item" href="/blank.html">Holidays database</a>
+                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
                 </div>
             </div>
         </li>
@@ -262,111 +277,9 @@
             </nav>
             <!-- End of Topbar -->
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <!-- Template injection -->
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Template blank</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-
-                    <!-- Current total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Current
-                                            month total
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">17</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Next total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next
-                                            month total
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Today employee on vcacation Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Absent
-                                            today
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5</div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar"
-                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-user-tie fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending
-                                            Requests
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-hourglass-start fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
+          <#include "/${contentTemplate}">
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
@@ -409,18 +322,20 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
-<script src="/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>-->
-<script src="/js/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <#if pluginJsTemplate??>
+        <#include "/${pluginJsTemplate}">
+    </#if>
 </body>
 
 </html>

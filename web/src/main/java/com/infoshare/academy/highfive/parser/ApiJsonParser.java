@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,9 +38,10 @@ public class ApiJsonParser {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
     }
 
-    public List<Holiday> parseFromFile(String fileName) throws IOException {
+    public List<Holiday> parseFromFile(InputStream inputFromFile) throws IOException {
         logger.info("Uploading JSON DATA from local file;");
-        return parseJson(objectMapper.readTree(new File(fileName)));
+        //return parseJson(objectMapper.readTree(inputFromFile));
+        return parseJson(objectMapper.readTree(inputFromFile));
     }
 
     public List<Holiday> parseFromURL(String urlPath) throws IOException {

@@ -5,6 +5,7 @@ import com.infoshare.academy.highfive.domain.Holiday;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.List;
 
 @Stateless
 public class HolidayService {
@@ -16,8 +17,8 @@ public class HolidayService {
         holidayDao.saveHoliday(holiday);
     }
 
-    public void listAllHoliday(){
-        holidayDao.listAllHoliday();
+    public List listAllHoliday(){
+        return holidayDao.listAllHoliday();
     }
 
 }
