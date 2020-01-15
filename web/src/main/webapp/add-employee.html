@@ -64,7 +64,7 @@
             </a>
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="holiday-search.html">Holiday search</a>
+                    <a class="collapse-item" href="holiday-search-WORKING.html">Holiday search</a>
                     <a class="collapse-item" href="blank.html">Employee vacation</a>
                     <a class="collapse-item" href="blank.html">Team vacation</a>
                 </div>
@@ -286,50 +286,63 @@
                                             </div>
                                             <form class="user">
                                                 <div class="form-group">
+                                                    <label for="InputFirstName">first name</label>
                                                     <input type="text" class="form-control form-control-user"
-                                                           id="exampleInputFirstName" placeholder="First Name">
+                                                           id="InputFirstName" placeholder="Employee's first name">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="InputSurame">surname</label>
                                                     <input type="text" class="form-control form-control-user"
-                                                           id="exampleInputSurame" placeholder="Surname">
+                                                           id="InputSurame" placeholder="Employee's surname">
                                                 </div>
-                                                <label for="exampleInputEmail">e-mail</label>
+                                                <label for="InputEmail">e-mail</label>
                                                 <div class="form-group">
                                                     <input type="email" class="form-control form-control-user"
-                                                           id="exampleInputEmail" aria-describedby="emailHelp"
-                                                           placeholder="Email Address">
+                                                           id="InputEmail" aria-describedby="emailHelp"
+                                                           placeholder="Input e-mail address">
                                                 </div>
-<!--                                                TODO-->
-<!--                                                make it serializable-->
+                                                <label for="SelectTeam">team</label>
                                                 <div class="form-group">
-                                                    <input type="collect" class="form-control form-control-user"
-                                                           id="exampleInputTeamName" placeholder="Choose Employee's Team">
+<!--                                TODO-->
+<!--                                format-->
+                                                    <select class="form-group" id="SelectTeam">
+
+                                                        <option class="form-control form-control-user">High Five Team</option>
+                                                        <option class="form-control form-control-user">Four plus One</option>
+                                                        <option class="form-control form-control-user">LSA</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="InputPosition">position</label>
                                                     <input type="text" class="form-control form-control-user"
-                                                           id="exampleInputPosition" placeholder="Enter New Team Name">
+                                                           id="InputPosition" placeholder="Enter employee's position">
                                                 </div>
-<!--                                                TODO-->
-<!--                                                calendar field-->
+<!--                                TODO-->
+<!--                                calendar field-->
                                                 <div class="form-group">
+                                                    <label for="exampleInputHireDate">hire date</label>
                                                     <input type="date" class="form-control form-control-user"
-                                                           id="exampleInputHireDate" placeholder="Enter New Team Name">
+                                                           id="exampleInputHireDate" placeholder="Choose hire date from calendar">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="holiday_entitlement" class="form-control form-control-user"
-                                                           id="exampleInputHolidayEntitlement" placeholder="Holiday Entitlement">
+                                                    <label for="InputEntitlement">holiday entitlement</label>
+                                                    <input type="number" class="form-control form-control-user"
+                                                           id="InputEntitlement" placeholder="Input employee's entitlement">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="additional_entitlement" class="form-control form-control-user"
-                                                           id="exampleAdditionalEntitlement" placeholder="Parental Care Entitlement">
+                                                    <label for="exampleAdditionalEntitlement">parental care entitlement</label>
+                                                    <input type="number" class="form-control form-control-user"
+                                                           id="exampleAdditionalEntitlement" placeholder="Put number from 0 to 2 following employee's statement">
                                                 </div>
-<!--                                                TODO-->
-<!--                                                SAVE button-->
+                                                <hr>
+                                                <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                                    Save
+                                                </a>
                                             </form>
                                         </div>
                                     </div>
-<!--                                    TODO-->
-<!--                                    Fit image size and content !!! -->
+<!--                             TODO-->
+<!--                             Fit image size and content !!! -->
                                     <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                                 </div>
                             </div>
