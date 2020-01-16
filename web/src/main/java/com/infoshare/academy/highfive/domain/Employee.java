@@ -1,6 +1,8 @@
 package com.infoshare.academy.highfive.domain;
 
 
+import com.sun.xml.bind.v2.TODO;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -26,9 +28,10 @@ public class Employee {
     @Column(name = "holiday_entitlement", nullable = false)
     private int holidayEntitlement;
 
-    @NotNull
+//    TODO
+//    int changed to Integet, to get possibility of "null" value
     @Column(name = "additional_entitlement")
-    private int additionalEntitlement;
+    private Integer additionalEntitlement;
 
     @Column(name = "login")
     private String login;
