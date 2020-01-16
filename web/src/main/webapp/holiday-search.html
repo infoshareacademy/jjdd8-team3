@@ -285,6 +285,7 @@
                                                 <h1 class="h4 text-gray-900 mb-4">Search by Name</h1>
                                             </div>
                                             <form class="user">
+                                                <label for="exampleInputHolidayName">Please type holiday name here:</label>
                                                 <div class="form-group">
                                                     <input type="holiday_name" class="form-control form-control-user"
                                                            id="exampleInputHolidayName" placeholder="Please enter a minimum of 3 letters...">
@@ -306,9 +307,15 @@
                                             <h1 class="h4 text-gray-900 mb-4">Search by Date</h1>
                                         </div>
                                         <form class="user">
+                                            <label for="exampleInputHolidayDateFrom">from</label>
                                             <div class="form-group">
                                                 <input type="date" name="date" class="form-control form-control-user"
-                                                       id="exampleInputHolidayDate" min="2020-01-01" max="2050-12-31">
+                                                       id="exampleInputHolidayDateFrom" min="2020-01-01" max="2050-12-31">
+                                            </div>
+                                            <label for="exampleInputHolidayDateTo">to</label>
+                                            <div class="form-group">
+                                                <input type="date" name="date" class="form-control form-control-user"
+                                                       id="exampleInputHolidayDateTo" min="2020-01-01" max="2050-12-31">
                                             </div>
                                             <div class="form-group">
                                                 <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">
@@ -318,9 +325,10 @@
                                         </form>
                                         </div>
                                     </div>
-                                    <!--TODO-->
-                                    <!--Fit image size and content !!! -->
-                                    <div class="col-lg-3 d-none d-lg-block bg-login-image"></div>
+                                    <div class="col-lg-3 d-none d-lg-block">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                             src="/img/undraw_calendar_dutt.svg" alt="calendar">
+                                    </div>
                                 </div>
                             </div>
                         </div>

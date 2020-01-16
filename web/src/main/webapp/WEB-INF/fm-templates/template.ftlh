@@ -78,7 +78,7 @@
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
-                    <a class="collapse-item" href="/blank.html">Holiday search</a>
+                    <a class="collapse-item" href="/holiday-search.html">Holiday search</a>
                     <a class="collapse-item" href="/blank.html">Employee vacation</a>
                     <a class="collapse-item" href="/blank.html">Team vacation</a>
                 </div>
