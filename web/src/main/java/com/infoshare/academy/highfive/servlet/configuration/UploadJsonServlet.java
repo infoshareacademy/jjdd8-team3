@@ -1,10 +1,8 @@
 package com.infoshare.academy.highfive.servlet.configuration;
 
-import com.infoshare.academy.highfive.cdi.FileUploadProcessor;
-import com.infoshare.academy.highfive.domain.Holiday;
+import com.infoshare.academy.highfive.exception.JsonFileNotFound;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.parser.ApiJsonParser;
-import com.infoshare.academy.highfive.service.HolidayService;
+import com.infoshare.academy.highfive.service.configuration.UploadJsonService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -19,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +34,8 @@ public class UploadJsonServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    FileUploadProcessor fileUploadProcessor;
+    UploadJsonService uploadJsonService;
 
-    @Inject
-    HolidayService holidayService;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -53,10 +49,7 @@ public class UploadJsonServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "upload-json.ftlh");
         dataModel.put("title", "Upload JSON Holidays");
-//        dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-upload-json.ftlh");
-        // dataModel.put("holidays", holidayService.listAllHoliday());
-
 
         try {
             template.process(dataModel, writer);
@@ -71,24 +64,26 @@ public class UploadJsonServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Part fileName = req.getPart("file-name");
+        Paths.get(fileName.getSubmittedFileName()).getFileName().toString();
+        String realPath = getServletContext().getRealPath("/WEB-INF");
 
-        if (fileName == null || fileName.getSize() == 0) {
+        if (fileName.getSize() == 0) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        InputStream uploadedFile = null;
-        InputStream fileContent = fileName.getInputStream();
-//        try {
-//            uploadedFile = fileUploadProcessor.uploadJsonFile(fileName);
-//        } catch (JsonFileNotFound userImageNotFound) {
-//            logger.warn(userImageNotFound.getMessage());
-//        }
-        ApiJsonParser apiJsonParser = new ApiJsonParser();
-        List<Holiday> holidayList = apiJsonParser.parseFromFile(fileContent);
-        holidayList.forEach(holiday -> holidayService.saveHoliday(holiday));
+        List importedList = null;
+        try {
+            importedList = uploadJsonService.uploadJsonHoliday(fileName, realPath);
+        } catch (JsonFileNotFound jsonFileNotFound) {
+            jsonFileNotFound.printStackTrace();
+        }
 
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
         resp.setStatus(HttpServletResponse.SC_OK);
+        writer.println("File <b>" + Paths.get(fileName.getSubmittedFileName()).getFileName().toString() + "</b> uploaded with no errors!");
+        writer.println("<br />Total file size: " + (double) (fileName.getSize() / 1000) + "kB");
+        writer.println("<br />" + importedList.size() + " holidays added to database!");
+        writer.println("<br />" + getServletContext().getRealPath("/"));
     }
 }

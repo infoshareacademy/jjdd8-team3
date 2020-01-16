@@ -38,7 +38,7 @@ public class ApiJsonParser {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
     }
 
-    public List<Holiday> parseFromFile(InputStream inputFromFile) throws IOException {
+    public List<Holiday> parseFromFile(File inputFromFile) throws IOException {
         logger.info("Uploading JSON DATA from local file;");
         //return parseJson(objectMapper.readTree(inputFromFile));
         return parseJson(objectMapper.readTree(inputFromFile));

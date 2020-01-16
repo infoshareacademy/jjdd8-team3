@@ -2,12 +2,11 @@ package com.infoshare.academy.highfive.dao;
 
 import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.parser.ApiJsonParser;
-import com.infoshare.academy.highfive.service.HolidayService;
+import com.infoshare.academy.highfive.service.holiday.HolidayService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import java.io.IOException;
 import java.util.List;
 

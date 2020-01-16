@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.service;
+package com.infoshare.academy.highfive.service.holiday;
 
 import com.infoshare.academy.highfive.dao.HolidayDao;
 import com.infoshare.academy.highfive.domain.Holiday;
