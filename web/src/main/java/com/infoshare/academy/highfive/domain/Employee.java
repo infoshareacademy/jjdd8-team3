@@ -14,7 +14,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -26,7 +26,7 @@ public class Employee {
     private LocalDate hireDate;
 
     @Column(name = "holiday_entitlement", nullable = false)
-    private int holidayEntitlement;
+    private Integer holidayEntitlement;
 
 //    TODO
 //    int changed to Integet, to get possibility of "null" value
@@ -53,11 +53,11 @@ public class Employee {
     Employee() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
