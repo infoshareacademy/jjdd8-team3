@@ -1,7 +1,7 @@
 package com.infoshare.academy.highfive.servlet.holiday;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.service.HolidayService;
+import com.infoshare.academy.highfive.service.holiday.HolidayService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 

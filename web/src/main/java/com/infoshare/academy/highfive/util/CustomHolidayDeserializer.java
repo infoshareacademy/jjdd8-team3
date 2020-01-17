@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.parser;
+package com.infoshare.academy.highfive.util;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

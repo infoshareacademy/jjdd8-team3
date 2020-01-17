@@ -22,10 +22,10 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Upload holiday JSON file</h1>
                 </div>
-                <form name="upload-form" class="user" method="POST" enctype="multipart/form-data">
+                <form id="upload-form" name="upload-form" class="user" method="POST" enctype="multipart/form-data">
                   <div class="custom-file mb-3">
                     <input type="file" class="custom-file-input" id="file-name" name="file-name" accept=".json" required>
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label class="custom-file-label" for="file-name">Choose file</label>
                   </div>
                  <button type="submit" class="btn btn-primary"><span class="icon text-white-50">
                       <i class="fas fa-upload"></i>

@@ -12,36 +12,29 @@ import java.nio.file.Paths;
 
 @RequestScoped
 public class FileUploadProcessor {
-//    private String SETTINGS_FILE = "settings.properties";
-//    private String FILE_LINE = "Upload.Path.Images";
 
-//    public String getUploadImageFilesPath() throws IOException {
-//
-//        Properties settings = new Properties();
-//        settings.load(Thread.currentThread().getContextClassLoader().getResource(SETTINGS_FILE).openStream());
-//
-//        return settings.getProperty(FILE_LINE);
-//
-//    }
+    private String TEMP = "/tmp/hfv/";
 
+    public File uploadJsonFile(Part filePart) throws IOException, JsonFileNotFound {
 
-    public InputStream uploadJsonFile(Part filePart) throws IOException, JsonFileNotFound {
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
-        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        if (fileName == null || fileName.isEmpty()) {
+            throw new JsonFileNotFound("No JSON file found found!");
+        }
+        File uploadDir = new File(TEMP);
+        if (!uploadDir.exists()) uploadDir.mkdir();
 
-//        if (fileName == null || fileName.isEmpty()) {
-//            throw new JsonFileNotFound("No JSON found!");
-//        }
+        File file = new File( TEMP + fileName);
 
-//
+        Files.deleteIfExists(file.toPath());
 
         InputStream fileContent = filePart.getInputStream();
-        // old way and bytes an sonone OutputStream os = new FileOutputStream(file);
 
-        //Files.copy(fileContent, file.toPath());
+        Files.copy(fileContent, file.toPath());
 
         fileContent.close();
 
-        return fileContent;
+        return file;
     }
 }
