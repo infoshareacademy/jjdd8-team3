@@ -61,14 +61,4 @@ public class AddHolidayServlet extends HttpServlet {
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        Map asasasas = req.getParameterMap();
-
-
-        resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter writer = resp.getWriter();
-        resp.setStatus(HttpServletResponse.SC_OK);
-    }
 }

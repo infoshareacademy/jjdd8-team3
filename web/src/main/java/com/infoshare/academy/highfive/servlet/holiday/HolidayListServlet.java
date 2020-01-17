@@ -39,8 +39,7 @@ public class HolidayListServlet extends HttpServlet {
         dataModel.put("title", "List Holidays");
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
-        dataModel.put("holidays", holidayService.listAllHoliday());
-
+        dataModel.put("holidays", holidayService.listAllHolidayViews());
 
         try {
             template.process(dataModel, writer);

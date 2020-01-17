@@ -18,7 +18,7 @@ public class HolidayDao {
         em.persist(holiday);
     }
 
-    public List listAllHoliday() {
+    public List<Holiday> listAllHoliday() {
         return this.em
                 .createNamedQuery("Holiday.findAll")
                 .getResultList();

@@ -4,7 +4,6 @@ import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.exception.JsonFileNotFound;
 import com.infoshare.academy.highfive.service.configuration.UploadJsonService;
 import com.infoshare.academy.highfive.service.holiday.HolidayService;
-import mapper.holiday.HolidayJsonMapper;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -22,7 +21,7 @@ import java.util.Map;
 //import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 //import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
-@Path("/holiday-api")
+@Path("/holiday")
 public class HolidayApi {
 
     @Inject
@@ -46,8 +45,8 @@ public class HolidayApi {
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject list() {
-        return null;
+    public Response list() {
+        return Response.ok().entity(holidayService.listAllHolidayViews()).build();
     }
 
     @POST

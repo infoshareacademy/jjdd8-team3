@@ -3,7 +3,7 @@
 
   $( function() {
 
-        $( "#holiday-day" ).datepicker({
+        $( "#holiday-date" ).datepicker({
             numberOfMonths: 1,
             showButtonPanel: false,
             format: 'yyyy-mm-dd'

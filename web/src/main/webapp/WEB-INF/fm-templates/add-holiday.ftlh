@@ -33,15 +33,15 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlSelect2">Example multiple select</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <select class="form-control" id="holiday-type" name="holiday-type">
                       <#list holidayTypes as holidayType>
                       <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
                       </#list>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="data-picker form-control form-control-user" id="holiday-day"
-                           data-provide="datepicker" id="holiday-day" placeholder="2000-01-01" value="<#if action=="edit">${holiday.date!}</#if>" required>
+                    <input type="text" class="data-picker form-control form-control-user" id="holiday-date"
+                           data-provide="holiday-date" name="holiday-date" placeholder="2000-01-01" value="<#if action=="edit">${holiday.date!}</#if>" required>
                   </div>
 <#--                  <div class="input-group date" data-provide="datepicker">-->
 <#--                    <input type="text" class="form-control">-->
