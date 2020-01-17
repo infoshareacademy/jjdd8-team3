@@ -39,7 +39,8 @@ public class HolidayApi {
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject get(@PathParam("id") Long id) {
         Holiday holiday = holidayService.finById(id);
-        return holidayJsonMapper.toJson(holiday);
+       // return holidayJsonMapper.toJson(holiday);
+        return null;
     }
 
     @GET
