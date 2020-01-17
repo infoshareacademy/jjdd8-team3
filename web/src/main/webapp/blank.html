@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/js/bootstrap-year-calendar_v2.css" rel="stylesheet">
 
 </head>
 
@@ -265,104 +266,7 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Template blank</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-
-                    <!-- Current total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Current
-                                            month total
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">17</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Next total (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next
-                                            month total
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Today employee on vcacation Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Absent
-                                            today
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5</div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar"
-                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-user-tie fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending
-                                            Requests
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-hourglass-start fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+                <div id="calendar"></div>
             <!-- /.container-fluid -->
 
         </div>
@@ -420,7 +324,123 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/js/bootstrap-year-calendar_v2.js"></script>
+    <script>
+        $(function() {
+            var currentYear = new Date().getFullYear();
 
+            $('#calendar').calendar({
+                enableContextMenu: true,
+                enableRangeSelection: true,
+                weekStart:1,
+                mouseOnDay: function(e) {
+                    if(e.events.length > 0) {
+                        var content = '';
+
+                        for(var i in e.events) {
+                            content += '<div class="event-tooltip-content">'
+                                + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
+                                + '<div class="event-location">' + e.events[i].location + '</div>'
+                                + '</div>';
+                        }
+
+                        $(e.element).popover({
+                            trigger: 'manual',
+                            container: 'body',
+                            html:true,
+                            content: content
+                        });
+
+                        $(e.element).popover('show');
+                    }
+                },
+                mouseOutDay: function(e) {
+                    if(e.events.length > 0) {
+                        $(e.element).popover('hide');
+                    }
+                },
+                dayContextMenu: function(e) {
+                    $(e.element).popover('hide');
+                },
+                dataSource: [
+                    {
+                        id: 0,
+                        name: 'Google I/O',
+                        location: 'San Francisco, CA',
+                        startDate: new Date(currentYear, 4, 28),
+                        endDate: new Date(currentYear, 4, 29)
+                    },
+                    {
+                        id: 1,
+                        name: 'Microsoft Convergence',
+                        location: 'New Orleans, LA',
+                        startDate: new Date(currentYear, 2, 16),
+                        endDate: new Date(currentYear, 2, 19)
+                    },
+                    {
+                        id: 2,
+                        name: 'Microsoft Build Developer Conference',
+                        location: 'San Francisco, CA',
+                        startDate: new Date(currentYear, 3, 29),
+                        endDate: new Date(currentYear, 4, 1)
+                    },
+                    {
+                        id: 3,
+                        name: 'Apple Special Event',
+                        location: 'San Francisco, CA',
+                        startDate: new Date(currentYear, 8, 1),
+                        endDate: new Date(currentYear, 8, 1)
+                    },
+                    {
+                        id: 4,
+                        name: 'Apple Keynote',
+                        location: 'San Francisco, CA',
+                        startDate: new Date(currentYear, 8, 9),
+                        endDate: new Date(currentYear, 8, 9)
+                    },
+                    {
+                        id: 5,
+                        name: 'Chrome Developer Summit',
+                        location: 'Mountain View, CA',
+                        startDate: new Date(currentYear, 10, 17),
+                        endDate: new Date(currentYear, 10, 18)
+                    },
+                    {
+                        id: 6,
+                        name: 'F8 2015',
+                        location: 'San Francisco, CA',
+                        startDate: new Date(currentYear, 2, 25),
+                        endDate: new Date(currentYear, 2, 26)
+                    },
+                    {
+                        id: 7,
+                        name: 'Yahoo Mobile Developer Conference',
+                        location: 'New York',
+                        startDate: new Date(currentYear, 7, 25),
+                        endDate: new Date(currentYear, 7, 26)
+                    },
+                    {
+                        id: 8,
+                        name: 'Android Developer Conference',
+                        location: 'Santa Clara, CA',
+                        startDate: new Date(currentYear, 11, 1),
+                        endDate: new Date(currentYear, 11, 4)
+                    },
+                    {
+                        id: 9,
+                        name: 'LA Tech Summit',
+                        location: 'Los Angeles, CA',
+                        startDate: new Date(currentYear, 10, 17),
+                        endDate: new Date(currentYear, 10, 17)
+                    }
+                ]
+            });
+
+            $('#save-event').click(function() {
+                saveEvent();
+            });
+        });
+    </script>
 </body>
 
 </html>
