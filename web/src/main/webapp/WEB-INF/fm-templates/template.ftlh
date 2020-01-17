@@ -164,7 +164,7 @@
             </a>
             <div id="collapseExtra" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add</a>
+                    <a class="collapse-item" href="/admin/add-holiday">Add</a>
                     <a class="collapse-item" href="/blank.html">Edit</a>
                     <a class="collapse-item" href="/blank.html">Remove</a>
                 </div>
@@ -337,7 +337,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div id="modal-info-body" class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/></div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Ok</button>
 <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->

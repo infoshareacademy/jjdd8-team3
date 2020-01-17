@@ -13,18 +13,19 @@ import java.nio.file.Paths;
 @RequestScoped
 public class FileUploadProcessor {
 
-    private String TEMP = "/temp/";
+    private String TEMP = "/tmp/hfv/";
 
-
-    public File uploadJsonFile(Part filePart, String realPath) throws IOException, JsonFileNotFound {
+    public File uploadJsonFile(Part filePart) throws IOException, JsonFileNotFound {
 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
         if (fileName == null || fileName.isEmpty()) {
             throw new JsonFileNotFound("No JSON file found found!");
         }
+        File uploadDir = new File(TEMP);
+        if (!uploadDir.exists()) uploadDir.mkdir();
 
-        File file = new File(realPath + TEMP + fileName);
+        File file = new File( TEMP + fileName);
 
         Files.deleteIfExists(file.toPath());
 

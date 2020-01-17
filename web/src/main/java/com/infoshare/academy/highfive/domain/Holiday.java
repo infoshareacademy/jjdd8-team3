@@ -1,7 +1,7 @@
 package com.infoshare.academy.highfive.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.infoshare.academy.highfive.parser.CustomHolidayDeserializer;
+import com.infoshare.academy.highfive.util.CustomHolidayDeserializer;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ public class Holiday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -55,11 +55,11 @@ public class Holiday {
         this.holidayType = holidayType;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

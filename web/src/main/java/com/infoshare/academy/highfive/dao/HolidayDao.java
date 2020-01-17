@@ -24,4 +24,8 @@ public class HolidayDao {
                 .getResultList();
     }
 
+    public Holiday getById(Long id){
+        return em.find(Holiday.class,id);
+    }
+
 }
