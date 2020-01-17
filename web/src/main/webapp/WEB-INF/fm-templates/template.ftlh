@@ -110,7 +110,7 @@
 
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="blank.html">
+            <a class="nav-link" href="../../blank.html">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>
         </li>

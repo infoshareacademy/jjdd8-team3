@@ -31,8 +31,8 @@ public class HolidayApi {
     @Inject
     UploadJsonService uploadJsonService;
 
-    @Inject
-    HolidayJsonMapper holidayJsonMapper;
+   // @Inject
+   // HolidayJsonMapper holidayJsonMapper;
 
     @GET
     @Path("/get/{id}")
