@@ -10,7 +10,21 @@ import javax.inject.Inject;
 public class EmployeeService {
 
   @Inject
-  EmployeeDao employeeDao;
+  private EmployeeMapper employeeMapper;
+  @Inject
+  private EmployeeDao employeeDao;
+
+  public void addNewEmployee(EmployeeRequest request) {
+    employeeDao.addEmployee(employeeMapper.mapRequestToEntity(request));
+  }
+
+  public void editEmployee(EmployeeRequest request) {
+    employeeDao.editEmployee(employeeMapper.mapRequestToEntity(request));
+  }
+
+  public void deleteEmployee(EmployeeRequest request) {
+    employeeDao.deleteEmployee(employeeMapper.mapRequestToEntity(request));
+  }
 
   public void updateVacationEntitlementOnYearStart() {
 
@@ -22,4 +36,3 @@ public class EmployeeService {
   public Employee getById(Long id) {
     return this.employeeDao.getEmployeeById(id);
   }
-}

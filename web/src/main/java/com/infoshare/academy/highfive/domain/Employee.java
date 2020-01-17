@@ -3,6 +3,7 @@ package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "employee")
@@ -23,10 +24,10 @@ public class Employee {
     private LocalDate hireDate;
 
     @Column(name = "holiday_entitlement", nullable = false)
-    private int holidayEntitlement;
+    private Integer holidayEntitlement;
 
     @Column(name = "additional_entitlement")
-    private int additionalEntitlement;
+    private Integer additionalEntitlement;
 
     @Column(name = "login")
     private String login;
@@ -39,11 +40,11 @@ public class Employee {
 
     @JoinColumn(name = "team_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private Team teamId;
+    private Team team;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role roleId;
+    private Role role;
 
     public Employee() {
     }
@@ -82,7 +83,7 @@ public class Employee {
 
     public int getHolidayEntitlement() { return holidayEntitlement; }
 
-    public void setHolidayEntitlement(int holidayEntitlement) {
+    public void setHolidayEntitlement(Integer holidayEntitlement) {
         this.holidayEntitlement = holidayEntitlement;
     }
 
@@ -90,7 +91,7 @@ public class Employee {
         return additionalEntitlement;
     }
 
-    public void setAdditionalEntitlement(int additionalEntitlement) {
+    public void setAdditionalEntitlement(Integer additionalEntitlement) {
         this.additionalEntitlement = additionalEntitlement; }
 
     public String getEmail() {
@@ -101,19 +102,27 @@ public class Employee {
         this.email = email;
     }
 
-    public Team getTeamId() {
-        return teamId;
+    public Team getTeam() { return team; }
+
+    public void setTeam(Team team) { this.team = team; }
+
+    public Role getRole() {
+        return role;
     }
 
-    public void setTeamId(Team teamId) {
-        this.teamId = teamId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public Role getRoleId() {
-        return roleId;
-    }
+    public String getLogin() { return login; }
 
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
-    }
+    public void setLogin(String login) { this.login = login; }
+
+    public void setHolidayEntitlement(Integer holidayEntitlement) { this.holidayEntitlement = holidayEntitlement; }
+
+    public void setAdditionalEntitlement(Integer additionalEntitlement) { this.additionalEntitlement = additionalEntitlement; }
+
+    public String getPosition() { return position; }
+
+    public void setPosition(String position) { this.position = position; }
 }
