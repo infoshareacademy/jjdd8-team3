@@ -14,10 +14,10 @@ public class SearchHolidayByNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String inputSearch = req.getParameter("inputSearch");
+//        String inputSearch = req.getParameter("inputSearch");
 
-        String reqUser = "*" + inputSearch + "*";
+//        String reqUser = "*" + inputSearch + "*";
 
-        super.doPost(req, resp);
+//        @Query(reqUser="select * from holiday h where h.name like %:inputSearch%", nativeQuery=true)
     }
 }
