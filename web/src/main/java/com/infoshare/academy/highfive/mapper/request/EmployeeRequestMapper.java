@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RequestScoped
@@ -19,7 +21,7 @@ public class EmployeeRequestMapper {
   public EmployeeRequest mapParamsToRequest(HttpServletRequest request) throws ParseException {
 
     EmployeeRequest employeeRequest = new EmployeeRequest();
-    Date hireDate = new SimpleDateFormat("dd/mm/yyyy").parse(request.getParameter("hire_date"));
+    LocalDate hireDate = LocalDate.parse(request.getParameter("hire_date"), DateTimeFormatter.ofPattern("dd/mm/yyyy"));
 
     employeeRequest.setId((Long) request.getAttribute("id"));
     employeeRequest.setFirstName((String) request.getAttribute("first_name"));

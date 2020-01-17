@@ -2,7 +2,8 @@ package com.infoshare.academy.highfive.request;
 
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 public class EmployeeRequest {
 
@@ -12,7 +13,7 @@ public class EmployeeRequest {
 
     private String surname;
 
-    private Date hireDate;
+    private LocalDate hireDate;
 
     private Integer holidayEntitlement;
 
@@ -40,9 +41,9 @@ public class EmployeeRequest {
 
     public void setSurname(String surname) { this.surname = surname; }
 
-    public Date getHireDate() { return hireDate; }
+    public LocalDate getHireDate() { return hireDate; }
 
-    public void setHireDate(Date hireDate) { this.hireDate = hireDate; }
+    public void setHireDate(LocalDate hireDate) { this.hireDate = hireDate; }
 
     public Integer getHolidayEntitlement() { return holidayEntitlement; }
 

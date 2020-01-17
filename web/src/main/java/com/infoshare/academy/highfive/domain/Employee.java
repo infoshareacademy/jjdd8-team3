@@ -21,7 +21,7 @@ public class Employee {
     private String surname;
 
     @Column(name = "hire_date", nullable = false)
-    private Date hireDate;
+    private LocalDate hireDate;
 
     @Column(name = "holiday_entitlement", nullable = false)
     private Integer holidayEntitlement;
@@ -75,11 +75,11 @@ public class Employee {
         this.surname = surname;
     }
 
-    public Date getHireDate() {
+    public LocalDate getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) {
+    public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
     }
 
