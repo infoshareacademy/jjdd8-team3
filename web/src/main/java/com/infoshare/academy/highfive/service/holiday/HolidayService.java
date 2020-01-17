@@ -21,4 +21,5 @@ public class HolidayService {
         return holidayDao.listAllHoliday();
     }
 
+//    public void searchHolidayByName(String queryByName) { return holidayDao.searchHolidayByName();}
 }

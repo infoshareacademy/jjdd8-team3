@@ -24,4 +24,8 @@ public class HolidayDao {
                 .getResultList();
     }
 
+//    public void searchHolidayByName() {em.persist();}
+
+    public void searchHolidayByDate(Holiday holiday) {em.persist(holiday);}
+
 }
