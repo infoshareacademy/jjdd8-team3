@@ -1,6 +1,6 @@
 package com.infoshare.academy.highfive.request;
 
-public class AddTeamRequest {
+public class TeamRequest {
 
     private Long id;
 
