@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+@NamedQueries({
+  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT DISTINCT vacation FROM Vacation vacation JOIN vacation.employee e WHERE vacation.vacationStatus = com.infoshare.academy.highfive.domain.VacationStatus.APPLIED"),
+  }
+)
+
 @Entity
 @Table (name = "vacation")
 public class Vacation {
@@ -11,11 +16,11 @@ public class Vacation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @JoinColumn(name = "employee_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private Employee employeeId;
+    private Employee employee;
 
     @Column (name = "from_date", nullable = false)
     private LocalDate vacationFrom;
@@ -31,11 +36,11 @@ public class Vacation {
     @Column (name = "vacation_status")
     private VacationStatus vacationStatus;
 
-    public int getId() { return id; }
+    public Long getId() { return id; }
 
-    public Employee getEmployeeId() { return employeeId; }
+    public Employee getEmployee() { return employee; }
 
-    public void setEmployeeId(Employee employeeId) { this.employeeId = employeeId; }
+    public void setEmployee(Employee employee) { this.employee = employee; }
 
     public LocalDate getVacationFrom() { return vacationFrom; }
 

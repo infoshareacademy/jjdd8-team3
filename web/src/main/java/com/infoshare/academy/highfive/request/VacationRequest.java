@@ -1,28 +1,38 @@
 package com.infoshare.academy.highfive.request;
 
+import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Role;
+import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.domain.VacationType;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class VacationRequest {
 
-  private Long id;
+  private Long employeeId;
 
   private Role role;
 
-  private Date dateFrom;
+  private LocalDate dateFrom;
 
-  private Date dateTo;
+  private LocalDate dateTo;
 
   private VacationType vacationType;
 
-  public Long getId() {
-    return id;
+  private VacationStatus vacationStatus;
+
+  public VacationStatus getVacationStatus() {
+    return vacationStatus;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setEmployeeId(Long employeeId) { this.employeeId = employeeId; }
+
+  public void setVacationStatus(VacationStatus vacationStatus) {
+    this.vacationStatus = vacationStatus;
+  }
+
+  public Long getEmployeeId() {
+    return employeeId;
   }
 
   public Role getRole() {
@@ -33,19 +43,19 @@ public class VacationRequest {
     this.role = role;
   }
 
-  public Date getDateFrom(Date dateFrom) {
+  public LocalDate getDateFrom() {
     return this.dateFrom;
   }
 
-  public void setDateFrom(Date dateFrom) {
+  public void setDateFrom(LocalDate dateFrom) {
     this.dateFrom = dateFrom;
   }
 
-  public Date getDateTo() {
+  public LocalDate getDateTo() {
     return dateTo;
   }
 
-  public void setDateTo(Date dateTo) {
+  public void setDateTo(LocalDate dateTo) {
     this.dateTo = dateTo;
   }
 

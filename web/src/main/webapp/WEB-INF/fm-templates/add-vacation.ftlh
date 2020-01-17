@@ -2,7 +2,7 @@
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Add vacation</h1>
+    <h1 class="h3 mb-0 text-gray-800">Vacation form</h1>
     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
   </div>
 
@@ -103,7 +103,6 @@
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Define new team</h1>
     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
   </div>
 
@@ -120,12 +119,12 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Add vacation</h1>
                 </div>
-                <form class="user">
-                  <label for="exampleInputVacationType">Vacation Starts</label>
-                  <div class="form-group">
-                    <input type="radio" class="form-control form-control-user"
-                           id="exampleInputVacationStarts" placeholder="Vacation Starts" name="vacationType" required="">
-                  </div>
+                <form class="user" method="post" action="employee/add-vacation">
+                  <label for="exampleInputVacationType">Vacation type</label>
+<#--                  <div class="form-group">-->
+<#--                    <input type="radio" class="form-control form-control-user"-->
+<#--                           id="exampleInputVacationStarts" placeholder="Vacation Starts" name="vacationType" required="">-->
+<#--                  </div>-->
                   <label for="exampleInputVacationStarts">Vacation Starts</label>
                   <div class="form-group">
                     <input type="date" class="form-control form-control-user"
@@ -133,10 +132,10 @@
                   </div>
                   <label for="exampleInputVacationStarts">Vacation Ends</label>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-user"
+                    <input type="date" class="form-control form-control-user"
                            id="exampleInputVacationEnds" placeholder="Vacation ends" name="dateTo" required="">
                   </div>
-                  <a href="/employee/add-vacation" class="btn btn-primary btn-user btn-block">
+                  <a href="employee/add-vacation" class="btn btn-primary btn-user btn-block">
                     Submit request
                   </a>
 

@@ -6,8 +6,9 @@ import com.infoshare.academy.highfive.parser.CustomHolidayDeserializer;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@NamedQueries(
-        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday")
+@NamedQueries({
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
+        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY")}
 )
 
 @Entity

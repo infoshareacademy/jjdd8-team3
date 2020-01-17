@@ -11,7 +11,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -45,14 +45,14 @@ public class Employee {
     @Column(name = "role")
     private Role roleId;
 
-    Employee() {
+    public Employee() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,9 +80,7 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    public int getHolidayEntitlement() {
-        return holidayEntitlement;
-    }
+    public int getHolidayEntitlement() { return holidayEntitlement; }
 
     public void setHolidayEntitlement(int holidayEntitlement) {
         this.holidayEntitlement = holidayEntitlement;
@@ -93,8 +91,7 @@ public class Employee {
     }
 
     public void setAdditionalEntitlement(int additionalEntitlement) {
-        this.additionalEntitlement = additionalEntitlement;
-    }
+        this.additionalEntitlement = additionalEntitlement; }
 
     public String getEmail() {
         return email;
