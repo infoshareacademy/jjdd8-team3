@@ -7,9 +7,9 @@ import javax.ejb.Stateless;
 @Stateless
 public class TeamDao {
 
-    public void addTeam(Team team){}
+    public void addTeam(){}
 
-    public void editTeam(Team team){}
+    public void editTeam(){}
 
-    public void deleteTeam (Team team){}
+    public void deleteTeam (){}
 }

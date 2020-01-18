@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 
-@WebServlet("/manager/add-employee/")
+@WebServlet("/manager/delete-employee/")
 public class DeleteEmployeeServlet extends HttpServlet {
 
     Logger logger = LoggerFactory.getLogger(getClass().getName());

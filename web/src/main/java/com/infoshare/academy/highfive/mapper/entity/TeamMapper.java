@@ -8,9 +8,9 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class TeamMapper {
 
-    public Team mapRequestToEntity(TeamRequest request){
+    public Team mapRequestToEntity(TeamRequest request) {
 
-   Team team = new Team();
+        Team team = new Team();
         team.setId(request.getId());
         team.setTeamName(request.getTeamName());
         return team;

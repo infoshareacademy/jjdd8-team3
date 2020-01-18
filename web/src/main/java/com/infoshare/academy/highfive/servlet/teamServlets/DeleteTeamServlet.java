@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/manager/add-team/")
+@WebServlet("/manager/delete-team/")
 public class DeleteTeamServlet extends HttpServlet {
 
     Logger logger = LoggerFactory.getLogger(getClass().getName());
