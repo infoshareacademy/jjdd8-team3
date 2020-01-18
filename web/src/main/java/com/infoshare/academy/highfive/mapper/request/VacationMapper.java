@@ -11,9 +11,6 @@ import javax.inject.Inject;
 @Stateless
 public class VacationMapper {
 
-  @Inject
-  EmployeeMapper employeeMapper;
-
   public Vacation mapRequestToEntity(Employee employee, VacationRequest vacationRequest) {
 
     Vacation vacation = new Vacation();

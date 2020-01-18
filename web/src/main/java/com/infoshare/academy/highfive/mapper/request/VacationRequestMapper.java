@@ -1,43 +1,40 @@
 package com.infoshare.academy.highfive.mapper.request;
 
-import com.infoshare.academy.highfive.domain.*;
+import com.infoshare.academy.highfive.domain.Role;
+import com.infoshare.academy.highfive.domain.VacationStatus;
+import com.infoshare.academy.highfive.domain.VacationType;
 import com.infoshare.academy.highfive.request.VacationRequest;
 
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 @RequestScoped
 public class VacationRequestMapper {
 
   public VacationRequest mapParamsToRequest(HttpServletRequest request) throws ParseException {
 
-    Date dateFrom = new SimpleDateFormat("dd/mm/yyyy").parse(request.getParameter("dateFrom"));
-    Date dateTo = new SimpleDateFormat("dd/mm/yyyy").parse(request.getParameter("dateTo"));
+    LocalDate dateFrom = LocalDate.parse(request.getParameter("date_from"));
+    LocalDate dateTo = LocalDate.parse(request.getParameter("date_to"));
 
     VacationRequest vacationRequest = new VacationRequest();
-
-    vacationRequest.setEmployeeId((Long) request.getAttribute("id"));
+    vacationRequest.setEmployeeId(Long.parseLong(request.getParameter("employee_id")));
     vacationRequest.setRole((Role) request.getAttribute("role"));
-    vacationRequest.setDateFrom(convertToLocalDateViaSqlDate(dateFrom));
-    vacationRequest.setDateTo(convertToLocalDateViaSqlDate(dateTo));
+    vacationRequest.setDateFrom(dateFrom);
+    vacationRequest.setDateTo(dateTo);
     vacationRequest.setVacationStatus(VacationStatus.APPLIED);
 
-    if (request.getParameter("VacationType").equals("parental")) {
+    if (request.getParameter("vacation_type").equals("parental")) {
       vacationRequest.setVacationType(VacationType.PARENTAL);
-    } else if (request.getParameter("VacationType").equals("vacation")) {
+    } else if (request.getParameter("vacation_type").equals("vacation")) {
       vacationRequest.setVacationType(VacationType.VACATION);
-    } else { vacationRequest.setVacationType(VacationType.OCCASIONAL); }
+    } else {
+      vacationRequest.setVacationType(VacationType.ON_DEMAND);
+    }
 
     return vacationRequest;
-  }
 
-  public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
-    return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
   }
-
 
 }

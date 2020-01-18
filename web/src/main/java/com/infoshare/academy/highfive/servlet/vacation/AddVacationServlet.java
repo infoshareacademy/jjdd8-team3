@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.servlet;
+package com.infoshare.academy.highfive.servlet.vacation;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
@@ -24,7 +24,7 @@ import java.util.Map;
 @WebServlet("employee/add-vacation")
 public class AddVacationServlet extends HttpServlet {
 
-  Logger logger = LoggerFactory.getLogger(getClass().getName());
+  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
   @Inject
   private TemplateProvider templateProvider;
@@ -49,16 +49,14 @@ public class AddVacationServlet extends HttpServlet {
     dataModel.put("method", req.getMethod());
     dataModel.put("contentTemplate", "add-vacation.ftlh");
     dataModel.put("title", "Add vacation");
-    dataModel.put("pluginCssTemplate", "plugin-css-main-content.ftlh");
-    dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
 
-    logger.info("User provided with vacation form.");
+    LOGGER.info("User provided with vacation form.");
 
     try {
       template.process(dataModel, writer);
     } catch (
       TemplateException e) {
-      logger.warn("Issue with processing Freemarker template.");
+      LOGGER.warn("Issue with processing Freemarker template.");
       e.getMessage();
     }
 
@@ -70,10 +68,45 @@ public class AddVacationServlet extends HttpServlet {
     try {
       VacationRequest vacationRequest = vacationRequestMapper.mapParamsToRequest(req);
       this.vacationService.addVacation(vacationRequest);
+
     } catch (ParseException e) {
-      logger.warn("Issue with parsing http request.");
+      LOGGER.warn("Issue with parsing http request.");
       e.printStackTrace();
+    }
+
+    Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+
+    resp.setContentType("text/html;charset=UTF-8");
+    PrintWriter writer = resp.getWriter();
+    Map<String, Object> dataModel = new HashMap<>();
+
+    LOGGER.debug("Status {}", vacationService.getStatus());
+
+    if (vacationService.getStatus().equals("ok")) {
+
+      dataModel.put("contentTemplate", "success.ftlh");
+      dataModel.put("title", "Success!");
+
+    } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
+
+      dataModel.put("contentTemplate", "exceeding_entitlement.ftlh");
+      dataModel.put("title", "Given days are exceeding entitlement.");
+
+    } else {
+
+      dataModel.put("contentTemplate", "wrong_date.ftlh");
+      dataModel.put("title", "Wrong dates given.");
+
+    }
+
+    try {
+      template.process(dataModel, writer);
+    } catch (
+      TemplateException e) {
+      LOGGER.warn("Issue with processing Freemarker template.");
+      e.getMessage();
     }
 
   }
 }
+

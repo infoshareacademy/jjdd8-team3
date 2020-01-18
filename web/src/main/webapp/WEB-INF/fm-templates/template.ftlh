@@ -94,7 +94,7 @@
             </a>
             <div id="requestMenu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add vacation</a>
+                    <a class="collapse-item" href="/employee/add-vacation">Add vacation</a>
                     <a class="collapse-item" href="/blank.html">Cancel vacation</a>
                 </div>
             </div>
@@ -110,7 +110,7 @@
 
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="blank.html">
+            <a class="nav-link" href="/manager/pending-requests">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>
         </li>
@@ -282,8 +282,9 @@
 
 <#--            KONIEC-->
             <!-- Template injection -->
-
+          <#if contentTemplate??>
           <#include "/${contentTemplate}">
+          </#if>
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">

@@ -118,9 +118,6 @@ public class Employee {
 
     public void setLogin(String login) { this.login = login; }
 
-    public void setHolidayEntitlement(Integer holidayEntitlement) { this.holidayEntitlement = holidayEntitlement; }
-
-    public void setAdditionalEntitlement(Integer additionalEntitlement) { this.additionalEntitlement = additionalEntitlement; }
 
     public String getPosition() { return position; }
 

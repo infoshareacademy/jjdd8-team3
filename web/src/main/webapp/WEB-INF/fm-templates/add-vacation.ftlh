@@ -1,115 +1,11 @@
+<!-- Begin Page Content -->
 <div class="container-fluid">
-
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Vacation form</h1>
-    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    <h1 class="h3 mb-0 text-gray-800">Define new team</h1>
   </div>
-
-  <!-- Content Row -->
-  <div class="row">
-
-    <!-- Current total (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Current
-                month total
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">17</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Next total (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next
-                month total
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Today employee on vcacation Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Absent
-                today
-              </div>
-              <div class="row no-gutters align-items-center">
-                <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5</div>
-                </div>
-                <div class="col">
-                  <div class="progress progress-sm mr-2">
-                    <div class="progress-bar bg-info" role="progressbar"
-                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                         aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-user-tie fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending
-                Requests
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-hourglass-start fa-2x text-gray-300"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-<!-- /.container-fluid -->
-<div class="container-fluid">
-
-  <!-- Page Heading -->
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-  </div>
-
   <div class="row justify-content-center">
-
     <div class="col-xl-10 col-lg-12 col-md-9">
-
       <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
@@ -117,42 +13,52 @@
             <div class="col-lg-6">
               <div class="p-5">
                 <div class="text-center">
-                  <h1 class="h4 text-gray-900 mb-4">Add vacation</h1>
+                  <h1 class="h4 text-gray-900 mb-4">Request vacation</h1>
                 </div>
-                <form class="user" method="post" action="employee/add-vacation">
-                  <label for="exampleInputVacationType">Vacation type</label>
-<#--                  <div class="form-group">-->
-<#--                    <input type="radio" class="form-control form-control-user"-->
-<#--                           id="exampleInputVacationStarts" placeholder="Vacation Starts" name="vacationType" required="">-->
-<#--                  </div>-->
-                  <label for="exampleInputVacationStarts">Vacation Starts</label>
+                <form class="user" action="add-vacation" method="post">
                   <div class="form-group">
-                    <input type="date" class="form-control form-control-user"
-                           id="exampleInputVacationStarts" placeholder="Vacation Starts" name="dateFrom" required="">
+                    <label for="employee_id">Employee ID</label>
+                    <input type="number" class="form-control form-control-user"
+                           id="employee_id" placeholder="Employee ID" required="" name="employee_id">
                   </div>
-                  <label for="exampleInputVacationStarts">Vacation Ends</label>
                   <div class="form-group">
+                    <label for="date_from">Date from</label>
                     <input type="date" class="form-control form-control-user"
-                           id="exampleInputVacationEnds" placeholder="Vacation ends" name="dateTo" required="">
+                           name="date_from" required="" placeholder="">
                   </div>
-                  <a href="employee/add-vacation" class="btn btn-primary btn-user btn-block">
-                    Submit request
-                  </a>
-
-                  <!--                                                TODO-->
-                  <!--                                                SAVE button-->
-                </form>
+                  <div class="form-group">
+                    <label for="date_to">Date to</label>
+                    <input type="date" class="form-control form-control-user"
+                           name="date_to" required="" placeholder="">
+                  </div>
+              <div>
+                  <label for="exampleFormControlSelect2">Vacation type</label>
+                  <select class="form-control" id="vacation_type" name="vacation_type">
+                    <option name="vacation" value="vacation">Vacation leave</option>
+                    <option name="parental" value="parental">Parental leave</option>
+                    <option name="on_demand" value="on_demand">On demand</option>
+                  </select>
+              </div>
+              <hr>
+              <div>
+                <button type="submit" class="btn btn-primary">Submit request</button>
+              </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-6 d-none d-lg-block">
+            <div class="card-body">
+              <div class="text-center">
+                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                     src="/img/undraw_journey_lwlj.svg" alt="add-vacation">
               </div>
             </div>
-            <!--                                    TODO-->
-            <!--                                    Fit image size and content !!! -->
-            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
+</div>
+<!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->

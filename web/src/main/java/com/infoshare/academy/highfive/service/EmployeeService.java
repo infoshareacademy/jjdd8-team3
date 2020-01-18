@@ -2,15 +2,18 @@ package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.EmployeeDao;
 import com.infoshare.academy.highfive.domain.Employee;
+import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
+import com.infoshare.academy.highfive.request.EmployeeRequest;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-@RequestScoped
+@Stateless
 public class EmployeeService {
 
   @Inject
   private EmployeeMapper employeeMapper;
+
   @Inject
   private EmployeeDao employeeDao;
 
@@ -26,13 +29,8 @@ public class EmployeeService {
     employeeDao.deleteEmployee(employeeMapper.mapRequestToEntity(request));
   }
 
-  public void updateVacationEntitlementOnYearStart() {
-
-  }
-
-  public void updateVacationEntitlementOnYearEnd() {
-  }
-
   public Employee getById(Long id) {
     return this.employeeDao.getEmployeeById(id);
   }
+
+}

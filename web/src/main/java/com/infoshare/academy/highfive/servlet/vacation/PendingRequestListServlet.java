@@ -1,9 +1,6 @@
-package com.infoshare.academy.highfive.servlet;
+package com.infoshare.academy.highfive.servlet.vacation;
 
-import com.infoshare.academy.highfive.domain.Vacation;
-import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.service.HolidayService;
 import com.infoshare.academy.highfive.service.VacationService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -29,10 +26,9 @@ public class PendingRequestListServlet extends HttpServlet {
   VacationService vacationService;
 
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     resp.setContentType("text/html;charset=UTF-8");
-
     PrintWriter writer = resp.getWriter();
-
     Map<String, Object> dataModel = new HashMap<>();
 
     Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
@@ -43,7 +39,6 @@ public class PendingRequestListServlet extends HttpServlet {
     dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
     dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
     dataModel.put("vacations", vacationService.listAllPendingRequests());
-
 
     try {
       template.process(dataModel, writer);
