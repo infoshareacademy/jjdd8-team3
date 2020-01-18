@@ -7,6 +7,7 @@ docker run -p 0.0.0.0:3306:3306 --name mysql-hfv -e MYSQL_ROOT_PASSWORD=root -e 
 mysql -h mysql -uroot -proot -D hfvdb
 
 #### Connecting to mysql database hfvdb on docker with terminal (CLI) ######
+docker exec -it mysql-hfv mysql -D hfvdb -uroot -p
 
 
 ####helpers commands#####
