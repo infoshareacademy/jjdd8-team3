@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 
 @Stateless
@@ -24,8 +25,8 @@ public class HolidayDao {
                 .getResultList();
     }
 
-    public Holiday getById(Long id){
-        return em.find(Holiday.class,id);
+    public Optional<Holiday> getById(Long id){
+        return Optional.ofNullable(em.find(Holiday.class,id));
     }
 
 }

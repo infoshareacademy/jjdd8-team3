@@ -43,8 +43,6 @@ public class AddHolidayServlet extends HttpServlet {
 
         Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
-
-
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "add-holiday.ftlh");
         dataModel.put("title", "Add holiday");

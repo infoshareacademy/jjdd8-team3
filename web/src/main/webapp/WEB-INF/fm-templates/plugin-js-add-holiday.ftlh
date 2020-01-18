@@ -11,15 +11,14 @@
 
    });
 
-  function ConvertFormToJSON(form){
-      var array = jQuery(form).serializeArray();
-      var json = {};
-
-      jQuery.each(array, function() {
-          json[this.name] = this.value || '';
+  // Helper function to serialize all the form fields into a JSON string
+  function formToJSON() {
+      return JSON.stringify({
+          "name": $('#holiday-name').val(),
+          "description": $('#holiday-description').val(),
+          "holiday_type": $('#holiday-type').val(),
+          "holiday_date": $('#holiday-date').val()
       });
-
-      return json;
   }
 
     $('#add-holiday-form').submit(function (event) {
@@ -28,11 +27,12 @@
 
         $.ajax({
             type: "POST",
-            url: $(this).attr('action'),
-            //enctype: 'application/json',
+            url: "/api/holiday/add",
+            enctype: 'application/json;charset=UTF-8',
             dataType: 'json',
-            data: ConvertFormToJSON($(this)),
-            contentType: 'application/json;charset=UTF-8',
+            data: formToJSON(),
+            contentType: 'application/json;charset=UTF-8'
+            // contentType: 'application/json',
         })
             .done(
                 function (data) {

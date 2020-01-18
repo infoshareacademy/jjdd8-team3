@@ -1,5 +1,7 @@
 package com.infoshare.academy.highfive.domain.view;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.HolidayType;
 
 import java.time.LocalDate;
@@ -12,8 +14,10 @@ public class HolidayView {
 
     private String description;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    @JsonProperty("type")
     private HolidayType holidayType;
 
     public Long getId() {

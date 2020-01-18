@@ -6,7 +6,7 @@ import com.infoshare.academy.highfive.domain.view.HolidayView;
 import javax.ejb.Stateless;
 
 @Stateless
-public class HolidayJsonMapper {
+public class HolidayMapper {
 
     public HolidayView mapEntityToView(Holiday holiday) {
         HolidayView holidayView = new HolidayView();

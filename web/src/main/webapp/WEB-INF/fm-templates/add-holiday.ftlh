@@ -35,7 +35,7 @@
                     <label for="exampleFormControlSelect2">Example multiple select</label>
                     <select class="form-control" id="holiday-type" name="holiday-type">
                       <#list holidayTypes as holidayType>
-                      <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
+                      <option value="${holidayType!}">${holidayType.getType()!}</option>
                       </#list>
                     </select>
                   </div>
