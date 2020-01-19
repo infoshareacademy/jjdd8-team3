@@ -13,7 +13,8 @@
             <div class="col-lg-6">
               <div class="p-5">
                 <div class="text-center">
-                  <h1 class="h4 text-gray-900 mb-4">Chosen days amount is exceeding your current entitlement. Please try again. </h1>
+                  <h1 class="h4 text-gray-900 mb-4">Chosen days amount is exceeding your current entitlement.</h1>
+                  <p>Please try again.</p>
                 </div>
               </div>
             </div>

@@ -28,7 +28,7 @@ public class RejectVacationRequestServlet extends HttpServlet {
   VacationService vacationService;
 
   @Inject
-  private TemplateProvider templateProvider;
+  TemplateProvider templateProvider;
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,6 +44,7 @@ public class RejectVacationRequestServlet extends HttpServlet {
 
     dataModel.put("contentTemplate", "pending-vacation-reject.ftlh");
     dataModel.put("title", "Success!");
+
 
     try {
       template.process(dataModel, writer);

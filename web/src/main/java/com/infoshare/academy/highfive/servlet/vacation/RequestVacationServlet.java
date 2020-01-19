@@ -90,7 +90,7 @@ public class RequestVacationServlet extends HttpServlet {
 
       dataModel.put("contentTemplate", "request-vacation-success.ftlh");
       dataModel.put("title", "Success!");
-//      mailSender.sendNotification("bandurskim@gmail.com");
+      mailSender.sendNotification("jjdd8highfive@gmail.com");
 
     } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
 

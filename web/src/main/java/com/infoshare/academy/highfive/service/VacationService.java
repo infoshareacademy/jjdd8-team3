@@ -5,16 +5,17 @@ import com.infoshare.academy.highfive.dao.EntitlementDao;
 import com.infoshare.academy.highfive.dao.HolidayDao;
 import com.infoshare.academy.highfive.dao.VacationDao;
 import com.infoshare.academy.highfive.domain.*;
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
-import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.service.configuration.MailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +37,9 @@ public class VacationService {
 
   @Inject
   EntitlementDao entitlementDao;
+
+  @Inject
+  MailSender mailSender;
 
   Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
@@ -163,16 +167,21 @@ public class VacationService {
 
   }
 
-  public String changeVacationStatus(Long vacationId, VacationStatus vacationStatus) {
+  public void changeVacationStatus(Long vacationId, VacationStatus vacationStatus) throws IOException {
 
     Vacation vacation = vacationDao.getVacationById(vacationId);
     vacation.setVacationStatus(vacationStatus);
     vacationDao.updateVacationStatus(vacation);
 
-    return "Success";
+    if (vacationStatus.equals(VacationStatus.APPROVED)) {
+
+      mailSender.sendApprove(vacation.getEmployee().getEmail());
+
+    } else {
+      mailSender.sendReject(vacation.getEmployee().getEmail());
+    }
 
   }
-
 
 }
 
