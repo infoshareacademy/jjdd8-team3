@@ -29,7 +29,7 @@ public class App {
         stdout.info("HIGH-FIVE TEAM \n");
 
         initRepositoryFromFiles();
-        TerminalCleaner.cleanTerminal();
-        MainMenu.runMenu();
+   //     TerminalCleaner.cleanTerminal();
+  //      MainMenu.runMenu();
     }
 }

@@ -1,21 +1,30 @@
 package com.infoshare.academy.highfive.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infoshare.academy.highfive.util.CustomHolidayDeserializer;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NamedQueries({
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
+        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY")}
+)
+
 @Entity
 @Table(name = "holiday")
+@JsonDeserialize(using = CustomHolidayDeserializer.class)
 public class Holiday {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @Column(name = "date", nullable = false)
@@ -31,17 +40,27 @@ public class Holiday {
     private int day;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="holiday_type")
+    @Column(name = "holiday_type")
     private HolidayType holidayType;
 
     public Holiday() {
     }
 
-    public int getId() {
+    public Holiday(String name, String description, LocalDate date, int year, int month, int day, HolidayType holidayType) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.holidayType = holidayType;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

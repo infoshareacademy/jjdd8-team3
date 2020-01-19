@@ -12,7 +12,7 @@ public class EmployeeMapper {
 
         Employee employee = new Employee();
 
-        employee.setId(request.getId());
+
         employee.setFirstName(request.getFirstName());
         employee.setSurname(request.getSurname());
         employee.setHireDate(request.getHireDate());

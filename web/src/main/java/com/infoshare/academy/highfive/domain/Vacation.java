@@ -3,6 +3,14 @@ package com.infoshare.academy.highfive.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NamedQueries({
+  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT DISTINCT vacation " +
+    "FROM Vacation vacation " +
+    "JOIN vacation.employee e " +
+    "WHERE vacation.vacationStatus = com.infoshare.academy.highfive.domain.VacationStatus.APPLIED"),
+  }
+)
+
 @Entity
 @Table (name = "vacation")
 public class Vacation {

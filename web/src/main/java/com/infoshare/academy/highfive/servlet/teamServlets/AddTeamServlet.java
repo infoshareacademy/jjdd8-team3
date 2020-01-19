@@ -30,6 +30,12 @@ public class AddTeamServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         TeamRequest teamRequest = requestMapper.mapParamsToRequest(req);
-        teamService.addNewTeam(teamRequest);
+        teamService.saveTeam(teamRequest);
+
+//        TODO
+//                Prepare confirmation communication for client/user. It may be a list of teams as well
+
+        resp.sendRedirect("/well-done");
+
     }
 }

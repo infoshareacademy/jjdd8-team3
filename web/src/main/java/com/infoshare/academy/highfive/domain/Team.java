@@ -2,6 +2,11 @@ package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
 import java.util.Set;
+import org.hibernate.annotations.Index;
+
+@NamedQueries(
+        @NamedQuery(name = "Team.findAll",
+                query = "SELECT team" + "FROM Team team"))
 
 @Entity
 @Table(name = "team")
@@ -16,10 +21,9 @@ public class Team {
     private String teamName;
 
     @OneToMany(
-            mappedBy = "teamId",
+            mappedBy = "team",
             orphanRemoval = true
     )
-
     private Set<Employee> teamEmployeeList;
 
     public Long getId() {
