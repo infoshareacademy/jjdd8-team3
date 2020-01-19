@@ -3,7 +3,7 @@ package com.infoshare.academy.highfive.mapper.request;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.domain.VacationType;
-import com.infoshare.academy.highfive.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;

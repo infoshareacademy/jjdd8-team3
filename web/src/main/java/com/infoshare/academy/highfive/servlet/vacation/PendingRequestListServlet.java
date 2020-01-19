@@ -36,8 +36,6 @@ public class PendingRequestListServlet extends HttpServlet {
     dataModel.put("method", req.getMethod());
     dataModel.put("contentTemplate", "pending-vacation.ftlh");
     dataModel.put("title", "Pending requests");
-    dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
-    dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
     dataModel.put("vacations", vacationService.listAllPendingRequests());
 
     try {

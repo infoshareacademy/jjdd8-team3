@@ -2,7 +2,7 @@
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Define new team</h1>
+    <h1 class="h3 mb-0 text-gray-800">There was a problem with processing your request</h1>
   </div>
   <div class="row justify-content-center">
     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -13,8 +13,7 @@
             <div class="col-lg-6">
               <div class="p-5">
                 <div class="text-center">
-                  <h1 class="h4 text-gray-900 mb-4">There was a problem with processing your request.</h1>
-                  <p>Start date is after end date. Please try again. </p>
+                  <h1 class="h4 text-gray-900 mb-4">Start date is after end date. Please try again.</h1>
                 </div>
               </div>
             </div>

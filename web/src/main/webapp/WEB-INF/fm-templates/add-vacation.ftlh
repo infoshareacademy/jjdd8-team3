@@ -24,15 +24,15 @@
                   <div class="form-group">
                     <label for="date_from">Date from</label>
                     <input type="date" class="form-control form-control-user"
-                           name="date_from" required="" placeholder="">
+                           name="date_from" required="" placeholder="" id="date_from">
                   </div>
                   <div class="form-group">
                     <label for="date_to">Date to</label>
                     <input type="date" class="form-control form-control-user"
-                           name="date_to" required="" placeholder="">
+                           name="date_to" required="" placeholder="" id="date_to">
                   </div>
               <div>
-                  <label for="exampleFormControlSelect2">Vacation type</label>
+                  <label for="vacation_type">Vacation type</label>
                   <select class="form-control" id="vacation_type" name="vacation_type">
                     <option name="vacation" value="vacation">Vacation leave</option>
                     <option name="parental" value="parental">Parental leave</option>

@@ -7,8 +7,8 @@ import com.infoshare.academy.highfive.dao.VacationDao;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Entitlement;
 import com.infoshare.academy.highfive.domain.VacationType;
-import com.infoshare.academy.highfive.mapper.request.VacationMapper;
-import com.infoshare.academy.highfive.request.VacationRequest;
+import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

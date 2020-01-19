@@ -2,7 +2,7 @@ package com.infoshare.academy.highfive.servlet.vacation;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
-import com.infoshare.academy.highfive.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.service.VacationService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

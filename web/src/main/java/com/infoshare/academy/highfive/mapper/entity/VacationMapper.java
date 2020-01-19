@@ -1,12 +1,10 @@
-package com.infoshare.academy.highfive.mapper.request;
+package com.infoshare.academy.highfive.mapper.entity;
 
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Vacation;
-import com.infoshare.academy.highfive.dto.EmployeeDTO;
-import com.infoshare.academy.highfive.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 @Stateless
 public class VacationMapper {

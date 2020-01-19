@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.request;
+package com.infoshare.academy.highfive.dto.request;
 
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Role;
@@ -43,9 +43,7 @@ public class VacationRequest {
     this.role = role;
   }
 
-  public LocalDate getDateFrom() {
-    return this.dateFrom;
-  }
+  public LocalDate getDateFrom() { return this.dateFrom; }
 
   public void setDateFrom(LocalDate dateFrom) {
     this.dateFrom = dateFrom;

@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @NamedQueries({
-  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT DISTINCT vacation " +
+  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "JOIN vacation.employee e " +
+    "INNER JOIN Employee employee ON vacation.employee = employee " +
     "WHERE vacation.vacationStatus = com.infoshare.academy.highfive.domain.VacationStatus.APPLIED"),
   }
 )
