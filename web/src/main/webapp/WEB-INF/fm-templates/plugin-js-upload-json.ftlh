@@ -14,7 +14,7 @@
         $.ajax({
             type: "POST",
             //url: $(this).attr('action'),
-            url: "/api/holiday-api/upload",
+            url: "/api/holiday/upload",
             enctype: 'multipart/form-data',
             data: new FormData(this),
             processData: false,

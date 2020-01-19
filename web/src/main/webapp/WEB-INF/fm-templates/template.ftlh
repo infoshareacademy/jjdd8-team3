@@ -282,9 +282,8 @@
 
 <#--            KONIEC-->
             <!-- Template injection -->
-          <#if contentTemplate??>
+
           <#include "/${contentTemplate}">
-          </#if>
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
