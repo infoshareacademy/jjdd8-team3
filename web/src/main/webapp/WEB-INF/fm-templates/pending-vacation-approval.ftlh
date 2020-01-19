@@ -13,7 +13,7 @@
             <div class="col-lg-6">
               <div class="p-5">
                 <div class="text-center">
-                  <h1 class="h4 text-gray-900 mb-4">Request sent to your manager. Please patiently wait for approval.</h1>
+                  <h1 class="h4 text-gray-900 mb-4">Request approved.</h1>
                 </div>
               </div>
             </div>
@@ -30,6 +30,6 @@
       </div>
     </div>
   </div>
-<!-- /.container-fluid -->
+  <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->

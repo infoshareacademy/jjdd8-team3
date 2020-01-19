@@ -4,9 +4,8 @@ import com.infoshare.academy.highfive.dao.EmployeeDao;
 import com.infoshare.academy.highfive.dao.EntitlementDao;
 import com.infoshare.academy.highfive.dao.HolidayDao;
 import com.infoshare.academy.highfive.dao.VacationDao;
-import com.infoshare.academy.highfive.domain.Employee;
-import com.infoshare.academy.highfive.domain.Entitlement;
-import com.infoshare.academy.highfive.domain.VacationType;
+import com.infoshare.academy.highfive.domain.*;
+import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import org.slf4j.Logger;
@@ -15,8 +14,10 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class VacationService {
@@ -153,11 +154,25 @@ public class VacationService {
 
   }
 
-  public List listAllPendingRequests() {
+  public List<VacationView> listAllPendingRequests() {
 
-    return vacationDao.getPendingRequestsList();
+    return vacationDao.getPendingRequestsList()
+      .stream()
+      .map(vacation -> vacationMapper.mapEntityToView(vacation))
+      .collect(Collectors.toList());
 
   }
+
+  public String changeVacationStatus(Long vacationId, VacationStatus vacationStatus) {
+
+    Vacation vacation = vacationDao.getVacationById(vacationId);
+    vacation.setVacationStatus(vacationStatus);
+    vacationDao.updateVacationStatus(vacation);
+
+    return "Success";
+
+  }
+
 
 }
 

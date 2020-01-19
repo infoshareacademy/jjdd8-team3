@@ -6,8 +6,11 @@ import java.time.LocalDate;
 @NamedQueries({
   @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "INNER JOIN Employee employee ON vacation.employee = employee " +
-    "WHERE vacation.vacationStatus = com.infoshare.academy.highfive.domain.VacationStatus.APPLIED"),
+    "JOIN FETCH Employee employee ON vacation.employee = employee " +
+    "WHERE vacation.vacationStatus = :status"),
+  @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
+    "FROM Vacation vacation " +
+    "WHERE vacation.id = :vacationId")
   }
 )
 
@@ -21,7 +24,7 @@ public class Vacation {
     private Long id;
 
     @JoinColumn(name = "employee_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
 
     @Column (name = "from_date", nullable = false)

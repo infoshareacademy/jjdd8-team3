@@ -4,6 +4,7 @@ import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.service.VacationService;
+import com.infoshare.academy.highfive.service.configuration.MailSender;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -21,8 +22,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("employee/add-vacation")
-public class AddVacationServlet extends HttpServlet {
+@WebServlet("employee/request-vacation")
+public class RequestVacationServlet extends HttpServlet {
 
   Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
@@ -34,6 +35,9 @@ public class AddVacationServlet extends HttpServlet {
 
   @Inject
   VacationService vacationService;
+
+  @Inject
+  MailSender mailSender;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,8 +51,8 @@ public class AddVacationServlet extends HttpServlet {
     Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
     dataModel.put("method", req.getMethod());
-    dataModel.put("contentTemplate", "add-vacation.ftlh");
-    dataModel.put("title", "Add vacation");
+    dataModel.put("contentTemplate", "request-vacation.ftlh");
+    dataModel.put("title", "Request vacation");
 
     LOGGER.info("User provided with vacation form.");
 
@@ -84,17 +88,18 @@ public class AddVacationServlet extends HttpServlet {
 
     if (vacationService.getStatus().equals("ok")) {
 
-      dataModel.put("contentTemplate", "success.ftlh");
+      dataModel.put("contentTemplate", "request-vacation-success.ftlh");
       dataModel.put("title", "Success!");
+//      mailSender.sendNotification("bandurskim@gmail.com");
 
     } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
 
-      dataModel.put("contentTemplate", "exceeding_entitlement.ftlh");
+      dataModel.put("contentTemplate", "request-vacation-exceeding-entitlement.ftlh");
       dataModel.put("title", "Given days are exceeding entitlement.");
 
     } else {
 
-      dataModel.put("contentTemplate", "wrong_date.ftlh");
+      dataModel.put("contentTemplate", "request-vacation-wrong-date.ftlh");
       dataModel.put("title", "Wrong dates given.");
 
     }
