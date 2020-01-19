@@ -1,7 +1,7 @@
-package com.infoshare.academy.highfive.servlet.teamServlets;
+package com.infoshare.academy.highfive.servlet.team;
 
 import com.infoshare.academy.highfive.mapper.request.TeamRequestMapper;
-import com.infoshare.academy.highfive.request.TeamRequest;
+import com.infoshare.academy.highfive.dto.request.TeamRequest;
 import com.infoshare.academy.highfive.service.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +34,6 @@ public class AddTeamServlet extends HttpServlet {
 
 //        TODO
 //                Prepare confirmation communication for client/user. It may be a list of teams as well
-
-        resp.sendRedirect("/well-done");
-
+//        resp.sendRedirect("/well-done");
     }
 }

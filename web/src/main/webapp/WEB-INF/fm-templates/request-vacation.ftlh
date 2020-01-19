@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Define new team</h1>
+    <h1 class="h3 mb-0 text-gray-800"></h1>
   </div>
   <div class="row justify-content-center">
     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -15,21 +15,21 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Request vacation</h1>
                 </div>
-                <form class="user" action="add-vacation" method="post">
+                <form class="user" action="request-vacation" method="post">
                   <div class="form-group">
                     <label for="employee_id">Employee ID</label>
-                    <input type="number" class="form-control form-control-user" id="employee_id"
-                           placeholder="Employee ID" required="" name="employee_id">
+                    <input type="number" class="form-control form-control-user"
+                           id="employee_id" placeholder="Employee ID" required="" name="employee_id">
                   </div>
                   <div class="form-group">
                     <label for="date_from">Date from</label>
-                    <input type="date" class="form-control form-control-user" id="date_from"
-                           name="date_from" required="" placeholder="">
+                    <input type="date" class="form-control form-control-user"
+                           name="date_from" required="" placeholder="" id="date_from">
                   </div>
                   <div class="form-group">
                     <label for="date_to">Date to</label>
                     <input type="date" class="form-control form-control-user"
-                           name="date_to" required="" placeholder="">
+                           name="date_to" required="" placeholder="" id="date_to">
                   </div>
               <div>
                   <label for="vacation_type">Vacation type</label>

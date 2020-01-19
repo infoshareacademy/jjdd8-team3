@@ -4,10 +4,12 @@ import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.exception.JsonFileNotFound;
 import com.infoshare.academy.highfive.service.configuration.UploadJsonService;
 import com.infoshare.academy.highfive.service.holiday.HolidayService;
+//import mapper.holiday.HolidayJsonMapper;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import javax.inject.Inject;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -17,36 +19,34 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-@Path("/holiday")
+//import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+//import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
+@Path("/holiday-api")
 public class HolidayApi {
 
     @Inject
     private HolidayService holidayService;
 
     @Inject
-    private UploadJsonService uploadJsonService;
+    UploadJsonService uploadJsonService;
 
-    @GET
-    @Path("/get/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("id") Long id) {
-        return Response.ok().entity(holidayService.finById(id)).build();
-    }
+//    @Inject
+//    HolidayJsonMapper holidayJsonMapper;
+
+//    @GET
+//    @Path("/get/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public JsonObject get(@PathParam("id") Long id) {
+//        Holiday holiday = holidayService.finById(id);
+//        return holidayJsonMapper.toJson(holiday);
+//    }
 
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response list() {
-        return Response.ok().entity(holidayService.listAllHolidayViews()).build();
-    }
-
-    @POST
-    @Path("/add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response create(Holiday holiday) {
-            holidayService.saveHoliday(holiday);
-            return Response.ok().entity("Operation successful").build();
+    public JsonObject list() {
+        return null;
     }
 
     @POST

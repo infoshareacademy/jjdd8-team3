@@ -1,10 +1,13 @@
 package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.TeamDao;
+import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Team;
+import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.view.TeamView;
+import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
 import com.infoshare.academy.highfive.mapper.entity.TeamMapper;
-import com.infoshare.academy.highfive.request.TeamRequest;
-import com.sun.xml.bind.v2.TODO;
+import com.infoshare.academy.highfive.dto.request.TeamRequest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,34 +21,38 @@ public class TeamService {
     private TeamMapper teamMapper;
     @Inject
     private TeamDao teamDao;
+    @Inject
+    private EmployeeMapper employeeMapper;
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
 
     public void saveTeam(TeamRequest request) {
         teamDao.saveTeam(teamMapper.mapRequestToEntity(request));
     }
 
-//    TODO
-    public void deleteTeam(TeamRequest request) { }
+    //    TODO
+    public void deleteTeam(TeamRequest request) {
+    }
 
-//    TODO
-    public void editTeam(TeamRequest teamRequest) {}
+    //    TODO
+    public void editTeam(TeamRequest request) {
+    }
 
-
-    public void getAllTeams (TeamRequest request){}
-
-
-    public Team findById(Long id) {
+    public TeamView findById(Long id) {
         Team team = teamDao.findById(id).orElseThrow();
-        return team;
+        return teamMapper.mapEntityToView(team);
     }
 
-    public List<Team> findAll() {
+    public List<TeamView> findAll() {
 
-        List<Team> teams = new ArrayList<>();
+        List<TeamView> teamViews = new ArrayList<>();
 
-        teamDao.findAll();
+        teamDao.findAll().forEach(employee -> teamViews.add(teamMapper.mapEntityToView(employee)));
 
-        return teams;
+        return teamViews;
     }
-
-
 }

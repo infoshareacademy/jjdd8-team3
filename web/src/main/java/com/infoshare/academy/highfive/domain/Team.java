@@ -1,12 +1,17 @@
 package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
-import org.hibernate.annotations.Index;
 
-@NamedQueries(
-        @NamedQuery(name = "Team.findAll",
-                query = "SELECT team" + "FROM Team team"))
+@NamedQueries({
+        @NamedQuery(name = "Team.findAll", query = "SELECT team " +
+            "FROM Team team "),
+        @NamedQuery (name = "Team.findAllTeamMembers", query = "SELECT employee " +
+            "FROM Employee employee " +
+            "WHERE team.id = :teamId")
+        }
+        )
 
 @Entity
 @Table(name = "team")
@@ -20,11 +25,8 @@ public class Team {
     @Column(name = "team_name", nullable = false)
     private String teamName;
 
-    @OneToMany(
-            mappedBy = "team",
-            orphanRemoval = true
-    )
-    private Set<Employee> teamEmployeeList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team", orphanRemoval = true )
+    private List<Employee> teamMembers;
 
     public Long getId() {
         return id;
@@ -42,11 +44,11 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public Set<Employee> getTeamEmployeeList() {
-        return teamEmployeeList;
+    public List<Employee> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setTeamEmployeeList(Set<Employee> teamEmployeeList) {
-        this.teamEmployeeList = teamEmployeeList;
+    public void setTeamMembers(List<Employee> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 }

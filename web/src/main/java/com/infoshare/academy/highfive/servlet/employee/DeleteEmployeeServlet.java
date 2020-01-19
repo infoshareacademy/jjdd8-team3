@@ -1,7 +1,7 @@
-package com.infoshare.academy.highfive.servlet.employeeServlets;
+package com.infoshare.academy.highfive.servlet.employee;
 
 import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
-import com.infoshare.academy.highfive.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

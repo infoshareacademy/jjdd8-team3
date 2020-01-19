@@ -1,11 +1,12 @@
-package com.infoshare.academy.highfive.request;
+package com.infoshare.academy.highfive.dto.view;
+
 
 import com.infoshare.academy.highfive.domain.Role;
-import com.infoshare.academy.highfive.domain.Team;
-
 import java.time.LocalDate;
 
-public class EmployeeRequest {
+public class EmployeeView {
+
+    private Long id;
 
     private String firstName;
 
@@ -15,17 +16,19 @@ public class EmployeeRequest {
 
     private Integer holidayEntitlement;
 
-    private  Integer additionalEntitlement;
-
-    private String login;
+    private Integer additionalEntitlement;
 
     private String email;
 
     private String position;
 
-    private Team team;
+    private Long teamId;
 
     private Role role;
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public String getFirstName() { return firstName; }
 
@@ -47,10 +50,6 @@ public class EmployeeRequest {
 
     public void setAdditionalEntitlement(Integer additionalEntitlement) { this.additionalEntitlement = additionalEntitlement; }
 
-    public String getLogin() { return login; }
-
-    public void setLogin(String login) { this.login = login; }
-
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
@@ -59,9 +58,9 @@ public class EmployeeRequest {
 
     public void setPosition(String position) { this.position = position; }
 
-    public Team getTeam() { return team; }
+    public Long getTeamId() { return teamId; }
 
-    public void setTeam(Team teamId) { this.team = teamId; }
+    public void setTeamId(Long teamId) { this.teamId = teamId; }
 
     public Role getRole() { return role; }
 

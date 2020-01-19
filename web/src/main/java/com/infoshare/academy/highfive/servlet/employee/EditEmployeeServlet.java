@@ -1,10 +1,11 @@
-package com.infoshare.academy.highfive.servlet.employeeServlets;
+package com.infoshare.academy.highfive.servlet.employee;
 
 import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
-import com.infoshare.academy.highfive.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -15,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 
-@WebServlet("/manager/add-employee/")
-public class AddEmployeeServlet extends HttpServlet {
+@WebServlet("/manager/edit-employee/")
+public class EditEmployeeServlet extends HttpServlet {
 
     Logger logger = LoggerFactory.getLogger(getClass().getName());
 
@@ -31,7 +32,7 @@ public class AddEmployeeServlet extends HttpServlet {
 
         try {
             EmployeeRequest employeeRequest = requestMapper.mapParamsToRequest(req);
-            employeeService.addNewEmployee(employeeRequest);
+            employeeService.editEmployee(employeeRequest);
         } catch (ParseException e) {
             e.printStackTrace();
         }

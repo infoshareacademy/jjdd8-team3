@@ -1,7 +1,7 @@
-package com.infoshare.academy.highfive.servlet.teamServlets;
+package com.infoshare.academy.highfive.servlet.team;
 
 import com.infoshare.academy.highfive.mapper.request.TeamRequestMapper;
-import com.infoshare.academy.highfive.request.TeamRequest;
+import com.infoshare.academy.highfive.dto.request.TeamRequest;
 import com.infoshare.academy.highfive.service.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -94,8 +94,8 @@
             </a>
             <div id="requestMenu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/employee/add-vacation">Add vacation</a>
-                    <a class="collapse-item" href="/blank.html">Cancel vacation</a>
+                    <a class="collapse-item" href="/employee/request-vacation">Request vacation</a>
+                    <a class="collapse-item" href="/blank.html">Withdraw request</a>
                 </div>
             </div>
         </li>

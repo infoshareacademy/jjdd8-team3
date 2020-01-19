@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.request;
+package com.infoshare.academy.highfive.dto.request;
 
 public class TeamRequest {
 
