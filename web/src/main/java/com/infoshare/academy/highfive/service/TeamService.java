@@ -4,6 +4,7 @@ import com.infoshare.academy.highfive.dao.TeamDao;
 import com.infoshare.academy.highfive.domain.Team;
 import com.infoshare.academy.highfive.mapper.entity.TeamMapper;
 import com.infoshare.academy.highfive.request.TeamRequest;
+import com.sun.xml.bind.v2.TODO;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -22,8 +23,12 @@ public class TeamService {
         teamDao.saveTeam(teamMapper.mapRequestToEntity(request));
     }
 
-//    public void deleteTeam(TeamRequest request) {
-//        teamDao.deleteTeam(teamMapper.mapRequestToEntity(request));}
+//    TODO
+    public void deleteTeam(TeamRequest request) { }
+
+//    TODO
+    public void editTeam(TeamRequest teamRequest) {}
+
 
     public void getAllTeams (TeamRequest request){}
 
@@ -41,5 +46,6 @@ public class TeamService {
 
         return teams;
     }
+
 
 }

@@ -23,7 +23,6 @@ public class EmployeeRequestMapper {
     EmployeeRequest employeeRequest = new EmployeeRequest();
     LocalDate hireDate = LocalDate.parse(request.getParameter("hire_date"), DateTimeFormatter.ofPattern("dd/mm/yyyy"));
 
-    employeeRequest.setId((Long) request.getAttribute("id"));
     employeeRequest.setFirstName((String) request.getAttribute("first_name"));
     employeeRequest.setSurname((String) request.getAttribute("surname"));
     employeeRequest.setHireDate(hireDate);

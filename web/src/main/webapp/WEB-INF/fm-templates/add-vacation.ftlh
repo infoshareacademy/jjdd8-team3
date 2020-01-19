@@ -18,12 +18,12 @@
                 <form class="user" action="add-vacation" method="post">
                   <div class="form-group">
                     <label for="employee_id">Employee ID</label>
-                    <input type="number" class="form-control form-control-user"
-                           id="employee_id" placeholder="Employee ID" required="" name="employee_id">
+                    <input type="number" class="form-control form-control-user" id="employee_id"
+                           placeholder="Employee ID" required="" name="employee_id">
                   </div>
                   <div class="form-group">
                     <label for="date_from">Date from</label>
-                    <input type="date" class="form-control form-control-user"
+                    <input type="date" class="form-control form-control-user" id="date_from"
                            name="date_from" required="" placeholder="">
                   </div>
                   <div class="form-group">
@@ -32,7 +32,7 @@
                            name="date_to" required="" placeholder="">
                   </div>
               <div>
-                  <label for="exampleFormControlSelect2">Vacation type</label>
+                  <label for="vacation_type">Vacation type</label>
                   <select class="form-control" id="vacation_type" name="vacation_type">
                     <option name="vacation" value="vacation">Vacation leave</option>
                     <option name="parental" value="parental">Parental leave</option>

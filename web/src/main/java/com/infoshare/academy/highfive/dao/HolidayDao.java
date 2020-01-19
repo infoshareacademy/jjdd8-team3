@@ -5,6 +5,7 @@ import com.infoshare.academy.highfive.domain.Holiday;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,4 +30,6 @@ public class HolidayDao {
         return Optional.ofNullable(em.find(Holiday.class,id));
     }
 
+//    TODO
+    public List<LocalDate> listAllHolidayDates() { return null; }
 }
