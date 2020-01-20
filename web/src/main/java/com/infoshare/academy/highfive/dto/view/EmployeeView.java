@@ -2,6 +2,8 @@ package com.infoshare.academy.highfive.dto.view;
 
 
 import com.infoshare.academy.highfive.domain.Role;
+import com.infoshare.academy.highfive.domain.Team;
+
 import java.time.LocalDate;
 
 public class EmployeeView {
@@ -22,7 +24,7 @@ public class EmployeeView {
 
     private String position;
 
-    private Long teamId;
+    private Team teamId;
 
     private Role role;
 
@@ -58,9 +60,9 @@ public class EmployeeView {
 
     public void setPosition(String position) { this.position = position; }
 
-    public Long getTeamId() { return teamId; }
+    public Team getTeamId() { return teamId; }
 
-    public void setTeamId(Long teamId) { this.teamId = teamId; }
+    public void setTeamId(Team teamId) { this.teamId = teamId; }
 
     public Role getRole() { return role; }
 

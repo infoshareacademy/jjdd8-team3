@@ -37,7 +37,7 @@ public class Employee {
     @Column(name = "position")
     private String position;
 
-    @JoinColumn(name = "team_id", nullable = false)
+    @JoinColumn(name = "team_id", nullable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
@@ -101,7 +101,7 @@ public class Employee {
         this.email = email;
     }
 
-    public Long getTeam() { return team; }
+    public Team getTeam() { return team; }
 
     public void setTeam(Team team) { this.team = team; }
 
