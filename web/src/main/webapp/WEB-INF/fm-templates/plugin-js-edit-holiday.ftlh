@@ -30,16 +30,15 @@
 
         $.ajax({
             type: <#if action == "edit">"PUT"<#else>"POST"</#if>,
-            url: <#if action == "edit">"/api/holiday/put/"+$('#holiday-id').val()<#else>\"/api/holiday/add"</#if>,
+            url: <#if action == "edit">"/api/holiday/put/"+$('#holiday-id').val()<#else>"/api/holiday/add"</#if>,
             enctype: 'application/json;charset=UTF-8',
             dataType: 'json',
             data: formToJSON(),
             contentType: 'application/json;charset=UTF-8'
-        // contentType: 'application/json',
     })
     .done(
             function (data) {
-                $('#modal-info-body').html(data.name + data.date);
+                $('#modal-info-body').html("Operation complete on holiday: "+date.name +" on day "+ data.date);
                 $('#infoModal').modal('show');
             })
             .fail(

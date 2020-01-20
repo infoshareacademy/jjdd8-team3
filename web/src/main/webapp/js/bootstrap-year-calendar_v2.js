@@ -274,9 +274,9 @@
 					do {
 						var cell = $(document.createElement('td'));
 						if (currentDate.getDay() == 0){
-							cell.addClass('day-sun');
+							cell.addClass('day day-sun');
 						} else if (currentDate.getDay() == 6){
-							cell.addClass('day-sat');
+							cell.addClass('day day-sat');
 						} else {
 							cell.addClass('day');
 						}

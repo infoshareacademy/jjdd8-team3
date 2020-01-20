@@ -13,7 +13,7 @@
             .done(
                 function (data) {
                     $('#modal-button').attr('onClick', 'window.location.href="/admin/edit-holiday";');
-                    $('#modal-info-body').html("Holiday "+ data.name +" " + data.date+ "removed");
+                    $('#modal-info-body').html("Holiday: "+ data.name +" " + data.date+ " removed!");
                     $('#infoModal').modal('show');
 
                 })

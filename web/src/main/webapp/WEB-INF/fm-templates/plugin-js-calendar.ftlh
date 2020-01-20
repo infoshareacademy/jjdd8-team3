@@ -45,8 +45,8 @@
                     location: '${holiday.description!}',
                     type:'${holiday.holidayType.getType()!}',
                     <#if holiday.holidayType.getType() == 'National holiday'>color:'red'<#else>color:'orange'</#if>,
-                    startDate: new Date(${holiday.date?substring(0, 4)},${holiday.month},${holiday.day}),
-                    endDate: new Date(${holiday.date?substring(0, 4)},${holiday.month},${holiday.day})
+                    startDate: new Date(${holiday.date?substring(0, 4)},${holiday.month-1},${holiday.day}),
+                    endDate: new Date(${holiday.date?substring(0, 4)},${holiday.month-1},${holiday.day})
                    }
              <#sep>, </#sep>
         </#list>
