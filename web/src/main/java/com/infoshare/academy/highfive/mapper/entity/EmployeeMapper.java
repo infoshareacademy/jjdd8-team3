@@ -43,7 +43,7 @@ public class EmployeeMapper {
         employeeView.setAdditionalEntitlement(employee.getAdditionalEntitlement());
         employeeView.setEmail(employee.getEmail());
         employeeView.setPosition(employee.getPosition());
-        employeeView.setTeamId(employee.getTeam());
+        employeeView.setTeamId(employee.getTeam().getId());
         employeeView.setRole(employee.getRole());
 
         return employeeView;

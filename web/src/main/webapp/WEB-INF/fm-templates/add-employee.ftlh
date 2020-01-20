@@ -40,7 +40,7 @@
 
                   <div class="form-group">
                     <label for="select-team">Select team</label>
-                    <select class="form-control  id="select-team" name="team_name">
+                    <select class="form-control" id="select-team" name="team_name">
                       <#list teams as team>
                           <option value="${team!}">${team.getTeamName()!}</option>
                       </#list>

@@ -101,7 +101,7 @@ public class Employee {
         this.email = email;
     }
 
-    public Long getTeam() { return team; }
+    public Team getTeam() { return team; }
 
     public void setTeam(Team team) { this.team = team; }
 

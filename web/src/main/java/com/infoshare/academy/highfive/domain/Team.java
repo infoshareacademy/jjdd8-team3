@@ -2,7 +2,7 @@ package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 
 @NamedQueries({
         @NamedQuery(name = "Team.findAll", query = "SELECT team " +
