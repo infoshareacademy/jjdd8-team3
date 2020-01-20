@@ -8,23 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="HIGH-FIVE">
-    <#if title??>
-        <title>${title!}</title>
-    <#else>
-        <title>Vacation Manager</title>
-    </#if>
+
+    <title>VACATION MANAGER</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
-<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
 
-    <#if pluginCssTemplate??>
-    <#include "/${pluginCssTemplate}">
-    </#if>
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -36,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-praying-hands"></i>
             </div>
@@ -48,7 +42,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="/">
+            <a class="nav-link" href="index.html">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -70,11 +64,9 @@
             </a>
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/list-holidays">Holiday - List</a>
-                    <a class="collapse-item" href="/calendar">Calendar</a>
-                    <a class="collapse-item" href="/blank">Holiday search</a>
-                    <a class="collapse-item" href="/blank">Employee vacation</a>
-                    <a class="collapse-item" href="/blank">Team vacation</a>
+                    <a class="collapse-item" href="holiday-search-WORKING.html">Holiday search</a>
+                    <a class="collapse-item" href="blank.html">Employee vacation</a>
+                    <a class="collapse-item" href="blank.html">Team vacation</a>
                 </div>
             </div>
         </li>
@@ -88,8 +80,8 @@
             </a>
             <div id="requestMenu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/employee/request-vacation">Request vacation</a>
-                    <a class="collapse-item" href="/blank.html">Withdraw request</a>
+                    <a class="collapse-item" href="blank.html">Add vacation</a>
+                    <a class="collapse-item" href="blank.html">Cancel vacation</a>
                 </div>
             </div>
         </li>
@@ -104,8 +96,7 @@
 
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="/blank">
-            <a class="nav-link" href="/manager/pending-requests">
+            <a class="nav-link" href="blank.html">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>
         </li>
@@ -119,9 +110,9 @@
             </a>
             <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
-                    <a class="collapse-item" href="/blank">Edit</a>
-                    <a class="collapse-item" href="/blank">Remove</a>
+                    <a class="collapse-item" href="blank.html">Add</a>
+                    <a class="collapse-item" href="blank.html">Edit</a>
+                    <a class="collapse-item" href="blank.html">Remove</a>
                 </div>
             </div>
         </li>
@@ -135,9 +126,9 @@
             </a>
             <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
-                    <a class="collapse-item" href="/blank">Edit</a>
-                    <a class="collapse-item" href="/blank">Remove</a>
+                    <a class="collapse-item" href="blank.html">Add</a>
+                    <a class="collapse-item" href="blank.html">Edit</a>
+                    <a class="collapse-item" href="blank.html">Remove</a>
                 </div>
             </div>
         </li>
@@ -152,10 +143,20 @@
 
         <!-- Heading -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin/edit-holiday">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExtra"
+               aria-expanded="true" aria-controls="collapseExtra">
                 <i class="fas fa-calendar-plus"></i>
-                <span>Edit holidays</span></a>
+                <span>Extra holidays</span>
+            </a>
+            <div id="collapseExtra" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="blank.html">Add</a>
+                    <a class="collapse-item" href="blank.html">Edit</a>
+                    <a class="collapse-item" href="blank.html">Remove</a>
+                </div>
+            </div>
         </li>
+
         <!-- Nav Item - Configuration -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfig"
@@ -165,10 +166,9 @@
             </a>
             <div id="collapseConfig" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Date format</a>
-                    <a class="collapse-item" href="/blank">Sorting</a>
-                    <a class="collapse-item" href="/blank">Holidays database</a>
-                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
+                    <a class="collapse-item" href="blank.html">Date format</a>
+                    <a class="collapse-item" href="blank.html">Sorting</a>
+                    <a class="collapse-item" href="blank.html">Holidays database</a>
                 </div>
             </div>
         </li>
@@ -262,14 +262,56 @@
             </nav>
             <!-- End of Topbar -->
 
-<#--            NASZ SORDEK-->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Define new team</h1>
+                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+                </div>
 
-<#--            KONIEC-->
-            <!-- Template injection -->
-          <#if contentTemplate??>
-          <#include "/${contentTemplate}">
-          </#if>
+                <div class="row justify-content-center">
+
+                    <div class="col-xl-10 col-lg-12 col-md-9">
+
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Define new team</h1>
+                                            </div>
+                                            <form class="user">
+                                                <div class="form-group">
+                                                    <label for="team_id">team name</label>
+                                                    <input type="text" class="form-control form-control-user"
+                                                           id="team_id" placeholder="Enter new team name">
+                                                </div>
+                                                <hr>
+                                                <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                                    Save
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </div>
+<!--                            TODO-->
+<!--                            Fit image size and content !!! -->
+                                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
@@ -306,46 +348,24 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/login.html">Logout</a>
+                <a class="btn btn-primary" href="login.html">Logout</a>
             </div>
         </div>
     </div>
 </div>
 
-    <!-- Operation INFO Modal-->
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Operation Info!</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/></div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
-<#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Bootstrap core JavaScript-->
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<script src="js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Core plugin JavaScript-->
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>-->
+<script src="js/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+<script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <#if pluginJsTemplate??>
-        <#include "/${pluginJsTemplate}">
-    </#if>
 </body>
 
 </html>

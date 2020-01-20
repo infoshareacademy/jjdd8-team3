@@ -5,6 +5,7 @@ import com.infoshare.academy.highfive.domain.Holiday;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,12 @@ public class HolidayDao {
         return this.em
                 .createNamedQuery("Holiday.findAll")
                 .getResultList();
+    }
+
+    public List<LocalDate> listAllHolidayDates() {
+      return this.em
+        .createNamedQuery("Holiday.findAllDates")
+        .getResultList();
     }
 
     public Optional<Holiday> getById(Long id) {
