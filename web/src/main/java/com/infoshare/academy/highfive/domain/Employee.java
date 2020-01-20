@@ -3,7 +3,6 @@ package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "employee")
@@ -102,7 +101,7 @@ public class Employee {
         this.email = email;
     }
 
-    public Team getTeam() { return team; }
+    public Long getTeam() { return team; }
 
     public void setTeam(Team team) { this.team = team; }
 

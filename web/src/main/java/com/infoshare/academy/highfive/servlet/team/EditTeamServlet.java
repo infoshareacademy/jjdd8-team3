@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/manager/edit-team/")
+@WebServlet("/manager/edit-team")
 public class EditTeamServlet extends HttpServlet {
 
     Logger logger = LoggerFactory.getLogger(getClass().getName());

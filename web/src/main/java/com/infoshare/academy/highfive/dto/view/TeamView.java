@@ -2,7 +2,7 @@ package com.infoshare.academy.highfive.dto.view;
 
 import com.infoshare.academy.highfive.domain.Employee;
 
-import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 public class TeamView {
@@ -11,7 +11,7 @@ public class TeamView {
 
     private String teamName;
 
-    private Set<Employee> teamEmployeeList;
+    private List<Employee> teamEmployeeList;
 
     public Long getId() {
         return id;
@@ -29,11 +29,11 @@ public class TeamView {
         this.teamName = teamName;
     }
 
-    public Set<Employee> getTeamEmployeeList() {
+    public List<Employee> getTeamEmployeeList() {
         return teamEmployeeList;
     }
 
-    public void setTeamEmployeeList(Set<Employee> teamEmployeeList) {
+    public void setTeamEmployeeList(List<Employee> teamEmployeeList) {
         this.teamEmployeeList = teamEmployeeList;
     }
 }

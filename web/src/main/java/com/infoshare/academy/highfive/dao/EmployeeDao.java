@@ -9,8 +9,10 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class EmployeeDao {
 
-  public void addEmployee(Employee employee) {
-  }
+  @PersistenceContext
+  EntityManager em;
+
+  public void addEmployee(Employee employee) { em.persist(employee); }
 
   public void editEmployee(Employee employee) {
   }

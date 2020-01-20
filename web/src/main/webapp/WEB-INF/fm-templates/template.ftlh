@@ -124,7 +124,7 @@
             </a>
             <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add</a>
+                    <a class="collapse-item" href="/manager/add-employee">Add</a>
                     <a class="collapse-item" href="/blank.html">Edit</a>
                     <a class="collapse-item" href="/blank.html">Remove</a>
                 </div>
@@ -140,7 +140,7 @@
             </a>
             <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add</a>
+                    <a class="collapse-item" href="/manager/add-team">Add</a>
                     <a class="collapse-item" href="/blank.html">Edit</a>
                     <a class="collapse-item" href="/blank.html">Remove</a>
                 </div>
@@ -183,7 +183,7 @@
                     <a class="collapse-item" href="/blank.html">Date format</a>
                     <a class="collapse-item" href="/blank.html">Sorting</a>
                     <a class="collapse-item" href="/blank.html">Holidays database</a>
-                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
+                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br/> form file</a>
                 </div>
             </div>
         </li>
@@ -277,54 +277,54 @@
             </nav>
             <!-- End of Topbar -->
 
-<#--            NASZ SORDEK-->
+            <#--            NASZ SORDEK-->
 
 
-<#--            KONIEC-->
+            <#--            KONIEC-->
             <!-- Template injection -->
 
-          <#include "/${contentTemplate}">
+            <#include "/${contentTemplate}">
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; HIGH-FIVE 2020</span>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; HIGH-FIVE 2020</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/login.html">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Operation INFO Modal-->
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -337,10 +337,11 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/></div>
+                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/>
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Ok</button>
-<#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
+                    <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
                 </div>
             </div>
         </div>
@@ -354,13 +355,14 @@
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>
         <#include "/${pluginJsTemplate}">
     </#if>
+</div>
 </body>
 
 </html>
