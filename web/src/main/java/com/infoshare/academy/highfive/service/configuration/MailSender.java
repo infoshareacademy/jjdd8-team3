@@ -30,7 +30,7 @@ public class MailSender {
 
   public void sendApprove(String emailRecipient) throws IOException {
 
-    Email from = new Email("vacation-manager@highfive.com");
+    Email from = new Email("Vacation-Manager@HighFive.com");
     String subject = "Vacation Manager notification. Your request has been approved.";
     Email to = new Email(emailRecipient);
     Content content = new Content("text/plain", "Please be informed your vacation request has been approved.");
@@ -40,7 +40,7 @@ public class MailSender {
 
   public void sendReject(String emailRecipient) throws IOException {
 
-    Email from = new Email("vacation-manager@highfive.com");
+    Email from = new Email("Vacation-Manager@HighFive.com");
     String subject = "Vacation Manager notification. Your request has been rejected.";
     Email to = new Email(emailRecipient);
     Content content = new Content("text/plain", "Please be informed your vacation request has been rejected.");
@@ -50,7 +50,7 @@ public class MailSender {
 
   public void sendNotification(String emailRecipient) throws IOException {
 
-    Email from = new Email("vacation-manager@highfive.com");
+    Email from = new Email("Vacation-Manager@HighFive.com");
     String subject = "Vacation Manager notification. New vacation request.";
     Email to = new Email(emailRecipient);
     Content content = new Content("text/plain", "Please be informed new vacation request is waiting for your approval");
