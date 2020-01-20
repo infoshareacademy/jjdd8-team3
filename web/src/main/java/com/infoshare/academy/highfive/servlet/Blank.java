@@ -1,13 +1,11 @@
-package com.infoshare.academy.highfive.servlet.configuration;
+package com.infoshare.academy.highfive.servlet;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,18 +15,15 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-
-@MultipartConfig
-@WebServlet("/admin/upload-json")
-public class UploadJsonServlet extends HttpServlet {
-
-    private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
+@WebServlet("/blank")
+public class Blank extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         resp.setContentType("text/html;charset=UTF-8");
 
         PrintWriter writer = resp.getWriter();
@@ -38,9 +33,8 @@ public class UploadJsonServlet extends HttpServlet {
         Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
         dataModel.put("method", req.getMethod());
-        dataModel.put("contentTemplate", "upload-json.ftlh");
-        dataModel.put("title", "Upload JSON Holidays");
-        dataModel.put("pluginJsTemplate", "plugin-js-upload-json.ftlh");
+        dataModel.put("contentTemplate", "blank.ftlh");
+        dataModel.put("title", "Vacation Manager");
 
         try {
             template.process(dataModel, writer);
@@ -50,5 +44,4 @@ public class UploadJsonServlet extends HttpServlet {
         }
 
     }
-
 }

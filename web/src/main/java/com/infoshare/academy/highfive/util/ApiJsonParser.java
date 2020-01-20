@@ -52,10 +52,10 @@ public class ApiJsonParser {
         return parseJson(objectMapper.readTree(inputStreamFromFile));
     }
 
-    public List<Holiday> parseFromURL(String urlPath) throws IOException, JsonUrlNotFound{
+    public List<Holiday> parseFromURL(String urlPath) throws IOException, JsonUrlNotFound {
 
         logger.info("Connecting to url API for JSON DATA;");
-        Client client= ClientBuilder.newClient();
+        Client client = ClientBuilder.newClient();
         WebTarget target = client.target(urlPath);
 
         int status = 0;
@@ -66,16 +66,16 @@ public class ApiJsonParser {
         } catch (Exception e) {
             //TODO
             ///UnknownHostException dont know how
-            logger.debug("Service is not responding; {}",e);
+            logger.debug("Service is not responding; {}", e);
             throw new JsonUrlNotFound("Service is not responding");
         }
 
         if (status != 200) {
-            logger.debug("No valid url or API is down! status {}",status);
+            logger.debug("No valid url or API is down! status {}", status);
             throw new JsonUrlNotFound("Service is not responding");
         }
 
-        logger.debug("Connecting to URL API for JSON data. Connection status: {}",status);
+        logger.debug("Connecting to URL API for JSON data. Connection status: {}", status);
         return parseJson(objectMapper.readTree(urlPath));
     }
 
@@ -84,7 +84,7 @@ public class ApiJsonParser {
         try {
             JsonNode jsonData = jsonNodeBase.findPath(HOLIDAYS);
             holidayImport = objectMapper.treeToValue(jsonData, Holiday[].class);
-            logger.info("Holidays from JSON imported to Holiday entity! total entities parsed {}",holidayImport.length);
+            logger.info("Holidays from JSON imported to Holiday entity! total entities parsed {}", holidayImport.length);
         } catch (JsonProcessingException e) {
             logger.info("Error with parsing JSON to entity!\n", e);
         }

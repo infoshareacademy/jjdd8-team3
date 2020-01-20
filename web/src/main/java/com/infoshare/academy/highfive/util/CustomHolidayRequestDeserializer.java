@@ -6,19 +6,20 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.domain.HolidayType;
+import com.infoshare.academy.highfive.domain.request.HolidayRequest;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CustomHolidayDeserializer extends StdDeserializer<Holiday> {
+public class CustomHolidayRequestDeserializer extends StdDeserializer<Holiday> {
 
 
-    public CustomHolidayDeserializer() {
+    public CustomHolidayRequestDeserializer() {
         this(null);
     }
 
-    private CustomHolidayDeserializer(Class<?> vc) {
+    private CustomHolidayRequestDeserializer(Class<?> vc) {
         super(vc);
     }
 
@@ -37,12 +38,8 @@ public class CustomHolidayDeserializer extends StdDeserializer<Holiday> {
         }
 
         String isoDate = node.get("date").findValue("iso").asText();
-
         LocalDate date = LocalDate.parse(isoDate.substring(0, 10), DateTimeFormatter.ISO_DATE);
 
-        int year = date.getYear();
-        int month = date.getMonthValue();
-        int day = date.getDayOfMonth();
         String array = node.get("type").get(0).asText();
         HolidayType holidayType;
 
@@ -58,8 +55,8 @@ public class CustomHolidayDeserializer extends StdDeserializer<Holiday> {
                 break;
         }
 
-        return new
+        Holiday holiday = new Holiday(name, description, date, holidayType);
 
-                Holiday(name, description, date, year, month, day, holidayType);
+        return holiday;
     }
 }

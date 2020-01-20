@@ -25,8 +25,21 @@ public class HolidayDao {
                 .getResultList();
     }
 
-    public Optional<Holiday> getById(Long id){
-        return Optional.ofNullable(em.find(Holiday.class,id));
+    public Optional<Holiday> getById(Long id) {
+        return Optional.ofNullable(em.find(Holiday.class, id));
     }
+
+    public void update(Holiday holiday) {
+        em.merge(holiday);
+    }
+
+    public Holiday deleteById(Long id) {
+        Holiday holidayToRemove = getById(id).orElseThrow();
+        if (holidayToRemove != null) {
+            em.remove(holidayToRemove);
+        }
+        return holidayToRemove;
+    }
+
 
 }

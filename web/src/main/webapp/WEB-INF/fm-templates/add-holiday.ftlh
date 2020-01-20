@@ -23,6 +23,7 @@
                   <h1 class="h4 text-gray-900 mb-4"><#if action == "edit">Edit<#else>Add</#if> holiday!</h1>
                 </div>
                 <form id="add-holiday-form" name="add-holiday-form" class="user" method="POST">
+                  <#if action == "edit"><input id="holiday-id" name="holiday-id" type="hidden" value="${holiday.id!}"></#if>
                   <div class="form-group">
                     <input type="text" class="form-control form-control-user" name="holiday-name"
                            id="holiday-name" placeholder="name of holiday" value="<#if action == "edit">${holiday.name!}</#if>" required>
@@ -35,24 +36,18 @@
                     <label for="exampleFormControlSelect2">Example multiple select</label>
                     <select class="form-control" id="holiday-type" name="holiday-type">
                       <#list holidayTypes as holidayType>
-                      <option value="${holidayType!}">${holidayType.getType()!}</option>
+                      <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
                       </#list>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="data-picker form-control form-control-user" id="holiday-date"
-                           data-provide="holiday-date" name="holiday-date" placeholder="2000-01-01" value="<#if action=="edit">${holiday.date!}</#if>" required>
+                    <input type="text" class="form-control form-control-user" name="holiday-date"
+                           id="holiday-date" placeholder="2019-01-01" value="<#if action == "edit">${holiday.date!}</#if>" required>
                   </div>
-<#--                  <div class="input-group date" data-provide="datepicker">-->
-<#--                    <input type="text" class="form-control">-->
-<#--                    <div class="input-group-addon">-->
-<#--                      <span class="glyphicon glyphicon-th"></span>-->
-<#--                    </div>-->
-<#--                  </div>-->
                  <button type="submit" class="btn btn-primary"><span class="icon text-white-50">
                       <i class="fas fa-calendar-plus"></i>
                     </span>
-                   <span class="text">Add</span></button>
+                   <span class="text"><#if action == "edit">Change<#else>Add</#if> holiday!</span></button>
                 </form>
               </div>
             </div>

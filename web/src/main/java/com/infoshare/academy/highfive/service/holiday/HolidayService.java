@@ -2,13 +2,16 @@ package com.infoshare.academy.highfive.service.holiday;
 
 import com.infoshare.academy.highfive.dao.HolidayDao;
 import com.infoshare.academy.highfive.domain.Holiday;
+import com.infoshare.academy.highfive.domain.request.HolidayRequest;
 import com.infoshare.academy.highfive.domain.view.HolidayView;
-import com.infoshare.academy.highfive.mapper.holiday.HolidayMapper;
+import com.infoshare.academy.highfive.mapper.entity.HolidayEntityMapper;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class HolidayService {
@@ -16,20 +19,43 @@ public class HolidayService {
     @EJB
     private HolidayDao holidayDao;
 
-    @EJB
-    private HolidayMapper holidayMapper;
+    @Inject
+    private HolidayEntityMapper holidayEntityMapper;
 
-    public void saveHoliday(Holiday holiday) {
+    public HolidayView finById(Long id){
+        return holidayEntityMapper.mapEntityToView(holidayDao.getById(id).orElseThrow());
+    }
+
+    public List<HolidayView> findAll() {
+
+        List<HolidayView> holidayViews = new ArrayList<>();
+        holidayDao.listAllHoliday().
+                forEach(h -> holidayViews.add(holidayEntityMapper.mapEntityToView(h)));
+
+        return holidayViews;
+    }
+
+    public void update(Long id, HolidayRequest holidayRequest) {
+        Holiday holiday= holidayDao.getById(id).orElseThrow();
+
+        holidayEntityMapper.mapRequestToEntity(holidayRequest, holiday);
+
+        holidayDao.update(holiday);
+    }
+
+    public void saveFromParser(Holiday holiday) {
         if (holiday != null) holidayDao.saveHoliday(holiday);
     }
 
-    public HolidayView finById(Long id){
-        return  holidayMapper.mapEntityToView(holidayDao.getById(id).orElseThrow());
+    public void save(HolidayRequest holidayRequest) {
+
+        Holiday holiday = holidayEntityMapper.mapRequestToEntity(holidayRequest);
+        holidayDao.saveHoliday(holiday);
+
     }
 
-    public List<HolidayView> listAllHolidayViews() {
-        List<HolidayView> holidayViews = new ArrayList<>();
-         holidayDao.listAllHoliday().forEach(h -> holidayViews.add(holidayMapper.mapEntityToView(h)));
-         return holidayViews;
+    public HolidayView remove(Long id){
+         return holidayEntityMapper.mapEntityToView(holidayDao.deleteById(id));
     }
+
 }

@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +36,12 @@ public class AddHolidayServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         String action = req.getParameter("action");
+        String id = req.getParameter("get");
+
+        if (action == null || action.isEmpty()) {
+            action = "add";
+        }
+
         PrintWriter writer = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
@@ -45,9 +50,16 @@ public class AddHolidayServlet extends HttpServlet {
 
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "add-holiday.ftlh");
-        dataModel.put("title", "Add holiday");
-        dataModel.put("action", "add");
+
+        if (action.equals("edit")) {
+            dataModel.put("action", "edit");
+            dataModel.put("holiday", holidayService.finById(Long.parseLong(id)));
+        } else {
+            dataModel.put("title", "Add holiday");
+            dataModel.put("action", "add");
+        }
         dataModel.put("holidayTypes", HolidayType.values());
+        dataModel.put("pluginCssTemplate", "plugin-css-add-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-add-holiday.ftlh");
 
         try {

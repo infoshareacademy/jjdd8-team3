@@ -1,18 +1,21 @@
 package com.infoshare.academy.highfive.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.infoshare.academy.highfive.util.CustomHolidayDeserializer;
+import com.infoshare.academy.highfive.util.CustomHolidayRequestDeserializer;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@NamedQueries(
-        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday")
-)
-
+@NamedQueries({
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
+        @NamedQuery(
+                name = "Holiday.findHolidaysInRange",
+                query = "SELECT holiday FROM Holiday holiday WHERE holiday.date BETWEEN :dateFrom AND :dateTo"
+        )
+})
+@JsonDeserialize(using = CustomHolidayRequestDeserializer.class)
 @Entity
 @Table(name = "holiday")
-@JsonDeserialize(using = CustomHolidayDeserializer.class)
 public class Holiday {
 
     @Id
@@ -45,13 +48,10 @@ public class Holiday {
     public Holiday() {
     }
 
-    public Holiday(String name, String description, LocalDate date, int year, int month, int day, HolidayType holidayType) {
+    public Holiday(String name, String description, LocalDate date, HolidayType holidayType) {
         this.name = name;
         this.description = description;
         this.date = date;
-        this.year = year;
-        this.month = month;
-        this.day = day;
         this.holidayType = holidayType;
     }
 

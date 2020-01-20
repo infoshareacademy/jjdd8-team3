@@ -1,10 +1,3 @@
-<#--<#function hideNullFromDB x>
-    <#if x == "null">
-        <#return "">
-    <#else>
-        <#return x>
-    </#if>
-</#function>-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,10 +18,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-    <link href=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
 <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
+
     <#if pluginCssTemplate??>
     <#include "/${pluginCssTemplate}">
     </#if>
@@ -78,9 +71,10 @@
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
-                    <a class="collapse-item" href="/blank.html">Holiday search</a>
-                    <a class="collapse-item" href="/blank.html">Employee vacation</a>
-                    <a class="collapse-item" href="/blank.html">Team vacation</a>
+                    <a class="collapse-item" href="/calendar">Calendar</a>
+                    <a class="collapse-item" href="/blank">Holiday search</a>
+                    <a class="collapse-item" href="/blank">Employee vacation</a>
+                    <a class="collapse-item" href="/blank">Team vacation</a>
                 </div>
             </div>
         </li>
@@ -94,8 +88,8 @@
             </a>
             <div id="requestMenu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add vacation</a>
-                    <a class="collapse-item" href="/blank.html">Cancel vacation</a>
+                    <a class="collapse-item" href="/blank">Add vacation</a>
+                    <a class="collapse-item" href="/blank">Cancel vacation</a>
                 </div>
             </div>
         </li>
@@ -110,7 +104,7 @@
 
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="../../blank.html">
+            <a class="nav-link" href="/blank">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>
         </li>
@@ -124,9 +118,9 @@
             </a>
             <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add</a>
-                    <a class="collapse-item" href="/blank.html">Edit</a>
-                    <a class="collapse-item" href="/blank.html">Remove</a>
+                    <a class="collapse-item" href="/blank">Add</a>
+                    <a class="collapse-item" href="/blank">Edit</a>
+                    <a class="collapse-item" href="/blank">Remove</a>
                 </div>
             </div>
         </li>
@@ -140,9 +134,9 @@
             </a>
             <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Add</a>
-                    <a class="collapse-item" href="/blank.html">Edit</a>
-                    <a class="collapse-item" href="/blank.html">Remove</a>
+                    <a class="collapse-item" href="/blank">Add</a>
+                    <a class="collapse-item" href="/blank">Edit</a>
+                    <a class="collapse-item" href="/blank">Remove</a>
                 </div>
             </div>
         </li>
@@ -157,20 +151,10 @@
 
         <!-- Heading -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExtra"
-               aria-expanded="true" aria-controls="collapseExtra">
+            <a class="nav-link" href="/admin/edit-holiday">
                 <i class="fas fa-calendar-plus"></i>
-                <span>Extra holidays</span>
-            </a>
-            <div id="collapseExtra" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/admin/add-holiday">Add</a>
-                    <a class="collapse-item" href="/blank.html">Edit</a>
-                    <a class="collapse-item" href="/blank.html">Remove</a>
-                </div>
-            </div>
+                <span>Edit holidays</span></a>
         </li>
-
         <!-- Nav Item - Configuration -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfig"
@@ -180,9 +164,9 @@
             </a>
             <div id="collapseConfig" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank.html">Date format</a>
-                    <a class="collapse-item" href="/blank.html">Sorting</a>
-                    <a class="collapse-item" href="/blank.html">Holidays database</a>
+                    <a class="collapse-item" href="/blank">Date format</a>
+                    <a class="collapse-item" href="/blank">Sorting</a>
+                    <a class="collapse-item" href="/blank">Holidays database</a>
                     <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
                 </div>
             </div>
@@ -339,7 +323,7 @@
                 </div>
                 <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/></div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Ok</button>
+                    <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
 <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
                 </div>
             </div>
@@ -352,7 +336,6 @@
 
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
