@@ -3,7 +3,6 @@ package com.infoshare.academy.highfive.dto.view;
 import com.infoshare.academy.highfive.domain.Employee;
 
 import java.util.List;
-import java.util.Set;
 
 public class TeamView {
 
@@ -11,7 +10,7 @@ public class TeamView {
 
     private String teamName;
 
-    private List<Employee> teamEmployeeList;
+    private List<Employee> teamMembers;
 
     public Long getId() {
         return id;
@@ -29,11 +28,11 @@ public class TeamView {
         this.teamName = teamName;
     }
 
-    public List<Employee> getTeamEmployeeList() {
-        return teamEmployeeList;
+    public List<Employee> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setTeamEmployeeList(List<Employee> teamEmployeeList) {
-        this.teamEmployeeList = teamEmployeeList;
+    public void setTeamMembers(List<Employee> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 }

@@ -51,7 +51,7 @@ public class TeamService {
 
         List<TeamView> teamViews = new ArrayList<>();
 
-        teamDao.findAll().forEach(employee -> teamViews.add(teamMapper.mapEntityToView(employee)));
+        teamDao.findAll().forEach(t -> teamViews.add(teamMapper.mapEntityToView(t)));
 
         return teamViews;
     }

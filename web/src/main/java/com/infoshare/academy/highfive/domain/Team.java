@@ -9,7 +9,7 @@ import java.util.List;
             "FROM Team team "),
         @NamedQuery (name = "Team.findAllTeamMembers", query = "SELECT employee " +
             "FROM Employee employee " +
-            "WHERE team.id = :teamId")
+            "WHERE Team.id = :teamId")
         }
         )
 
