@@ -58,7 +58,7 @@ public class HolidayApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") Long id, HolidayRequest holidayRequest) {
 
-        holidayService.save(holidayRequest);
+        holidayService.update(id, holidayRequest);
         return Response.ok().entity(holidayRequest).build();
 
     }
