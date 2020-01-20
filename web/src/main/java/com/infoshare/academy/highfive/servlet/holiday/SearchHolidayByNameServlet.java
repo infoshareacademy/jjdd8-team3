@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.servlet.holiday;
 
 
+import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.holiday.HolidayService;
 import freemarker.template.Template;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/search-by-name")
@@ -58,19 +60,21 @@ public class SearchHolidayByNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        String searchByName = req.getParameter("search_by_name");
         Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
 
+        List<Holiday> holidays = holidayService.searchHolidayByName(searchByName);
+
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "holiday-search-by-name.ftlh");
         dataModel.put("title", "Search result by name");
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
-        dataModel.put("holidays", holidayService.searchHolidayByName("search_by_name"));
+        dataModel.put("holidays", holidays);
 
 
         try {

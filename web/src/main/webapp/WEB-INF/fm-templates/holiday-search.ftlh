@@ -20,22 +20,20 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Search by Name</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" action="search-by-name" method="post">
                                     <label for="exampleInputHolidayName">Please type holiday name here:</label>
                                     <div class="form-group">
-                                        <input type="holiday_name" class="form-control form-control-user"
+                                        <input type="holiday_name" name="search_by_name" class="form-control form-control-user"
                                                id="exampleInputHolidayName" placeholder="Please enter a minimum of 3 letters...">
                                         <div class="text-center">
-                                            <strong>${inputSearch}</strong>
+                                            <strong<#-->${inputSearch}--></strong>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                      <!--    <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">  -->
                                       <!--       Search  -->
                                       <!--   </a> -->
-                                        <form class="user" action="search-by-name" method="post">
-                                            <button type="submit" class="btn btn-primary" name="search_by_name" value="${search_by_name}">Search</button>
-                                        </form>
+                                            <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
 
@@ -46,24 +44,22 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Search by Date</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" action="search-by-date" method="post">
                                     <label for="exampleInputHolidayDateFrom">from</label>
                                     <div class="form-group">
-                                        <input type="date" name="date" class="form-control form-control-user"
+                                        <input type="date" name="date-from" class="form-control form-control-user"
                                                id="exampleInputHolidayDateFrom" min="2020-01-01" max="2050-12-31">
                                     </div>
                                     <label for="exampleInputHolidayDateTo">to</label>
                                     <div class="form-group">
-                                        <input type="date" name="date" class="form-control form-control-user"
+                                        <input type="date" name="date-to" class="form-control form-control-user"
                                                id="exampleInputHolidayDateTo" min="2020-01-01" max="2050-12-31">
                                     </div>
                                     <div class="form-group">
                                     <!--     <a href="holiday-search.html" class="btn btn-primary btn-user btn-block"> -->
                                      <!--        Search -->
                                     <!--     </a> -->
-                                    <form class="user" action="search-by-date" method="post">
-                                        <button type="submit" class="btn btn-primary" name="search_by_date" value="${search_by_date}">Search</button>
-                                    </form>
+                                        <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
                             </div>

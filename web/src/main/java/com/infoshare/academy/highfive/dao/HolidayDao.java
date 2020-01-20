@@ -48,23 +48,19 @@ public class HolidayDao {
         return holidayToRemove;
     }
 
-
-    public List searchHolidayByName() {
-        return this.em
-            .createNamedQuery("Holiday.searchByName")
-            .getResultList();
-    public Holiday searchHolidayByName(String searchName) {
-        return (Holiday) em
+    public List<Holiday> searchHolidayByName(String searchName) {
+        return em
                     .createNamedQuery("Holiday.searchByName")
                     .setParameter("searchName", searchName)
-                    .getSingleResult();
+                    .getResultList();
     }
 
-    public Holiday searchHolidayByDate(String searchDate) {
-      return (Holiday) em
+    public List<Holiday> searchHolidayByDate(LocalDate dateFrom, LocalDate dateTo) {
+      return  em
               .createNamedQuery("Holiday.searchByDate")
-              .setParameter("searchDate", searchDate)
-              .getSingleResult();
+              .setParameter("dateFrom", dateFrom)
+              .setParameter("dateTo", dateTo)
+              .getResultList();
             }
 
 }

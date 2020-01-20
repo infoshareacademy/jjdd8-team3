@@ -9,6 +9,7 @@ import com.infoshare.academy.highfive.mapper.entity.HolidayEntityMapper;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,9 +59,9 @@ public class HolidayService {
          return holidayEntityMapper.mapEntityToView(holidayDao.deleteById(id));
     }
 
-    public Holiday searchHolidayByName(String searchName) {
-        return (Holiday) holidayDao.searchHolidayByName(searchName);
+    public List<Holiday> searchHolidayByName(String searchName) {
+        return holidayDao.searchHolidayByName(searchName);
     }
 
-    public Holiday searchHolidayByDate(String searchDate) { return (Holiday) holidayDao.searchHolidayByDate(searchDate);}
+    public List<Holiday> searchHolidayByDate(LocalDate dateFrom, LocalDate dateTo) { return holidayDao.searchHolidayByDate(dateFrom, dateTo);}
 }

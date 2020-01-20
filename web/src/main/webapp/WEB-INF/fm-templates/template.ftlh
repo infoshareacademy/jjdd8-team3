@@ -72,7 +72,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/calendar">Calendar</a>
-                    <a class="collapse-item" href="/blank">Holiday search</a>
+                    <a class="collapse-item" href="/holiday-search">Holiday search</a>
                     <a class="collapse-item" href="/blank">Employee vacation</a>
                     <a class="collapse-item" href="/blank">Team vacation</a>
                 </div>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +56,10 @@ public class SearchByDateServlet extends HttpServlet {
 
 @Override
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+    String dateFrom = req.getParameter("date-from");
+    String dateTo = req.getParameter("date-to");
+    LocalDate dateFromD = LocalDate.parse(dateFrom);
+    LocalDate dateToD = LocalDate.parse(dateTo);
     Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
     resp.setContentType("text/html;charset=UTF-8");
@@ -68,7 +71,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
     dataModel.put("title", "Search result by date");
     dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
     dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
-    dataModel.put("holidays", holidayService.searchHolidayByDate("search_by_date"));
+    dataModel.put("holidays", holidayService.searchHolidayByDate(dateFromD,dateToD));
 
     try {
         template.process(dataModel, writer);
