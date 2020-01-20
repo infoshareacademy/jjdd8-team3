@@ -1,6 +1,8 @@
 package com.infoshare.academy.highfive.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infoshare.academy.highfive.parser.CustomHolidayDeserializer;
+import org.jboss.logging.Param;
 import com.infoshare.academy.highfive.util.CustomHolidayRequestDeserializer;
 
 import javax.persistence.*;
@@ -15,6 +17,15 @@ import java.time.LocalDate;
         @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY")
         })
 @JsonDeserialize(using = CustomHolidayRequestDeserializer.class)
+@NamedQueries({
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
+        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY"),
+        @NamedQuery(name = "Holiday.searchByName", query = "SELECT holiday.name FROM Holiday holiday WHERE holiday.name LIKE %:searchName%"),
+//        @NamedQuery(name = "Holiday.searchByDate", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.date = ")
+//        List<holiday> searchHolidayByNameLike(@Param("searchName") String searchName);
+}
+)
+
 @Entity
 @Table(name = "holiday")
 public class Holiday {

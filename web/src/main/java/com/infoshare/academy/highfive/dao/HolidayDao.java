@@ -49,4 +49,16 @@ public class HolidayDao {
     }
 
 
+    public List searchHolidayByName() {
+        return this.em
+            .createNamedQuery("Holiday.searchByName")
+            .getResultList();
+    }
+
+//    public void searchHolidayByDate(Holiday holiday) {
+//      return this.em
+//            .createNamedQuery("Holiday.searchByDate")
+//            .getResultList();
+//            }
+
 }

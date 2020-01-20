@@ -58,4 +58,9 @@ public class HolidayService {
          return holidayEntityMapper.mapEntityToView(holidayDao.deleteById(id));
     }
 
+    public List searchHolidayByName() {
+        return holidayDao.searchHolidayByName();
+    }
+
+//    public List searchHolidayByDate() { return holidayDao.searchHolidayByDate();}
 }
