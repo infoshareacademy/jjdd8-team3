@@ -30,9 +30,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">
-                                            Search
-                                        </a>
+                                     <!--    <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">  -->
+                                      <!--       Search  -->
+                                      <!--   </a> -->
+                                        <form class="user" action="search-by-name" method="post">
+                                            <button type="submit" class="btn btn-primary" name="search_by_name" value="${search_by_name}">Search</button>
+                                        </form>
                                     </div>
                                 </form>
 
@@ -55,9 +58,12 @@
                                                id="exampleInputHolidayDateTo" min="2020-01-01" max="2050-12-31">
                                     </div>
                                     <div class="form-group">
-                                        <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">
-                                            Search
-                                        </a>
+                                    <!--     <a href="holiday-search.html" class="btn btn-primary btn-user btn-block"> -->
+                                     <!--        Search -->
+                                    <!--     </a> -->
+                                    <form class="user" action="search-by-date" method="post">
+                                        <button type="submit" class="btn btn-primary" name="search_by_date" value="${search_by_date}">Search</button>
+                                    </form>
                                     </div>
                                 </form>
                             </div>

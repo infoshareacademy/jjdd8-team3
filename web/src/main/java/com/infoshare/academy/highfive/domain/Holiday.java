@@ -2,12 +2,18 @@ package com.infoshare.academy.highfive.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.infoshare.academy.highfive.parser.CustomHolidayDeserializer;
+import org.jboss.logging.Param;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@NamedQueries(
-        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday")
+@NamedQueries({
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
+        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY"),
+        @NamedQuery(name = "Holiday.searchByName", query = "SELECT holiday.name FROM Holiday holiday WHERE holiday.name LIKE %:searchName%"),
+//        @NamedQuery(name = "Holiday.searchByDate", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.date = ")
+//        List<holiday> searchHolidayByNameLike(@Param("searchName") String searchName);
+}
 )
 
 @Entity
@@ -18,7 +24,7 @@ public class Holiday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -55,11 +61,11 @@ public class Holiday {
         this.holidayType = holidayType;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
