@@ -30,12 +30,11 @@
             dataType: 'json',
             data: formToJSON(),
             contentType: 'application/json;charset=UTF-8'
-            // contentType: 'application/json',
         })
             .done(
                 function (data) {
                     $('#modal-button').attr('onClick', 'window.location.href="/admin/edit-holiday";');
-                    $('#modal-info-body').html(data.name + data.date);
+                    $('#modal-info-body').html("Holiday: " + data.name + " added for date: " + data.date);
                     $('#infoModal').modal('show');
                 })
             .fail(

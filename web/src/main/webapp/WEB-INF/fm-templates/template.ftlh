@@ -104,7 +104,6 @@
 
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="/blank">
             <a class="nav-link" href="/manager/pending-requests">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>

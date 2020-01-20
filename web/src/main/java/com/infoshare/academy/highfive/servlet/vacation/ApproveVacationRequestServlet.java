@@ -42,7 +42,7 @@ public class ApproveVacationRequestServlet extends HttpServlet {
     PrintWriter writer = resp.getWriter();
     Map<String, Object> dataModel = new HashMap<>();
 
-    dataModel.put("contentTemplate", "pending-vacation-approve.ftlh");
+    dataModel.put("contentTemplate", "pending-vacation-approval.ftlh");
     dataModel.put("title", "Success!");
 
 

@@ -25,15 +25,17 @@
                 <form id="add-holiday-form" name="add-holiday-form" class="user" method="POST">
                   <#if action == "edit"><input id="holiday-id" name="holiday-id" type="hidden" value="${holiday.id!}"></#if>
                   <div class="form-group">
+                    <label for="holiday-name">Name od Holiday</label>
                     <input type="text" class="form-control form-control-user" name="holiday-name"
                            id="holiday-name" placeholder="name of holiday" value="<#if action == "edit">${holiday.name!}</#if>" required>
                   </div>
                   <div class="form-group">
+                    <label for="holiday-description">Description</label>
                     <textarea class="form-control" name="holiday-description"
                               id="holiday-description" rows="3"><#if action=="edit">${holiday.description!}</#if></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="exampleFormControlSelect2">Example multiple select</label>
+                    <label for="holiday-type">Holiday type</label>
                     <select class="form-control" id="holiday-type" name="holiday-type">
                       <#list holidayTypes as holidayType>
                       <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
@@ -41,6 +43,7 @@
                     </select>
                   </div>
                   <div class="form-group">
+                    <label for="holiday-date">Holiday date</label>
                     <input type="text" class="form-control form-control-user" name="holiday-date"
                            id="holiday-date" placeholder="2019-01-01" value="<#if action == "edit">${holiday.date!}</#if>" required>
                   </div>

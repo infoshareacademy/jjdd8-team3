@@ -36,8 +36,7 @@ public class MainServlet extends HttpServlet {
         dataModel.put("contentTemplate", "main-content.ftlh");
         dataModel.put("title", "Vacation Manager");
 //      dataModel.put("pluginCssTemplate", "plugin-css-main-content.ftlh");
-       // dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
-        // dataModel.put("holidays", holidayService.listAllHoliday());
+        dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
 
         try {
             template.process(dataModel, writer);

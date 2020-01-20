@@ -17,7 +17,7 @@ public class MailSender {
   private void createMail(Email from, String subject, Email to, Content content) throws IOException {
     Mail mail = new Mail(from, subject, to, content);
 
-    SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+    SendGrid sg = new SendGrid("");
     Request request = new Request();
     request.setMethod(Method.POST);
     request.setEndpoint("mail/send");
