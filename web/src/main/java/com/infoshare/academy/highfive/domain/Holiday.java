@@ -8,12 +8,11 @@ import java.time.LocalDate;
 
 @NamedQueries({
         @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
-        @NamedQuery(
-                name = "Holiday.findHolidaysInRange",
-                query = "SELECT holiday FROM Holiday holiday WHERE holiday.date BETWEEN :dateFrom AND :dateTo"
-        ),
-        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY")}
-
+//        @NamedQuery(
+//                name = "Holiday.findHolidaysInRange",
+//                query = "SELECT holiday FROM Holiday holiday WHERE holiday.date BETWEEN :dateFrom AND :dateTo"
+//        ),
+        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY")
         })
 @JsonDeserialize(using = CustomHolidayRequestDeserializer.class)
 @Entity
