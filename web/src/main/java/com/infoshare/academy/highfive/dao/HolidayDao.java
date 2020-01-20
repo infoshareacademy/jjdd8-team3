@@ -53,12 +53,18 @@ public class HolidayDao {
         return this.em
             .createNamedQuery("Holiday.searchByName")
             .getResultList();
+    public Holiday searchHolidayByName(String searchName) {
+        return (Holiday) em
+                    .createNamedQuery("Holiday.searchByName")
+                    .setParameter("searchName", searchName)
+                    .getSingleResult();
     }
 
-//    public void searchHolidayByDate(Holiday holiday) {
-//      return this.em
-//            .createNamedQuery("Holiday.searchByDate")
-//            .getResultList();
-//            }
+    public Holiday searchHolidayByDate(String searchDate) {
+      return (Holiday) em
+              .createNamedQuery("Holiday.searchByDate")
+              .setParameter("searchDate", searchDate)
+              .getSingleResult();
+            }
 
 }
