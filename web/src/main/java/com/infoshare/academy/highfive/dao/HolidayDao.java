@@ -30,10 +30,10 @@ public class HolidayDao {
             .getResultList();
     }
 
-//    public void searchHolidayByDate(Holiday holiday) {
-//      return this.em
-//            .createNamedQuery("Holiday.searchByDate")
-//            .getResultList();
-//            }
+    public List searchHolidayByDate() {
+      return this.em
+            .createNamedQuery("Holiday.searchByDate")
+            .getResultList();
+            }
 
 }

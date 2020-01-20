@@ -25,5 +25,5 @@ public class HolidayService {
         return holidayDao.searchHolidayByName();
     }
 
-//    public List searchHolidayByDate() { return holidayDao.searchHolidayByDate();}
+    public List searchHolidayByDate() { return holidayDao.searchHolidayByDate();}
 }
