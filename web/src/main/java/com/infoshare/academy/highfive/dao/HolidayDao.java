@@ -24,16 +24,18 @@ public class HolidayDao {
                 .getResultList();
     }
 
-    public List searchHolidayByName() {
-        return this.em
-            .createNamedQuery("Holiday.searchByName")
-            .getResultList();
+    public Holiday searchHolidayByName(String searchName) {
+        return (Holiday) em
+                    .createNamedQuery("Holiday.searchByName")
+                    .setParameter("searchName", searchName)
+                    .getSingleResult();
     }
 
-    public List searchHolidayByDate() {
-      return this.em
-            .createNamedQuery("Holiday.searchByDate")
-            .getResultList();
+    public Holiday searchHolidayByDate(String searchDate) {
+      return (Holiday) em
+              .createNamedQuery("Holiday.searchByDate")
+              .setParameter("searchDate", searchDate)
+              .getSingleResult();
             }
 
 }

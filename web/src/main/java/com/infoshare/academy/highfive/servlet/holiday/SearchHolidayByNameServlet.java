@@ -70,7 +70,7 @@ public class SearchHolidayByNameServlet extends HttpServlet {
         dataModel.put("title", "Search result by name");
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
-        dataModel.put("holidays", holidayService.searchHolidayByName());
+        dataModel.put("holidays", holidayService.searchHolidayByName("search_by_name"));
 
 
         try {

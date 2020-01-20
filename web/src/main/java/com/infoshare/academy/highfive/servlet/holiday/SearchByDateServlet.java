@@ -68,7 +68,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
     dataModel.put("title", "Search result by date");
     dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
     dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
-    dataModel.put("holidays", holidayService.searchHolidayByDate());
+    dataModel.put("holidays", holidayService.searchHolidayByDate("search_by_date"));
 
     try {
         template.process(dataModel, writer);
