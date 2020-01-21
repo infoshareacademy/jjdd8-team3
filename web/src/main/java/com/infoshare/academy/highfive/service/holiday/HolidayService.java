@@ -59,9 +59,21 @@ public class HolidayService {
          return holidayEntityMapper.mapEntityToView(holidayDao.deleteById(id));
     }
 
-    public List<Holiday> searchHolidayByName(String searchName) {
-        return holidayDao.searchHolidayByName(searchName);
+    public List<HolidayView> searchHolidayByName(String searchName) {
+
+        List<HolidayView> holidayViews = new ArrayList<>();
+        holidayDao.searchHolidayByName(searchName).
+                forEach(h -> holidayViews.add(holidayEntityMapper.mapEntityToView(h)));
+
+        return holidayViews;
     }
 
-    public List<Holiday> searchHolidayByDate(LocalDate dateFrom, LocalDate dateTo) { return holidayDao.searchHolidayByDate(dateFrom, dateTo);}
+    public List<HolidayView> searchHolidayByDate(LocalDate dateFrom, LocalDate dateTo) {
+
+        List<HolidayView> holidayViews = new ArrayList<>();
+        holidayDao.searchHolidayByDate(dateFrom, dateTo).
+                forEach(h -> holidayViews.add(holidayEntityMapper.mapEntityToView(h)));
+
+        return holidayViews;
+    }
 }

@@ -21,7 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
 <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
-
+    <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
     <#if pluginCssTemplate??>
     <#include "/${pluginCssTemplate}">
     </#if>
@@ -340,6 +340,16 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
+
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+
+
+    <script>
+        $('.form-control-date').datepicker({
+            clearBtn: false,
+            format: "yyyy-mm-dd"
+        });
+        </script>
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>

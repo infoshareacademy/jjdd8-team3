@@ -1,7 +1,5 @@
 package com.infoshare.academy.highfive.servlet.holiday;
 
-
-import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.domain.view.HolidayView;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.holiday.HolidayService;
@@ -18,16 +16,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/search-by-name")
-public class SearchHolidayByNameServlet extends HttpServlet {
+@WebServlet("/search-by-date")
+public class SearchHolidayByDateServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
+
+    private String DATE_PATTERN = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
 
     @Inject
     private TemplateProvider templateProvider;
@@ -46,7 +45,7 @@ public class SearchHolidayByNameServlet extends HttpServlet {
 
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "holiday-search.ftlh");
-        dataModel.put("title", "Search result by name");
+        dataModel.put("title", "Search result by date");
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
 
@@ -57,22 +56,27 @@ public class SearchHolidayByNameServlet extends HttpServlet {
             e.getMessage();
         }
 
-      }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String searchByName = req.getParameter("search_by_name");
+        String dateFrom = req.getParameter("date-from");
+        String dateTo = req.getParameter("date-to");
 
         List<HolidayView> holidays = null;
         Boolean validInputs = false;
 
-        if (searchByName.length()>2) {
+        LOGGER.info("Checking date format from inputs!");
+
+        if (dateFrom.matches(DATE_PATTERN) && dateTo.matches(DATE_PATTERN)) {
             validInputs = true;
             LOGGER.info("Inputs Correct. Processing!");
-            holidays = holidayService.searchHolidayByName(searchByName);
+            LocalDate dateFromD = LocalDate.parse(dateFrom);
+            LocalDate dateToD = LocalDate.parse(dateTo);
+            holidays = holidayService.searchHolidayByDate(dateFromD, dateToD);
 
         }
+
 
         Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
@@ -82,13 +86,12 @@ public class SearchHolidayByNameServlet extends HttpServlet {
 
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "holiday-search-result.ftlh");
-        dataModel.put("title", "Search result by name");
+        dataModel.put("title", "Search result by date");
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
         dataModel.put("validInputs", validInputs);
-        dataModel.put("searchType", "by name");
+        dataModel.put("searchType", "by date");
         dataModel.put("holidays", holidays);
-
 
         try {
             template.process(dataModel, writer);

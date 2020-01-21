@@ -23,13 +23,13 @@
                   </div>
                   <div class="form-group">
                     <label for="date_from">Date from</label>
-                    <input type="date" class="form-control form-control-user"
-                           name="date_from" required="" placeholder="" id="date_from">
+                    <input type="text" class="form-control form-control-user form-control-date" title = "please insert correct date format YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                           name="date_from" required="" placeholder="2020-01-01" id="date_from">
                   </div>
                   <div class="form-group">
                     <label for="date_to">Date to</label>
-                    <input type="date" class="form-control form-control-user"
-                           name="date_to" required="" placeholder="" id="date_to">
+                    <input type="text" class="form-control form-control-user form-control-date" title = "please insert correct date format YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                           name="date_to" required="" placeholder="2020-01-01" id="date_to">
                   </div>
               <div>
                   <label for="vacation_type">Vacation type</label>

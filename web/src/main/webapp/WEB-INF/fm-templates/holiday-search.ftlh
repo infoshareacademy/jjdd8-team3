@@ -23,7 +23,7 @@
                                 <form class="user" action="search-by-name" method="post">
                                     <label for="exampleInputHolidayName">Please type holiday name here:</label>
                                     <div class="form-group">
-                                        <input type="holiday_name" name="search_by_name" class="form-control form-control-user"
+                                        <input type="holiday_name" title="Please insert min 3 char." name="search_by_name" class="form-control form-control-user" pattern=".{3,}"
                                                id="exampleInputHolidayName" placeholder="Please enter a minimum of 3 letters...">
                                         <div class="text-center">
                                             <strong<#-->${inputSearch}--></strong>
@@ -47,13 +47,13 @@
                                 <form class="user" action="search-by-date" method="post">
                                     <label for="exampleInputHolidayDateFrom">from</label>
                                     <div class="form-group">
-                                        <input type="date" name="date-from" class="form-control form-control-user"
-                                               id="exampleInputHolidayDateFrom" min="2020-01-01" max="2050-12-31">
+                                        <input type="text" class="form-control form-control-user form-control-date" title ="please insert correct date format YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                                               name="date-from" id="date-from" placeholder="2020-01-01" required>
                                     </div>
                                     <label for="exampleInputHolidayDateTo">to</label>
                                     <div class="form-group">
-                                        <input type="date" name="date-to" class="form-control form-control-user"
-                                               id="exampleInputHolidayDateTo" min="2020-01-01" max="2050-12-31">
+                                        <input type="text" class="form-control form-control-user form-control-date" title = "please insert correct date format YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                                               name="date-to" id="date-to" placeholder="2020-01-01" required>
                                     </div>
                                     <div class="form-group">
                                     <!--     <a href="holiday-search.html" class="btn btn-primary btn-user btn-block"> -->
