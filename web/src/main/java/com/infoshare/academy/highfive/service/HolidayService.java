@@ -22,7 +22,7 @@ public class HolidayService {
     @Inject
     private HolidayEntityMapper holidayEntityMapper;
 
-    public HolidayView finById(Long id){
+    public HolidayView finById(Long id) {
         return holidayEntityMapper.mapEntityToView(holidayDao.getById(id).orElseThrow());
     }
 
@@ -36,7 +36,7 @@ public class HolidayService {
     }
 
     public void update(Long id, HolidayRequest holidayRequest) {
-        Holiday holiday= holidayDao.getById(id).orElseThrow();
+        Holiday holiday = holidayDao.getById(id).orElseThrow();
 
         holidayEntityMapper.mapRequestToEntity(holidayRequest, holiday);
 
@@ -54,8 +54,8 @@ public class HolidayService {
 
     }
 
-    public HolidayView remove(Long id){
-         return holidayEntityMapper.mapEntityToView(holidayDao.deleteById(id));
+    public HolidayView remove(Long id) {
+        return holidayEntityMapper.mapEntityToView(holidayDao.deleteById(id));
     }
 
     public List<HolidayView> searchHolidayByName(String searchName) {

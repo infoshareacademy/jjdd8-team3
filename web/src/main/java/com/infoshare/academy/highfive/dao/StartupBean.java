@@ -17,14 +17,14 @@ import java.util.List;
 //@Startup
 public class StartupBean {
 
-    private Logger logger = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @EJB
     private HolidayService holidayService;
 
     @PostConstruct
     public void initialize() throws IOException {
-        logger.info("Initializing service;");
+        LOGGER.info("Initializing service;");
         try {
             ApiJsonParser apiJsonParser = new ApiJsonParser();
             List<Holiday> holidayList = apiJsonParser.parseFromURL("https://calendarific.com/api/v2/holidays?&api_key=c2ddb57bb630fc01911bbcd01ae5907afaaced8e058cc0f33a938f517c0321e3&country=PL&year=2019");
@@ -32,10 +32,10 @@ public class StartupBean {
                 holidayList.forEach(holiday-> holidayService.saveFromParser(holiday));
             }
         } catch (JsonUrlNotFound e) {
-            logger.warn("Service not initialized {}", e);
+            LOGGER.warn("Service not initialized {}", e);
             return;
         }
-        logger.debug("Service initialized");
+        LOGGER.debug("Service initialized");
     }
 
 

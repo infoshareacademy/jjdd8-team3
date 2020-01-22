@@ -53,7 +53,7 @@ public class SearchHolidayByDateServlet extends HttpServlet {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            e.getMessage();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }
@@ -97,8 +97,7 @@ public class SearchHolidayByDateServlet extends HttpServlet {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            LOGGER.warn("Issue with processing Freemarker template.");
-            e.getMessage();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }

@@ -18,7 +18,7 @@ import java.text.ParseException;
 @WebServlet("/manager/add-employee/")
 public class AddEmployeeServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
     private EmployeeRequestMapper requestMapper;
@@ -33,7 +33,7 @@ public class AddEmployeeServlet extends HttpServlet {
             EmployeeRequest employeeRequest = requestMapper.mapParamsToRequest(req);
             employeeService.addNewEmployee(employeeRequest);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }
