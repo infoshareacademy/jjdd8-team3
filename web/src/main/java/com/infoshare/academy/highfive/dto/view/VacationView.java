@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dto.view;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.domain.VacationType;
@@ -10,20 +11,26 @@ public class VacationView {
 
   private Long id;
 
+  @JsonProperty("employee_id")
   private Long employeeId;
 
+  @JsonProperty("first_name")
   private String firstName;
 
   private String surname;
 
   private String position;
 
+  @JsonProperty("vacation_from")
   private LocalDate vacationFrom;
 
+  @JsonProperty("vacation_from")
   private LocalDate vacationTo;
 
+  @JsonProperty("vacation_type")
   private VacationType vacationType;
 
+  @JsonProperty("vacation_status")
   private VacationStatus vacationStatus;
 
   public Long getId() {

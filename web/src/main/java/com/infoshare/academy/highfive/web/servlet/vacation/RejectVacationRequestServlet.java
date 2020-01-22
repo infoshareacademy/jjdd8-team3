@@ -50,8 +50,7 @@ public class RejectVacationRequestServlet extends HttpServlet {
       template.process(dataModel, writer);
     } catch (
       TemplateException e) {
-      LOGGER.warn("Issue with processing Freemarker template.");
-      e.getMessage();
+      LOGGER.error(e.getMessage(), e);
     }
 
   }

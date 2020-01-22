@@ -4,6 +4,8 @@ import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.VacationService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -18,6 +20,8 @@ import java.util.Map;
 
 @WebServlet("/manager/pending-requests")
 public class PendingRequestListServlet extends HttpServlet {
+
+  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
   @Inject
   private TemplateProvider templateProvider;
@@ -44,7 +48,7 @@ public class PendingRequestListServlet extends HttpServlet {
       template.process(dataModel, writer);
     } catch (
       TemplateException e) {
-      e.getMessage();
+      LOGGER.error(e.getMessage(), e);
     }
 
   }

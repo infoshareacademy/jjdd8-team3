@@ -20,7 +20,7 @@ import java.util.Map;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-  Logger logger = LoggerFactory.getLogger(getClass().getName());
+  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
   @Inject
   private TemplateProvider templateProvider;
@@ -43,8 +43,7 @@ public class LoginServlet extends HttpServlet {
     try {
       template.process(model, writer);
     } catch (TemplateException e) {
-      logger.warn(e.getMessage());
-      logger.debug("aaaa");
+      LOGGER.error(e.getMessage(), e);
     }
   }
 }
