@@ -25,6 +25,7 @@ public class UploadJsonService {
         ApiJsonParser apiJsonParser = new ApiJsonParser();
         List<Holiday> holidayListFromUpload = apiJsonParser.parseFromInputStream(fileName);
         holidayListFromUpload.forEach(holiday -> holidayService.saveFromParser(holiday));
+        LOGGER.info("Uploading Json holiday file!");
         return holidayListFromUpload.size();
     }
 
