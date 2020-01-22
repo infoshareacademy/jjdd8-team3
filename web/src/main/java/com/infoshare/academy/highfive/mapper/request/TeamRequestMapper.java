@@ -1,7 +1,7 @@
 package com.infoshare.academy.highfive.mapper.request;
 
 
-import com.infoshare.academy.highfive.request.TeamRequest;
+import com.infoshare.academy.highfive.dto.request.TeamRequest;
 
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;

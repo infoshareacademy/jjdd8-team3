@@ -2,10 +2,8 @@ package com.infoshare.academy.highfive.service.configuration;
 
 import com.infoshare.academy.highfive.cdi.FileUploadProcessor;
 import com.infoshare.academy.highfive.domain.Holiday;
-import com.infoshare.academy.highfive.domain.request.HolidayRequest;
-import com.infoshare.academy.highfive.domain.view.HolidayView;
 import com.infoshare.academy.highfive.exception.JsonFileNotFound;
-import com.infoshare.academy.highfive.service.holiday.HolidayService;
+import com.infoshare.academy.highfive.service.HolidayService;
 import com.infoshare.academy.highfive.util.ApiJsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

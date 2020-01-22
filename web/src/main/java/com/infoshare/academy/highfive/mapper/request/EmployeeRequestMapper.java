@@ -3,17 +3,13 @@ package com.infoshare.academy.highfive.mapper.request;
 
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
-import com.infoshare.academy.highfive.request.EmployeeRequest;
-import com.infoshare.academy.highfive.request.TeamRequest;
+import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 
 import javax.enterprise.context.RequestScoped;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @RequestScoped
 public class EmployeeRequestMapper {

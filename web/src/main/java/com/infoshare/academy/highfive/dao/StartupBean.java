@@ -1,18 +1,15 @@
 package com.infoshare.academy.highfive.dao;
 
 import com.infoshare.academy.highfive.domain.Holiday;
-import com.infoshare.academy.highfive.domain.request.HolidayRequest;
-import com.infoshare.academy.highfive.domain.view.HolidayView;
 import com.infoshare.academy.highfive.exception.JsonUrlNotFound;
 import com.infoshare.academy.highfive.util.ApiJsonParser;
-import com.infoshare.academy.highfive.service.holiday.HolidayService;
+import com.infoshare.academy.highfive.service.HolidayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import java.io.IOException;
 import java.util.List;
 
