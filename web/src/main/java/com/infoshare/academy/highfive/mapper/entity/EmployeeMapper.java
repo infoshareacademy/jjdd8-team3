@@ -1,7 +1,7 @@
 package com.infoshare.academy.highfive.mapper.entity;
 
 import com.infoshare.academy.highfive.domain.Employee;
-import com.infoshare.academy.highfive.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped

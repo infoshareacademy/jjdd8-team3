@@ -2,7 +2,7 @@ package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.TeamDao;
 import com.infoshare.academy.highfive.mapper.entity.TeamMapper;
-import com.infoshare.academy.highfive.request.TeamRequest;
+import com.infoshare.academy.highfive.dto.request.TeamRequest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

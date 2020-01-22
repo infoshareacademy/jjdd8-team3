@@ -3,7 +3,7 @@ package com.infoshare.academy.highfive.service;
 import com.infoshare.academy.highfive.dao.EmployeeDao;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
-import com.infoshare.academy.highfive.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
