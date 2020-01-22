@@ -246,7 +246,12 @@ th {
 
 label {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem !important;
+    font-size: .7rem;
+    color: #4e73df;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+
 }
 
 button {
@@ -1841,34 +1846,34 @@ pre code {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: #858796;
-    opacity: 1;
+    color: #C0C0C0;
+    opacity: 0.8;
 }
 
 .form-control::-moz-placeholder {
-    color: #858796;
-    opacity: 1;
+    color: #C0C0C0;
+    opacity: 0.6;
 }
 
 .form-control:-ms-input-placeholder {
-    color: #858796;
-    opacity: 1;
+    color: #C0C0C0;
+    opacity: 0.8;
 }
 
 .form-control::-ms-input-placeholder {
-    color: #858796;
-    opacity: 1;
+    color: #C0C0C0;
+    opacity: 0.8;
 }
 
 .form-control::placeholder {
-    color: #858796;
-    opacity: 1;
+    color: #C0C0C0;
+    opacity: 0.8;
 }
 
 .form-control:disabled,
 .form-control[readonly] {
     background-color: #eaecf4;
-    opacity: 1;
+    opacity: 0.8;
 }
 
 select.form-control:focus::-ms-value {
@@ -10930,8 +10935,8 @@ form.user .custom-checkbox.small label {
 }
 
 form.user .form-control-user {
-    font-size: 0.8rem;
-    border-radius: 10rem;
+    font-size: 1rem;
+    #border-radius: 10rem;
     padding: 1.5rem 1rem;
 }
 
