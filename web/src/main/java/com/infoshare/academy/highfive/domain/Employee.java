@@ -26,8 +26,6 @@ public class Employee {
     @Column(name = "holiday_entitlement", nullable = false)
     private Integer holidayEntitlement;
 
-//    TODO
-//    int changed to Integet, to get possibility of "null" value
     @Column(name = "additional_entitlement")
     private Integer additionalEntitlement;
 
@@ -83,6 +81,19 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
+    public int getHolidayEntitlement() { return holidayEntitlement; }
+
+    public void setHolidayEntitlement(Integer holidayEntitlement) {
+        this.holidayEntitlement = holidayEntitlement;
+    }
+
+    public int getAdditionalEntitlement() {
+        return additionalEntitlement;
+    }
+
+    public void setAdditionalEntitlement(Integer additionalEntitlement) {
+        this.additionalEntitlement = additionalEntitlement; }
+
     public String getEmail() {
         return email;
     }
@@ -107,9 +118,6 @@ public class Employee {
 
     public void setLogin(String login) { this.login = login; }
 
-    public void setHolidayEntitlement(Integer holidayEntitlement) { this.holidayEntitlement = holidayEntitlement; }
-
-    public void setAdditionalEntitlement(Integer additionalEntitlement) { this.additionalEntitlement = additionalEntitlement; }
 
     public String getPosition() { return position; }
 

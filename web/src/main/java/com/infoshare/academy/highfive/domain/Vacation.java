@@ -3,6 +3,17 @@ package com.infoshare.academy.highfive.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NamedQueries({
+  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
+    "FROM Vacation vacation " +
+    "JOIN FETCH Employee employee ON vacation.employee = employee " +
+    "WHERE vacation.vacationStatus = :status"),
+  @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
+    "FROM Vacation vacation " +
+    "WHERE vacation.id = :vacationId")
+  }
+)
+
 @Entity
 @Table (name = "vacation")
 public class Vacation {
@@ -13,7 +24,7 @@ public class Vacation {
     private Long id;
 
     @JoinColumn(name = "employee_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
 
     @Column (name = "from_date", nullable = false)

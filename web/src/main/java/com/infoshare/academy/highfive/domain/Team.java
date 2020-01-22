@@ -16,10 +16,9 @@ public class Team {
     private String teamName;
 
     @OneToMany(
-            mappedBy = "teamId",
+            mappedBy = "team",
             orphanRemoval = true
     )
-
     private Set<Employee> teamEmployeeList;
 
     public Long getId() {

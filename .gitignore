@@ -29,3 +29,5 @@ web/target/*
 hs_err_pid*
 
 /web/src/main/webapp/bootstrap/
+/web/src/main/webapp/test/
+sendgrid.env

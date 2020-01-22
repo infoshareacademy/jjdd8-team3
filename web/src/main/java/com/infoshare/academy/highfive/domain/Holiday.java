@@ -1,8 +1,19 @@
 package com.infoshare.academy.highfive.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infoshare.academy.highfive.util.CustomHolidayRequestDeserializer;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@NamedQueries({
+        @NamedQuery(name = "Holiday.findAll", query = "SELECT holiday FROM Holiday holiday"),
+        @NamedQuery(name = "Holiday.findAllDates", query = "SELECT holiday.date FROM Holiday holiday WHERE holiday.holidayType = com.infoshare.academy.highfive.domain.HolidayType.NATIONAL_HOLIDAY"),
+        @NamedQuery(name = "Holiday.searchByName", query = "SELECT holiday FROM Holiday holiday WHERE holiday.name LIKE CONCAT('%',:searchName,'%')"),
+        @NamedQuery(name = "Holiday.searchByDate", query = "SELECT holiday FROM Holiday holiday WHERE holiday.date BETWEEN :dateFrom AND :dateTo")
+})
+
+@JsonDeserialize(using = CustomHolidayRequestDeserializer.class)
 @Entity
 @Table(name = "holiday")
 public class Holiday {
@@ -10,12 +21,12 @@ public class Holiday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @Column(name = "date", nullable = false)
@@ -31,17 +42,24 @@ public class Holiday {
     private int day;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="holiday_type")
+    @Column(name = "holiday_type")
     private HolidayType holidayType;
 
     public Holiday() {
     }
 
-    public int getId() {
+    public Holiday(String name, String description, LocalDate date, HolidayType holidayType) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.holidayType = holidayType;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
