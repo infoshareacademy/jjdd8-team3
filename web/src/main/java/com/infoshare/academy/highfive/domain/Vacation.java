@@ -1,7 +1,9 @@
 package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
+import javax.xml.namespace.QName;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @NamedQueries({
   @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
@@ -10,8 +12,11 @@ import java.time.LocalDate;
     "WHERE vacation.vacationStatus = :status"),
   @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "WHERE vacation.id = :vacationId")
-  }
+    "WHERE vacation.id = :vacationId")//,
+//  @NamedQuery(name = "Vacation.stillPendingRequest", query = "SELECT e.firstName, e.surname FROM Employee e " +
+//    "INNER JOIN Vacation v " +
+//    "WHERE v.id = e.id")
+    }
 )
 
 @Entity
@@ -32,6 +37,9 @@ public class Vacation {
 
     @Column (name = "to_date", nullable = false)
     private LocalDate vacationTo;
+
+    @Column (name = "date_of_request" , nullable = false)
+    private LocalDateTime dateOfRequest;
 
     @Enumerated(EnumType.STRING)
     @Column (name = "vacation_type")

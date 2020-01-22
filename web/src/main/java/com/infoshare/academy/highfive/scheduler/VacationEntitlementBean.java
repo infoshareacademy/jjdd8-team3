@@ -12,8 +12,7 @@ import java.util.logging.Logger;
 @Startup
 public class VacationEntitlementBean {
 
-  private static final Logger logger =
-    Logger.getLogger(VacationEntitlementBean.class.getName());
+  private static final Logger logger = Logger.getLogger(VacationEntitlementBean.class.getName());
 
 //  @EJB
 //  EmployeeService employeeService;

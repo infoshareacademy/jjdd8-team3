@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RequestScoped
 public class VacationRequestMapper {
@@ -17,6 +18,7 @@ public class VacationRequestMapper {
 
     LocalDate dateFrom = LocalDate.parse(request.getParameter("date_from"));
     LocalDate dateTo = LocalDate.parse(request.getParameter("date_to"));
+    LocalDateTime dateOfRequest = LocalDateTime.now();
 
     VacationRequest vacationRequest = new VacationRequest();
     vacationRequest.setEmployeeId(Long.parseLong(request.getParameter("employee_id")));
@@ -24,6 +26,7 @@ public class VacationRequestMapper {
     vacationRequest.setDateFrom(dateFrom);
     vacationRequest.setDateTo(dateTo);
     vacationRequest.setVacationStatus(VacationStatus.APPLIED);
+    vacationRequest.setDateOfRequest(dateOfRequest);
 
     if (request.getParameter("vacation_type").equals("parental")) {
       vacationRequest.setVacationType(VacationType.PARENTAL);
