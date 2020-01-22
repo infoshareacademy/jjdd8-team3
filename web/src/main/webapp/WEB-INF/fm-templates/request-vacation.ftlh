@@ -50,7 +50,7 @@
             <div class="card-body">
               <div class="text-center">
                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                     src="/img/undraw_journey_lwlj.svg" alt="add-vacation">
+                     src="/img/undraw_booking_33fn.svg" alt="add-vacation">
               </div>
             </div>
           </div>
