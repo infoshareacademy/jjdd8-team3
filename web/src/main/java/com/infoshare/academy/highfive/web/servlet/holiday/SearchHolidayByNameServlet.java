@@ -51,10 +51,10 @@ public class SearchHolidayByNameServlet extends HttpServlet {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            e.getMessage();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
-      }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -64,7 +64,7 @@ public class SearchHolidayByNameServlet extends HttpServlet {
         List<HolidayView> holidays = null;
         Boolean validInputs = false;
 
-        if (searchByName.length()>2) {
+        if (searchByName.length() > 2) {
             validInputs = true;
             LOGGER.info("Inputs Correct. Processing!");
             holidays = holidayService.searchHolidayByName(searchByName);
@@ -91,8 +91,7 @@ public class SearchHolidayByNameServlet extends HttpServlet {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            LOGGER.warn("Issue with processing Freemarker template.");
-            e.getMessage();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }

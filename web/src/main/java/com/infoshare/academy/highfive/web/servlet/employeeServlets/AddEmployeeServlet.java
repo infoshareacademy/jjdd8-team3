@@ -1,11 +1,10 @@
-package com.infoshare.academy.highfive.web.servlet.employee;
+package com.infoshare.academy.highfive.web.servlet.employeeServlets;
 
 import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -16,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 
-@WebServlet("/manager/edit-employee")
-public class EditEmployeeServlet extends HttpServlet {
+@WebServlet("/manager/add-employee/")
+public class AddEmployeeServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
@@ -32,7 +31,7 @@ public class EditEmployeeServlet extends HttpServlet {
 
         try {
             EmployeeRequest employeeRequest = requestMapper.mapParamsToRequest(req);
-            employeeService.editEmployee(employeeRequest);
+            employeeService.addNewEmployee(employeeRequest);
         } catch (ParseException e) {
             LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }

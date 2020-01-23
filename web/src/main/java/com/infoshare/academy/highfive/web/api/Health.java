@@ -12,6 +12,6 @@ public class Health {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Response get() {
-        return Response.status(200).build();
+        return Response.ok().build();
     }
 }

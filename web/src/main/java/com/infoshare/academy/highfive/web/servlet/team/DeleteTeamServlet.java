@@ -18,7 +18,7 @@ import java.io.IOException;
 @WebServlet("/manager/delete-team/")
 public class DeleteTeamServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
     private TeamRequestMapper requestMapper;

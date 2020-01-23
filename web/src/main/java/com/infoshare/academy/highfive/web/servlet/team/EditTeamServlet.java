@@ -18,7 +18,7 @@ import java.io.IOException;
 @WebServlet("/manager/edit-team")
 public class EditTeamServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
     private TeamRequestMapper requestMapper;

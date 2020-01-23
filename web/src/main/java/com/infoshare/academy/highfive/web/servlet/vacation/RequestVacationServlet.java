@@ -60,8 +60,7 @@ public class RequestVacationServlet extends HttpServlet {
       template.process(dataModel, writer);
     } catch (
       TemplateException e) {
-      LOGGER.warn("Issue with processing Freemarker template.");
-      e.getMessage();
+      LOGGER.error(e.getMessage(), e);
     }
 
   }
@@ -74,8 +73,7 @@ public class RequestVacationServlet extends HttpServlet {
       this.vacationService.addVacation(vacationRequest);
 
     } catch (ParseException e) {
-      LOGGER.warn("Issue with parsing http request.");
-      e.printStackTrace();
+      LOGGER.error(e.getMessage(), e);
     }
 
     Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
@@ -108,8 +106,7 @@ public class RequestVacationServlet extends HttpServlet {
       template.process(dataModel, writer);
     } catch (
       TemplateException e) {
-      LOGGER.warn("Issue with processing Freemarker template.");
-      e.getMessage();
+      LOGGER.error(e.getMessage(), e);
     }
 
   }

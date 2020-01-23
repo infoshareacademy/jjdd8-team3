@@ -24,7 +24,7 @@ import java.util.Map;
 @WebServlet("/admin/add-holiday")
 public class AddHolidayServlet extends HttpServlet {
 
-    private Logger logger = LoggerFactory.getLogger(getClass().getName());
+    private Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
 
     @Inject
@@ -66,7 +66,7 @@ public class AddHolidayServlet extends HttpServlet {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            e.getMessage();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }

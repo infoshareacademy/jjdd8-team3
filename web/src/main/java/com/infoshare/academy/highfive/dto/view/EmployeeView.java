@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dto.view;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
 
@@ -9,18 +10,24 @@ public class EmployeeView {
 
   private Long Id;
 
+  @JsonProperty("first_name")
   private String firstName;
 
   private String surname;
 
+  @JsonProperty("hire_date")
   private LocalDate hireDate;
 
+  @JsonProperty("holiday_entitlement")
   private int holidayEntitlement;
 
+  @JsonProperty("additional_entitlement")
   private int additionalEntitlement;
 
+  @JsonProperty("team_id")
   private Team teamId;
 
+  @JsonProperty("role_id")
   private Role roleId;
 
   public EmployeeView(Long Id, String firstName, String surname, LocalDate hireDate, int holidayEntitlement, int additionalEntitlement, Team teamId, Role roleId) {
@@ -58,7 +65,6 @@ public class EmployeeView {
     return additionalEntitlement;
   }
 
-
   public Team getTeamId() {
     return teamId;
   }
@@ -66,4 +72,5 @@ public class EmployeeView {
   public Role getRoleId() {
     return roleId;
   }
+
 }
