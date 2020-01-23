@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
     "WHERE vacation.vacationStatus = :status"),
   @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "WHERE vacation.id = :vacationId")//,
-//  @NamedQuery(name = "Vacation.stillPendingRequest", query = "SELECT e.firstName, e.surname FROM Employee e " +
-//    "INNER JOIN Vacation v " +
-//    "WHERE v.id = e.id")
+    "WHERE vacation.id = :vacationId"),
+  @NamedQuery(name = "Vacation.stillPendingRequest", query = "SELECT employee.firstName, employee.surname FROM Employee employee " +
+    "INNER JOIN Vacation vacation " +
+    "ON vacation.employee")
     }
 )
 

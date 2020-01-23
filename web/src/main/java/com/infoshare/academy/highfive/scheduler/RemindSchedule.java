@@ -24,6 +24,7 @@ public class RemindSchedule {
     VacationRequest vacationRequest;
 
 // TODO
+
 //    @Schedule(hour = "*", minute = "1", second = "*", info = "Every 1 minute timer")
 //    public void requestReminderSchedule() throws IOException {
 //        if( < LocalDateTime.now()) {
