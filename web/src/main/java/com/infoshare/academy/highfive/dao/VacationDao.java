@@ -41,4 +41,12 @@ public class VacationDao {
     entityManager.merge(vacation);
 
   }
+
+//  public List<Vacation> getStillPendingRequestsList() {
+//
+//    return entityManager.createNamedQuery("Vacation.findPendingRequests")
+//            .setParameter("status", VacationStatus.APPLIED)
+//            .getResultList();
+//
+//  }
 }

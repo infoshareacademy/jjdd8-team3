@@ -58,4 +58,14 @@ public class MailSender {
 
     }
 
+  public void sendRequestReminder(String emailRecipient) throws IOException {
+
+    Email from = new Email("Vacation-Manager@HighFive.com");
+    String subject = "Vacation Manager notification. Request reminder.";
+    Email to = new Email(emailRecipient);
+    Content content = new Content("text/plain", "Please be informed there still is a vacation request is waiting for your approval");
+    createMail(from, subject, to, content);
+
+  }
+
 }
