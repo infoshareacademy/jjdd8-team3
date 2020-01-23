@@ -118,7 +118,7 @@
             </a>
             <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/manager/add-team">Add</a>
+                    <a class="collapse-item" href="/blank">Add</a>
                     <a class="collapse-item" href="/blank">Edit</a>
                     <a class="collapse-item" href="/blank">Remove</a>
                 </div>
@@ -134,7 +134,7 @@
             </a>
             <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
+                    <a class="collapse-item" href="/manager/add-team">Add</a>
                     <a class="collapse-item" href="/blank">Edit</a>
                     <a class="collapse-item" href="/blank">Remove</a>
                 </div>

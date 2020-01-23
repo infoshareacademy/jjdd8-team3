@@ -24,7 +24,7 @@ import java.util.Map;
 @WebServlet("/manager/add-team")
 public class AddTeamServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
     private TeamRequestMapper requestMapper;
@@ -39,9 +39,7 @@ public class AddTeamServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
-
         PrintWriter writer = resp.getWriter();
-
         Map<String, Object> dataModel = new HashMap<>();
 
         Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
@@ -50,13 +48,13 @@ public class AddTeamServlet extends HttpServlet {
         dataModel.put("contentTemplate", "add-team.ftlh");
         dataModel.put("title", "Define new team");
 
-        logger.info("User (manager) provided with team defining form.");
+        LOGGER.info("User (manager) provided with team defining form.");
 
         try {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            logger.warn("Issue with processing Freemarker template.");
+            LOGGER.warn("Issue with processing Freemarker template.");
             e.getMessage();
         }
 
@@ -78,7 +76,7 @@ public class AddTeamServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
 
-        dataModel.put("method", req.getMethod());
+//        dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "add-team.ftlh");
         dataModel.put("title", "Define new team");
     }

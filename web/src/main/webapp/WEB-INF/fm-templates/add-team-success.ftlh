@@ -1,8 +1,8 @@
-<!-- Begin Page Content -->
 <div class="container-fluid">
+
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"></h1>
+    <h1 class="h3 mb-0 text-gray-800">Success!</h1>
   </div>
   <div class="row justify-content-center">
     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -13,26 +13,16 @@
             <div class="col-lg-6">
               <div class="p-5">
                 <div class="text-center">
-                  <h1 class="h4 text-gray-900 mb-4">Define new team</h1>
+                  <h1 class="h4 text-gray-900 mb-4">New team defined.</h1>
+                  <p> You can assign employees to new team since now</p>
                 </div>
-                <form class="user" action="add-team" method="post">
-                  <div class="form-group">
-                    <label for="team_name">team name</label>
-                    <input type="text" class="form-control form-control-user"
-                           id="team_name" placeholder="Enter name of new team" required="" pattern="\d*" name="team_name">
-                  </div>
-                  <hr>
-                  <div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                  </div>
-                </form>
               </div>
             </div>
             <div class="col-lg-6 d-none d-lg-block">
               <div class="card-body">
                 <div class="text-center">
                   <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                       src="/img/undraw_team_spirit_hrr4.svg" alt="add-team">
+                       src="/img/undraw_journey_lwlj.svg" alt="add-vacation">
                 </div>
               </div>
             </div>
@@ -41,6 +31,6 @@
       </div>
     </div>
   </div>
-  <!-- /.container-fluid -->
+<!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
