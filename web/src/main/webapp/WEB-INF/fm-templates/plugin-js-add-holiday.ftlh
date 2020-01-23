@@ -1,13 +1,5 @@
 <!-- Page level plugins -->
-
-<script src="/js/bootstrap-datepicker.min.js"></script>
-
-
 <script>
-    $('#holiday-date').datepicker({
-        clearBtn: false,
-        format: "yyyy-mm-dd"
-    });
 
     // Helper function to serialize all the form fields into a JSON string
     function formToJSON() {

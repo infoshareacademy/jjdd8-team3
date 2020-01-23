@@ -1,8 +1,8 @@
 package com.infoshare.academy.highfive.mapper.entity;
 
 import com.infoshare.academy.highfive.domain.Holiday;
-import com.infoshare.academy.highfive.domain.request.HolidayRequest;
-import com.infoshare.academy.highfive.domain.view.HolidayView;
+import com.infoshare.academy.highfive.dto.request.HolidayRequest;
+import com.infoshare.academy.highfive.dto.view.HolidayView;
 
 import javax.enterprise.context.RequestScoped;
 import java.time.LocalDate;

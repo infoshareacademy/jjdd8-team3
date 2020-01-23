@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -158,6 +159,7 @@ public class VacationService {
 
   }
 
+  @Transactional
   public List<VacationView> listAllPendingRequests() {
 
     return vacationDao.getPendingRequestsList()

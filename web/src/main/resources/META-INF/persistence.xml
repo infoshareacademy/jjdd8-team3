@@ -16,7 +16,7 @@
       <property name="hibernate.cache.use_second_level_cache" value="true"/>
       <property name="hibernate.cache.use_query_cache" value="false"/>
       <property name="javax.persistence.sql-load-script-source"
-                value="/home/mich/IdeaProjects/jjdd8-highfive/web/start.sql" />
+                value="start.sql" />
     </properties>
   </persistence-unit>
 </persistence>

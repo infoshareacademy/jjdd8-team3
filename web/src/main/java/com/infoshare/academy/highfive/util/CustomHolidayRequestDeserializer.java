@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.domain.HolidayType;
-import com.infoshare.academy.highfive.domain.request.HolidayRequest;
 
 import java.io.IOException;
 import java.time.LocalDate;
