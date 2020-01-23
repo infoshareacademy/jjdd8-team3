@@ -63,6 +63,14 @@ public class Vacation {
 
     public void setVacationTo(LocalDate vacationTo) { this.vacationTo = vacationTo; }
 
+    public LocalDateTime getDateOfRequest() {
+        return dateOfRequest;
+    }
+
+    public void setDateOfRequest(LocalDateTime dateOfRequest) {
+        this.dateOfRequest = dateOfRequest;
+    }
+
     public VacationType getVacationType() { return vacationType; }
 
     public void setVacationType(VacationType vacationType) { this.vacationType = vacationType; }

@@ -33,6 +33,7 @@ public class VacationMapper {
     vacationView.setPosition(vacationEntity.getEmployee().getPosition());
     vacationView.setVacationFrom(vacationEntity.getVacationFrom());
     vacationView.setVacationTo(vacationEntity.getVacationTo());
+    vacationView.setDateOfRequest(vacationEntity.getDateOfRequest());
     vacationView.setVacationType(vacationEntity.getVacationType());
     vacationView.setVacationStatus(vacationEntity.getVacationStatus());
 

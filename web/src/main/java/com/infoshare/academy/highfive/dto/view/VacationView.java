@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.domain.VacationType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class VacationView {
 
@@ -26,6 +27,9 @@ public class VacationView {
 
   @JsonProperty("vacation_from")
   private LocalDate vacationTo;
+
+  @JsonProperty("vacation_request_dateTime")
+  private LocalDateTime dateOfRequest;
 
   @JsonProperty("vacation_type")
   private VacationType vacationType;
@@ -91,6 +95,14 @@ public class VacationView {
 
   public VacationType getVacationType() {
     return vacationType;
+  }
+
+  public LocalDateTime getDateOfRequest() {
+    return dateOfRequest;
+  }
+
+  public void setDateOfRequest(LocalDateTime dateOfRequest) {
+    this.dateOfRequest = dateOfRequest;
   }
 
   public void setVacationType(VacationType vacationType) {
