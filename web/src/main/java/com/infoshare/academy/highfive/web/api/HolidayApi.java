@@ -41,6 +41,13 @@ public class HolidayApi {
         return Response.ok().entity(holidayService.findAll()).build();
     }
 
+    @GET
+    @Path("/list/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchByName(@PathParam("name") String name) {
+        return Response.ok().entity(holidayService.searchHolidayByName(name)).build();
+    }
+
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)

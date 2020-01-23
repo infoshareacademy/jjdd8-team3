@@ -23,11 +23,10 @@
                                 <form class="user" action="search-by-name" method="post">
                                     <label for="exampleInputHolidayName">Please type holiday name here:</label>
                                     <div class="form-group">
-                                        <input type="holiday_name" title="Please insert min 3 char." name="search_by_name" class="form-control form-control-user" pattern=".{3,}"
-                                               id="exampleInputHolidayName" placeholder="Please enter a minimum of 3 letters...">
-                                        <div class="text-center">
-                                            <strong<#-->${inputSearch}--></strong>
-                                        </div>
+                                        <input type="text" title="Please insert min 3 char." name="search_by_name" class="form-control form-control-user" pattern=".{3,}"
+                                               id="holiday-name" placeholder="Please enter a minimum of 3 letters..." autocomplete="off">
+<#--                                        <div id="result-div" class="list-group" style="width:60%;position:absolute;margin-top:2px;margin-left:10%;height:300px;z-index: 99 !important;">-->
+<#--                                        </div>-->
                                     </div>
                                     <div class="form-group">
                                      <!--    <a href="holiday-search.html" class="btn btn-primary btn-user btn-block">  -->
@@ -36,6 +35,13 @@
                                             <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
+                                <label for="exampleInputHolidayName">Quick live search:</label>
+                                <div class="form-group">
+                                    <input type="text" title="Please insert min 3 char." name="holiday-quick" class="form-control form-control-user" pattern=".{3,}"
+                                           id="holiday-quick" placeholder="Please enter a minimum of 3 letters..." autocomplete="off">
+                                    <div id="result-div" class="list-group" style="margin-top:2px;margin-left:0;z-index: 1000 !important;">
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
