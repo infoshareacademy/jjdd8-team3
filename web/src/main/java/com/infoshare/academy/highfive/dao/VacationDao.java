@@ -44,7 +44,7 @@ public class VacationDao {
 
 //  public List<Vacation> getStillPendingRequestsList() {
 //
-//    return entityManager.createNamedQuery("Vacation.findPendingRequests")
+//    return entityManager.createNamedQuery("Vacation.Vacation.stillPendingRequest")
 //            .setParameter("status", VacationStatus.APPLIED)
 //            .getResultList();
 //
