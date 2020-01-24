@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
   @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
     "FROM Vacation vacation " +
     "WHERE vacation.id = :vacationId"),
-  @NamedQuery(name = "Vacation.stillPendingRequest", query = "SELECT employee.firstName, employee.surname FROM Employee employee " +
-    "INNER JOIN Vacation vacation " +
-    "ON vacation.employee")
+//  @NamedQuery(name = "Vacation.stillPendingRequest", query = "SELECT employee.firstName, employee.surname FROM Employee employee " +
+//    "INNER JOIN Vacation vacation " +
+//    "ON vacation.employee")
     }
 )
 

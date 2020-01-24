@@ -32,6 +32,7 @@ public class VacationMapper {
     vacationView.setEmployeeId(vacationEntity.getEmployee().getId());
     vacationView.setFirstName(vacationEntity.getEmployee().getFirstName());
     vacationView.setSurname(vacationEntity.getEmployee().getSurname());
+    vacationView.setEmail(vacationEntity.getEmployee().getEmail());
     vacationView.setPosition(vacationEntity.getEmployee().getPosition());
     vacationView.setVacationFrom(vacationEntity.getVacationFrom());
     vacationView.setVacationTo(vacationEntity.getVacationTo());

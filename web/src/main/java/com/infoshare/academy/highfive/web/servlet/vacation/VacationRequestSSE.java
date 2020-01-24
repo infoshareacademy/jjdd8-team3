@@ -26,7 +26,7 @@ public class VacationRequestSSE extends HttpServlet {
             throws ServletException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-            mapper.writer().withDefaultPrettyPrinter();
+        mapper.writer().withDefaultPrettyPrinter();
         resp.setContentType("text/event-stream");
         resp.setCharacterEncoding("UTF-8");
 
@@ -41,7 +41,9 @@ public class VacationRequestSSE extends HttpServlet {
 
         String listToJson = mapper.writeValueAsString(vacationViews);
 
-      resp.getWriter().write(listToJson);
+        resp.getWriter().write(listToJson);
+
+      //  String aaa = resp.getWriter().write(listToJson);
 
     }
 
