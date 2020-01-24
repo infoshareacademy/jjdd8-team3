@@ -6,17 +6,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NamedQueries({
-  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "JOIN FETCH Employee employee ON vacation.employee = employee " +
-    "WHERE vacation.vacationStatus = :status"),
-  @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "WHERE vacation.id = :vacationId"),
-  @NamedQuery(name = "Vacation.stillPendingRequest", query = "SELECT employee.firstName, employee.surname FROM Employee employee " +
-    "INNER JOIN Vacation vacation " +
-    "ON vacation.employee")
-    }
+        @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "JOIN FETCH Employee employee ON vacation.employee = employee " +
+                "WHERE vacation.vacationStatus = :status"),
+        @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "WHERE vacation.id = :vacationId")
+}
 )
 
 @Entity
@@ -62,6 +59,14 @@ public class Vacation {
     public LocalDate getVacationTo() { return vacationTo; }
 
     public void setVacationTo(LocalDate vacationTo) { this.vacationTo = vacationTo; }
+
+    public LocalDateTime getDateOfRequest() {
+        return dateOfRequest;
+    }
+
+    public void setDateOfRequest(LocalDateTime dateOfRequest) {
+        this.dateOfRequest = dateOfRequest;
+    }
 
     public VacationType getVacationType() { return vacationType; }
 
