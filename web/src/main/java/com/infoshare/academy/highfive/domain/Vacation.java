@@ -10,7 +10,13 @@ import java.time.LocalDate;
     "WHERE vacation.vacationStatus = :status"),
   @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "WHERE vacation.id = :vacationId")
+    "WHERE vacation.id = :vacationId"),
+  @NamedQuery(name = "Vacation.findAbsentToday", query = "SELECT vacation " +
+    "FROM Vacation vacation " +
+    "WHERE vacation.vacationFrom <= :today AND vacation.vacationTo >= :today")/*,
+  @NamedQuery(name = "Vacation.findAbsentThisMonth", query = "SELECT vacation " +
+    "FROM Vacation vacation " +
+    "WHERE vacation.vacationFrom <= :today AND vacation.vacationTo >= :today")*/
   }
 )
 

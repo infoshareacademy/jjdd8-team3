@@ -7,6 +7,8 @@ import com.infoshare.academy.highfive.dao.VacationDao;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.dto.view.VacationView;
+import com.infoshare.academy.highfive.dto.VacationStatisticView;
+import com.infoshare.academy.highfive.mapper.VacationStatisticMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
 import org.slf4j.Logger;
@@ -38,6 +40,9 @@ public class VacationService {
 
   @Inject
   EntitlementDao entitlementDao;
+
+  @Inject
+  VacationStatisticMapper vacationStatisticMapper;
 
   @Inject
   MailSender mailSender;
@@ -185,5 +190,8 @@ public class VacationService {
 
   }
 
+//  public VacationStatisticView getStatistics() {
+//    return vacationStatisticMapper;
+//  }
 }
 

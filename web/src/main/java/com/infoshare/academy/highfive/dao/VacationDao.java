@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 @Stateless
@@ -28,6 +29,13 @@ public class VacationDao {
 
   }
 
+  public int getAmountOfAbsentToday() {
+    return entityManager.createNamedQuery("Vacation.findAbsentToday")
+      .setParameter("today", LocalDate.now())
+      .getResultList().size();
+
+  }
+
   public Vacation getVacationById(Long vacationId) {
 
     return (Vacation) entityManager
@@ -41,4 +49,13 @@ public class VacationDao {
     entityManager.merge(vacation);
 
   }
+
+  public Integer getAmountOfAbsentThisMonth() {
+    return entityManager
+      .createNamedQuery("Vacation.findAbsentThisMonth")
+      .setParameter("currentMonth", LocalDate.now())
+      .getResultList().size();
+  }
+
 }
+

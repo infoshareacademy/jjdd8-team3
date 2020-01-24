@@ -1,6 +1,7 @@
 package com.infoshare.academy.highfive.dao;
 
 import com.infoshare.academy.highfive.domain.Employee;
+import com.infoshare.academy.highfive.domain.Vacation;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,6 +29,8 @@ public class EmployeeDao {
   public void saveEmployee(Employee employee) {
     entityManager.persist(employee);
   }
+
+
 
 
 }
