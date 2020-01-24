@@ -28,7 +28,7 @@ public class VacationRequest {
     return dateOfRequest;
   }
 
-  public void setDateOfRequest(LocalDateTime dataOfRequest) {
+  public void setDateOfRequest(LocalDateTime dateOfRequest) {
     this.dateOfRequest = dateOfRequest;
   }
 
