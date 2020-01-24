@@ -21,12 +21,12 @@ public class VacationRequestSSE extends HttpServlet {
     @Inject
     private VacationService vacationService;
 
-/*    @Override
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-
+            mapper.writer().withDefaultPrettyPrinter();
         resp.setContentType("text/event-stream");
         resp.setCharacterEncoding("UTF-8");
 
@@ -36,13 +36,13 @@ public class VacationRequestSSE extends HttpServlet {
                 .stream()
                 .filter(v -> v.getVacationStatus().equals(VacationStatus.APPLIED))
                 .sorted((o1, o2) -> o2.getDateOfRequest().compareTo(o1.getDateOfRequest()))
-                .limit(4)
+                .limit(2)
                 .collect(Collectors.toList());
 
         String listToJson = mapper.writeValueAsString(vacationViews);
 
       resp.getWriter().write(listToJson);
 
-    }*/
+    }
 
 }

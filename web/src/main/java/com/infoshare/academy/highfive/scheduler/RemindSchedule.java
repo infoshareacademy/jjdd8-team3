@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
-@Singleton
-@Startup
+//@Singleton
+//@Startup
 public class RemindSchedule {
 
     Logger logger = Logger.getLogger(RemindSchedule.class.getName());

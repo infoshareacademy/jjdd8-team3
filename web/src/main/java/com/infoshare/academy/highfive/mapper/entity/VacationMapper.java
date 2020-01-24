@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 
 import javax.ejb.Stateless;
+import java.time.LocalDateTime;
 
 @Stateless
 public class VacationMapper {
@@ -18,6 +19,7 @@ public class VacationMapper {
     vacationEntity.setVacationTo(vacationRequest.getDateTo());
     vacationEntity.setVacationType(vacationRequest.getVacationType());
     vacationEntity.setVacationStatus(vacationRequest.getVacationStatus());
+    vacationEntity.setDateOfRequest(LocalDateTime.now());
 
     return vacationEntity;
 

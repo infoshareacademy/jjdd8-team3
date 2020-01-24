@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="/css/events.css"/>
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+</head>
+<body>
+<div id="events-list">
+
+</div>
+
+<br><br>
+<button onclick="start()">Start</button>
+
+<script type="text/javascript">
+  function start() {
+    var eventSource = new EventSource("/admin/notify");
+    var usersListSize = 0;
+    eventSource.onmessage = function (event) {
+      if (usersListSize != event.data) {
+        usersListSize = event.data;
+        $('#events-list').append('<div>'
+            + 'New users list size: ' + usersListSize
+            + '</div>');
+        $('#events-list div').last().delay(1000).animate({opacity: 1}, 1000);
+      }
+    };
+  }
+</script>
+</body>
+</html>

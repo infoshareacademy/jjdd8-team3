@@ -22,16 +22,6 @@ public class VacationRequest {
 
   private VacationStatus vacationStatus;
 
-  private LocalDateTime dateOfRequest;
-
-  public LocalDateTime getDataOfRequest() {
-    return dateOfRequest;
-  }
-
-  public void setDateOfRequest(LocalDateTime dataOfRequest) {
-    this.dateOfRequest = dateOfRequest;
-  }
-
   public VacationStatus getVacationStatus() {
     return vacationStatus;
   }
@@ -75,4 +65,5 @@ public class VacationRequest {
   public void setVacationType(VacationType vacationType) {
     this.vacationType = vacationType;
   }
+
 }
