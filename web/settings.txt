@@ -24,3 +24,7 @@ CREATE hfvdb;
 USE hfvdb;
 Show tables;
 
+### docker z glownego katalogu aplikacji
+docker-compose -f docker-compose.yml up --build
+
+

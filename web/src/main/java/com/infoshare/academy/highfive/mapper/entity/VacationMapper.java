@@ -3,10 +3,12 @@ package com.infoshare.academy.highfive.mapper.entity;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Vacation;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.view.VacationSSE;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 
 import javax.ejb.Stateless;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Stateless
 public class VacationMapper {
@@ -41,6 +43,20 @@ public class VacationMapper {
     vacationView.setVacationStatus(vacationEntity.getVacationStatus());
 
     return vacationView;
+  }
+
+  public VacationSSE mapEntityToSSE(Vacation vacationEntity) {
+
+    VacationSSE vacationSSE = new VacationSSE();
+    vacationSSE.setId(vacationEntity.getId());
+    vacationSSE.setEmployeeId(vacationEntity.getEmployee().getId());
+    vacationSSE.setFirstName(vacationEntity.getEmployee().getFirstName());
+    vacationSSE.setSurname(vacationEntity.getEmployee().getSurname());
+    vacationSSE.setVacationStatus(vacationEntity.getVacationStatus());
+    VacationSSE.setDateOfRequest(vacationEntity.getDateOfRequest());
+    vacationSSE.setDateOfRequestIso(vacationEntity.getDateOfRequest().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
+    return vacationSSE;
   }
 
 }

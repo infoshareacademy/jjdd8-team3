@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.dao.HolidayDao;
 import com.infoshare.academy.highfive.dao.VacationDao;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.view.VacationSSE;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
@@ -166,6 +167,16 @@ public class VacationService {
       .stream()
       .map(vacation -> vacationMapper.mapEntityToView(vacation))
       .collect(Collectors.toList());
+
+  }
+
+  @Transactional
+  public List<VacationSSE> listAllPendingRequestsSSE() {
+
+    return vacationDao.getPendingRequestsList()
+            .stream()
+            .map(vacation -> vacationMapper.mapEntityToSSE(vacation))
+            .collect(Collectors.toList());
 
   }
 

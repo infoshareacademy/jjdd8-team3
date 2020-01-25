@@ -20,7 +20,6 @@
           rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
-<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
     <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
     <#if pluginCssTemplate??>
     <#include "/${pluginCssTemplate}">
@@ -31,7 +30,6 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -185,6 +183,12 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
+        <div id="new-request" class="alert alert-warning alert-dismissible fade show" style="position: absolute;z-index: 9999;display: none;left:50%;transform: translate(-50%, 0);"role="alert">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
         <!-- Main Content -->
         <div id="content">
@@ -234,6 +238,22 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter"></span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div id="alert-list" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Requests Center
+                            </h6>
+                            <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show All Requests</a>
                         </div>
                     </li>
 
@@ -349,6 +369,34 @@
             clearBtn: false,
             format: "yyyy-mm-dd"
         });
+
+        //function start() {
+        var source = new EventSource("/admin/notify");
+        lastData=null;
+        dataSize = 0;
+        source.addEventListener('message', function(e) {
+            var data = JSON.parse(e.data);
+            if (lastData != data) {
+               // $('#new-request').show();
+                lastData = data;
+                dataSize = data.length;
+                if (dataSize > 0) {
+                    $('#alertsDropdown span').text(dataSize)
+                }
+                $('.pending-req').remove();
+                $.each(data, function (i, item) {
+
+                    $('#alert-list').append('<a class="dropdown-item d-flex align-items-center pending-req" href="/manager/pending-requests"><div class="mr-3">'
+                        + '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>'
+                        + '</div><div><div class="small text-black-500">' + item.iso_date_of_request + '</div>'
+                        + item.first_name + ' ' + item.surname + ' requested for vacation'
+                        + '</div></a>');
+                    //$('#alert-list').show();
+                });
+            }
+        }, false);
+
+        // }
         </script>
 
     <!-- Page level plugins -->

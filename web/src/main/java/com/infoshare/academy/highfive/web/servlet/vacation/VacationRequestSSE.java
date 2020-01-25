@@ -2,6 +2,7 @@ package com.infoshare.academy.highfive.web.servlet.vacation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshare.academy.highfive.domain.VacationStatus;
+import com.infoshare.academy.highfive.dto.view.VacationSSE;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.service.VacationService;
 
@@ -30,20 +31,17 @@ public class VacationRequestSSE extends HttpServlet {
         resp.setContentType("text/event-stream");
         resp.setCharacterEncoding("UTF-8");
 
-        //resp.getWriter().write("retry: 20000\n");
-
-        List<VacationView> vacationViews = vacationService.listAllPendingRequests()
+        List<VacationSSE> vacationSSE = vacationService.listAllPendingRequestsSSE()
                 .stream()
                 .filter(v -> v.getVacationStatus().equals(VacationStatus.APPLIED))
                 .sorted((o1, o2) -> o2.getDateOfRequest().compareTo(o1.getDateOfRequest()))
-                .limit(2)
+                //.limit(2)
                 .collect(Collectors.toList());
 
-        String listToJson = mapper.writeValueAsString(vacationViews);
+        String listToJson = mapper.writeValueAsString(vacationSSE);
 
-        resp.getWriter().write(listToJson);
-
-      //  String aaa = resp.getWriter().write(listToJson);
+        resp.getWriter().write("retry: 20000\n");
+        resp.getWriter().write("data:" + listToJson + "\n\n");
 
     }
 

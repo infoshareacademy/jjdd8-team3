@@ -125,4 +125,5 @@ public class VacationView {
     public void setVacationStatus(VacationStatus vacationStatus) {
         this.vacationStatus = vacationStatus;
     }
+
 }
