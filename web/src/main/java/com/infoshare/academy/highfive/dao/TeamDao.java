@@ -14,20 +14,28 @@ public class TeamDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public void saveTeam(Team team){
+    public void save(Team team){
         entityManager.persist(team);
     }
 
-    public Optional<Team> findById(Long id) {
+    public List<Team> listAllTeam(){
+        return this.entityManager
+                .createNamedQuery("Team.findAll")
+                .getResultList();
+    }
+
+    public Optional<Team> getById(Long id) {
         return Optional.ofNullable(entityManager.find(Team.class, id));
     }
 
-    public List<Team> findAll() {
-        return entityManager.createNamedQuery("Team.findAll").getResultList();
+    public void update(Team team){ entityManager.merge(team); }
+
+    public void edit(){}
+
+    public Team delete (Long id){
+        Team removedTeam = getById(id).orElseThrow();
+        if (removedTeam != null){entityManager.remove(removedTeam);}
+        return removedTeam;
     }
-
-    public void editTeam(){}
-
-    public void deleteTeam (){}
 
 }

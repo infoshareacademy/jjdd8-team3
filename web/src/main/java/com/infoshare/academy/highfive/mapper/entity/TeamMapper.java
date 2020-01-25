@@ -9,13 +9,6 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class TeamMapper {
 
-    public Team mapRequestToEntity(TeamRequest request) {
-
-        Team team = new Team();
-        team.setTeamName(request.getTeamName());
-        return team;
-    }
-
     public TeamView mapEntityToView(Team team) {
 
         TeamView teamView = new TeamView();
@@ -28,5 +21,19 @@ public class TeamMapper {
         teamView.setTeamName(team.getTeamName());
 
         return teamView;
+    }
+
+    //for save
+    public Team mapRequestToEntity(TeamRequest teamRequest) {
+
+        Team team = new Team();
+        return mapRequestToEntity(teamRequest, team);
+    }
+
+    //for update
+    public Team mapRequestToEntity(TeamRequest teamRequest, Team team) {
+
+        team.setTeamName(teamRequest.getTeamName());
+        return team;
     }
 }

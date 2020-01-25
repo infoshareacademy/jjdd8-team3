@@ -13,7 +13,6 @@ public class TeamRequestMapper {
 
     TeamRequest teamRequest = new TeamRequest();
 
-    teamRequest.setId((Long) request.getAttribute("team_id"));
     teamRequest.setTeamName((String) request.getAttribute("team_name"));
 
     return teamRequest;

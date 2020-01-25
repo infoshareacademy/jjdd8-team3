@@ -31,7 +31,7 @@
           <tbody>
           <#list teams as team>
             <tr>
-              <td><a href="/admin/add-holiday?action=edit&get=${team.id!}" class="btn btn-info btn-circle btn-sm">
+              <td><a href="/manager/add-team?action=edit&get=${team.id!}" class="btn btn-info btn-circle btn-sm">
                   <i class="fas fa-info-circle"></i>
                 </a>
                   <a href="#" class="btn btn-danger btn-circle btn-sm" onclick="deleteTeam(${team.id!})">

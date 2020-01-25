@@ -20,7 +20,6 @@
           <tr>
             <th>Team ID</th>
             <th>Name</th>
-           /tr>
           </tfoot>
           <tbody>
           <#list teams as team>

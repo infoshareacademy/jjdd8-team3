@@ -1,9 +1,7 @@
 package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.TeamDao;
-import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Team;
-import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.dto.view.TeamView;
 import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
 import com.infoshare.academy.highfive.mapper.entity.TeamMapper;
@@ -24,35 +22,34 @@ public class TeamService {
     @Inject
     private EmployeeMapper employeeMapper;
 
-    private String status;
-
-    public String getStatus() {
-        return status;
+    public void save(TeamRequest request) {
+        teamDao.save(teamMapper.mapRequestToEntity(request));
     }
 
-    public void saveTeam(TeamRequest request) {
-        teamDao.saveTeam(teamMapper.mapRequestToEntity(request));
+    public void update(Long id, TeamRequest teamRequest) {
+        Team team = teamDao.getById(id).orElseThrow();
+
+        teamMapper.mapRequestToEntity(teamRequest, team);
+        teamDao.update(team);
     }
 
-    //    TODO
-    public void deleteTeam(TeamRequest request) {
-    }
-
-    //    TODO
-    public void editTeam(TeamRequest request) {
+    public TeamView remove(Long id){
+        teamDao.delete(id);
+        TeamView teamView = teamMapper.mapEntityToView(teamDao.delete(id));
+        return teamView;
     }
 
     public TeamView findById(Long id) {
-        Team team = teamDao.findById(id).orElseThrow();
+        Team team = teamDao.getById(id).orElseThrow();
         return teamMapper.mapEntityToView(team);
     }
 
-    public List<TeamView> findAll() {
-
-        List<TeamView> teamViews = new ArrayList<>();
-
-        teamDao.findAll().forEach(t -> teamViews.add(teamMapper.mapEntityToView(t)));
-
-        return teamViews;
+    public List<TeamView> listAll() {
+        List<TeamView> allTeamsView = new ArrayList<>();
+        teamDao.listAllTeam()
+                .forEach(team -> allTeamsView.add(teamMapper.mapEntityToView(team)));
+        return allTeamsView;
     }
+
+
 }

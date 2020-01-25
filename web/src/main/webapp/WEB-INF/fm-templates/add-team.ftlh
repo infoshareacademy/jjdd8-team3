@@ -14,7 +14,7 @@
 
               <div class="text-center">
                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                     src="/img/undraw_fill_forms_yltj.svg" alt="women on vacation">
+                     src="/img/undraw_team_spirit_hrr4.svg" alt="women on vacation">
               </div>
             </div>
             <div class="col-lg-6">
