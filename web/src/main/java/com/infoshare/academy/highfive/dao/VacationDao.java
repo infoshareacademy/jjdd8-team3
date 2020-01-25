@@ -51,9 +51,11 @@ public class VacationDao {
   }
 
   public Integer getAmountOfAbsentThisMonth() {
+    LocalDate currentTime = LocalDate.now();
     return entityManager
       .createNamedQuery("Vacation.findAbsentThisMonth")
-      .setParameter("currentMonth", LocalDate.now())
+      .setParameter("firstDayOfMonth", currentTime.withDayOfMonth(1))
+      .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
       .getResultList().size();
   }
 
