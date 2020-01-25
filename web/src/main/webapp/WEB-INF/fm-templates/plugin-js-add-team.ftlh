@@ -4,7 +4,7 @@
     // Helper function to serialize all the form fields into a JSON string
     function formToJSON() {
         return JSON.stringify({
-            "name": $('#team-name').val()
+            "team_name": $('#team-name').val()
         });
     }
 
@@ -23,7 +23,7 @@
             .done(
                 function (data) {
                     $('#modal-button').attr('onClick', 'window.location.href="/manager/edit-team";');
-                    $('#modal-info-body').html("New team: " + data.name + " defined");
+                    $('#modal-info-body').html("New team: " + data.team_name + " defined");
                     $('#infoModal').modal('show');
                 })
             .fail(

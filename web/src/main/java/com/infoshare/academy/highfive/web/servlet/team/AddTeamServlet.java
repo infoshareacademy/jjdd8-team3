@@ -1,25 +1,20 @@
 package com.infoshare.academy.highfive.web.servlet.team;
 
-import com.infoshare.academy.highfive.dto.request.TeamRequest;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.mapper.request.TeamRequestMapper;
 import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,21 +23,18 @@ public class AddTeamServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-    @EJB
+    @Inject
     private TeamService teamService;
 
     @Inject
     private TemplateProvider templateProvider;
 
-    @Inject
-    private TeamRequestMapper teamRequestMapper;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         resp.setContentType("text/html;charset=UTF-8");
         String action = req.getParameter("action");
-        String id = req.getParameter("action");
+        String id = req.getParameter("get");
 
         if (action == null || action.isEmpty()) {
             action = "add";
@@ -65,7 +57,7 @@ public class AddTeamServlet extends HttpServlet {
             dataModel.put("action", "add");
         }
         dataModel.put("pluginCssTemplate", "plugin-css-add-holiday.ftlh");
-        dataModel.put("pluginsJsTemplate", "plugin-js-add-team.ftlh");
+        dataModel.put("pluginJsTemplate", "plugin-js-add-team.ftlh");
 
         try {
             template.process(dataModel, writer);
@@ -75,29 +67,4 @@ public class AddTeamServlet extends HttpServlet {
             e.getMessage();
         }
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        TeamRequest teamRequest = teamRequestMapper.mapParamsToRequest(req);
-//        teamService.save(teamRequest);
-//
-//
-//        Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
-//
-//        resp.setContentType("text/html;charset=UTF-8");
-//        PrintWriter writer = resp.getWriter();
-//        Map<String, Object> dataModel = new HashMap<>();
-//
-//            dataModel.put("contentTemplate", "add-team.ftlh");
-//            dataModel.put("title", "Success!");
-//
-//        try {
-//            template.process(dataModel, writer);
-//        } catch (
-//                TemplateException e) {
-//            LOGGER.error(e.getMessage(), e);
-//        }
-//
-//    }
 }

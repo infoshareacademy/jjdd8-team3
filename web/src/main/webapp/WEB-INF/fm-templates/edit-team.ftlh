@@ -37,7 +37,7 @@
                   <a href="#" class="btn btn-danger btn-circle btn-sm" onclick="deleteTeam(${team.id!})">
                   <i class="fas fa-trash"></i></a>
               </td>
-              <td>${team.name!}</td>
+              <td>${team.teamName!}</td>
             </tr>
           </#list>
           </tbody>

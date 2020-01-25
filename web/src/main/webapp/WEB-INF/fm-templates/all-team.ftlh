@@ -25,7 +25,7 @@
           <#list teams as team>
             <tr>
               <td>${team.team-id!}</td>
-              <td>${team.name!}</td>
+              <td>${team.teamName!}</td>
             </tr>
           </#list>
           </tbody>

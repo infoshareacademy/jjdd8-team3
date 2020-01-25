@@ -361,7 +361,7 @@
             clearBtn: false,
             format: "yyyy-mm-dd"
         });
-        </script>
+    </script>
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>

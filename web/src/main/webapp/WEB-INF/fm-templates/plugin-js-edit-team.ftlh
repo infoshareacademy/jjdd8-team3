@@ -9,15 +9,10 @@
 
 
 <script>
-
-    $('#holiday-date').datepicker({
-        clearBtn: false,
-        format: "yyyy-mm-dd"
-    });
     // Helper function to serialize all the form fields into a JSON string
     function formToJSON() {
         return JSON.stringify({
-            "name": $('#team-name-name').val(),
+            "team_name": $('#team-name-name').val(),
         });
     }
 

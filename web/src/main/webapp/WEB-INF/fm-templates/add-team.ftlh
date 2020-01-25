@@ -27,7 +27,7 @@
                   <div class="form-group">
                     <label for="team-name">Name od Team</label>
                     <input type="text" class="form-control form-control-user" name="team-name"
-                           id="team-name" placeholder="name of team" value="<#if action == "edit">${team.name!}</#if>" required>
+                           id="team-name" placeholder="name of team" value="<#if action == "edit">${team.teamName!}</#if>" required>
                   </div>
                   <button type="submit" class="btn btn-primary"><span class="icon text-white-50">
                       <i class="fas fa-calendar-plus"></i>
