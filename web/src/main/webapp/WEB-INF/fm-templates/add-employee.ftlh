@@ -53,17 +53,17 @@
                            value="<#if action == "edit">${employee.position!}</#if>" required>
                   </div>
 
-                  <div class="form-group">
-                    <label for="team-id">Team</label>
-                    <select class="form-control" id="team-id" name="team-id">
-                      <#list teams as team>
-                        <tr>
-                          <td>${team.team-id!}</td>
-                          <td>${team.teamName!}</td>
-                        </tr>
-                      </#list>
-                    </select>
-                  </div>
+<#--                  <div class="form-group">-->
+<#--                    <label for="team-id">Team</label>-->
+<#--                    <select class="form-control" id="team-id" name="team-id">-->
+<#--                      <#list teams as team>-->
+<#--                        <tr>-->
+<#--                          <td>${team.team-id!}</td>-->
+<#--                          <td>${team.teamName!}</td>-->
+<#--                        </tr>-->
+<#--                      </#list>-->
+<#--                    </select>-->
+<#--                  </div>-->
 
                   <div class="form-group">
                     <label for="hire-date">hire date</label>
@@ -88,7 +88,7 @@
                   <button type="submit" class="btn btn-primary"><span class="icon text-white-50">
                     <i class="fas fa-calendar-plus"></i>
                   </span>
-                    <span class="text"><#if action == "edit">Change<#else>Add</#if> holiday!</span></button>
+                    <span class="text"><#if action == "edit">Change<#else>Add</#if> employee!</span></button>
                 </form>
               </div>
             </div>

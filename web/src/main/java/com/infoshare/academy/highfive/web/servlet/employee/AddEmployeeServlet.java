@@ -54,8 +54,8 @@ public class AddEmployeeServlet extends HttpServlet {
             dataModel.put("title","Add employee");
             dataModel.put("action", "add");
         }
-        dataModel.put("pluginCssTemplate", "plugin-css-template-add-holiday.ftlh");
-        dataModel.put("pluginJsTamplate", "plugin-js-template-add-employee.ftlh");
+        dataModel.put("pluginCssTemplate", "plugin-css-add-holiday.ftlh");
+        dataModel.put("pluginJsTamplate", "plugin-js-add-employee.ftlh");
 
         LOGGER.info("User (manager) provided with new employee adding form.");
 

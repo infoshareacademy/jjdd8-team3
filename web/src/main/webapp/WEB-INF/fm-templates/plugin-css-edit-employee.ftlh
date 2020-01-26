@@ -1,19 +1,19 @@
 <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
 <script>
-    function deleteHoliday(id) {
+    function deleteEmployee(id) {
 
         // event.preventDefault(); // Prevent the form from submitting via the browser
 
         $.ajax({
             type: "DELETE",
-            url: "/api/holiday/delete/"+id,
+            url: "/api/employee/delete/"+id,
             data: id,
         })
             .done(
                 function (data) {
-                    $('#modal-button').attr('onClick', 'window.location.href="/admin/edit-holiday";');
-                    $('#modal-info-body').html("Holiday: "+ data.name +" " + data.date+ " removed!");
+                    $('#modal-button').attr('onClick', 'window.location.href="/manager/edit-employee";');
+                    $('#modal-info-body').html("Employee: "+ data.first_name +" "+ data.surname +" removed!");
                     $('#infoModal').modal('show');
 
                 })

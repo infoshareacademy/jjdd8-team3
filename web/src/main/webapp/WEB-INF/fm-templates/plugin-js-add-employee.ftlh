@@ -23,7 +23,7 @@
 
         $.ajax({
             type: <#if action == "edit">"PUT"<#else>"POST"</#if>,
-            url: <#if action == "edit">"/api/holiday/put/"+$('#employee-id').val()<#else>"/api/employee/add"</#if>,
+            url: <#if action == "edit">"/api/employee/put/"+$('#employee-id').val()<#else>"/api/employee/add"</#if>,
             enctype: 'application/json;charset=UTF-8',
             dataType: 'json',
             data: formToJSON(),
