@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
 
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 public class EmployeeView {
 
-  private Long Id;
+  private Long id;
 
   @JsonProperty("first_name")
   private String firstName;
@@ -19,58 +20,91 @@ public class EmployeeView {
   private LocalDate hireDate;
 
   @JsonProperty("holiday_entitlement")
-  private int holidayEntitlement;
+  private Integer holidayEntitlement;
 
   @JsonProperty("additional_entitlement")
-  private int additionalEntitlement;
+  private Integer additionalEntitlement;
+
+  @JsonProperty("email")
+  private String email;
 
   @JsonProperty("team_id")
-  private Team teamId;
+  private TeamView teamView;
 
   @JsonProperty("role_id")
-  private Role roleId;
+  private Role role;
 
-  public EmployeeView(Long Id, String firstName, String surname, LocalDate hireDate, int holidayEntitlement, int additionalEntitlement, Team teamId, Role roleId) {
-    this.Id = Id;
-    this.firstName = firstName;
-    this.surname = surname;
-    this.hireDate = hireDate;
-    this.holidayEntitlement = holidayEntitlement;
-    this.additionalEntitlement = additionalEntitlement;
-    this.teamId = teamId;
-    this.roleId = roleId;
-  }
+  public EmployeeView(){};
 
   public Long getId() {
-    return Id;
+    return id;
+  }
+
+  public void setId(Long id) {
+    id = id;
   }
 
   public String getFirstName() {
     return firstName;
   }
 
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
   public String getSurname() {
     return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
   }
 
   public LocalDate getHireDate() {
     return hireDate;
   }
 
-  public int getHolidayEntitlement() {
+  public void setHireDate(LocalDate hireDate) {
+    this.hireDate = hireDate;
+  }
+
+  public Integer getHolidayEntitlement() {
     return holidayEntitlement;
   }
 
-  public int getAdditionalEntitlement() {
+  public void setHolidayEntitlement(Integer holidayEntitlement) {
+    this.holidayEntitlement = holidayEntitlement;
+  }
+
+  public Integer getAdditionalEntitlement() {
     return additionalEntitlement;
   }
 
-  public Team getTeamId() {
-    return teamId;
+  public void setAdditionalEntitlement(Integer additionalEntitlement) {
+    this.additionalEntitlement = additionalEntitlement;
   }
 
-  public Role getRoleId() {
-    return roleId;
+  public TeamView getTeamView() {
+    return teamView;
   }
 
+  public void setTeamView(TeamView teamView) {
+    this.teamView = teamView;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
 }

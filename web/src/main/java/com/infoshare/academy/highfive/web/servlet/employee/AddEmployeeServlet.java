@@ -4,6 +4,7 @@ import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
+import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -24,13 +25,16 @@ import java.util.Map;
 @WebServlet("/manager/add-employee")
 public class AddEmployeeServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
     private EmployeeRequestMapper requestMapper;
 
     @EJB
     private EmployeeService employeeService;
+
+    @EJB
+    private TeamService teamService;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -49,15 +53,16 @@ public class AddEmployeeServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "add-employee.ftlh");
         dataModel.put("title", "Add new employee");
+        dataModel.put("teams", teamService.listAll());
 
-        logger.info("User (manager) provided with new employee adding form.");
+
+        LOGGER.info("User (manager) provided with new employee adding form.");
 
         try {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            logger.warn("Issue with processing Freemarker template.");
-            e.getMessage();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }
@@ -69,7 +74,7 @@ public class AddEmployeeServlet extends HttpServlet {
             EmployeeRequest employeeRequest = requestMapper.mapParamsToRequest(req);
             employeeService.addNewEmployee(employeeRequest);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
 
     }

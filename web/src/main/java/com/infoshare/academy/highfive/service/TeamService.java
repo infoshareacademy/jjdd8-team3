@@ -19,8 +19,6 @@ public class TeamService {
     private TeamMapper teamMapper;
     @Inject
     private TeamDao teamDao;
-    @Inject
-    private EmployeeMapper employeeMapper;
 
     public void save(TeamRequest request) {
         teamDao.save(teamMapper.mapRequestToEntity(request));

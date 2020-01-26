@@ -42,18 +42,14 @@
                     <input type="text" class="form-control form-control-user"
                            id="position" placeholder="Enter employee's position">
                   </div>
-                  <label for="team_id">team</label>
-                  <div class="dropdown no-arrow mb-2 show" id="team_id">
-                    <button class="btn btn-dark dropdown" type="button" id="teamsToChoose"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      Select team
-                    </button>
-                    <div class="dropdown-menu show" aria-labelledby="teamsToChoose" x-placement="bottom-start"
-                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                  <div class="form-group">
+                    <label for="holiday-type">team</label>
+                    <select class="form-control" id="team-name" name="team-name">
+                      <#list teams as team>
+                        <option value="${team.getId()!}">${team.getTeamName()!}</option>
+                      </#list>
+                    </select>
+                  </div>
                     <div class="form-group">
                       <label for="hire_date">hire date</label>
                       <input type="date" class="form-control form-control-user"

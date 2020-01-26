@@ -29,10 +29,10 @@ public class EditEmployeeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        Long id = Long.parseLong(req.getParameter("id"));
         try {
             EmployeeRequest employeeRequest = requestMapper.mapParamsToRequest(req);
-            employeeService.editEmployee(employeeRequest);
+            employeeService.editEmployee(id,employeeRequest);
         } catch (ParseException e) {
             LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
