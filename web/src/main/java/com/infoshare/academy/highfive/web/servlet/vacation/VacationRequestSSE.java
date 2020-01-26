@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,9 +37,12 @@ public class VacationRequestSSE extends HttpServlet {
         List<VacationSSE> vacationSSE = vacationService.listAllPendingRequestsSSE()
                 .stream()
                 .filter(v -> v.getVacationStatus().equals(VacationStatus.APPLIED))
-                .sorted((o1, o2) -> o2.getDateOfRequest().compareTo(o1.getDateOfRequest()))
+              //  .sorted(Comparator.comparing(o1 -> VacationSSE.getDateOfRequest()))
+                //.sorted(Collections.reverse())
                 //.limit(2)
                 .collect(Collectors.toList());
+
+       Collections.reverse(vacationSSE);
 
         String listToJson = mapper.writeValueAsString(vacationSSE);
 

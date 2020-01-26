@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
     <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="/js/bootstrap-year-calendar_v2.css" rel="stylesheet">
     <#if pluginCssTemplate??>
     <#include "/${pluginCssTemplate}">
     </#if>
@@ -183,7 +184,7 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-        <div id="new-request" class="alert alert-warning alert-dismissible fade show" style="position: absolute;z-index: 9999;display: none;left:50%;transform: translate(-50%, 0);"role="alert">
+        <div id="new-request" class="alert alert-warning alert-dismissible fade show" style="position: absolute;z-index: 9999;display: block;left:50%;transform: translate(-50%, 0);"role="alert">
             <strong>Holy guacamole!</strong> You should check in on some of those fields below.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -251,7 +252,7 @@
                         <!-- Dropdown - Alerts -->
                         <div id="alert-list" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
-                                Requests Center
+                                Requests Center (recent 3 requests)
                             </h6>
                             <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show All Requests</a>
                         </div>
@@ -351,6 +352,26 @@
         </div>
     </div>
 
+    <!-- Operation INFO Modal-->
+    <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalh1id">Operation Info!</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div id="modal-info-body" class="modal-body"><div id="calendar"></div></div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
+                    <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -370,14 +391,16 @@
             format: "yyyy-mm-dd"
         });
 
-        //function start() {
+
+       //function start() {
         var source = new EventSource("/admin/notify");
         lastData=null;
         dataSize = 0;
+        var dates = [];
         source.addEventListener('message', function(e) {
             var data = JSON.parse(e.data);
             if (lastData != data) {
-               // $('#new-request').show();
+
                 lastData = data;
                 dataSize = data.length;
                 if (dataSize > 0) {
@@ -385,6 +408,11 @@
                 }
                 $('.pending-req').remove();
                 $.each(data, function (i, item) {
+                    dateTime = Date.parse(item.iso_date_of_request);
+                    dates.push(dateTime);
+                    if (i>2){
+                        return false;
+                    }
 
                     $('#alert-list').append('<a class="dropdown-item d-flex align-items-center pending-req" href="/manager/pending-requests"><div class="mr-3">'
                         + '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>'
@@ -394,10 +422,86 @@
                     //$('#alert-list').show();
                 });
             }
+            var sorted = dates.sort(function(a,b){return new Date(a).getTime() - new Date(b).getTime()});
+            var maxDate = new Date(sorted[0]);
+            $('#new-request').html(maxDate.toISOString());
         }, false);
-
-        // }
         </script>
+
+    <script src="/js/bootstrap-year-calendar_v2.js"></script>
+    <script>
+        $(function() {
+
+            $('#calendar').calendar({
+                enableContextMenu: true,
+                enableRangeSelection: false,
+                weekStart:1,
+                mouseOnDay: function(e) {
+                    if(e.events.length > 0) {
+                        var content = '';
+
+                        for(var i in e.events) {
+                            content += '<div class="event-tooltip-content">'
+                                + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
+                                + '<div class="event-location">' + e.events[i].location + '</div>'
+                                + '<div class="event-location">' + e.events[i].type + '</div>'
+                                + '</div>';
+                        }
+
+                        $(e.element).popover({
+                            trigger: 'manual',
+                            container: 'body',
+                            html:true,
+                            content: content
+                        });
+
+                        $(e.element).popover('show');
+                    }
+                },
+                mouseOutDay: function(e) {
+                    if(e.events.length > 0) {
+                        $(e.element).popover('hide');
+                    }
+                },
+                dayContextMenu: function(e) {
+                    $(e.element).popover('hide');
+                },
+               dataSource: null
+            });
+
+            var dataS =[];
+            $.ajax({
+                type: "GET",
+                url:"/api/holiday/list",
+                enctype: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8'
+            })
+                .done(
+                    function (data) {
+                        $.each(data, function (i, item) {
+                            dataS.push({
+                                id: item.id,
+                                name: item.name,
+                                location: item.description,
+                                type: item.type,
+                                typeStyle: 'box',
+                                startDate: new Date(item.year, item.month - 1, item.day),
+                                endDate: new Date(item.year, item.month - 1, item.day)
+                            });
+                            //$('#alert-list').show();
+                        });
+                        $('#calendar').data('calendar').setDataSource(dataS);
+                        $('#calendarModal').modal('show');
+                    })
+                .fail(
+                    function () {
+                        $('#modal-info-body').html("Ups... Operation failed!!!");
+                        $('#infoModal').modal('show');
+                    });
+
+        });
+    </script>
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>
