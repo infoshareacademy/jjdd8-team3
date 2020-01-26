@@ -34,7 +34,6 @@ public class TeamService {
     }
 
     public TeamView remove(Long id){
-        teamDao.delete(id);
         TeamView teamView = teamMapper.mapEntityToView(teamDao.delete(id));
         return teamView;
     }

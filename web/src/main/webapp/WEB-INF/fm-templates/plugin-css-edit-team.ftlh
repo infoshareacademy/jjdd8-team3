@@ -12,8 +12,8 @@
         })
             .done(
                 function (data) {
-                    $('#modal-button').attr('onClick', 'window.location.href="/admin/edit-holiday";');
-                    $('#modal-info-body').html("Holiday: "+ data.name +" removed!");
+                    $('#modal-button').attr('onClick', 'window.location.href="/manager/edit-team";');
+                    $('#modal-info-body').html("Team: "+ data.teamName +" removed!");
                     $('#infoModal').modal('show');
 
                 })
