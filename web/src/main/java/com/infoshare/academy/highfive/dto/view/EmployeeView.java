@@ -30,16 +30,16 @@ public class EmployeeView {
   @JsonProperty("role_id")
   private Role roleId;
 
-  public EmployeeView(Long Id, String firstName, String surname, LocalDate hireDate, int holidayEntitlement, int additionalEntitlement, Team teamId, Role roleId) {
-    this.Id = Id;
-    this.firstName = firstName;
-    this.surname = surname;
-    this.hireDate = hireDate;
-    this.holidayEntitlement = holidayEntitlement;
-    this.additionalEntitlement = additionalEntitlement;
-    this.teamId = teamId;
-    this.roleId = roleId;
-  }
+//  public EmployeeView(Long Id, String firstName, String surname, LocalDate hireDate, int holidayEntitlement, int additionalEntitlement, Team teamId, Role roleId) {
+//    this.Id = Id;
+//    this.firstName = firstName;
+//    this.surname = surname;
+//    this.hireDate = hireDate;
+//    this.holidayEntitlement = holidayEntitlement;
+//    this.additionalEntitlement = additionalEntitlement;
+//    this.teamId = teamId;
+//    this.roleId = roleId;
+//  }
 
   public Long getId() {
     return Id;
@@ -73,4 +73,19 @@ public class EmployeeView {
     return roleId;
   }
 
+  public void setId(Long id) { Id = id; }
+
+  public void setFirstName(String firstName) { this.firstName = firstName; }
+
+  public void setSurname(String surname) { this.surname = surname; }
+
+  public void setHireDate(LocalDate hireDate) { this.hireDate = hireDate; }
+
+  public void setHolidayEntitlement(int holidayEntitlement) { this.holidayEntitlement = holidayEntitlement; }
+
+  public void setAdditionalEntitlement(int additionalEntitlement) { this.additionalEntitlement = additionalEntitlement; }
+
+  public void setTeamId(Team teamId) { this.teamId = teamId; }
+
+  public void setRoleId(Role roleId) { this.roleId = roleId; }
 }

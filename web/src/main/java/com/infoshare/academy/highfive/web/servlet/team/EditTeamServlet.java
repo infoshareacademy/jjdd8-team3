@@ -35,7 +35,8 @@ public class EditTeamServlet extends HttpServlet {
 
         Map<String, Object> dataModel = new HashMap<>();
 
-        Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+        Template template = this.templateProvider
+                .getTemplate(getServletContext(), "template.ftlh");
 
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "edit-team.ftlh");

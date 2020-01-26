@@ -5,6 +5,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+@NamedQueries({
+@NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee")
+})
+
 @Entity
 @Table(name = "employee")
 public class Employee {

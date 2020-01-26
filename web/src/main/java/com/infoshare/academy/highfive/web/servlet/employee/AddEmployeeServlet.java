@@ -1,8 +1,6 @@
 package com.infoshare.academy.highfive.web.servlet.employee;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
-import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -17,17 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/manager/add-employee")
 public class AddEmployeeServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(getClass().getName());
-
-    @Inject
-    private EmployeeRequestMapper requestMapper;
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     @EJB
     private EmployeeService employeeService;
@@ -39,6 +33,10 @@ public class AddEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
+        String action = req.getParameter("action");
+        String id = req.getParameter("get");
+
+        if (action == null || action.isEmpty()) { action = "add"; }
 
         PrintWriter writer = resp.getWriter();
 
@@ -48,29 +46,25 @@ public class AddEmployeeServlet extends HttpServlet {
 
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "add-employee.ftlh");
-        dataModel.put("title", "Add new employee");
 
-        logger.info("User (manager) provided with new employee adding form.");
+        if (action.equals("edit")){
+            dataModel.put("action", "edit");
+            dataModel.put("employee", employeeService.findById(Long.parseLong(id)));
+        } else {
+            dataModel.put("title","Add employee");
+            dataModel.put("action", "add");
+        }
+        dataModel.put("pluginCssTemplate", "plugin-css-template-add-holiday.ftlh");
+        dataModel.put("pluginJsTamplate", "plugin-js-template-add-employee.ftlh");
+
+        LOGGER.info("User (manager) provided with new employee adding form.");
 
         try {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
-            logger.warn("Issue with processing Freemarker template.");
+            LOGGER.warn("Issue with processing Freemarker template.");
             e.getMessage();
         }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        try {
-            EmployeeRequest employeeRequest = requestMapper.mapParamsToRequest(req);
-            employeeService.addNewEmployee(employeeRequest);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
     }
 }

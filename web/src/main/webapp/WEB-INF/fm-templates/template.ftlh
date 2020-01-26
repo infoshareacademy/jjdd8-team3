@@ -112,20 +112,22 @@
         </li>
 
         <!-- Nav Item - Employees -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
-               aria-expanded="true" aria-controls="collapseEmployees">
-                <i class="fas fa-user"></i>
-                <span>Employees</span>
-            </a>
-            <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/manager/add-employee">Add</a>
-                    <a class="collapse-item" href="/manager/edit-employee">Edit</a>
-                    <a class="collapse-item" href="/manager/delete-employee">Remove</a>
-                </div>
-            </div>
-        </li>
+<#--    TODO Old Version - Team Menu&ndash;&gt;-->
+<#--        -->
+<#--        <li class="nav-item">-->
+<#--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"-->
+<#--               aria-expanded="true" aria-controls="collapseEmployees">-->
+<#--                <i class="fas fa-user"></i>-->
+<#--                <span>Employees</span>-->
+<#--            </a>-->
+<#--            <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
+<#--                <div class="bg-white py-2 collapse-inner rounded">-->
+<#--                    <a class="collapse-item" href="/manager/add-employee">Add</a>-->
+<#--                    <a class="collapse-item" href="/manager/edit-employee">Edit</a>-->
+<#--                    <a class="collapse-item" href="/manager/delete-employee">Remove</a>-->
+<#--                </div>-->
+<#--            </div>-->
+<#--        </li>               >-->
 
         <!-- Nav Item - Teams -->
 <#--        TODO Old Version - Team Menu-->
@@ -144,7 +146,19 @@
 <#--                </div>-->
 <#--            </div>-->
 <#--        </li>-->
-        <#--        TODO New Version - Team VIEW with add/edit/list functions-->
+
+        <!-- Nav Item - Employees -->
+        <#-- Employee VIEW with add/edit/list functions-->
+        <!-- Heading -->
+        <li class="nav-item">
+            <a class="nav-link" href="/manager/edit-employee">
+                <i class="fas fa-user"></i>
+                <span>Employees</span></a>
+        </li>
+
+
+        <!-- Nav Item - Teams -->
+        <#-- Team VIEW with add/edit/list functions-->
         <!-- Heading -->
         <li class="nav-item">
             <a class="nav-link" href="/manager/edit-team">

@@ -19,8 +19,6 @@ public class TeamService {
     private TeamMapper teamMapper;
     @Inject
     private TeamDao teamDao;
-    @Inject
-    private EmployeeMapper employeeMapper;
 
     public void save(TeamRequest request) {
         teamDao.save(teamMapper.mapRequestToEntity(request));
@@ -34,8 +32,7 @@ public class TeamService {
     }
 
     public TeamView remove(Long id){
-        TeamView teamView = teamMapper.mapEntityToView(teamDao.delete(id));
-        return teamView;
+        return teamMapper.mapEntityToView(teamDao.delete(id));
     }
 
     public TeamView findById(Long id) {

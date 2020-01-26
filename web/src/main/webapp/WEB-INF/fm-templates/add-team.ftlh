@@ -23,11 +23,13 @@
                   <h1 class="h4 text-gray-900 mb-4"><#if action == "edit">Edit<#else>Add</#if> team!</h1>
                 </div>
                 <form id="add-team-form" name="add-team-form" class="user" method="POST">
-                  <#if action == "edit"><input id="team-id" name="team-id" type="hidden" value="${team.id!}"></#if>
+                  <#if action == "edit"><input id="team-id" name="team-id"
+                                               type="hidden"value="${team.id!}"></#if>
                   <div class="form-group">
                     <label for="team-name">Name od Team</label>
-                    <input type="text" class="form-control form-control-user" name="team-name"
-                           id="team-name" placeholder="name of team" value="<#if action == "edit">${team.teamName!}</#if>" required>
+                    <input type="text" class="form-control form-control-user" name="team-name" id="team-name"
+                           placeholder="name of team" value="<#if action == "edit">${team.teamName!}</#if>"
+                           required>
                   </div>
                   <button type="submit" class="btn btn-primary"><span class="icon text-white-50">
                       <i class="fas fa-calendar-plus"></i>

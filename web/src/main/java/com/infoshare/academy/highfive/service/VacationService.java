@@ -52,7 +52,7 @@ public class VacationService {
 
   public void addVacation(VacationRequest vacationRequest) {
 
-    Employee employee = employeeDao.getEmployeeById(vacationRequest.getEmployeeId());
+    Employee employee = employeeDao.findById(vacationRequest.getEmployeeId());
     Entitlement entitlement = entitlementDao.getEntitlementByEmployeeId(employee);
 
     int entitledDays = getEmployeeEntitlement(entitlement, vacationRequest);

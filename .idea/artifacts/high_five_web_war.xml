@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="high-five-web:war">
+    <output-path>$PROJECT_DIR$/web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>high-five-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="high-five-web.war">
+      <element id="artifact" artifact-name="high-five-web:war exploded" />
+    </root>
+  </artifact>
+</component>

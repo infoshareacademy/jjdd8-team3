@@ -41,7 +41,6 @@ public class TeamApi {
 
         teamService.save(teamRequest);
         return Response.ok().entity(teamRequest).build();
-
     }
 
     @PUT
@@ -52,7 +51,6 @@ public class TeamApi {
 
         teamService.update(id, teamRequest);
         return Response.ok().entity(teamRequest).build();
-
     }
 
     @DELETE
