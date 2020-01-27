@@ -1,6 +1,8 @@
 package com.infoshare.academy.highfive.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
 
@@ -16,6 +18,7 @@ public class EmployeeRequest {
     private String surname;
 
     @JsonProperty("hire_date")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate hireDate;
 
     @JsonProperty("holiday_entitlement")
