@@ -39,6 +39,7 @@ public class SearchHolidayServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "holiday-search.ftlh");
         dataModel.put("title", "Vacation Manager");
+        dataModel.put("pluginJsTemplate", "plugin-js-holiday-search.ftlh");
 
         try {
             template.process(dataModel, writer);

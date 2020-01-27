@@ -6,15 +6,17 @@
 
   <persistence-unit name="hfvpersistence" transaction-type="JTA">
     <jta-data-source>java:ds/hfvDS</jta-data-source>
+    <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
-      <property name="hibernate.dialect.storage_engine" value="innodb"/>
-      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+      <property name="hibernate.show_sql" value="false"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.hbm2ddl.auto" value="create"/>
       <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.SingletonEhCacheProvider"/>
+      <property name="hibernate.cache.use_second_level_cache" value="true"/>
       <property name="hibernate.cache.use_query_cache" value="false"/>
-      <property name="javax.persistence.sql-load-script-source"
-                value="start.sql" />
+      <property name="javax.persistence.sql-load-script-source" value="start.sql" />
     </properties>
   </persistence-unit>
 </persistence>

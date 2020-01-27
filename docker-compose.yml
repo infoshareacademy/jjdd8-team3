@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: "hfvdb"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - 4306:3306
+    command: ["mysqld",
+              "--character-set-server=utf8",
+              "--collation-server=utf8_unicode_ci",
+              "--init-connect='SET NAMES UTF8;'",
+              "--innodb-flush-log-at-trx-commit=0" ]
+
+  wildfly:
+    build:
+      context: ./web
+    ports:
+      - 4300:8080
+      - 4301:9990
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    environment:
+      - TZ=Europe/Warsaw
