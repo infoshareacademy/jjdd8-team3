@@ -41,8 +41,8 @@ public class HolidayListServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "all-holiday.ftlh");
         dataModel.put("title", "List Holidays");
-        dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
-        dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
+        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
+        dataModel.put("pluginJsTemplate", "plugin-js-servlets.ftlh");
         dataModel.put("holidays", holidayService.findAll());
 
         try {

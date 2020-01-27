@@ -56,7 +56,7 @@ public class AddTeamServlet extends HttpServlet {
             dataModel.put("title", "Add team");
             dataModel.put("action", "add");
         }
-        dataModel.put("pluginCssTemplate", "plugin-css-add-holiday.ftlh");
+        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-add-team.ftlh");
 
         try {

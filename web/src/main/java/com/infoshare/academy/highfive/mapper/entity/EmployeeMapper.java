@@ -5,9 +5,13 @@ import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.dto.view.EmployeeView;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 @RequestScoped
 public class EmployeeMapper {
+
+    @Inject
+    private TeamMapper teamMapper;
 
     public EmployeeView mapEntityToView(Employee employee){
 
@@ -18,6 +22,7 @@ public class EmployeeMapper {
         employeeView.setId(employee.getId());
         employeeView.setFirstName(employee.getFirstName());
         employeeView.setSurname(employee.getSurname());
+        employeeView.setTeam(teamMapper.mapEntityToView(employee.getTeam()));
 
         return employeeView;
     }

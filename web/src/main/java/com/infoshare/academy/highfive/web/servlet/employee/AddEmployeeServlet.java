@@ -2,6 +2,7 @@ package com.infoshare.academy.highfive.web.servlet.employee;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.EmployeeService;
+import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class AddEmployeeServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
+    @Inject
+    private TeamService teamService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -54,8 +58,9 @@ public class AddEmployeeServlet extends HttpServlet {
             dataModel.put("title","Add employee");
             dataModel.put("action", "add");
         }
-        dataModel.put("pluginCssTemplate", "plugin-css-add-holiday.ftlh");
-        dataModel.put("pluginJsTamplate", "plugin-js-add-employee.ftlh");
+        dataModel.put("teams", teamService.listAll());
+        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
+        dataModel.put("pluginJsTemplate", "plugin-js-add-employee.ftlh");
 
         LOGGER.info("User (manager) provided with new employee adding form.");
 

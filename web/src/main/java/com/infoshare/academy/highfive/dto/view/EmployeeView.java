@@ -25,7 +25,7 @@ public class EmployeeView {
   private int additionalEntitlement;
 
   @JsonProperty("team_id")
-  private Team teamId;
+  private TeamView team;
 
   @JsonProperty("role_id")
   private Role roleId;
@@ -65,8 +65,8 @@ public class EmployeeView {
     return additionalEntitlement;
   }
 
-  public Team getTeamId() {
-    return teamId;
+  public TeamView getTeam() {
+    return team;
   }
 
   public Role getRoleId() {
@@ -85,7 +85,7 @@ public class EmployeeView {
 
   public void setAdditionalEntitlement(int additionalEntitlement) { this.additionalEntitlement = additionalEntitlement; }
 
-  public void setTeamId(Team teamId) { this.teamId = teamId; }
+  public void setTeam(TeamView team) { this.team = team; }
 
   public void setRoleId(Role roleId) { this.roleId = roleId; }
 }

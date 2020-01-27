@@ -53,17 +53,14 @@
                            value="<#if action == "edit">${employee.position!}</#if>" required>
                   </div>
 
-<#--                  <div class="form-group">-->
-<#--                    <label for="team-id">Team</label>-->
-<#--                    <select class="form-control" id="team-id" name="team-id">-->
-<#--                      <#list teams as team>-->
-<#--                        <tr>-->
-<#--                          <td>${team.team-id!}</td>-->
-<#--                          <td>${team.teamName!}</td>-->
-<#--                        </tr>-->
-<#--                      </#list>-->
-<#--                    </select>-->
-<#--                  </div>-->
+                  <div class="form-group">
+                    <label for="holiday-type">team</label>
+                    <select class="form-control" id="team-name" name="team-name">
+                      <#list teams as team>
+                        <option value="${team.getId()!}">${team.getTeamName()!}</option>
+                      </#list>
+                    </select>
+                  </div>
 
                   <div class="form-group">
                     <label for="hire-date">hire date</label>
@@ -75,13 +72,13 @@
 
                   <div class="form-group">
                     <label for="holiday-entitlement">holiday entitlement</label>
-                    <input type="number" class="form-control form-control-user" name="holiday-entitlement"
+                    <input type="text" class="form-control form-control-user" name="holiday-entitlement"
                            id="holiday-entitlement" placeholder="Input employee's entitlement" value="<#if action =="edit">${employee.holidayEntitlment!}</#if>" required>
                   </div>
 
                   <div class="form-group">
                     <label for="additional-entitlement">parental care entitlement</label>
-                    <input type="number" class="form-control form-control-user" name="additional-entitlement"
+                    <input type="text" class="form-control form-control-user" name="additional-entitlement"
                            id="additional-entitlement" placeholder="0, 1 or 2 days following employee's statement"
                            value="<#if action == "edit">${employee.additionalEntitlement!}</#if>">
                   </div>

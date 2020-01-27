@@ -17,7 +17,7 @@ public class EmployeeRequestMapper {
   public EmployeeRequest mapParamsToRequest(HttpServletRequest request) throws ParseException {
 
     EmployeeRequest employeeRequest = new EmployeeRequest();
-    LocalDate hireDate = LocalDate.parse(request.getParameter("hire_date"), DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+    LocalDate hireDate = LocalDate.parse(request.getParameter("hire_date"), DateTimeFormatter.ofPattern("yyyy-mm-dd"));
 
     employeeRequest.setId((Long) request.getAttribute("id"));
     employeeRequest.setFirstName((String) request.getAttribute("first_name"));
