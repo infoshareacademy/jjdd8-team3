@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
 
@@ -9,14 +10,18 @@ public class EmployeeRequest {
 
     private Long id;
 
+    @JsonProperty("first_name")
     private String firstName;
 
     private String surname;
 
+    @JsonProperty("hire_date")
     private LocalDate hireDate;
 
+    @JsonProperty("holiday_entitlement")
     private Integer holidayEntitlement;
 
+    @JsonProperty("additional_entitlement")
     private  Integer additionalEntitlement;
 
     private String login;

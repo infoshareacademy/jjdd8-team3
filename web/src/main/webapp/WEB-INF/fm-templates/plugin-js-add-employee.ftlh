@@ -4,16 +4,16 @@
     // Helper function to serialize all the form fields into a JSON string
     function formToJSON() {
         return JSON.stringify({
-            "first_name": $('#employee-first-name').val(),
-            "surname": $('#employee-surname').val(),
-            "hire_date": $('#employee-hire-date'),
-            "holiday_entitlement": $('#employee-holiday-entitlement'),
-            "additional_entitlement": $('#employee-additional-entitlement'),
-            "login": $('#employee-login'),
-            "email": $('#employee-email').val(),
-            "position": $('#employee-position').val(),
-            "team_id": $('#employee-team-id').val(),
-            "role": $('#employee-role').val()
+            "first_name": $('#first-name').val(),
+            "surname": $('#surname').val(),
+            "hire_date": $('#hire-date').val(),
+            "holiday_entitlement": $('#holiday-entitlement').val(),
+            "additional_entitlement": $('#additional-entitlement').val(),
+            "login": $('#login').val(),
+            "email": $('#email').val(),
+            "position": $('#position').val(),
+            "team_id": $('#team-id').val(),
+            "role": $('#role').val()
         });
     }
 
