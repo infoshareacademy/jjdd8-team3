@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.dto;
+package com.infoshare.academy.highfive.dto.view;
 
 import javax.enterprise.context.RequestScoped;
 

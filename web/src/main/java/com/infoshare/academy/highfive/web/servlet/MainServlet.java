@@ -1,6 +1,8 @@
 package com.infoshare.academy.highfive.web.servlet;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
+import com.infoshare.academy.highfive.service.EmployeeService;
+import com.infoshare.academy.highfive.service.VacationService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -20,33 +22,44 @@ import java.util.Map;
 @WebServlet("")
 public class MainServlet extends HttpServlet {
 
-    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
+  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-    @Inject
-    private TemplateProvider templateProvider;
+  @Inject
+  private TemplateProvider templateProvider;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  @Inject
+  VacationService vacationService;
 
-        resp.setContentType("text/html;charset=UTF-8");
+  @Inject
+  EmployeeService employeeService;
 
-        PrintWriter writer = resp.getWriter();
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Map<String, Object> dataModel = new HashMap<>();
+    resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+    PrintWriter writer = resp.getWriter();
 
-        dataModel.put("method", req.getMethod());
-        dataModel.put("contentTemplate", "main-content.ftlh");
-        dataModel.put("title", "Vacation Manager");
-        dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
+    Map<String, Object> dataModel = new HashMap<>();
 
-        try {
-            template.process(dataModel, writer);
-        } catch (
-                TemplateException e) {
-            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
-        }
+    Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
+    dataModel.put("method", req.getMethod());
+    dataModel.put("contentTemplate", "main-content.ftlh");
+    dataModel.put("title", "Vacation Manager");
+    dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
+    dataModel.put("currentMonthTotal", vacationService.getStatistics().getCurrentMonthTotal());
+    dataModel.put("nextMonthTotal", vacationService.getStatistics().getNextMonthTotal());
+    dataModel.put("absentToday", vacationService.getStatistics().getAbsentToday());
+    dataModel.put("totalEmployees", employeeService.listAllSize());
+    dataModel.put("pendingRequests", vacationService.getStatistics().getPendingRequests());
+
+    try {
+      template.process(dataModel, writer);
+    } catch (
+      TemplateException e) {
+      LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
     }
+
+  }
 }

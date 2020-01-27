@@ -1,11 +1,11 @@
 package com.infoshare.academy.highfive.dao;
 
 import com.infoshare.academy.highfive.domain.Employee;
-import com.infoshare.academy.highfive.domain.Vacation;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 public class EmployeeDao {
@@ -30,7 +30,9 @@ public class EmployeeDao {
     entityManager.persist(employee);
   }
 
-
+  public List<Employee> listAllEmployees() {
+    return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
+  }
 
 
 }
