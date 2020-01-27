@@ -1,7 +1,6 @@
 package com.infoshare.academy.highfive.web.api;
 
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
-import com.infoshare.academy.highfive.dto.request.TeamRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import com.infoshare.academy.highfive.service.configuration.UploadJsonService;
 
