@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/high-five.iml" filepath="$PROJECT_DIR$/high-five.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/high-five-app.iml" filepath="$PROJECT_DIR$/app/high-five-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/web/high-five-web.iml" filepath="$PROJECT_DIR$/web/high-five-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/jjdd8-highfive.iml" filepath="$PROJECT_DIR$/.idea/jjdd8-highfive.iml" />
     </modules>
   </component>
 </project>

@@ -3,10 +3,13 @@ package com.infoshare.academy.highfive.web.api;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import com.infoshare.academy.highfive.service.configuration.UploadJsonService;
+import org.apache.http.protocol.HttpDateGenerator;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -35,9 +38,9 @@ public class EmployeeApi {
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(EmployeeRequest employeeRequest) {
+    public Response create(EmployeeRequest employeeRequest, @Context HttpServletRequest request) {
 
-        employeeService.addNew(employeeRequest);
+        employeeService.save(employeeRequest);
         return Response.ok().entity(employeeRequest).build();
     }
 

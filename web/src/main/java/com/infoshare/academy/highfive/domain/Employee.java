@@ -122,7 +122,6 @@ public class Employee {
 
     public void setLogin(String login) { this.login = login; }
 
-
     public String getPosition() { return position; }
 
     public void setPosition(String position) { this.position = position; }

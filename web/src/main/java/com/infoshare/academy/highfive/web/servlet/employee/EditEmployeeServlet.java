@@ -4,6 +4,7 @@ import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
+import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -36,6 +37,9 @@ public class EditEmployeeServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
+    @Inject
+    private TeamService teamService;
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF8");
         PrintWriter writer = resp.getWriter();
@@ -49,6 +53,7 @@ public class EditEmployeeServlet extends HttpServlet {
         dataModel.put("pluginCssTemplate", "plugin-css-edit-employee.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-edit-employee.ftlh");
         dataModel.put("employees", employeeService.listAll());
+        dataModel.put("teams", teamService.listAll());
 
         try{
             template.process(dataModel, writer);

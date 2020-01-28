@@ -19,7 +19,7 @@ public class EmployeeService {
     @Inject
     private EmployeeDao employeeDao;
 
-    public void addNew(EmployeeRequest request) {
+    public void save(EmployeeRequest request) {
         employeeDao.save(employeeMapper.mapRequestToEntity(request));
     }
 

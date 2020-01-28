@@ -12,7 +12,7 @@
             "login": $('#login').val(),
             "email": $('#email').val(),
             "position": $('#position').val(),
-            "team_id": $('#team-id').val(),
+            "team": $('#team-name').val(),
             "role": $('#role').val()
         });
     }

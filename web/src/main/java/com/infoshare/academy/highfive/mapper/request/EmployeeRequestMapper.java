@@ -19,7 +19,6 @@ public class EmployeeRequestMapper {
     EmployeeRequest employeeRequest = new EmployeeRequest();
     LocalDate hireDate = LocalDate.parse(request.getParameter("hire_date"), DateTimeFormatter.ofPattern("yyyy-mm-dd"));
 
-    employeeRequest.setId((Long) request.getAttribute("id"));
     employeeRequest.setFirstName((String) request.getAttribute("first_name"));
     employeeRequest.setSurname((String) request.getAttribute("surname"));
     employeeRequest.setHireDate(hireDate);
@@ -28,7 +27,7 @@ public class EmployeeRequestMapper {
     employeeRequest.setLogin((String) request.getAttribute("login"));
     employeeRequest.setEmail((String) request.getAttribute("email"));
     employeeRequest.setPosition((String) request.getAttribute("position"));
-    employeeRequest.setTeam((Team) request.getAttribute("team_id"));
+    employeeRequest.setTeam((Long) request.getAttribute("team_id"));
     employeeRequest.setRole((Role) request.getAttribute("role"));
 
     return employeeRequest;

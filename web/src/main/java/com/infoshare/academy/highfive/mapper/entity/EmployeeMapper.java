@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.mapper.entity;
 
+import com.infoshare.academy.highfive.dao.TeamDao;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.dto.view.EmployeeView;
@@ -13,11 +14,16 @@ public class EmployeeMapper {
     @Inject
     private TeamMapper teamMapper;
 
-    public EmployeeView mapEntityToView(Employee employee){
+    @Inject
+    private TeamDao teamDao;
+
+    public EmployeeView mapEntityToView(Employee employee) {
 
         EmployeeView employeeView = new EmployeeView();
 
-        if (employee == null) { return employeeView; }
+        if (employee == null) {
+            return employeeView;
+        }
 
         employeeView.setId(employee.getId());
         employeeView.setFirstName(employee.getFirstName());
@@ -27,7 +33,7 @@ public class EmployeeMapper {
         return employeeView;
     }
 
-//for save
+    //for save
     public Employee mapRequestToEntity(EmployeeRequest request) {
 
         Employee employee = new Employee();
@@ -35,7 +41,7 @@ public class EmployeeMapper {
         return mapRequestToEntity(request, employee);
     }
 
-//for update
+    //for update
     public Employee mapRequestToEntity(EmployeeRequest request, Employee employee) {
 
         employee.setFirstName(request.getFirstName());
@@ -46,7 +52,7 @@ public class EmployeeMapper {
         employee.setEmail(request.getEmail());
         employee.setLogin(request.getLogin());
         employee.setPosition(request.getPosition());
-        employee.setTeam(request.getTeam());
+        employee.setTeam(teamDao.getById(request.getTeam()).orElse(null));
         employee.setRole(request.getRole());
 
         return employee;

@@ -10,8 +10,6 @@ import java.time.LocalDate;
 
 public class EmployeeRequest {
 
-    private Long id;
-
     @JsonProperty("first_name")
     private String firstName;
 
@@ -33,13 +31,9 @@ public class EmployeeRequest {
 
     private String position;
 
-    private Team team;
+    private Long team;
 
     private Role role;
-
-    public Long getId() { return id;  }
-
-    public void setId(Long id) { this.id = id; }
 
     public String getFirstName() { return firstName; }
 
@@ -73,9 +67,9 @@ public class EmployeeRequest {
 
     public void setPosition(String position) { this.position = position; }
 
-    public Team getTeam() { return team; }
+    public Long getTeam() { return team; }
 
-    public void setTeam(Team teamId) { this.team = teamId; }
+    public void setTeam(Long teamId) { this.team = teamId; }
 
     public Role getRole() { return role; }
 

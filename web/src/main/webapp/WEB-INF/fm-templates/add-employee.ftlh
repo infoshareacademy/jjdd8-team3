@@ -54,8 +54,8 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="holiday-type">team</label>
-                    <select class="form-control" id="team-name" name="team-name">
+                    <label for="team-name">team</label>
+                    <select class="form-control" id="team-name" name="team">
                       <#list teams as team>
                         <option value="${team.getId()!}">${team.getTeamName()!}</option>
                       </#list>
