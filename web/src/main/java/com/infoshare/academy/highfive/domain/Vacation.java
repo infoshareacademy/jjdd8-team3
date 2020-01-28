@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @NamedQueries({
-  @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
+  @NamedQuery(name = "Vacation.findVacationByStatus", query = "SELECT vacation " +
     "FROM Vacation vacation " +
     "JOIN FETCH Employee employee ON vacation.employee = employee " +
     "WHERE vacation.vacationStatus = :status"),
@@ -21,7 +21,7 @@ import java.time.LocalDate;
     "FROM Vacation vacation " +
     "WHERE vacation.vacationStatus = :status " +
     "AND (vacation.vacationFrom BETWEEN :firstDayOfMonth AND :lastDayOfMonth " +
-    "OR vacation.vacationTo BETWEEN :firstDayOfMonth AND :lastDayOfMonth)")
+    "OR vacation.vacationTo BETWEEN :firstDayOfMonth AND :lastDayOfMonth)"),
 }
 )
 

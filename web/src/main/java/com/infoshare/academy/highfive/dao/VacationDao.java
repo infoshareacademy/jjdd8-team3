@@ -19,9 +19,9 @@ public class VacationDao {
     this.entityManager.persist(vacation);
   }
 
-  public List<Vacation> getPendingRequestsList() {
-    return entityManager.createNamedQuery("Vacation.findPendingRequests")
-      .setParameter("status", VacationStatus.APPLIED)
+  public List<Vacation> getVacationList(VacationStatus vacationStatus) {
+    return entityManager.createNamedQuery("Vacation.findVacationByStatus")
+      .setParameter("status", vacationStatus)
       .getResultList();
   }
 
@@ -63,13 +63,6 @@ public class VacationDao {
       .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
       .setParameter("status", VacationStatus.APPROVED)
       .getResultList().size();
-  }
-
-  public Integer getPendingRequestsListSize() {
-    return entityManager.createNamedQuery("Vacation.findPendingRequests")
-      .setParameter("status", VacationStatus.APPLIED)
-      .getResultList().size();
-
   }
 
 }

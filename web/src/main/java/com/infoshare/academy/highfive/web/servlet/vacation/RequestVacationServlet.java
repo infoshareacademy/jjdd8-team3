@@ -1,8 +1,9 @@
 package com.infoshare.academy.highfive.web.servlet.vacation;
 
+import com.infoshare.academy.highfive.dao.EntitlementDao;
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
-import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.service.VacationService;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
 import freemarker.template.Template;
@@ -38,6 +39,9 @@ public class RequestVacationServlet extends HttpServlet {
 
   @Inject
   MailSender mailSender;
+
+  @Inject
+  EntitlementDao entitlementDao;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

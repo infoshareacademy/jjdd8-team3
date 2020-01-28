@@ -6,13 +6,16 @@ import java.time.LocalDate;
 @NamedQueries({
   @NamedQuery(name = "Entitlement.findEntitlementByEmployeeId", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
-    "WHERE entitlement.employee = :employeeId")}
+    "WHERE entitlement.employee = :employeeId"),
+  @NamedQuery(name = "Entitlement.findRemainingEntitlement", query = "SELECT (entitlement.previousYearLeft + entitlement.vacationLeft + entitlement.additionalLeft + entitlement.onDemandHolidayLeft) AS entitlementSum, entitlement.employee " +
+    "FROM Entitlement entitlement " +
+    "ORDER BY entitlementSum")
+}
 )
 
 @Entity
 @Table(name = "entitlement")
 public class Entitlement {
-
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +40,6 @@ public class Entitlement {
   @OneToOne
   @JoinColumn(unique = true, name = "employee_id")
   Employee employee;
-
 
   public int getId() {
     return id;
