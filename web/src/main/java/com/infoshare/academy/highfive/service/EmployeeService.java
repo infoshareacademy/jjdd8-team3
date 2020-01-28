@@ -36,6 +36,10 @@ public class EmployeeService {
         return this.employeeMapper.mapEntityToView(employee);
     }
 
+  public int listAllSize() {
+    return employeeDao.listAllEmployees().size();
+  }
+
     public List<EmployeeView> listAll() {
         List<EmployeeView> allEmployeesView = new ArrayList<>();
         employeeDao.listAllEmployees()
