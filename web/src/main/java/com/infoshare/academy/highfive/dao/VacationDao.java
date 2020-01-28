@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
@@ -23,17 +24,17 @@ public class VacationDao {
   public List<Vacation> getPendingRequestsList() {
 
     return entityManager.createNamedQuery("Vacation.findPendingRequests")
-      .setParameter("status", VacationStatus.APPLIED)
-      .getResultList();
+            .setParameter("status", VacationStatus.APPLIED)
+            .getResultList();
 
   }
 
   public Vacation getVacationById(Long vacationId) {
 
     return (Vacation) entityManager
-      .createNamedQuery("Vacation.findVacationById")
-      .setParameter("vacationId", vacationId)
-      .getSingleResult();
+            .createNamedQuery("Vacation.findVacationById")
+            .setParameter("vacationId", vacationId)
+            .getSingleResult();
   }
 
   public void updateVacationStatus(Vacation vacation) {
@@ -42,11 +43,12 @@ public class VacationDao {
 
   }
 
-//  public List<Vacation> getStillPendingRequestsList() {
-//
-//    return entityManager.createNamedQuery("Vacation.Vacation.stillPendingRequest")
-//            .setParameter("status", VacationStatus.APPLIED)
-//            .getResultList();
-//
-//  }
+  public List<Vacation> findPendingRequest(LocalDateTime olderThen) {
+
+    return entityManager.createNamedQuery("Vacation.findPendingOldRequests")
+            .setParameter("status", VacationStatus.APPLIED)
+            .setParameter("date", olderThen)
+            .getResultList();
+
+  }
 }

@@ -1,7 +1,9 @@
 package com.infoshare.academy.highfive.scheduler;
 
-import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dao.VacationDao;
+import com.infoshare.academy.highfive.domain.Vacation;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
+import com.sendgrid.helpers.mail.objects.Content;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
@@ -9,26 +11,28 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.logging.Logger;
+import java.util.List;
 
 @Singleton
 @Startup
 public class RemindSchedule {
 
-    Logger logger = Logger.getLogger(RemindSchedule.class.getName());
-
     @Inject
     MailSender mailSender;
 
     @Inject
-    VacationRequest vacationRequest;
+    VacationDao vacationDao;
 
-// TODO
+    @Schedule(hour = "*", minute = "1", second = "*", info = "Every 1 minute timer")
+    public void requestReminderSchedule() throws IOException {
 
-//    @Schedule(hour = "*", minute = "1", second = "*", info = "Every 1 minute timer")
-//    public void requestReminderSchedule() throws IOException {
-//        if( < LocalDateTime.now()) {
-//            mailSender.sendRequestReminder("mich.chmielewski@gmail.com");
-//        }
+        List<Vacation> requestsToSend = vacationDao.findPendingRequest(LocalDateTime.now().minusMinutes(15));
+        String employeeWaitingList = requestsToSend.stream()
+                .map(vacation -> "- " + vacation.getEmployee().getFirstName() + " " + vacation.getEmployee().getSurname() + "\n")
+                .reduce("", (a, v) -> a + v);
+        Content content = new Content("text/plain", "Please be advised that there are still vacation requests awaiting confirmation sent by \n"
+                + employeeWaitingList + "\n Sincerely,\n Your Administrative Mail");
+        mailSender.sendRequestReminder("mich.chmielewski@gmail.com", content);
+
     }
-
+}
