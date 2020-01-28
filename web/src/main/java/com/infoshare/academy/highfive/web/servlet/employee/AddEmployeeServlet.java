@@ -3,10 +3,12 @@ package com.infoshare.academy.highfive.web.servlet.employee;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import com.infoshare.academy.highfive.service.TeamService;
+
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -40,7 +42,9 @@ public class AddEmployeeServlet extends HttpServlet {
         String action = req.getParameter("action");
         String id = req.getParameter("get");
 
-        if (action == null || action.isEmpty()) { action = "add"; }
+        if (action == null || action.isEmpty()) {
+            action = "add";
+        }
 
         PrintWriter writer = resp.getWriter();
 
@@ -51,11 +55,11 @@ public class AddEmployeeServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "add-employee.ftlh");
 
-        if (action.equals("edit")){
+        if (action.equals("edit")) {
             dataModel.put("action", "edit");
             dataModel.put("employee", employeeService.findById(Long.parseLong(id)));
         } else {
-            dataModel.put("title","Add employee");
+            dataModel.put("title", "Add employee");
             dataModel.put("action", "add");
         }
         dataModel.put("teams", teamService.listAll());

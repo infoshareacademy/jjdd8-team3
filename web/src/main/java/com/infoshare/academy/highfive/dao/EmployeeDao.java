@@ -14,9 +14,7 @@ public class EmployeeDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    public void save(Employee employee) {
-        entityManager.persist(employee);
-    }
+    public void save(Employee employee) { entityManager.persist(employee); }
 
     public Optional<Employee> getById(Long id) {
         return Optional.ofNullable(entityManager.find(Employee.class, id));
@@ -26,19 +24,17 @@ public class EmployeeDao {
         return entityManager.find(Employee.class, id);
     }
 
-
     public List<Employee> listAllEmployees() {
         return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
     }
 
-    public void update(Employee employee){ entityManager.merge(employee); }
+    public void update(Employee employee) { entityManager.merge(employee); }
 
-  public Employee delete(Long id) {
-    Employee removedEmployee = getById(id).orElseThrow();
-    if (removedEmployee != null) {
-      entityManager.remove(removedEmployee);
+    public Employee delete(Long id) {
+
+        Employee removedEmployee = getById(id).orElseThrow();
+        entityManager.remove(removedEmployee);
+
+        return removedEmployee;
     }
-    return removedEmployee;
-  }
-
 }

@@ -29,7 +29,6 @@ public class AddTeamServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");

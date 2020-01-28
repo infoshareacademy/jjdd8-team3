@@ -30,17 +30,6 @@ public class EmployeeView {
   @JsonProperty("role_id")
   private Role roleId;
 
-//  public EmployeeView(Long Id, String firstName, String surname, LocalDate hireDate, int holidayEntitlement, int additionalEntitlement, Team teamId, Role roleId) {
-//    this.Id = Id;
-//    this.firstName = firstName;
-//    this.surname = surname;
-//    this.hireDate = hireDate;
-//    this.holidayEntitlement = holidayEntitlement;
-//    this.additionalEntitlement = additionalEntitlement;
-//    this.teamId = teamId;
-//    this.roleId = roleId;
-//  }
-
   public Long getId() {
     return Id;
   }

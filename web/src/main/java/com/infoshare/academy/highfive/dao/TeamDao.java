@@ -32,15 +32,13 @@ public class TeamDao {
         entityManager.merge(team);
     }
 
-    public void edit() {
-    }
+    public void edit() { }
 
     public Team delete(Long id) {
+
         Team removedTeam = getById(id).orElseThrow();
-        if (removedTeam != null) {
-            entityManager.remove(removedTeam);
-        }
+        entityManager.remove(removedTeam);
+
         return removedTeam;
     }
-
 }

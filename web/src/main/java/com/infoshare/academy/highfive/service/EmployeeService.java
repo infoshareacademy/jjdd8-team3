@@ -3,7 +3,6 @@ package com.infoshare.academy.highfive.service;
 import com.infoshare.academy.highfive.dao.EmployeeDao;
 import com.infoshare.academy.highfive.dao.EntitlementDao;
 import com.infoshare.academy.highfive.domain.Employee;
-import com.infoshare.academy.highfive.domain.Entitlement;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.dto.view.EmployeeView;
 import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
@@ -25,10 +24,6 @@ public class EmployeeService {
 
     public void save(EmployeeRequest request) {
         employeeDao.save(employeeMapper.mapRequestToEntity(request));
-
-        Entitlement entitlement =
-
-        entitlementDao.save(persist.entitlement);
     }
 
     public void update(Long id, EmployeeRequest request) {

@@ -2,7 +2,6 @@ package com.infoshare.academy.highfive.web.servlet.employee;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
-import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +53,7 @@ public class EditEmployeeServlet extends HttpServlet {
         dataModel.put("employees", employeeService.listAll());
         dataModel.put("teams", teamService.listAll());
 
-        try{
+        try {
             template.process(dataModel, writer);
         } catch (
                 TemplateException e) {
