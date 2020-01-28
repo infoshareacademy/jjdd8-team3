@@ -52,6 +52,10 @@ public class Vacation {
     @Column (name = "vacation_status")
     private VacationStatus vacationStatus;
 
+    public boolean isReminderEmailSent() {
+        return reminderEmailSent;
+    }
+
     public Long getId() { return id; }
 
     public Employee getEmployee() { return employee; }
@@ -81,4 +85,8 @@ public class Vacation {
     public VacationStatus getVacationStatus() { return vacationStatus; }
 
     public void setVacationStatus(VacationStatus vacationStatus) { this.vacationStatus = vacationStatus; }
+
+    public void setReminderEmailSent(boolean reminderEmailSent) {
+        this.reminderEmailSent = reminderEmailSent;
+    }
 }

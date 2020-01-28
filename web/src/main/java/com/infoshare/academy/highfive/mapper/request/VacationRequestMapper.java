@@ -27,6 +27,8 @@ public class VacationRequestMapper {
     vacationRequest.setDateTo(dateTo);
     vacationRequest.setVacationStatus(VacationStatus.APPLIED);
     vacationRequest.setDateOfRequest(dateOfRequest);
+    vacationRequest.setReminderEmailSent(false);
+
 
     if (request.getParameter("vacation_type").equals("parental")) {
       vacationRequest.setVacationType(VacationType.PARENTAL);
