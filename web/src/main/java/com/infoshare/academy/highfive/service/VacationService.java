@@ -163,7 +163,7 @@ public class VacationService {
   @Transactional
   public List<VacationView> listAllPendingRequests() {
 
-    return vacationDao.getPendingRequestsList()
+    return vacationDao.getVacationList(VacationStatus.APPLIED)
       .stream()
       .map(vacation -> vacationMapper.mapEntityToView(vacation))
       .collect(Collectors.toList());
@@ -190,9 +190,20 @@ public class VacationService {
     VacationStatisticView vacationStatisticView = new VacationStatisticView();
     vacationStatisticView.setNextMonthTotal(vacationDao.getAmountOfAbsentNextMonth());
     vacationStatisticView.setCurrentMonthTotal(vacationDao.getAmountOfAbsentThisMonth());
-    vacationStatisticView.setPendingRequests(vacationDao.getPendingRequestsListSize());
+    vacationStatisticView.setPendingRequests(vacationDao.getVacationList(VacationStatus.APPLIED).size());
     vacationStatisticView.setAbsentToday(vacationDao.getAmountOfAbsentToday());
     return vacationStatisticView;
   }
+
+  public Double getApprovedToDeniedVacationRatio() {
+    Integer approvedVacation = vacationDao.getVacationList(VacationStatus.APPROVED).size();
+    Integer deniedVacation = vacationDao.getVacationList(VacationStatus.DENIED).size();
+    return Double.valueOf(approvedVacation) / Double.valueOf(deniedVacation);
+  }
+
+  public List<Entitlement> getEmployeesByRemainingEntitlement() {
+    return entitlementDao.getRemainingEntitlement();
+  }
+
 }
 
