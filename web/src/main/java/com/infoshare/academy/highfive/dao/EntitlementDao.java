@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.domain.Entitlement;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 
 @Stateless
@@ -26,6 +27,11 @@ public class EntitlementDao {
       .setParameter("employeeId", employee)
       .getSingleResult();
 
+  }
+
+  public List<Entitlement> getRemainingEntitlement() {
+    return entityManager.createNamedQuery("Entitlement.findRemainingEntitlement")
+      .getResultList();
   }
 
 }

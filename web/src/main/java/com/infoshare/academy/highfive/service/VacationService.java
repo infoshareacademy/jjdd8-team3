@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.dao.HolidayDao;
 import com.infoshare.academy.highfive.dao.VacationDao;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.view.VacationStatisticView;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
@@ -162,7 +163,7 @@ public class VacationService {
   @Transactional
   public List<VacationView> listAllPendingRequests() {
 
-    return vacationDao.getPendingRequestsList()
+    return vacationDao.getVacationList(VacationStatus.APPLIED)
       .stream()
       .map(vacation -> vacationMapper.mapEntityToView(vacation))
       .collect(Collectors.toList());
@@ -183,6 +184,25 @@ public class VacationService {
       mailSender.sendReject(vacation.getEmployee().getEmail());
     }
 
+  }
+
+  public VacationStatisticView getStatistics() {
+    VacationStatisticView vacationStatisticView = new VacationStatisticView();
+    vacationStatisticView.setNextMonthTotal(vacationDao.getAmountOfAbsentNextMonth());
+    vacationStatisticView.setCurrentMonthTotal(vacationDao.getAmountOfAbsentThisMonth());
+    vacationStatisticView.setPendingRequests(vacationDao.getVacationList(VacationStatus.APPLIED).size());
+    vacationStatisticView.setAbsentToday(vacationDao.getAmountOfAbsentToday());
+    return vacationStatisticView;
+  }
+
+  public Double getApprovedToDeniedVacationRatio() {
+    Integer approvedVacation = vacationDao.getVacationList(VacationStatus.APPROVED).size();
+    Integer deniedVacation = vacationDao.getVacationList(VacationStatus.DENIED).size();
+    return Double.valueOf(approvedVacation) / Double.valueOf(deniedVacation);
+  }
+
+  public List<Entitlement> getEmployeesByRemainingEntitlement() {
+    return entitlementDao.getRemainingEntitlement();
   }
 
 }
