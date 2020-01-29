@@ -32,7 +32,7 @@ public class RemindSchedule {
                 .reduce("", (a, v) -> a + v);
         Content content = new Content("text/plain", "Please be advised that there are still vacation requests awaiting confirmation sent by \n"
                 + employeeWaitingList + "\n Sincerely,\n Your Administrative Mail");
-        mailSender.sendRequestReminder("mich.chmielewski@gmail.com", content);
+        mailSender.sendRequestReminder("jjdd8highfive@gmail.com", content);
         requestsToSend.stream().forEach(vacation -> vacation.setReminderEmailSent(true));
 
     }

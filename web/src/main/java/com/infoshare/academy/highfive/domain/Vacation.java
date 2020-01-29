@@ -1,36 +1,32 @@
 package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
-import javax.xml.namespace.QName;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NamedQueries({
-  @NamedQuery(name = "Vacation.findVacationByStatus", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "JOIN FETCH Employee employee ON vacation.employee = employee " +
-    "WHERE vacation.vacationStatus = :status"),
-  @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "WHERE vacation.id = :vacationId"),
-  @NamedQuery(name = "Vacation.findAbsentToday", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "WHERE vacation.vacationStatus = :status " +
-    "AND (vacation.vacationFrom <= :today " +
-    "AND vacation.vacationTo >= :today) " +
-    ""),
-  @NamedQuery(name = "Vacation.findAbsentByMonth", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "WHERE vacation.vacationStatus = :status " +
-    "AND (vacation.vacationFrom BETWEEN :firstDayOfMonth AND :lastDayOfMonth " +
-    "OR vacation.vacationTo BETWEEN :firstDayOfMonth AND :lastDayOfMonth)"),
-        @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
+        @NamedQuery(name = "Vacation.findVacationByStatus", query = "SELECT vacation " +
                 "FROM Vacation vacation " +
                 "JOIN FETCH Employee employee ON vacation.employee = employee " +
                 "WHERE vacation.vacationStatus = :status"),
         @NamedQuery(name = "Vacation.findVacationById", query = "SELECT vacation " +
                 "FROM Vacation vacation " +
                 "WHERE vacation.id = :vacationId"),
+        @NamedQuery(name = "Vacation.findAbsentToday", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "WHERE vacation.vacationStatus = :status " +
+                "AND (vacation.vacationFrom <= :today " +
+                "AND vacation.vacationTo >= :today) " +
+                ""),
+        @NamedQuery(name = "Vacation.findAbsentByMonth", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "WHERE vacation.vacationStatus = :status " +
+                "AND (vacation.vacationFrom BETWEEN :firstDayOfMonth AND :lastDayOfMonth " +
+                "OR vacation.vacationTo BETWEEN :firstDayOfMonth AND :lastDayOfMonth)"),
+        @NamedQuery(name = "Vacation.findPendingRequests", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "JOIN FETCH Employee employee ON vacation.employee = employee " +
+                "WHERE vacation.vacationStatus = :status"),
         @NamedQuery(name = "Vacation.findPendingOldRequests", query = "SELECT vacation " +
                 "FROM Vacation vacation " +
                 "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent = false")
@@ -56,13 +52,13 @@ public class Vacation {
   @Column(name = "to_date", nullable = false)
   private LocalDate vacationTo;
 
-  @Column (name = "date_of_request" , nullable = false)
-    private LocalDateTime dateOfRequest;
+  @Column(name = "date_of_request")
+  private LocalDateTime dateOfRequest;
 
-    @Column (name = "reminder_email_sent", nullable = false)
-    private boolean reminderEmailSent;
+  @Column(name = "reminder_email_sent", nullable = false)
+  private boolean reminderEmailSent;
 
-    @Enumerated(EnumType.STRING)
+  @Enumerated(EnumType.STRING)
   @Column(name = "vacation_type")
   private VacationType vacationType;
 
@@ -71,10 +67,12 @@ public class Vacation {
   private VacationStatus vacationStatus;
 
   public boolean isReminderEmailSent() {
-        return reminderEmailSent;
-    }
+    return reminderEmailSent;
+  }
 
-    public Long getId() { return id; }
+  public Long getId() {
+    return id;
+  }
 
   public Employee getEmployee() {
     return employee;
@@ -101,14 +99,16 @@ public class Vacation {
   }
 
   public LocalDateTime getDateOfRequest() {
-        return dateOfRequest;
-    }
+    return dateOfRequest;
+  }
 
-    public void setDateOfRequest(LocalDateTime dateOfRequest) {
-        this.dateOfRequest = dateOfRequest;
-    }
+  public void setDateOfRequest(LocalDateTime dateOfRequest) {
+    this.dateOfRequest = dateOfRequest;
+  }
 
-    public VacationType getVacationType() { return vacationType; }
+  public VacationType getVacationType() {
+    return vacationType;
+  }
 
   public void setVacationType(VacationType vacationType) {
     this.vacationType = vacationType;
@@ -122,7 +122,7 @@ public class Vacation {
     this.vacationStatus = vacationStatus;
   }
 
-    public void setReminderEmailSent(boolean reminderEmailSent) {
-        this.reminderEmailSent = reminderEmailSent;
-    }
+  public void setReminderEmailSent(boolean reminderEmailSent) {
+    this.reminderEmailSent = reminderEmailSent;
+  }
 }

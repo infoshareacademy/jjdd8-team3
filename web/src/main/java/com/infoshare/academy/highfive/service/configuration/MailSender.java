@@ -7,12 +7,16 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import java.io.IOException;
 
 @RequestScoped
 public class MailSender {
+
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     private void createMail(Email from, String subject, Email to, Content content) throws IOException {
         Mail mail = new Mail(from, subject, to, content);
@@ -60,6 +64,7 @@ public class MailSender {
 
     public void sendRequestReminder(String emailRecipient, Content content) throws IOException {
 
+        LOGGER.error("{}", 1);
         Email from = new Email("Vacation-Manager@HighFive.com");
         String subject = "Vacation Manager notification. Request reminder.";
         Email to = new Email(emailRecipient);
