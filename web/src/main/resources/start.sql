@@ -10,3 +10,6 @@ insert into entitlement(additional_left, current_year, on_demand_holiday_left, p
 insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type) values (2, '2020-01-27', 'APPLIED', '2020-02-27', 'PARENTAL');
 insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type) values (2, '2020-01-27', 'APPROVED', '2020-01-31', 'VACATION');
 insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type) values (2, '2020-05-27', 'APPLIED', '2020-06-07', 'PARENTAL');
+
+update entitlement set days_taken = 2 where id = 1;
+

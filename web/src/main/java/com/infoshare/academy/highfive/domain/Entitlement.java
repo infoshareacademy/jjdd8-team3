@@ -7,9 +7,13 @@ import java.time.LocalDate;
   @NamedQuery(name = "Entitlement.findEntitlementByEmployeeId", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
     "WHERE entitlement.employee = :employeeId"),
-  @NamedQuery(name = "Entitlement.findRemainingEntitlement", query = "SELECT (entitlement.previousYearLeft + entitlement.vacationLeft + entitlement.additionalLeft + entitlement.onDemandHolidayLeft) AS entitlementSum, entitlement.employee " +
+  @NamedQuery(name = "Entitlement.findEmployeeHolidayTaken", query = "SELECT entitlement.holidayTaken, entitlement.employee " +
     "FROM Entitlement entitlement " +
-    "ORDER BY entitlementSum")
+    "ORDER BY entitlement.holidayTaken DESC"),
+  @NamedQuery(name = "Entitlement.findTeamHolidayTaken", query = "SELECT entitlement.holidayTaken, team.teamName " +
+    "FROM Entitlement entitlement " +
+    "JOIN FETCH Employee employee ON entitlement.employee = employee " +
+    "JOIN FETCH Team team ON employee.team = team")
 }
 )
 
@@ -36,6 +40,9 @@ public class Entitlement {
 
   @Column(name = "on_demand_holiday_left", nullable = false)
   private int onDemandHolidayLeft;
+
+  @Column(name = "days_taken")
+  private int holidayTaken;
 
   @OneToOne
   @JoinColumn(unique = true, name = "employee_id")
@@ -83,5 +90,13 @@ public class Entitlement {
 
   public void setOnDemandHolidayLeft(int onDemandHolidayLeft) {
     this.onDemandHolidayLeft = onDemandHolidayLeft;
+  }
+
+  public int getHolidayTaken() {
+    return holidayTaken;
+  }
+
+  public void setHolidayTaken(int holidayTaken) {
+    this.holidayTaken = holidayTaken;
   }
 }

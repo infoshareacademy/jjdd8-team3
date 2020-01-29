@@ -34,5 +34,4 @@ public class EmployeeDao {
     return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
   }
 
-
 }

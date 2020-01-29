@@ -68,6 +68,7 @@ public class VacationService {
 
         vacationDao.addVacation(vacationMapper.mapRequestToEntity(employee, vacationRequest));
         updateHolidayEntitlement(vacationRequest, daysOff, entitlement);
+
         LOGGER.info("Vacation added successfully");
         status = "ok";
       } else {
@@ -79,6 +80,7 @@ public class VacationService {
   }
 
   void updateHolidayEntitlement(VacationRequest vacationRequest, int daysOff, Entitlement entitlement) {
+    entitlement.setHolidayTaken(entitlement.getHolidayTaken() + daysOff);
 
     if (vacationRequest.getVacationType().equals(VacationType.PARENTAL)) {
 
@@ -178,10 +180,10 @@ public class VacationService {
 
     if (vacationStatus.equals(VacationStatus.APPROVED)) {
 
-      mailSender.sendApprove(vacation.getEmployee().getEmail());
+//      mailSender.sendApprove(vacation.getEmployee().getEmail());
 
     } else {
-      mailSender.sendReject(vacation.getEmployee().getEmail());
+//      mailSender.sendReject(vacation.getEmployee().getEmail());
     }
 
   }

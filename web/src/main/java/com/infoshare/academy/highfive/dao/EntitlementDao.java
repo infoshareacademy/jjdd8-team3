@@ -16,13 +16,11 @@ public class EntitlementDao {
   EntityManager entityManager;
 
   public void updateEntitlement(Entitlement entitlement) {
-
     entityManager.merge(entitlement);
 
   }
 
   public Entitlement getEntitlementByEmployeeId(Employee employee) {
-
     return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
       .setParameter("employeeId", employee)
       .getSingleResult();
@@ -30,8 +28,9 @@ public class EntitlementDao {
   }
 
   public List<Entitlement> getRemainingEntitlement() {
-    return entityManager.createNamedQuery("Entitlement.findRemainingEntitlement")
+    return entityManager.createNamedQuery("Entitlement.findEmployeeHolidayTaken")
       .getResultList();
+
   }
 
 }
