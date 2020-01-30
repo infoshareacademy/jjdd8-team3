@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class ApiJsonParser {
         }
 
         LOGGER.debug("Connecting to URL API for JSON data. Connection status: {}", status);
-        return parseJson(objectMapper.readTree(urlPath));
+        return parseJson(objectMapper.readTree(new URL(urlPath)));
     }
 
     private List<Holiday> parseJson(JsonNode jsonNodeBase) {
