@@ -28,7 +28,7 @@ public class EntitlementDao {
   }
 
   public List<Entitlement> getRemainingEntitlement() {
-    return entityManager.createNamedQuery("Entitlement.findEmployeeHolidayTaken")
+    return entityManager.createNamedQuery("Entitlement.findEmployeeVacationTaken")
       .getResultList();
 
   }

@@ -80,7 +80,7 @@ public class VacationService {
   }
 
   void updateHolidayEntitlement(VacationRequest vacationRequest, int daysOff, Entitlement entitlement) {
-    entitlement.setHolidayTaken(entitlement.getHolidayTaken() + daysOff);
+    entitlement.setVacationTaken(entitlement.getVacationTaken() + daysOff);
 
     if (vacationRequest.getVacationType().equals(VacationType.PARENTAL)) {
 
@@ -88,7 +88,7 @@ public class VacationService {
 
     } else if (vacationRequest.getVacationType().equals(VacationType.ON_DEMAND)) {
 
-      entitlement.setOnDemandHolidayLeft(entitlement.getOnDemandHolidayLeft() - daysOff);
+      entitlement.setOnDemandVacationLeft(entitlement.getOnDemandVacationLeft() - daysOff);
 
     } else {
 
@@ -106,7 +106,7 @@ public class VacationService {
 
     } else if (vacationRequest.getVacationType().equals(VacationType.ON_DEMAND)) {
 
-      return entitlement.getOnDemandHolidayLeft();
+      return entitlement.getOnDemandVacationLeft();
 
     } else {
 

@@ -7,15 +7,14 @@ import java.time.LocalDate;
   @NamedQuery(name = "Entitlement.findEntitlementByEmployeeId", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
     "WHERE entitlement.employee = :employeeId"),
-  @NamedQuery(name = "Entitlement.findEmployeeHolidayTaken", query = "SELECT entitlement.holidayTaken, entitlement.employee " +
+  @NamedQuery(name = "Entitlement.findEmployeeVacationTaken", query = "SELECT entitlement.vacationTaken, entitlement.employee " +
     "FROM Entitlement entitlement " +
-    "ORDER BY entitlement.holidayTaken DESC"),
-  @NamedQuery(name = "Entitlement.findTeamHolidayTaken", query = "SELECT entitlement.holidayTaken, team.teamName " +
+    "ORDER BY entitlement.vacationTaken DESC"),
+  @NamedQuery(name = "Entitlement.findTeamVacationTaken", query = "SELECT entitlement.vacationTaken, team.teamName " +
     "FROM Entitlement entitlement " +
     "JOIN FETCH Employee employee ON entitlement.employee = employee " +
     "JOIN FETCH Team team ON employee.team = team")
-}
-)
+})
 
 @Entity
 @Table(name = "entitlement")
@@ -39,10 +38,10 @@ public class Entitlement {
   private int additionalLeft;
 
   @Column(name = "on_demand_holiday_left", nullable = false)
-  private int onDemandHolidayLeft;
+  private int onDemandVacationLeft;
 
   @Column(name = "days_taken")
-  private int holidayTaken;
+  private int vacationTaken;
 
   @OneToOne
   @JoinColumn(unique = true, name = "employee_id")
@@ -84,19 +83,19 @@ public class Entitlement {
     this.additionalLeft = additionalLeft;
   }
 
-  public int getOnDemandHolidayLeft() {
-    return onDemandHolidayLeft;
+  public int getOnDemandVacationLeft() {
+    return onDemandVacationLeft;
   }
 
-  public void setOnDemandHolidayLeft(int onDemandHolidayLeft) {
-    this.onDemandHolidayLeft = onDemandHolidayLeft;
+  public void setOnDemandVacationLeft(int onDemandHolidayLeft) {
+    this.onDemandVacationLeft = onDemandHolidayLeft;
   }
 
-  public int getHolidayTaken() {
-    return holidayTaken;
+  public int getVacationTaken() {
+    return vacationTaken;
   }
 
-  public void setHolidayTaken(int holidayTaken) {
-    this.holidayTaken = holidayTaken;
+  public void setVacationTaken(int holidayTaken) {
+    this.vacationTaken = holidayTaken;
   }
 }
