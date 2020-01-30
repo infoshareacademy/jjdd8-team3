@@ -1,18 +1,24 @@
 package com.infoshare.academy.highfive.mapper.entity;
 
-import com.infoshare.academy.highfive.domain.Statistic;
-import com.infoshare.academy.highfive.dto.view.VacationMonthView;
+import com.infoshare.academy.highfive.domain.Entitlement;
+import com.infoshare.academy.highfive.dto.view.VacationEmployeeView;
 
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class VacationEmployeeMapper {
 
-  public VacationMonthView mapEntityToView(Statistic statistic) {
-    VacationMonthView vacationMonthView = new VacationMonthView();
-    vacationMonthView.setMonthName(statistic.getMonthName());
-    vacationMonthView.setMonthNumber(statistic.getMonthNumber());
-    vacationMonthView.setVacationDaysCount(statistic.getVacationDaysCount());
-    return vacationMonthView;
+  public VacationEmployeeView mapEntityToView(Entitlement entitlement) {
+
+    VacationEmployeeView vacationEmployeeView = new VacationEmployeeView();
+
+    vacationEmployeeView.setFirstName(entitlement.getEmployee().getFirstName());
+    vacationEmployeeView.setId(entitlement.getEmployee().getId());
+    vacationEmployeeView.setSecondName(entitlement.getEmployee().getSurname());
+    vacationEmployeeView.setVacationTaken(entitlement.getVacationTaken());
+
+    return vacationEmployeeView;
+
   }
+
 }

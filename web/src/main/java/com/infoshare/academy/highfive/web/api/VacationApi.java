@@ -16,31 +16,39 @@ public class VacationApi {
   VacationService vacationService;
 
   @GET
-  @Path("/takenByEmployee")
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getVacationTakenByEmployee() {
-    return Response.ok().entity(vacationService.getEmployeesByVacationTaken()).build();
-  }
-
-  @GET
-  @Path("/approvedToDeniedRatio")
+  @Path("/approved-denied-ratio")
   @Produces(MediaType.TEXT_PLAIN)
   public Response getEmployeeApprovedToDeniedRatio() {
+
     return Response.ok().entity(vacationService.getApprovedToDeniedVacationRatio().toString()).build();
+
   }
 
   @GET
-  @Path("/takenByTeam")
+  @Path("/taken-by-employee")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getVacationTakenByEmployee() {
+
+    return Response.ok().entity(vacationService.getEmployeesByVacationTaken()).build();
+
+  }
+
+  @GET
+  @Path("/taken-by-team")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getVacationTakenByTeam() {
+
     return Response.ok().entity(vacationService.getTeamByVacationTaken()).build();
+
   }
 
   @GET
-  @Path("/popularMonths")
+  @Path("/popular-months")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getPopularMonths() {
+
     return Response.ok().entity(vacationService.getMonthStatistic()).build();
+
   }
 
 }

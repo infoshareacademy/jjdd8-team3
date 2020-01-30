@@ -45,7 +45,6 @@ public class RejectVacationRequestServlet extends HttpServlet {
     dataModel.put("contentTemplate", "pending-vacation-reject.ftlh");
     dataModel.put("title", "Success!");
 
-
     try {
       template.process(dataModel, writer);
     } catch (

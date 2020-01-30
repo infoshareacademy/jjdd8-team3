@@ -1,6 +1,5 @@
 package com.infoshare.academy.highfive.web.servlet.vacation;
 
-import com.infoshare.academy.highfive.dao.EntitlementDao;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
@@ -39,9 +38,6 @@ public class RequestVacationServlet extends HttpServlet {
 
   @Inject
   MailSender mailSender;
-
-  @Inject
-  EntitlementDao entitlementDao;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -92,8 +88,7 @@ public class RequestVacationServlet extends HttpServlet {
 
       dataModel.put("contentTemplate", "request-vacation-success.ftlh");
       dataModel.put("title", "Success!");
-//      mailSender.sendNotification("jjdd8highfive@gmail.com");
-
+      mailSender.sendNotification("jjdd8highfive@gmail.com");
 
     } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
 
@@ -115,5 +110,6 @@ public class RequestVacationServlet extends HttpServlet {
     }
 
   }
+
 }
 

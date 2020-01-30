@@ -7,13 +7,14 @@ import java.time.LocalDate;
   @NamedQuery(name = "Entitlement.findEntitlementByEmployeeId", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
     "WHERE entitlement.employee = :employeeId"),
-  @NamedQuery(name = "Entitlement.findEmployeeVacationTaken", query = "SELECT entitlement.vacationTaken, entitlement.employee " +
+  @NamedQuery(name = "Entitlement.findEmployeeVacationTaken", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
     "ORDER BY entitlement.vacationTaken DESC"),
-  @NamedQuery(name = "Entitlement.findTeamVacationTaken", query = "SELECT entitlement.vacationTaken, team.teamName " +
+  @NamedQuery(name = "Entitlement.findTeamVacationTaken", query = "SELECT SUM(entitlement.vacationTaken), team.teamName " +
     "FROM Entitlement entitlement " +
     "JOIN FETCH Employee employee ON entitlement.employee = employee " +
-    "JOIN FETCH Team team ON employee.team = team")
+    "JOIN FETCH Team team ON employee.team = team " +
+    "GROUP BY team.teamName"),
 })
 
 @Entity

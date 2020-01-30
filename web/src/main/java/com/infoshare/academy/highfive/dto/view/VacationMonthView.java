@@ -1,11 +1,16 @@
 package com.infoshare.academy.highfive.dto.view;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class VacationMonthView {
 
+  @JsonProperty("month_number")
   private int monthNumber;
 
+  @JsonProperty("month_name")
   private String monthName;
 
+  @JsonProperty("vacation_days_count")
   private long vacationDaysCount;
 
   public int getMonthNumber() {

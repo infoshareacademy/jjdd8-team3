@@ -3,10 +3,11 @@ package com.infoshare.academy.highfive.domain;
 import javax.persistence.*;
 
 @NamedQueries({
-  @NamedQuery(name = "Statistic.findAllStatistic", query = "SELECT statistic FROM Statistic statistic"),
-  @NamedQuery(name = "Statistic.findStatisticByMonth", query = "SELECT statistic FROM Statistic statistic " +
+  @NamedQuery(name = "Statistic.findStatisticByMonth", query = "SELECT statistic " +
+    "FROM Statistic statistic " +
     "WHERE statistic.monthNumber = :monthNumber"),
-  @NamedQuery(name = "Statistic.findStatisticByVacationCount", query = "SELECT statistic FROM Statistic statistic " +
+  @NamedQuery(name = "Statistic.findStatisticByVacationCount", query = "SELECT statistic " +
+    "FROM Statistic statistic " +
     "ORDER BY statistic.vacationDaysCount DESC ")
 })
 

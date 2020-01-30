@@ -13,23 +13,23 @@ public class StatisticDao {
   @PersistenceContext
   EntityManager entityManager;
 
-  public List<Statistic> getStatisticList() {
-    return entityManager.createNamedQuery("Statistic.findAllStatistic")
-      .getResultList();
-  }
-
   public Statistic getStatisticByMonth(int monthNumber) {
+
     return (Statistic) entityManager.createNamedQuery("Statistic.findStatisticByMonth")
       .setParameter("monthNumber", monthNumber)
       .getSingleResult();
+
   }
 
   public List<Statistic> getStatisticListSortedByVacationDaysCount() {
+
     return entityManager.createNamedQuery("Statistic.findStatisticByVacationCount")
       .getResultList();
+
   }
 
   public void saveStatistic(Statistic statistic) {
     entityManager.merge(statistic);
   }
+
 }
