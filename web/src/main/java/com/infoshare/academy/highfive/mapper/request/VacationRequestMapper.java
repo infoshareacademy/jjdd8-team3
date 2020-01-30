@@ -19,6 +19,7 @@ public class VacationRequestMapper {
     LocalDate dateFrom = LocalDate.parse(request.getParameter("date_from"));
     LocalDate dateTo = LocalDate.parse(request.getParameter("date_to"));
     LocalDateTime dateOfRequest = LocalDateTime.now();
+    String reminderEmailSent = "0";
 
     VacationRequest vacationRequest = new VacationRequest();
     vacationRequest.setEmployeeId(Long.parseLong(request.getParameter("employee_id")));
@@ -27,7 +28,7 @@ public class VacationRequestMapper {
     vacationRequest.setDateTo(dateTo);
     vacationRequest.setVacationStatus(VacationStatus.APPLIED);
     vacationRequest.setDateOfRequest(dateOfRequest);
-    vacationRequest.setReminderEmailSent(false);
+    vacationRequest.setReminderEmailSent(reminderEmailSent);
 
 
     if (request.getParameter("vacation_type").equals("parental")) {

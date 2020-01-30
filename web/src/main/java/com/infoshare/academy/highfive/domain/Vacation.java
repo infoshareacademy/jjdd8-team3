@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
                 "WHERE vacation.vacationStatus = :status"),
         @NamedQuery(name = "Vacation.findPendingOldRequests", query = "SELECT vacation " +
                 "FROM Vacation vacation " +
-                "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent = false")
+                "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent = '0'")
 }
 )
 
@@ -55,8 +55,8 @@ public class Vacation {
   @Column(name = "date_of_request")
   private LocalDateTime dateOfRequest;
 
-  @Column(name = "reminder_email_sent", nullable = false)
-  private boolean reminderEmailSent;
+  @Column(name = "reminder_email_sent")
+  private String reminderEmailSent;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "vacation_type")
@@ -66,7 +66,7 @@ public class Vacation {
   @Column(name = "vacation_status")
   private VacationStatus vacationStatus;
 
-  public boolean isReminderEmailSent() {
+  public String isReminderEmailSent() {
     return reminderEmailSent;
   }
 
@@ -122,7 +122,7 @@ public class Vacation {
     this.vacationStatus = vacationStatus;
   }
 
-  public void setReminderEmailSent(boolean reminderEmailSent) {
+  public void setReminderEmailSent(String reminderEmailSent) {
     this.reminderEmailSent = reminderEmailSent;
   }
 }

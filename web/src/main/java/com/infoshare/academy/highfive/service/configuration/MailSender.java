@@ -21,7 +21,7 @@ public class MailSender {
     private void createMail(Email from, String subject, Email to, Content content) throws IOException {
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid("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");
+        SendGrid sg = new SendGrid("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");
         Request request = new Request();
         request.setMethod(Method.POST);
         request.setEndpoint("mail/send");
@@ -64,7 +64,6 @@ public class MailSender {
 
     public void sendRequestReminder(String emailRecipient, Content content) throws IOException {
 
-        LOGGER.error("{}", 1);
         Email from = new Email("Vacation-Manager@HighFive.com");
         String subject = "Vacation Manager notification. Request reminder.";
         Email to = new Email(emailRecipient);

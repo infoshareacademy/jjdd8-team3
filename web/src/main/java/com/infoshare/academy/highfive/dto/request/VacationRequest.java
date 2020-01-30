@@ -24,13 +24,13 @@ public class VacationRequest {
 
   private LocalDateTime dateOfRequest;
 
-  private boolean reminderEmailSent;
+  private String reminderEmailSent;
 
-  public boolean getReminderEmailSent() {
+  public String getReminderEmailSent() {
     return reminderEmailSent;
   }
 
-  public void setReminderEmailSent(boolean reminderEmailSent) {
+  public void setReminderEmailSent(String reminderEmailSent) {
     this.reminderEmailSent = reminderEmailSent;
   }
 
