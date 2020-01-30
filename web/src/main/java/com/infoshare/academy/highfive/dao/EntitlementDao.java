@@ -12,26 +12,32 @@ import java.util.List;
 @Stateless
 public class EntitlementDao {
 
-  @PersistenceContext
-  EntityManager entityManager;
+    @PersistenceContext
+    EntityManager entityManager;
 
-  public void updateEntitlement(Entitlement entitlement) {
+    public void updateEntitlement(Entitlement entitlement) {
 
-    entityManager.merge(entitlement);
+        entityManager.merge(entitlement);
 
-  }
+    }
 
-  public Entitlement getEntitlementByEmployeeId(Employee employee) {
+    public Entitlement getEntitlementByEmployeeId(Employee employee) {
 
-    return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
-      .setParameter("employeeId", employee)
-      .getSingleResult();
+        return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
+                .setParameter("employeeId", employee)
+                .getSingleResult();
 
-  }
+    }
+
+    public void save(Entitlement entitlement) {
+        entityManager.persist(entitlement);
+      
+    }
 
   public List<Entitlement> getRemainingEntitlement() {
     return entityManager.createNamedQuery("Entitlement.findRemainingEntitlement")
       .getResultList();
+    
   }
 
-}
+  }

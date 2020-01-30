@@ -1,9 +1,12 @@
 package com.infoshare.academy.highfive.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TeamRequest {
 
     private Long id;
 
+    @JsonProperty("team_name")
     private String teamName;
 
     public Long getId() { return id; }

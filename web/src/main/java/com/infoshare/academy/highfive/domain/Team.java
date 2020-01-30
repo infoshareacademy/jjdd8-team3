@@ -3,6 +3,10 @@ package com.infoshare.academy.highfive.domain;
 import javax.persistence.*;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "Team.findAll", query = "SELECT team FROM Team team")
+})
+
 @Entity
 @Table(name = "team")
 public class Team {

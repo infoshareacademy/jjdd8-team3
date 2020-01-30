@@ -1,12 +1,15 @@
-package com.infoshare.academy.highfive.web.servlet.holiday;
+package com.infoshare.academy.highfive.web.servlet.employee;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.service.HolidayService;
+import com.infoshare.academy.highfive.mapper.request.EmployeeRequestMapper;
+import com.infoshare.academy.highfive.service.EmployeeService;
+import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,32 +21,37 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/list-holidays")
-public class HolidayListServlet extends HttpServlet {
+@WebServlet("/manager/edit-employee")
+public class EditEmployeeServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
+
+    @Inject
+    private EmployeeRequestMapper requestMapper;
+
+    @EJB
+    private EmployeeService employeeService;
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    HolidayService holidayService;
+    private TeamService teamService;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
-
+        resp.setContentType("text/html; charset=UTF8");
         PrintWriter writer = resp.getWriter();
-
         Map<String, Object> dataModel = new HashMap<>();
-
-        Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+        Template template = this.templateProvider
+                .getTemplate(getServletContext(), "template.ftlh");
 
         dataModel.put("method", req.getMethod());
-        dataModel.put("contentTemplate", "all-holiday.ftlh");
-        dataModel.put("title", "List Holidays");
-        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
-        dataModel.put("pluginJsTemplate", "plugin-js-servlets.ftlh");
-        dataModel.put("holidays", holidayService.findAll());
+        dataModel.put("contentTemplate", "edit-employee.ftlh");
+        dataModel.put("title", "List Employees");
+        dataModel.put("pluginCssTemplate", "plugin-css-edit-employee.ftlh");
+        dataModel.put("pluginJsTemplate", "plugin-js-edit-employee.ftlh");
+        dataModel.put("employees", employeeService.listAll());
+        dataModel.put("teams", teamService.listAll());
 
         try {
             template.process(dataModel, writer);
@@ -51,7 +59,5 @@ public class HolidayListServlet extends HttpServlet {
                 TemplateException e) {
             LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
-
     }
-
 }

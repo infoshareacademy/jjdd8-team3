@@ -1,7 +1,7 @@
-package com.infoshare.academy.highfive.web.servlet.holiday;
+package com.infoshare.academy.highfive.web.servlet.team;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.service.HolidayService;
+import com.infoshare.academy.highfive.service.TeamService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -18,8 +18,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/list-holidays")
-public class HolidayListServlet extends HttpServlet {
+@WebServlet("/manager/edit-team")
+public class EditTeamServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
@@ -27,7 +27,7 @@ public class HolidayListServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    HolidayService holidayService;
+    TeamService teamService;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -36,14 +36,15 @@ public class HolidayListServlet extends HttpServlet {
 
         Map<String, Object> dataModel = new HashMap<>();
 
-        Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+        Template template = this.templateProvider
+                .getTemplate(getServletContext(), "template.ftlh");
 
         dataModel.put("method", req.getMethod());
-        dataModel.put("contentTemplate", "all-holiday.ftlh");
-        dataModel.put("title", "List Holidays");
-        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
-        dataModel.put("pluginJsTemplate", "plugin-js-servlets.ftlh");
-        dataModel.put("holidays", holidayService.findAll());
+        dataModel.put("contentTemplate", "edit-team.ftlh");
+        dataModel.put("title", "List Teams");
+        dataModel.put("pluginCssTemplate", "plugin-css-edit-team.ftlh");
+        dataModel.put("pluginJsTemplate", "plugin-js-edit-team.ftlh");
+        dataModel.put("teams", teamService.listAll());
 
         try {
             template.process(dataModel, writer);
