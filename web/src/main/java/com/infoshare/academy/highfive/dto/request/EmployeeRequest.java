@@ -29,6 +29,18 @@ public class EmployeeRequest {
 
     private Role role;
 
+    private String googleId;
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
+    }
+
+
+
     public Long getId() { return id;  }
 
     public void setId(Long id) { this.id = id; }

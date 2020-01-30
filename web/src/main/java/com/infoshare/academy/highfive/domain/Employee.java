@@ -41,6 +41,9 @@ public class Employee {
   @Column(name = "position")
   private String position;
 
+    @Column(name = "google_id")
+  private String googleId;
+
   @JoinColumn(name = "team_id", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY)
   private Team team;
@@ -99,7 +102,13 @@ public class Employee {
   public void setAdditionalEntitlement(Integer additionalEntitlement) {
     this.additionalEntitlement = additionalEntitlement;
   }
+  public String getGoogleId() {
+    return googleId;
+  }
 
+  public void setGoogleId(String googleId) {
+    this.googleId = googleId;
+  }
   public String getEmail() {
     return email;
   }
