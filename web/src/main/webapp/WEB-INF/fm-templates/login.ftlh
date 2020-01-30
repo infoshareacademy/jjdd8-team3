@@ -65,7 +65,7 @@
 <!--                                    <a href="index.html" class="btn btn-google btn-user btn-block">-->
 <!--                                        <i class="fab fa-google fa-fw" ></i> Login with Google-->
 <!--                                    </a>-->
-                                    <div class="btn btn-google btn-user btn-block" data-onsuccess="onSignIn"></div>
+                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
                                 </form>
                                 <hr>
@@ -101,7 +101,6 @@
 
 <!--google library-->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-
 <!--google js functions-->
 <script src="js/googleLoginSign.js"></script>
 

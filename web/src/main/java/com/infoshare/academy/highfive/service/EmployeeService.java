@@ -33,4 +33,7 @@ public class EmployeeService {
         return this.employeeDao.getEmployeeById(id);
     }
 
+    public Boolean employeeExist(String email){
+        return employeeDao.findByEmail(email).isPresent();
+    }
 }
