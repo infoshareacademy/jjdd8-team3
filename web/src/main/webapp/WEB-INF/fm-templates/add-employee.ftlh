@@ -56,6 +56,8 @@
                   <div class="form-group">
                     <label for="team-name">team</label>
                     <select class="form-control" id="team-name" name="team">
+                      <#if action=="edit"><option value="${employee.team.getTeamName()}"
+                                                  selected>${employee.team.getTeamName()}</option></#if>
                       <#list teams as team>
                         <option value="${team.getId()!}">${team.getTeamName()!}</option>
                       </#list>

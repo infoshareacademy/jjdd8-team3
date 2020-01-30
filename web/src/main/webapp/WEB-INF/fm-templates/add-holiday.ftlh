@@ -34,14 +34,26 @@
                     <textarea class="form-control" name="holiday-description"
                               id="holiday-description" rows="3"><#if action=="edit">${holiday.description!}</#if></textarea>
                   </div>
+<#--                  <div class="form-group">-->
+<#--                    <label for="holiday-type">Holiday type</label>-->
+<#--                    <select class="form-control" id="holiday-type" name="holiday-type">-->
+<#--                      <#list holidayTypes as holidayType>-->
+<#--                      <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>-->
+<#--                      </#list>-->
+<#--                    </select>-->
+<#--                  </div>-->
+
                   <div class="form-group">
                     <label for="holiday-type">Holiday type</label>
                     <select class="form-control" id="holiday-type" name="holiday-type">
+                      <#if action=="edit"><option value="${holiday.holidayType.getType()}"
+                                                  selected>${holiday.holidayType.getType()}</option></#if>
                       <#list holidayTypes as holidayType>
-                      <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
+                        <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
                       </#list>
                     </select>
                   </div>
+
                   <div class="form-group">
                     <label for="holiday-date">Holiday date</label>
                     <input type="text" class="form-control form-control-user form-control-date" title = "please insert correct date format YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
