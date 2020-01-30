@@ -17,12 +17,14 @@ public class EntitlementDao {
   EntityManager entityManager;
 
   public void updateEntitlement(Entitlement entitlement) {
+
     entityManager.merge(entitlement);
 
   }
 
   @Transactional
   public Entitlement getEntitlementByEmployeeId(Employee employee) {
+
     return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
       .setParameter("employeeId", employee)
       .getSingleResult();
@@ -31,6 +33,7 @@ public class EntitlementDao {
 
   @Transactional
   public List<Entitlement> getVacationTakenByEmployee() {
+
     return entityManager.createNamedQuery("Entitlement.findEmployeeVacationTaken")
       .setMaxResults(5)
       .getResultList();
@@ -39,9 +42,23 @@ public class EntitlementDao {
 
   @Transactional
   public List<Entitlement> getVacationTakenByTeam() {
+
     return entityManager.createNamedQuery("Entitlement.findTeamVacationTaken")
       .setMaxResults(5)
       .getResultList();
+
   }
+
+  public void save(Entitlement entitlement) {
+    entityManager.persist(entitlement);
+
+  }
+
+  public List<Entitlement> getRemainingEntitlement() {
+    return entityManager.createNamedQuery("Entitlement.findRemainingEntitlement")
+      .getResultList();
+
+  }
+
 
 }
