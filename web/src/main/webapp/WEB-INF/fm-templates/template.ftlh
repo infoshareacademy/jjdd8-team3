@@ -15,7 +15,8 @@
     </#if>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
+          type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <!-- Custom styles for this template-->
@@ -23,7 +24,7 @@
     <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="/js/bootstrap-year-calendar_v2.css" rel="stylesheet">
     <#if pluginCssTemplate??>
-    <#include "/${pluginCssTemplate}">
+        <#include "/${pluginCssTemplate}">
     </#if>
 </head>
 
@@ -166,7 +167,7 @@
                     <a class="collapse-item" href="/blank">Date format</a>
                     <a class="collapse-item" href="/blank">Sorting</a>
                     <a class="collapse-item" href="/blank">Holidays database</a>
-                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
+                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br/> form file</a>
                 </div>
             </div>
         </li>
@@ -184,11 +185,10 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-        <div id="new-request" class="alert alert-warning alert-dismissible fade show" style="position: absolute;z-index: 9999;display: block;left:50%;transform: translate(-50%, 0);"role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div id="new-request" class="alert alert-danger"
+             style="top:50px;position: absolute;z-index: 9999;display: none;left:50%;transform: translate(-50%, 0);"
+             role="alert">
+            <strong>Hello! You should check in on some of pending request.</strong>
         </div>
 
         <!-- Main Content -->
@@ -244,17 +244,21 @@
 
                     <!-- Nav Item - Alerts -->
                     <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
                             <!-- Counter - Alerts -->
                             <span class="badge badge-danger badge-counter"></span>
                         </a>
                         <!-- Dropdown - Alerts -->
-                        <div id="alert-list" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                        <div id="alert-list"
+                             class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
                                 Requests Center (recent 3 requests)
                             </h6>
-                            <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show All Requests</a>
+                            <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show
+                                All Requests</a>
                         </div>
                     </li>
 
@@ -282,55 +286,55 @@
             </nav>
             <!-- End of Topbar -->
 
-<#--            NASZ SORDEK-->
+            <#--            NASZ SORDEK-->
 
 
-<#--            KONIEC-->
+            <#--            KONIEC-->
             <!-- Template injection -->
-          <#if contentTemplate??>
-          <#include "/${contentTemplate}">
-          </#if>
+            <#if contentTemplate??>
+                <#include "/${contentTemplate}">
+            </#if>
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; HIGH-FIVE 2020</span>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; HIGH-FIVE 2020</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/login.html">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Operation INFO Modal-->
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -343,10 +347,11 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/></div>
+                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/>
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
-<#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
+                    <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
                 </div>
             </div>
         </div>
@@ -363,7 +368,9 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div id="modal-info-body" class="modal-body"><div id="calendar"></div></div>
+                <div id="modal-info-body" class="modal-body">
+                    <div id="calendar"></div>
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
                     <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
@@ -379,8 +386,8 @@
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
     <script src="/js/bootstrap-datepicker.min.js"></script>
 
@@ -391,56 +398,77 @@
             format: "yyyy-mm-dd"
         });
 
+        $("#alertsDropdown").click(function () {
+            $('#alertsDropdown span').text('');
+            sessionStorage.clicked = 1;
+            //return false;
+        });
 
-       //function start() {
+        $('#alertsDropdown').on('hidden.bs.dropdown', function () {
+            $('.pending-req').remove();
+        });
+
         var source = new EventSource("/admin/notify");
-        lastData=null;
+        lastData = null;
         dataSize = 0;
         var dates = [];
-        source.addEventListener('message', function(e) {
+        displayed = 0;
+        source.addEventListener('message', function (e) {
             var data = JSON.parse(e.data);
-            if (lastData != data) {
 
-                lastData = data;
-                dataSize = data.length;
-                if (dataSize > 0) {
-                    $('#alertsDropdown span').text(dataSize)
+            $.each(data, function (i, item) {
+
+                dateTime = Date.parse(item.iso_date_of_request);
+                if (sessionStorage.maxdateStored >= dateTime && sessionStorage.clicked == 1) {
+                    sessionStorage.displayed = 0;
+                    return;
                 }
-                $('.pending-req').remove();
-                $.each(data, function (i, item) {
-                    dateTime = Date.parse(item.iso_date_of_request);
-                    dates.push(dateTime);
-                    if (i>2){
-                        return false;
-                    }
+                sessionStorage.maxdateStored = dateTime;
+                dates.push(dateTime);
 
-                    $('#alert-list').append('<a class="dropdown-item d-flex align-items-center pending-req" href="/manager/pending-requests"><div class="mr-3">'
-                        + '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>'
-                        + '</div><div><div class="small text-black-500">' + item.iso_date_of_request + '</div>'
-                        + item.first_name + ' ' + item.surname + ' requested for vacation'
-                        + '</div></a>');
-                    //$('#alert-list').show();
-                });
-            }
-            var sorted = dates.sort(function(a,b){return new Date(a).getTime() - new Date(b).getTime()});
-            var maxDate = new Date(sorted[0]);
-            $('#new-request').html(maxDate.toISOString());
+                if (sessionStorage.displayed == 0) {
+                    $("#new-request").delay(1000).slideDown("slow", function () {
+                        sessionStorage.displayed = 1;
+                    });
+                    $("#new-request").delay(3000).slideUp("slow");
+                }
+                sessionStorage.clicked = 0;
+                $('.pending-req').remove();
+                $('#alert-list').append('<a class="dropdown-item d-flex align-items-center pending-req" href="/manager/pending-requests"><div class="mr-3">'
+                    + '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>'
+                    + '</div><div><div class="small text-black-500">' + item.iso_date_of_request + '</div>'
+                    + item.first_name + ' ' + item.surname + ' requested for vacation'
+                    + '</div></a>');
+                $('#alertsDropdown span').text(data.length);
+            });
+
         }, false);
-        </script>
+
+        if (typeof (Storage) !== "undefined") {
+            if (!sessionStorage.maxdateStored) {
+                sessionStorage.maxdateStored = null;
+                sessionStorage.clicked = 0;
+                sessionStorage.displayed = 0;
+            }
+        } else {
+            $('#new-request').html("Sorry, your browser does not support web storage...");
+        }
+
+    </script>
 
     <script src="/js/bootstrap-year-calendar_v2.js"></script>
     <script>
-        $(function() {
+        $(function () {
 
             $('#calendar').calendar({
                 enableContextMenu: true,
                 enableRangeSelection: false,
-                weekStart:1,
-                mouseOnDay: function(e) {
-                    if(e.events.length > 0) {
+                weekStart: 1,
+                mouseOnDay: function (e) {
+                    if (e.events.length > 0) {
                         var content = '';
 
-                        for(var i in e.events) {
+                        for (var i in e.events) {
                             content += '<div class="event-tooltip-content">'
                                 + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
                                 + '<div class="event-location">' + e.events[i].location + '</div>'
@@ -451,28 +479,28 @@
                         $(e.element).popover({
                             trigger: 'manual',
                             container: 'body',
-                            html:true,
+                            html: true,
                             content: content
                         });
 
                         $(e.element).popover('show');
                     }
                 },
-                mouseOutDay: function(e) {
-                    if(e.events.length > 0) {
+                mouseOutDay: function (e) {
+                    if (e.events.length > 0) {
                         $(e.element).popover('hide');
                     }
                 },
-                dayContextMenu: function(e) {
+                dayContextMenu: function (e) {
                     $(e.element).popover('hide');
                 },
-               dataSource: null
+                dataSource: null
             });
 
-            var dataS =[];
+            var dataS = [];
             $.ajax({
                 type: "GET",
-                url:"/api/holiday/list",
+                url: "/api/holiday/list",
                 enctype: 'application/json;charset=UTF-8',
                 dataType: 'json',
                 contentType: 'application/json;charset=UTF-8'
@@ -492,7 +520,7 @@
                             //$('#alert-list').show();
                         });
                         $('#calendar').data('calendar').setDataSource(dataS);
-                        $('#calendarModal').modal('show');
+                        //  $('#calendarModal').modal('show');
                     })
                 .fail(
                     function () {

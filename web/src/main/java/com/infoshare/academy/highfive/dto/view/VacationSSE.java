@@ -6,7 +6,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import java.time.LocalDateTime;
 
 public class VacationSSE {
-    private static LocalDateTime dateOfRequest;
+
     private Long id;
     @JsonProperty("employee_id")
     private Long employeeId;
@@ -16,19 +16,15 @@ public class VacationSSE {
 
     private String surname;
 
+    @JsonProperty("date_of_request")
+    private LocalDateTime dateOfRequest;
+
     @JsonProperty("iso_date_of_request")
     private String dateOfRequestIso;
 
+
     @JsonProperty("vacation_status")
     private VacationStatus vacationStatus;
-
-    public static void setDateOfRequest(LocalDateTime dateOfRequest) {
-        VacationSSE.dateOfRequest = dateOfRequest;
-    }
-
-    public static LocalDateTime getDateOfRequest() {
-        return dateOfRequest;
-    }
 
     public void setId(Long id) {
 
@@ -61,6 +57,14 @@ public class VacationSSE {
 
     public String getSurname() {
         return surname;
+    }
+
+    public void setDateOfRequest(LocalDateTime dateOfRequest) {
+        this.dateOfRequest = dateOfRequest;
+    }
+
+    public LocalDateTime getDateOfRequest() {
+        return dateOfRequest;
     }
 
     public void setDateOfRequestIso(String dateOfRequestIso) {

@@ -53,7 +53,7 @@ public class VacationMapper {
     vacationSSE.setFirstName(vacationEntity.getEmployee().getFirstName());
     vacationSSE.setSurname(vacationEntity.getEmployee().getSurname());
     vacationSSE.setVacationStatus(vacationEntity.getVacationStatus());
-    VacationSSE.setDateOfRequest(vacationEntity.getDateOfRequest());
+    vacationSSE.setDateOfRequest(vacationEntity.getDateOfRequest());
     //vacationSSE.setDateOfRequestIso(vacationEntity.getDateOfRequest().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     vacationSSE.setDateOfRequestIso((vacationEntity.getDateOfRequest().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)).substring(0,19)+"Z");
 

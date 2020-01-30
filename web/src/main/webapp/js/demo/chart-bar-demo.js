@@ -34,7 +34,7 @@ var myBarChart = new Chart(ctx, {
     data: {
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [{
-            label: "Revenue",
+            label: "Holidays",
             backgroundColor: "#4e73df",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
@@ -68,7 +68,7 @@ var myBarChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100,
+                    max: 50,
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
@@ -103,7 +103,7 @@ var myBarChart = new Chart(ctx, {
             callbacks: {
                 label: function(tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ': Total days' + number_format(tooltipItem.yLabel);
+                    return datasetLabel + ': Total days ' + number_format(tooltipItem.yLabel);
                 }
             }
         },

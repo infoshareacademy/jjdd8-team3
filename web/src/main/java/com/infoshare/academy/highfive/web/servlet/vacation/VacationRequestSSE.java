@@ -3,7 +3,6 @@ package com.infoshare.academy.highfive.web.servlet.vacation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.dto.view.VacationSSE;
-import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.service.VacationService;
 
 import javax.inject.Inject;
@@ -13,9 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
+import java.sql.Timestamp;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,16 +35,19 @@ public class VacationRequestSSE extends HttpServlet {
         List<VacationSSE> vacationSSE = vacationService.listAllPendingRequestsSSE()
                 .stream()
                 .filter(v -> v.getVacationStatus().equals(VacationStatus.APPLIED))
-              //  .sorted(Comparator.comparing(o1 -> VacationSSE.getDateOfRequest()))
-                //.sorted(Collections.reverse())
-                //.limit(2)
-                .collect(Collectors.toList());
+                .sorted((a, b) -> (int) (Timestamp.valueOf(b.getDateOfRequest()).getTime() - Timestamp.valueOf(a.getDateOfRequest()).getTime()))
+                //.sorted(Comparator.comparing(VacationSSE::getDateOfRequest))
+//                //.sorted(Collections.reverse())
+              .limit(1)
+             .collect(Collectors.toList());
+        //.collect(Collectors.toCollection(TreeSet::new));
 
-       Collections.reverse(vacationSSE);
+//        Collections.sort(vacationSSE,
+//                (a, b) -> (int) (Timestamp.valueOf(b.getDateOfRequest()).getTime() - Timestamp.valueOf(a.getDateOfRequest()).getTime()));
 
         String listToJson = mapper.writeValueAsString(vacationSSE);
 
-        resp.getWriter().write("retry: 20000\n");
+        resp.getWriter().write("retry: 10000\n");
         resp.getWriter().write("data:" + listToJson + "\n\n");
 
     }
