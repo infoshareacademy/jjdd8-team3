@@ -31,6 +31,7 @@ public class EmployeeMapper {
         employeeView.setEmail(employee.getEmail());
         employeeView.setPosition(employee.getPosition());
         employeeView.setTeam(teamMapper.mapEntityToView(employee.getTeam()));
+        employeeView.setHireDate(employee.getHireDate());
         employeeView.setHolidayEntitlement(employee.getHolidayEntitlement());
         employeeView.setAdditionalEntitlement(employee.getAdditionalEntitlement());
         employeeView.setRole(employee.getRole());
