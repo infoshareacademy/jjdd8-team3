@@ -28,7 +28,12 @@ public class EmployeeMapper {
         employeeView.setId(employee.getId());
         employeeView.setFirstName(employee.getFirstName());
         employeeView.setSurname(employee.getSurname());
+        employeeView.setEmail(employee.getEmail());
+        employeeView.setPosition(employee.getPosition());
         employeeView.setTeam(teamMapper.mapEntityToView(employee.getTeam()));
+        employeeView.setHolidayEntitlement(employee.getHolidayEntitlement());
+        employeeView.setAdditionalEntitlement(employee.getAdditionalEntitlement());
+        employeeView.setRole(employee.getRole());
 
         return employeeView;
     }

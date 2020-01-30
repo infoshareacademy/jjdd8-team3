@@ -27,7 +27,11 @@ public class EmployeeService {
     }
 
     public void update(Long id, EmployeeRequest request) {
-        employeeDao.update(employeeMapper.mapRequestToEntity(request));
+        Employee employee = employeeDao.getById(id).orElseThrow();
+
+        employeeMapper.mapRequestToEntity(request, employee);
+
+        employeeDao.update(employee);
     }
 
     public EmployeeView remove(Long id) {

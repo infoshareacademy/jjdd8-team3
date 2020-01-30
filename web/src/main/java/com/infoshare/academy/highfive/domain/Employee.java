@@ -50,8 +50,7 @@ public class Employee {
     @Column(name = "role")
     private Role role;
 
-    public Employee() {
-    }
+    public Employee() { }
 
     public Long getId() {
         return id;
@@ -98,9 +97,7 @@ public class Employee {
     public void setAdditionalEntitlement(Integer additionalEntitlement) {
         this.additionalEntitlement = additionalEntitlement; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
     public void setEmail(String email) {
         this.email = email;
