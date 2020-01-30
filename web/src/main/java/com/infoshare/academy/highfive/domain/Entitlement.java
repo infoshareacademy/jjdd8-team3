@@ -98,4 +98,12 @@ public class Entitlement {
   public void setVacationTaken(int holidayTaken) {
     this.vacationTaken = holidayTaken;
   }
+
+  public Employee getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
+  }
 }

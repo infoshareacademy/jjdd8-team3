@@ -1,13 +1,12 @@
 package com.infoshare.academy.highfive.service;
 
-import com.infoshare.academy.highfive.dao.EmployeeDao;
-import com.infoshare.academy.highfive.dao.EntitlementDao;
-import com.infoshare.academy.highfive.dao.HolidayDao;
-import com.infoshare.academy.highfive.dao.VacationDao;
+import com.infoshare.academy.highfive.dao.*;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.view.VacationMonthView;
 import com.infoshare.academy.highfive.dto.view.VacationStatisticView;
 import com.infoshare.academy.highfive.dto.view.VacationView;
+import com.infoshare.academy.highfive.mapper.entity.VacationEmployeeMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
 import org.slf4j.Logger;
@@ -18,8 +17,10 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -43,6 +44,12 @@ public class VacationService {
   @Inject
   MailSender mailSender;
 
+  @Inject
+  StatisticDao statisticDao;
+
+  @Inject
+  VacationEmployeeMapper vacationEmployeeMapper;
+
   Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
   private String status;
@@ -56,8 +63,10 @@ public class VacationService {
     Employee employee = employeeDao.getEmployeeById(vacationRequest.getEmployeeId());
     Entitlement entitlement = entitlementDao.getEntitlementByEmployeeId(employee);
 
+    List<LocalDate> vacationDaysList = creatingVacationDaysList(vacationRequest);
     int entitledDays = getEmployeeEntitlement(entitlement, vacationRequest);
-    int daysOff = calculatingDaysAmount(creatingVacationDaysList(vacationRequest));
+    int daysOff = calculatingDaysAmount(vacationDaysList);
+
 
     if (vacationRequest.getDateTo().isBefore((vacationRequest.getDateFrom()))) {
 
@@ -68,6 +77,13 @@ public class VacationService {
 
         vacationDao.addVacation(vacationMapper.mapRequestToEntity(employee, vacationRequest));
         updateHolidayEntitlement(vacationRequest, daysOff, entitlement);
+
+        vacationDaysList.forEach(day -> {
+          Statistic statisticMonth = statisticDao.getStatisticByMonth(day.getMonthValue());
+          long vacationDaysCount = statisticMonth.getVacationDaysCount();
+          statisticMonth.setVacationDaysCount(vacationDaysCount + 1);
+          statisticDao.saveStatistic(statisticMonth);
+        });
 
         LOGGER.info("Vacation added successfully");
         status = "ok";
@@ -188,7 +204,7 @@ public class VacationService {
 
   }
 
-  public VacationStatisticView getStatistics() {
+  public VacationStatisticView getDashboardStatistic() {
     VacationStatisticView vacationStatisticView = new VacationStatisticView();
     vacationStatisticView.setNextMonthTotal(vacationDao.getAmountOfAbsentNextMonth());
     vacationStatisticView.setCurrentMonthTotal(vacationDao.getAmountOfAbsentThisMonth());
@@ -198,14 +214,29 @@ public class VacationService {
   }
 
   public Double getApprovedToDeniedVacationRatio() {
-    Integer approvedVacation = vacationDao.getVacationList(VacationStatus.APPROVED).size();
-    Integer deniedVacation = vacationDao.getVacationList(VacationStatus.DENIED).size();
-    return Double.valueOf(approvedVacation) / Double.valueOf(deniedVacation);
+    double approvedVacation = vacationDao.getVacationList(VacationStatus.APPROVED).size();
+    double deniedVacation = vacationDao.getVacationList(VacationStatus.DENIED).size();
+    return approvedVacation / (deniedVacation + approvedVacation) * 100;
   }
 
-  public List<Entitlement> getEmployeesByRemainingEntitlement() {
-    return entitlementDao.getRemainingEntitlement();
+  public List<Entitlement> getEmployeesByVacationTaken() {
+    return entitlementDao.getVacationTakenByEmployee();
   }
 
+  public Map<Object, List<Entitlement>> getTeamByVacationTaken() {
+    List<Entitlement> entitlementList = entitlementDao.getVacationTakenByTeam();
+//    return entitlementList.stream()
+//      .collect(Collectors.groupingBy(entitlement -> entitlement.getEmployee().getTeam().getTeamName()), Collectors.counting());
+    return null;
+  }
+
+
+  public List<VacationMonthView> getMonthStatistic() {
+    List<VacationMonthView> vacationMonthView = new ArrayList<>();
+    statisticDao.getStatisticListSortedByVacationDaysCount().
+      forEach(h -> vacationMonthView.add(vacationEmployeeMapper.mapEntityToView(h)));
+
+    return vacationMonthView;
+  }
 }
 

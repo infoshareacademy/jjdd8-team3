@@ -13,15 +13,15 @@ insert into vacation (employee_id, from_date, vacation_status, to_date, vacation
 
 update entitlement set days_taken = 2 where id = 1;
 
-insert into statistic (month_number, month_name, vacation_days_count) values (1, "JANUARY", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (2, "FEBRUARY", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (3, "MARCH", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (4, "APRIL", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (5, "MAY", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (6, "JUNE", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (7, "JULY", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (8, "AUGUST", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (9, "SEPTEMBER", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (10, "OCTOBER", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (11, "NOVEMBER", 0);
-insert into statistic (month_number, month_name, vacation_days_count) values (12, "DECEMBER", 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (1, 'JANUARY', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (2, 'FEBRUARY', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (3, 'MARCH', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (4, 'APRIL', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (5, 'MAY', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (6, 'JUNE', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (7, 'JULY', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (8, 'AUGUST', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (9, 'SEPTEMBER', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (10, 'OCTOBER', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (11, 'NOVEMBER', 0);
+insert into statistic (month_number, month_name, vacation_days_count) values (12, 'DECEMBER', 0);

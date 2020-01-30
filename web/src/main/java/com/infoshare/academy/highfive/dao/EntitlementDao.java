@@ -27,10 +27,15 @@ public class EntitlementDao {
 
   }
 
-  public List<Entitlement> getRemainingEntitlement() {
+  public List<Entitlement> getVacationTakenByEmployee() {
     return entityManager.createNamedQuery("Entitlement.findEmployeeVacationTaken")
       .getResultList();
 
+  }
+
+  public List<Entitlement> getVacationTakenByTeam() {
+    return entityManager.createNamedQuery("Entitlement.findTeamVacationTaken")
+      .getResultList();
   }
 
 }
