@@ -50,15 +50,9 @@ public class EntitlementDao {
   }
 
   public void save(Entitlement entitlement) {
+
     entityManager.persist(entitlement);
 
   }
-
-  public List<Entitlement> getRemainingEntitlement() {
-    return entityManager.createNamedQuery("Entitlement.findRemainingEntitlement")
-      .getResultList();
-
-  }
-
 
 }
