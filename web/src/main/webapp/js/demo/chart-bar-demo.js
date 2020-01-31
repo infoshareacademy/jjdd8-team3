@@ -26,6 +26,33 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
+dataFromApi=[];
+$.ajax({
+    type: "GET",
+    url: "/api/vacation/popular-months",
+    enctype: 'application/json;charset=UTF-8',
+    dataType: 'json',
+    contentType: 'application/json;charset=UTF-8'
+})
+    .done(
+        function (data) {
+            $.each(data, function (i, item) {
+                vacCount = item.vacation_days_count;
+                dataFromApi.push(
+                    vacCount
+                );
+                //$('#alert-list').show();
+            });
+            myBarChart.config.data.datasets[0].data=dataFromApi; // Would update the first dataset's value of 'March' to be 50
+            myBarChart.update();
+        })
+    .fail(
+        function () {
+            $('#modal-info-body').html("Ups... API request data Operation failed!!!");
+            $('#infoModal').modal('show');
+        });
+
+
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
@@ -37,7 +64,7 @@ var myBarChart = new Chart(ctx, {
             backgroundColor: "#4e73df",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            data: [10, 7, 20, 23, 21, 5, 5, 5, 5, 5, 11, 12],
+            data: dataFromApi,
         }],
     },
     options: {

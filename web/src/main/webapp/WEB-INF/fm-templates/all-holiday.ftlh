@@ -12,6 +12,7 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
           <tr>
+            <th>No</th>
             <th>Name</th>
             <th>Description</th>
             <th>Date</th>
@@ -20,6 +21,7 @@
           </thead>
           <tfoot>
           <tr>
+            <th>No</th>
             <th>Name</th>
             <th>Description</th>
             <th>Date</th>
@@ -29,6 +31,7 @@
           <tbody>
           <#list holidays as holiday>
             <tr>
+              <td>${holiday.id!}</td>
               <td>${holiday.name!}</td>
               <td>${holiday.description!}</td>
               <td>${holiday.date!}</td>
