@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dto.view;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.Role;
 
@@ -19,6 +20,7 @@ public class EmployeeView {
   private String position;
 
   @JsonProperty("hire_date")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDate hireDate;
 
   @JsonProperty("holiday_entitlement")
@@ -30,8 +32,11 @@ public class EmployeeView {
   @JsonProperty("team_id")
   private TeamView team;
 
-  @JsonProperty("role")
   private Role role;
+
+  private int year;
+  private int month;
+  private int day;
 
   public Long getId() {
     return Id;
@@ -88,4 +93,17 @@ public class EmployeeView {
   public String getEmail() { return email; }
 
   public void setEmail(String email) { this.email = email; }
+
+  public int getYear() { return year; }
+
+  public void setYear(int year) { this.year = year; }
+
+  public int getMonth() { return month; }
+
+  public void setMonth(int month) { this.month = month; }
+
+  public int getDay() { return day; }
+
+  public void setDay(int day) { this.day = day; }
+
 }
