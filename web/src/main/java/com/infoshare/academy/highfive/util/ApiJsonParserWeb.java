@@ -26,14 +26,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ApiJsonParser {
+public class ApiJsonParserWeb {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
     private static final String HOLIDAYS = "holidays";
     private static ObjectMapper objectMapper;
 
-    public ApiJsonParser() {
+    public ApiJsonParserWeb() {
         objectMapper = new ObjectMapper();
         JavaTimeModule module = new JavaTimeModule();
         LocalDateTimeDeserializer localDateTimeDeserializer = new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

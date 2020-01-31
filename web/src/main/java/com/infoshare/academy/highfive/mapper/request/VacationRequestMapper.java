@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RequestScoped
 public class VacationRequestMapper {

@@ -3,10 +3,7 @@ package com.infoshare.academy.highfive.service;
 import com.infoshare.academy.highfive.dao.*;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
-import com.infoshare.academy.highfive.dto.view.VacationEmployeeView;
-import com.infoshare.academy.highfive.dto.view.VacationMonthView;
-import com.infoshare.academy.highfive.dto.view.VacationStatisticView;
-import com.infoshare.academy.highfive.dto.view.VacationView;
+import com.infoshare.academy.highfive.dto.view.*;
 import com.infoshare.academy.highfive.mapper.entity.VacationEmployeeMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMonthMapper;
@@ -184,6 +181,17 @@ public class VacationService {
 
   }
 
+  @Transactional
+  public List<VacationSSE> listAllPendingRequestsSSE() {
+
+    return listAllPendingRequests()
+            .stream()
+            .map(vacation -> vacationMapper.mapEntityToSSE(vacation))
+            .collect(Collectors.toList());
+
+  }
+
+  @Transactional
   public void changeVacationStatus(Long vacationId, VacationStatus vacationStatus) throws IOException {
 
     Vacation vacation = vacationDao.getVacationById(vacationId);
@@ -199,6 +207,20 @@ public class VacationService {
       mailSender.sendReject(vacation.getEmployee().getEmail());
 
     }
+
+  }
+
+  List<LocalDate> creatingVacationDaysListToReturn(Vacation vacation) {
+
+    LocalDate start = vacation.getVacationFrom();
+    LocalDate end = vacation.getVacationTo();
+    List<LocalDate> totalDates = new LinkedList<>();
+    while (!start.isAfter(end)) {
+      totalDates.add(start);
+      start = start.plusDays(1);
+    }
+
+    return totalDates;
 
   }
 

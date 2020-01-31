@@ -18,7 +18,6 @@
             url: "/api/holiday/" + id,
             enctype: 'application/json; charset=UTF-8',
             dataType: 'json',
-            //data: $('#holiday-name').val(),
             contentType: 'application/json; charset=UTF-8'
         })
             .done(

@@ -20,10 +20,10 @@
           rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet" type="text/css">
-<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
     <link href="/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="/js/bootstrap-year-calendar_v2.css" rel="stylesheet">
     <#if pluginCssTemplate??>
-    <#include "/${pluginCssTemplate}">
+        <#include "/${pluginCssTemplate}">
     </#if>
 </head>
 
@@ -73,6 +73,7 @@
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/calendar">Calendar</a>
                     <a class="collapse-item" href="/holiday-search">Holiday search</a>
+                    <a class="collapse-item" href="/statistics">Statistics</a>
                     <a class="collapse-item" href="/list-teams">Teams - list</a>
                     <a class="collapse-item" href="/blank">Team vacation</a>
                     <a class="collapse-item" href="/blank">Employee vacation</a>
@@ -112,54 +113,13 @@
         </li>
 
         <!-- Nav Item - Employees -->
-<#--    TODO Old Version - Team Menu&ndash;&gt;-->
-<#--        -->
-<#--        <li class="nav-item">-->
-<#--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"-->
-<#--               aria-expanded="true" aria-controls="collapseEmployees">-->
-<#--                <i class="fas fa-user"></i>-->
-<#--                <span>Employees</span>-->
-<#--            </a>-->
-<#--            <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
-<#--                <div class="bg-white py-2 collapse-inner rounded">-->
-<#--                    <a class="collapse-item" href="/manager/add-employee">Add</a>-->
-<#--                    <a class="collapse-item" href="/manager/edit-employee">Edit</a>-->
-<#--                    <a class="collapse-item" href="/manager/delete-employee">Remove</a>-->
-<#--                </div>-->
-<#--            </div>-->
-<#--        </li>               >-->
-
-        <!-- Nav Item - Teams -->
-<#--        TODO Old Version - Team Menu-->
-
-<#--        <li class="nav-item">-->
-<#--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeams"-->
-<#--               aria-expanded="true" aria-controls="collapseTeams">-->
-<#--                <i class="fas fa-users"></i>-->
-<#--                <span>Teams</span>-->
-<#--            </a>-->
-<#--            <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
-<#--                <div class="bg-white py-2 collapse-inner rounded">-->
-<#--                    <a class="collapse-item" href="/manager/add-team">Add</a>-->
-<#--                    <a class="collapse-item" href="/blank">Edit</a>-->
-<#--                    <a class="collapse-item" href="/blank">Remove</a>-->
-<#--                </div>-->
-<#--            </div>-->
-<#--        </li>-->
-
-        <!-- Nav Item - Employees -->
-        <#-- Employee VIEW with add/edit/list functions-->
-        <!-- Heading -->
         <li class="nav-item">
             <a class="nav-link" href="/manager/edit-employee">
                 <i class="fas fa-user"></i>
                 <span>Employees</span></a>
         </li>
 
-
         <!-- Nav Item - Teams -->
-        <#-- Team VIEW with add/edit/list functions-->
-        <!-- Heading -->
         <li class="nav-item">
             <a class="nav-link" href="/manager/edit-team">
                 <i class="fas fa-users"></i>
@@ -210,6 +170,11 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
+        <div id="new-request" class="alert alert-danger"
+             style="top:50px;position: absolute;z-index: 9999;display: none;left:50%;transform: translate(-50%, 0);"
+             role="alert">
+            <strong>Hello! You should check in on some of pending request.</strong>
+        </div>
 
         <!-- Main Content -->
         <div id="content">
@@ -262,6 +227,35 @@
                         </div>
                     </li>
 
+                    <!-- Nav Item - Calendar modal button -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="modal-calendar-button" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-calendar fa-fw"></i>
+                        </a>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter"></span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div id="alert-list"
+                             class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Requests Center
+
+                            </h6>
+                            <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show
+                                All Requests</a>
+                        </div>
+                    </li>
+
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
@@ -291,50 +285,50 @@
 
 <#--            KONIEC-->
             <!-- Template injection -->
-          <#if contentTemplate??>
-          <#include "/${contentTemplate}">
-          </#if>
+            <#if contentTemplate??>
+                <#include "/${contentTemplate}">
+            </#if>
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; HIGH-FIVE 2020</span>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; HIGH-FIVE 2020</span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/login.html">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/login.html">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Operation INFO Modal-->
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -347,7 +341,30 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/></div>
+                <div id="modal-info-body" class="modal-body"><img src="/img/ajax-loader.gif" alt="loading spinner"/>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
+                    <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Operation INFO Modal-->
+    <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalh1id">Operation Info!</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div id="modal-info-body" class="modal-body">
+                    <div id="calendar"></div>
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
 <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
@@ -363,11 +380,10 @@
     <!-- Core plugin JavaScript-->
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
     <script src="/js/bootstrap-datepicker.min.js"></script>
-
 
     <script>
         $('.form-control-date').datepicker({
@@ -375,6 +391,14 @@
             format: "yyyy-mm-dd"
         });
     </script>
+
+<#--    <#if adminmanager??>-->
+    <script src="/js/vacation-sse.js"></script>
+<#--    </#if>-->
+    <#--    <#if adminmanager??>-->
+    <script src="/js/bootstrap-year-calendar_v2.js"></script>
+    <script src="/js/modal-calendar.js"></script>
+    <#--    </#if>-->
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>
