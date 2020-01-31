@@ -242,6 +242,14 @@
                         </div>
                     </li>
 
+                    <!-- Nav Item - Calendar modal button -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="modal-calendar-button" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-calendar fa-fw"></i>
+                        </a>
+                    </li>
+
                     <!-- Nav Item - Alerts -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -255,7 +263,8 @@
                              class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
-                                Requests Center (recent 3 requests)
+                                Requests Center
+                                
                             </h6>
                             <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show
                                 All Requests</a>
@@ -391,145 +400,20 @@
 
     <script src="/js/bootstrap-datepicker.min.js"></script>
 
-
     <script>
         $('.form-control-date').datepicker({
             clearBtn: false,
             format: "yyyy-mm-dd"
         });
-
-        $("#alertsDropdown").click(function () {
-            $('#alertsDropdown span').text('');
-            sessionStorage.clicked = 1;
-            //return false;
-        });
-
-        $('#alertsDropdown').on('hidden.bs.dropdown', function () {
-            $('.pending-req').remove();
-        });
-
-        var source = new EventSource("/admin/notify");
-        lastData = null;
-        dataSize = 0;
-        var dates = [];
-        displayed = 0;
-        source.addEventListener('message', function (e) {
-            var data = JSON.parse(e.data);
-
-            $.each(data, function (i, item) {
-
-                dateTime = Date.parse(item.iso_date_of_request);
-                if (sessionStorage.maxdateStored >= dateTime && sessionStorage.clicked == 1) {
-                    sessionStorage.displayed = 0;
-                    return;
-                }
-                sessionStorage.maxdateStored = dateTime;
-                dates.push(dateTime);
-
-                if (sessionStorage.displayed == 0) {
-                    $("#new-request").delay(1000).slideDown("slow", function () {
-                        sessionStorage.displayed = 1;
-                    });
-                    $("#new-request").delay(3000).slideUp("slow");
-                }
-                sessionStorage.clicked = 0;
-                $('.pending-req').remove();
-                $('#alert-list').append('<a class="dropdown-item d-flex align-items-center pending-req" href="/manager/pending-requests"><div class="mr-3">'
-                    + '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>'
-                    + '</div><div><div class="small text-black-500">' + item.iso_date_of_request + '</div>'
-                    + item.first_name + ' ' + item.surname + ' requested for vacation'
-                    + '</div></a>');
-                $('#alertsDropdown span').text(data.length);
-            });
-
-        }, false);
-
-        if (typeof (Storage) !== "undefined") {
-            if (!sessionStorage.maxdateStored) {
-                sessionStorage.maxdateStored = null;
-                sessionStorage.clicked = 0;
-                sessionStorage.displayed = 0;
-            }
-        } else {
-            $('#new-request').html("Sorry, your browser does not support web storage...");
-        }
-
     </script>
 
+<#--    <#if adminmanager??>-->
+    <script src="/js/vacation-sse.js"></script>
+<#--    </#if>-->
+    <#--    <#if adminmanager??>-->
     <script src="/js/bootstrap-year-calendar_v2.js"></script>
-    <script>
-        $(function () {
-
-            $('#calendar').calendar({
-                enableContextMenu: true,
-                enableRangeSelection: false,
-                weekStart: 1,
-                mouseOnDay: function (e) {
-                    if (e.events.length > 0) {
-                        var content = '';
-
-                        for (var i in e.events) {
-                            content += '<div class="event-tooltip-content">'
-                                + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
-                                + '<div class="event-location">' + e.events[i].location + '</div>'
-                                + '<div class="event-location">' + e.events[i].type + '</div>'
-                                + '</div>';
-                        }
-
-                        $(e.element).popover({
-                            trigger: 'manual',
-                            container: 'body',
-                            html: true,
-                            content: content
-                        });
-
-                        $(e.element).popover('show');
-                    }
-                },
-                mouseOutDay: function (e) {
-                    if (e.events.length > 0) {
-                        $(e.element).popover('hide');
-                    }
-                },
-                dayContextMenu: function (e) {
-                    $(e.element).popover('hide');
-                },
-                dataSource: null
-            });
-
-            var dataS = [];
-            $.ajax({
-                type: "GET",
-                url: "/api/holiday/list",
-                enctype: 'application/json;charset=UTF-8',
-                dataType: 'json',
-                contentType: 'application/json;charset=UTF-8'
-            })
-                .done(
-                    function (data) {
-                        $.each(data, function (i, item) {
-                            dataS.push({
-                                id: item.id,
-                                name: item.name,
-                                location: item.description,
-                                type: item.type,
-                                typeStyle: 'box',
-                                startDate: new Date(item.year, item.month - 1, item.day),
-                                endDate: new Date(item.year, item.month - 1, item.day)
-                            });
-                            //$('#alert-list').show();
-                        });
-                        $('#calendar').data('calendar').setDataSource(dataS);
-                        //  $('#calendarModal').modal('show');
-                    })
-                .fail(
-                    function () {
-                        $('#modal-info-body').html("Ups... Operation failed!!!");
-                        $('#infoModal').modal('show');
-                    });
-
-        });
-    </script>
+    <script src="/js/modal-calendar.js"></script>
+    <#--    </#if>-->
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>
