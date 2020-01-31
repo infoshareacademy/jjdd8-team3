@@ -86,6 +86,16 @@
                            value="<#if action == "edit">${employee.additionalEntitlement!}</#if>">
                   </div>
 
+                  <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-control" id="role" name="role">
+                      <#if action=="edit"><option value="${employee.role.getRole()}"
+                                                  selected>${employee.role.getRole()}</option></#if>
+                      <#list roles as role>
+                        <option value="${role.getRole()!}">${role.getRole()!}</option>
+                      </#list>
+                    </select>
+                  </div>
 
 <#--                  <#if action == "edit">-->
 <#--                  <div class="form-group">-->
