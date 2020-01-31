@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @Stateless
@@ -25,8 +26,8 @@ public class EntitlementDao {
   @Transactional
   public Entitlement getEntitlementByEmployeeId(Employee employee) {
 
-    return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
-      .setParameter("employeeId", employee)
+    return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployee")
+      .setParameter("employee", employee)
       .getSingleResult();
 
   }
@@ -55,4 +56,9 @@ public class EntitlementDao {
 
   }
 
+    public Entitlement getEntitlementByEmployee(Employee employee) {
+
+//    Employee employee =
+      return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployee").setParameter("employee", employee).getSingleResult();
+    }
 }

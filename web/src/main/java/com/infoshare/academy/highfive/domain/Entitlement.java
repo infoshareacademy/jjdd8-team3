@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @NamedQueries({
-  @NamedQuery(name = "Entitlement.findEntitlementByEmployeeId", query = "SELECT entitlement " +
+  @NamedQuery(name = "Entitlement.findEntitlementByEmployee", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
-    "WHERE entitlement.employee = :employeeId"),
+    "WHERE entitlement.employee = :employee"),
   @NamedQuery(name = "Entitlement.findEmployeeVacationTaken", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
     "ORDER BY entitlement.vacationTaken DESC"),
@@ -15,6 +15,7 @@ import java.time.LocalDate;
     "JOIN FETCH Employee employee ON entitlement.employee = employee " +
     "JOIN FETCH Team team ON employee.team = team " +
     "GROUP BY team.teamName"),
+
 })
 
 @Entity
@@ -45,8 +46,8 @@ public class Entitlement {
   private int vacationTaken;
 
   @OneToOne
-  @JoinColumn(unique = true, name = "employee_id")
-  Employee employee;
+  @JoinColumn(unique = true, name = "employee_id", nullable = false)
+  private Employee employee;
 
   public int getId() {
     return id;

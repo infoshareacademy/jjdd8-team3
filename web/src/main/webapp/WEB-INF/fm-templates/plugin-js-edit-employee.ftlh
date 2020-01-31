@@ -30,7 +30,7 @@
         });
     }
 
-    $('#add-holiday-form').submit(function (event) {
+    $('#add-employee-form').submit(function (event) {
 
         event.preventDefault(); // Prevent the form from submitting via the browser
 
