@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
                 "WHERE vacation.vacationStatus = :status"),
         @NamedQuery(name = "Vacation.findPendingOldRequests", query = "SELECT vacation " +
                 "FROM Vacation vacation " +
-                "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent = '0'")
+                "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent LIKE '0'")
 }
 )
 
@@ -66,12 +66,17 @@ public class Vacation {
   @Column(name = "vacation_status")
   private VacationStatus vacationStatus;
 
-  public String isReminderEmailSent() {
+  public Long getId() {
+    return id;
+  }
+
+  public String getReminderEmailSent() {
     return reminderEmailSent;
   }
 
-  public Long getId() {
-    return id;
+  public Vacation setReminderEmailSent(String reminderEmailSent) {
+    this.reminderEmailSent = reminderEmailSent;
+    return this;
   }
 
   public Employee getEmployee() {
@@ -120,9 +125,5 @@ public class Vacation {
 
   public void setVacationStatus(VacationStatus vacationStatus) {
     this.vacationStatus = vacationStatus;
-  }
-
-  public void setReminderEmailSent(String reminderEmailSent) {
-    this.reminderEmailSent = reminderEmailSent;
   }
 }

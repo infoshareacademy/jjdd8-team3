@@ -27,9 +27,9 @@ public class MailSender {
         request.setEndpoint("mail/send");
         request.setBody(mail.build());
         Response response = sg.api(request);
-        System.out.println(response.getStatusCode());
-        System.out.println(response.getBody());
-        System.out.println(response.getHeaders());
+        LOGGER.info("{}", response.getStatusCode());
+        LOGGER.info("{}", response.getBody());
+        LOGGER.info("{}", response.getHeaders());
     }
 
     public void sendApprove(String emailRecipient) throws IOException {
