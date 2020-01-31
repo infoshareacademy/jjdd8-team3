@@ -5,29 +5,36 @@ import com.infoshare.academy.highfive.domain.Employee;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class EmployeeDao {
 
-  public void addEmployee(Employee employee) {
-  }
+    @PersistenceContext
+    EntityManager entityManager;
 
-  public void editEmployee(Employee employee) {
-  }
+    public void save(Employee employee) { entityManager.persist(employee); }
 
-  public void deleteEmployee(Employee employee) {
-  }
+    public Optional<Employee> getById(Long id) {
+        return Optional.ofNullable(entityManager.find(Employee.class, id));
+    }
 
-  @PersistenceContext
-  EntityManager entityManager;
+    public Employee findById(Long id) {
+        return entityManager.find(Employee.class, id);
+    }
 
-  public Employee getEmployeeById(Long id) {
-    return entityManager.find(Employee.class, id);
-  }
+    public List<Employee> listAllEmployees() {
+        return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
+    }
 
-  public void saveEmployee(Employee employee) {
-    entityManager.persist(employee);
-  }
+    public void update(Employee employee) { entityManager.merge(employee); }
 
+    public Employee delete(Long id) {
 
+        Employee removedEmployee = getById(id).orElseThrow();
+        entityManager.remove(removedEmployee);
+
+        return removedEmployee;
+    }
 }

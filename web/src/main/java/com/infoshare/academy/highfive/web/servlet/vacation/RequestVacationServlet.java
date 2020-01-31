@@ -1,8 +1,8 @@
 package com.infoshare.academy.highfive.web.servlet.vacation;
 
+import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
-import com.infoshare.academy.highfive.dto.request.VacationRequest;
 import com.infoshare.academy.highfive.service.VacationService;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
 import freemarker.template.Template;
@@ -88,7 +88,7 @@ public class RequestVacationServlet extends HttpServlet {
 
       dataModel.put("contentTemplate", "request-vacation-success.ftlh");
       dataModel.put("title", "Success!");
-      mailSender.sendNotification("Vacation-Manager@HighFive.com");
+      mailSender.sendNotification("jjdd8highfive@gmail.com");
 
     } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
 
@@ -110,5 +110,6 @@ public class RequestVacationServlet extends HttpServlet {
     }
 
   }
+
 }
 

@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 @Stateless
@@ -15,16 +16,23 @@ public class VacationDao {
   EntityManager entityManager;
 
   public void addVacation(Vacation vacation) {
-
     this.entityManager.persist(vacation);
+  }
+
+  public List<Vacation> getVacationList(VacationStatus vacationStatus) {
+
+    return entityManager.createNamedQuery("Vacation.findVacationByStatus")
+      .setParameter("status", vacationStatus)
+      .getResultList();
 
   }
 
-  public List<Vacation> getPendingRequestsList() {
+  public int getAmountOfAbsentToday() {
 
-    return entityManager.createNamedQuery("Vacation.findPendingRequests")
-      .setParameter("status", VacationStatus.APPLIED)
-      .getResultList();
+    return entityManager.createNamedQuery("Vacation.findAbsentToday")
+      .setParameter("status", VacationStatus.APPROVED)
+      .setParameter("today", LocalDate.now())
+      .getResultList().size();
 
   }
 
@@ -34,19 +42,38 @@ public class VacationDao {
       .createNamedQuery("Vacation.findVacationById")
       .setParameter("vacationId", vacationId)
       .getSingleResult();
+
   }
 
   public void updateVacationStatus(Vacation vacation) {
-
     entityManager.merge(vacation);
+  }
+
+  public List<Vacation> getAmountOfAbsentThisMonth() {
+
+    LocalDate currentTime = LocalDate.now();
+
+    return entityManager
+      .createNamedQuery("Vacation.findAbsentByMonth")
+      .setParameter("status", VacationStatus.APPROVED)
+      .setParameter("firstDayOfMonth", currentTime.withDayOfMonth(1))
+      .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
+      .getResultList();
 
   }
 
-//  public List<Vacation> getStillPendingRequestsList() {
-//
-//    return entityManager.createNamedQuery("Vacation.Vacation.stillPendingRequest")
-//            .setParameter("status", VacationStatus.APPLIED)
-//            .getResultList();
-//
-//  }
+  public List<Vacation> getAmountOfAbsentNextMonth() {
+
+    LocalDate currentTime = LocalDate.now().plusMonths(1);
+
+    return entityManager
+      .createNamedQuery("Vacation.findAbsentByMonth")
+      .setParameter("firstDayOfMonth", currentTime.withDayOfMonth(1))
+      .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
+      .setParameter("status", VacationStatus.APPROVED)
+      .getResultList();
+
+  }
+
 }
+

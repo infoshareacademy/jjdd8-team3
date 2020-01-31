@@ -5,6 +5,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+@NamedQueries({
+@NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee")
+})
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -46,8 +50,7 @@ public class Employee {
     @Column(name = "role")
     private Role role;
 
-    public Employee() {
-    }
+    public Employee() { }
 
     public Long getId() {
         return id;
@@ -94,9 +97,7 @@ public class Employee {
     public void setAdditionalEntitlement(Integer additionalEntitlement) {
         this.additionalEntitlement = additionalEntitlement; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
     public void setEmail(String email) {
         this.email = email;
@@ -117,7 +118,6 @@ public class Employee {
     public String getLogin() { return login; }
 
     public void setLogin(String login) { this.login = login; }
-
 
     public String getPosition() { return position; }
 

@@ -15,8 +15,7 @@
     </#if>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
-          type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <!-- Custom styles for this template-->
@@ -32,6 +31,7 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
+
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -73,8 +73,10 @@
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/calendar">Calendar</a>
                     <a class="collapse-item" href="/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/blank">Employee vacation</a>
+                    <a class="collapse-item" href="/list-teams">Teams - list</a>
                     <a class="collapse-item" href="/blank">Team vacation</a>
+                    <a class="collapse-item" href="/blank">Employee vacation</a>
+
                 </div>
             </div>
         </li>
@@ -111,34 +113,16 @@
 
         <!-- Nav Item - Employees -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
-               aria-expanded="true" aria-controls="collapseEmployees">
+            <a class="nav-link" href="/manager/edit-employee">
                 <i class="fas fa-user"></i>
-                <span>Employees</span>
-            </a>
-            <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
-                    <a class="collapse-item" href="/blank">Edit</a>
-                    <a class="collapse-item" href="/blank">Remove</a>
-                </div>
-            </div>
+                <span>Employees</span></a>
         </li>
 
         <!-- Nav Item - Teams -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeams"
-               aria-expanded="true" aria-controls="collapseTeams">
+            <a class="nav-link" href="/manager/edit-team">
                 <i class="fas fa-users"></i>
-                <span>Teams</span>
-            </a>
-            <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
-                    <a class="collapse-item" href="/blank">Edit</a>
-                    <a class="collapse-item" href="/blank">Remove</a>
-                </div>
-            </div>
+                <span>Teams</span></a>
         </li>
 
         <!-- Divider -->
@@ -167,7 +151,7 @@
                     <a class="collapse-item" href="/blank">Date format</a>
                     <a class="collapse-item" href="/blank">Sorting</a>
                     <a class="collapse-item" href="/blank">Holidays database</a>
-                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br/> form file</a>
+                    <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
                 </div>
             </div>
         </li>
@@ -264,7 +248,7 @@
                              aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
                                 Requests Center
-                                
+
                             </h6>
                             <a class="dropdown-item text-center small text-black-500" href="/manager/pending-requests">Show
                                 All Requests</a>
@@ -295,10 +279,10 @@
             </nav>
             <!-- End of Topbar -->
 
-            <#--            NASZ SORDEK-->
+<#--            NASZ SORDEK-->
 
 
-            <#--            KONIEC-->
+<#--            KONIEC-->
             <!-- Template injection -->
             <#if contentTemplate??>
                 <#include "/${contentTemplate}">
@@ -382,7 +366,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
-                    <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
+<#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
                 </div>
             </div>
         </div>

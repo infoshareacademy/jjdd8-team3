@@ -41,7 +41,7 @@ public class HolidayEditListServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "edit-holiday.ftlh");
         dataModel.put("title", "List Holidays");
-        dataModel.put("pluginCssTemplate", "plugin-css-edit-holiday.ftlh");
+        dataModel.put("pluginCsscTemplate", "plugin-css-edit-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-edit-holiday.ftlh");
         dataModel.put("holidays", holidayService.findAll());
 

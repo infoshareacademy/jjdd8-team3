@@ -53,7 +53,6 @@ public class ApproveVacationRequestServlet extends HttpServlet {
       LOGGER.error(e.getMessage(), e);
     }
 
-
   }
 
 }
