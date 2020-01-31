@@ -3,10 +3,7 @@ package com.infoshare.academy.highfive.service;
 import com.infoshare.academy.highfive.dao.*;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
-import com.infoshare.academy.highfive.dto.view.VacationEmployeeView;
-import com.infoshare.academy.highfive.dto.view.VacationMonthView;
-import com.infoshare.academy.highfive.dto.view.VacationStatisticView;
-import com.infoshare.academy.highfive.dto.view.VacationView;
+import com.infoshare.academy.highfive.dto.view.*;
 import com.infoshare.academy.highfive.mapper.entity.VacationEmployeeMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMonthMapper;
@@ -187,7 +184,7 @@ public class VacationService {
   @Transactional
   public List<VacationSSE> listAllPendingRequestsSSE() {
 
-    return vacationDao.getPendingRequestsList()
+    return listAllPendingRequests()
             .stream()
             .map(vacation -> vacationMapper.mapEntityToSSE(vacation))
             .collect(Collectors.toList());

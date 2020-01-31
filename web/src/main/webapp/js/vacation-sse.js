@@ -36,7 +36,7 @@ source.addEventListener('message', function (e) {
         $('.pending-req').remove();
         $('#alert-list').append('<a class="dropdown-item d-flex align-items-center pending-req" href="/manager/pending-requests"><div class="mr-3">'
             + '<div class="icon-circle bg-warning"><i class="fas fa-exclamation-triangle text-white"></i></div>'
-            + '</div><div><div class="small text-black-500">' + item.iso_date_of_request + '</div>'
+            + '</div><div><div class="small text-black-500">' + new Date(dateTime).toLocaleString("pl-PL") + '</div>'
             + item.first_name + ' ' + item.surname + ' requested for vacation'
             + '</div></a>');
         $('#alertsDropdown span').text(data.length);

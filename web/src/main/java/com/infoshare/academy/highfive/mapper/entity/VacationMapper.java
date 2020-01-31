@@ -45,17 +45,15 @@ public class VacationMapper {
     return vacationView;
   }
 
-  public VacationSSE mapEntityToSSE(Vacation vacationEntity) {
+  public VacationSSE mapEntityToSSE(VacationView vacationView) {
 
     VacationSSE vacationSSE = new VacationSSE();
-    vacationSSE.setId(vacationEntity.getId());
-    vacationSSE.setEmployeeId(vacationEntity.getEmployee().getId());
-    vacationSSE.setFirstName(vacationEntity.getEmployee().getFirstName());
-    vacationSSE.setSurname(vacationEntity.getEmployee().getSurname());
-    vacationSSE.setVacationStatus(vacationEntity.getVacationStatus());
-    vacationSSE.setDateOfRequest(vacationEntity.getDateOfRequest());
-    //vacationSSE.setDateOfRequestIso(vacationEntity.getDateOfRequest().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-    vacationSSE.setDateOfRequestIso((vacationEntity.getDateOfRequest().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)).substring(0,19)+"Z");
+    vacationSSE.setId(vacationView.getId());
+    vacationSSE.setFirstName(vacationView.getFirstName());
+    vacationSSE.setSurname(vacationView.getSurname());
+    vacationSSE.setVacationStatus(vacationView.getVacationStatus());
+    vacationSSE.setDateOfRequest(vacationView.getDateOfRequest());
+    vacationSSE.setDateOfRequestIso((vacationView.getDateOfRequest().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)).substring(0,19)+"Z");
 
     return vacationSSE;
   }
