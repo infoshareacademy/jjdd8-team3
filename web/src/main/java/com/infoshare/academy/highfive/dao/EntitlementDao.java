@@ -6,38 +6,53 @@ import com.infoshare.academy.highfive.domain.Entitlement;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 @Stateless
 public class EntitlementDao {
 
-    @PersistenceContext
-    EntityManager entityManager;
+  @PersistenceContext
+  EntityManager entityManager;
 
-    public void updateEntitlement(Entitlement entitlement) {
+  public void updateEntitlement(Entitlement entitlement) {
 
-        entityManager.merge(entitlement);
+    entityManager.merge(entitlement);
 
-    }
+  }
 
-    public Entitlement getEntitlementByEmployeeId(Employee employee) {
+  @Transactional
+  public Entitlement getEntitlementByEmployeeId(Employee employee) {
 
-        return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
-                .setParameter("employeeId", employee)
-                .getSingleResult();
+    return (Entitlement) entityManager.createNamedQuery("Entitlement.findEntitlementByEmployeeId")
+      .setParameter("employeeId", employee)
+      .getSingleResult();
 
-    }
+  }
 
-    public void save(Entitlement entitlement) {
-        entityManager.persist(entitlement);
-      
-    }
+  @Transactional
+  public List<Entitlement> getVacationTakenByEmployee() {
 
-  public List<Entitlement> getRemainingEntitlement() {
-    return entityManager.createNamedQuery("Entitlement.findRemainingEntitlement")
+    return entityManager.createNamedQuery("Entitlement.findEmployeeVacationTaken")
+      .setMaxResults(5)
       .getResultList();
-    
-  }
 
   }
+
+  @Transactional
+  public List<Entitlement> getVacationTakenByTeam() {
+
+    return entityManager.createNamedQuery("Entitlement.findTeamVacationTaken")
+      .setMaxResults(5)
+      .getResultList();
+
+  }
+
+  public void save(Entitlement entitlement) {
+
+    entityManager.persist(entitlement);
+
+  }
+
+}

@@ -7,6 +7,8 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import java.io.IOException;
@@ -14,16 +16,17 @@ import java.io.IOException;
 @RequestScoped
 public class MailSender {
 
-    private void createMail(Email from, String subject, Email to, Content content) throws IOException {
-        Mail mail = new Mail(from, subject, to, content);
+  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-        SendGrid sg = new SendGrid("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");
-        Request request = new Request();
-        request.setMethod(Method.POST);
-        request.setEndpoint("mail/send");
-        request.setBody(mail.build());
-        Response response = sg.api(request);
-        System.out.println(response.getStatusCode());
+  private void createMail(Email from, String subject, Email to, Content content) throws IOException {
+    Mail mail = new Mail(from, subject, to, content);
+    SendGrid sg = new SendGrid("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");
+    Request request = new Request();
+    request.setMethod(Method.POST);
+    request.setEndpoint("mail/send");
+    request.setBody(mail.build());
+    Response response = sg.api(request);
+    System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
         System.out.println(response.getHeaders());
     }
@@ -49,7 +52,6 @@ public class MailSender {
     }
 
     public void sendNotification(String emailRecipient) throws IOException {
-
         Email from = new Email("Vacation-Manager@HighFive.com");
         String subject = "Vacation Manager notification. New vacation request.";
         Email to = new Email(emailRecipient);

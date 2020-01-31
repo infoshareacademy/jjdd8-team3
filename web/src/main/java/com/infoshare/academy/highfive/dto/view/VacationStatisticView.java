@@ -6,8 +6,11 @@ import javax.enterprise.context.RequestScoped;
 public class VacationStatisticView {
 
   private Integer currentMonthTotal;
+
   private Integer nextMonthTotal;
+
   private Integer absentToday;
+
   private Integer pendingRequests;
 
   public Integer getCurrentMonthTotal() {
