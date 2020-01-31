@@ -3,10 +3,7 @@ package com.infoshare.academy.highfive.service;
 import com.infoshare.academy.highfive.dao.*;
 import com.infoshare.academy.highfive.domain.*;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
-import com.infoshare.academy.highfive.dto.view.VacationEmployeeView;
-import com.infoshare.academy.highfive.dto.view.VacationMonthView;
-import com.infoshare.academy.highfive.dto.view.VacationStatisticView;
-import com.infoshare.academy.highfive.dto.view.VacationView;
+import com.infoshare.academy.highfive.dto.view.*;
 import com.infoshare.academy.highfive.mapper.entity.VacationEmployeeMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMapper;
 import com.infoshare.academy.highfive.mapper.entity.VacationMonthMapper;
@@ -185,6 +182,16 @@ public class VacationService {
   }
 
   @Transactional
+  public List<VacationSSE> listAllPendingRequestsSSE() {
+
+    return listAllPendingRequests()
+            .stream()
+            .map(vacation -> vacationMapper.mapEntityToSSE(vacation))
+            .collect(Collectors.toList());
+
+  }
+
+  @Transactional
   public void changeVacationStatus(Long vacationId, VacationStatus vacationStatus) throws IOException {
 
     Vacation vacation = vacationDao.getVacationById(vacationId);
@@ -196,33 +203,6 @@ public class VacationService {
       mailSender.sendApprove(vacation.getEmployee().getEmail());
 
     } else {
-
-      Entitlement entitlement = entitlementDao.getEntitlementByEmployeeId(vacation.getEmployee());
-      List<LocalDate> vacationDaysList = creatingVacationDaysListToReturn(vacation);
-      int daysOff = calculatingDaysAmount(vacationDaysList);
-      int vacationTaken = entitlement.getVacationTaken();
-      entitlement.setVacationTaken(vacationTaken - daysOff);
-      entitlementDao.save(entitlement);
-
-      if (vacation.getVacationType().equals(VacationType.VACATION)) {
-
-        int vacationLeft = entitlement.getVacationLeft();
-        entitlement.setVacationLeft(vacationLeft + daysOff);
-        entitlementDao.save(entitlement);
-
-      } else if (vacation.getVacationType().equals(VacationType.ON_DEMAND)) {
-
-        int onDemandLeft = entitlement.getOnDemandVacationLeft();
-        entitlement.setOnDemandVacationLeft(onDemandLeft + daysOff);
-        entitlementDao.save(entitlement);
-
-      } else if (vacation.getVacationType().equals(VacationType.PARENTAL)) {
-
-        int parentalLeft = entitlement.getAdditionalLeft();
-        entitlement.setAdditionalLeft(parentalLeft + daysOff);
-        entitlementDao.save(entitlement);
-
-      }
 
       mailSender.sendReject(vacation.getEmployee().getEmail());
 

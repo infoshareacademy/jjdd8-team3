@@ -6,6 +6,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import com.infoshare.academy.highfive.domain.VacationType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class VacationRequest {
 
@@ -20,6 +21,16 @@ public class VacationRequest {
   private VacationType vacationType;
 
   private VacationStatus vacationStatus;
+
+  private LocalDateTime dateOfRequest;
+
+  public LocalDateTime getDataOfRequest() {
+    return dateOfRequest;
+  }
+
+  public void setDateOfRequest(LocalDateTime dateOfRequest) {
+    this.dateOfRequest = dateOfRequest;
+  }
 
   public VacationStatus getVacationStatus() {
     return vacationStatus;
