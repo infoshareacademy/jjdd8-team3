@@ -1,5 +1,8 @@
 package com.infoshare.academy.highfive.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.domain.Team;
 
@@ -7,16 +10,19 @@ import java.time.LocalDate;
 
 public class EmployeeRequest {
 
-    private Long id;
-
+    @JsonProperty("first_name")
     private String firstName;
 
     private String surname;
 
+    @JsonProperty("hire_date")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate hireDate;
 
+    @JsonProperty("holiday_entitlement")
     private Integer holidayEntitlement;
 
+    @JsonProperty("additional_entitlement")
     private  Integer additionalEntitlement;
 
     private String login;
@@ -25,7 +31,7 @@ public class EmployeeRequest {
 
     private String position;
 
-    private Team team;
+    private Long team;
 
     private Role role;
 
@@ -77,9 +83,9 @@ public class EmployeeRequest {
 
     public void setPosition(String position) { this.position = position; }
 
-    public Team getTeam() { return team; }
+    public Long getTeam() { return team; }
 
-    public void setTeam(Team teamId) { this.team = teamId; }
+    public void setTeam(Long teamId) { this.team = teamId; }
 
     public Role getRole() { return role; }
 

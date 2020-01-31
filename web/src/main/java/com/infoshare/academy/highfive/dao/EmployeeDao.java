@@ -50,5 +50,8 @@ public class EmployeeDao {
     }
     return Optional.of(employees.get(0));
   }
+    public void update(Employee employee) { entityManager.merge(employee); }
+
+    public Employee delete(Long id) {
 
 }

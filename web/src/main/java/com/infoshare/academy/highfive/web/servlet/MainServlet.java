@@ -48,11 +48,11 @@ public class MainServlet extends HttpServlet {
     dataModel.put("contentTemplate", "main-content.ftlh");
     dataModel.put("title", "Vacation Manager");
     dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
-    dataModel.put("currentMonthTotal", vacationService.getStatistics().getCurrentMonthTotal());
-    dataModel.put("nextMonthTotal", vacationService.getStatistics().getNextMonthTotal());
-    dataModel.put("absentToday", vacationService.getStatistics().getAbsentToday());
+    dataModel.put("currentMonthTotal", vacationService.getDashboardStatistic().getCurrentMonthTotal());
+    dataModel.put("nextMonthTotal", vacationService.getDashboardStatistic().getNextMonthTotal());
+    dataModel.put("absentToday", vacationService.getDashboardStatistic().getAbsentToday());
     dataModel.put("totalEmployees", employeeService.listAllSize());
-    dataModel.put("pendingRequests", vacationService.getStatistics().getPendingRequests());
+    dataModel.put("pendingRequests", vacationService.getDashboardStatistic().getPendingRequests());
 
     try {
       template.process(dataModel, writer);
@@ -62,4 +62,5 @@ public class MainServlet extends HttpServlet {
     }
 
   }
+
 }

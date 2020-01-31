@@ -73,8 +73,10 @@
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/calendar">Calendar</a>
                     <a class="collapse-item" href="/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/blank">Employee vacation</a>
+                    <a class="collapse-item" href="/list-teams">Teams - list</a>
                     <a class="collapse-item" href="/blank">Team vacation</a>
+                    <a class="collapse-item" href="/blank">Employee vacation</a>
+
                 </div>
             </div>
         </li>
@@ -110,35 +112,58 @@
         </li>
 
         <!-- Nav Item - Employees -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
-               aria-expanded="true" aria-controls="collapseEmployees">
-                <i class="fas fa-user"></i>
-                <span>Employees</span>
-            </a>
-            <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
-                    <a class="collapse-item" href="/blank">Edit</a>
-                    <a class="collapse-item" href="/blank">Remove</a>
-                </div>
-            </div>
-        </li>
+<#--    TODO Old Version - Team Menu&ndash;&gt;-->
+<#--        -->
+<#--        <li class="nav-item">-->
+<#--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"-->
+<#--               aria-expanded="true" aria-controls="collapseEmployees">-->
+<#--                <i class="fas fa-user"></i>-->
+<#--                <span>Employees</span>-->
+<#--            </a>-->
+<#--            <div id="collapseEmployees" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
+<#--                <div class="bg-white py-2 collapse-inner rounded">-->
+<#--                    <a class="collapse-item" href="/manager/add-employee">Add</a>-->
+<#--                    <a class="collapse-item" href="/manager/edit-employee">Edit</a>-->
+<#--                    <a class="collapse-item" href="/manager/delete-employee">Remove</a>-->
+<#--                </div>-->
+<#--            </div>-->
+<#--        </li>               >-->
 
         <!-- Nav Item - Teams -->
+<#--        TODO Old Version - Team Menu-->
+
+<#--        <li class="nav-item">-->
+<#--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeams"-->
+<#--               aria-expanded="true" aria-controls="collapseTeams">-->
+<#--                <i class="fas fa-users"></i>-->
+<#--                <span>Teams</span>-->
+<#--            </a>-->
+<#--            <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
+<#--                <div class="bg-white py-2 collapse-inner rounded">-->
+<#--                    <a class="collapse-item" href="/manager/add-team">Add</a>-->
+<#--                    <a class="collapse-item" href="/blank">Edit</a>-->
+<#--                    <a class="collapse-item" href="/blank">Remove</a>-->
+<#--                </div>-->
+<#--            </div>-->
+<#--        </li>-->
+
+        <!-- Nav Item - Employees -->
+        <#-- Employee VIEW with add/edit/list functions-->
+        <!-- Heading -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeams"
-               aria-expanded="true" aria-controls="collapseTeams">
+            <a class="nav-link" href="/manager/edit-employee">
+                <i class="fas fa-user"></i>
+                <span>Employees</span></a>
+        </li>
+
+
+        <!-- Nav Item - Teams -->
+        <#-- Team VIEW with add/edit/list functions-->
+        <!-- Heading -->
+        <li class="nav-item">
+            <a class="nav-link" href="/manager/edit-team">
                 <i class="fas fa-users"></i>
-                <span>Teams</span>
-            </a>
-            <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Add</a>
-                    <a class="collapse-item" href="/blank">Edit</a>
-                    <a class="collapse-item" href="/blank">Remove</a>
-                </div>
-            </div>
+                <span>Teams</span></a>
         </li>
 
         <!-- Divider -->
@@ -352,7 +377,7 @@
             clearBtn: false,
             format: "yyyy-mm-dd"
         });
-        </script>
+    </script>
 
     <!-- Page level plugins -->
     <#if pluginJsTemplate??>

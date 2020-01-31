@@ -25,14 +25,16 @@ public class HolidayEntityMapper {
 
         return holidayView;
     }
-
+//for save
     public Holiday mapRequestToEntity(HolidayRequest holidayRequest) {
         Holiday holiday = new Holiday();
 
         return mapRequestToEntity(holidayRequest, holiday);
     }
-
+//for update
     public Holiday mapRequestToEntity(HolidayRequest holidayRequest, Holiday holiday) {
+
+
         holiday.setName(holidayRequest.getName());
         holiday.setDescription(holidayRequest.getDescription());
         holiday.setHolidayType(holidayRequest.getHolidayType());

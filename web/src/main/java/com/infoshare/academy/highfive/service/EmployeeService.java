@@ -1,14 +1,18 @@
 package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.EmployeeDao;
+import com.infoshare.academy.highfive.dao.EntitlementDao;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.view.EmployeeView;
 import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
 import org.hibernate.usertype.UserType;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.registry.infomodel.User;
 import java.util.Optional;
 
@@ -41,6 +45,12 @@ public class EmployeeService {
     return employeeDao.listAllEmployees().size();
   }
 
+    public List<EmployeeView> listAll() {
+        List<EmployeeView> allEmployeesView = new ArrayList<>();
+        employeeDao.listAllEmployees()
+                .forEach(e -> allEmployeesView.add(employeeMapper.mapEntityToView(e)));
+        return allEmployeesView;
+    }
     public Boolean employeeExist(String email){
         return employeeDao.findByEmail(email).isPresent();
     }

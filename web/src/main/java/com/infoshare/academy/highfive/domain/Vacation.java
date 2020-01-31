@@ -22,8 +22,7 @@ import java.time.LocalDate;
     "WHERE vacation.vacationStatus = :status " +
     "AND (vacation.vacationFrom BETWEEN :firstDayOfMonth AND :lastDayOfMonth " +
     "OR vacation.vacationTo BETWEEN :firstDayOfMonth AND :lastDayOfMonth)"),
-}
-)
+})
 
 @Entity
 @Table(name = "vacation")

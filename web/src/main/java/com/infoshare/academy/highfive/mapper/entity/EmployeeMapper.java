@@ -1,19 +1,55 @@
 package com.infoshare.academy.highfive.mapper.entity;
 
+import com.infoshare.academy.highfive.dao.TeamDao;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.view.EmployeeView;
 
 import javax.enterprise.context.RequestScoped;
-import javax.transaction.Transactional;
+import javax.inject.Inject;
 
 @RequestScoped
 public class EmployeeMapper {
 
+    @Inject
+    private TeamMapper teamMapper;
+
+    @Inject
+    private TeamDao teamDao;
+
+    public EmployeeView mapEntityToView(Employee employee) {
+
+        EmployeeView employeeView = new EmployeeView();
+
+        if (employee == null) {
+            return employeeView;
+        }
+
+        employeeView.setId(employee.getId());
+        employeeView.setFirstName(employee.getFirstName());
+        employeeView.setSurname(employee.getSurname());
+        employeeView.setEmail(employee.getEmail());
+        employeeView.setPosition(employee.getPosition());
+        employeeView.setTeam(teamMapper.mapEntityToView(employee.getTeam()));
+        employeeView.setHireDate(employee.getHireDate());
+        employeeView.setHolidayEntitlement(employee.getHolidayEntitlement());
+        employeeView.setAdditionalEntitlement(employee.getAdditionalEntitlement());
+        employeeView.setRole(employee.getRole());
+
+        return employeeView;
+    }
+
+    //for save
     public Employee mapRequestToEntity(EmployeeRequest request) {
 
         Employee employee = new Employee();
 
-        employee.setId(request.getId());
+        return mapRequestToEntity(request, employee);
+    }
+
+    //for update
+    public Employee mapRequestToEntity(EmployeeRequest request, Employee employee) {
+
         employee.setFirstName(request.getFirstName());
         employee.setSurname(request.getSurname());
         employee.setHireDate(request.getHireDate());
@@ -22,9 +58,8 @@ public class EmployeeMapper {
         employee.setEmail(request.getEmail());
         employee.setLogin(request.getLogin());
         employee.setPosition(request.getPosition());
-        employee.setTeam(request.getTeam());
+        employee.setTeam(teamDao.getById(request.getTeam()).orElse(null));
         employee.setRole(request.getRole());
-        employee.setGoogleId(request.getGoogleId());
 
         return employee;
     }
@@ -42,7 +77,6 @@ public class EmployeeMapper {
         employeeRequest.setEmail(employee.getEmail());
         employeeRequest.setLogin(employee.getLogin());
         employeeRequest.setPosition(employee.getPosition());
-        employeeRequest.setTeam(employee.getTeam());
         employeeRequest.setRole(employee.getRole());
         employeeRequest.setGoogleId(employee.getGoogleId());
 

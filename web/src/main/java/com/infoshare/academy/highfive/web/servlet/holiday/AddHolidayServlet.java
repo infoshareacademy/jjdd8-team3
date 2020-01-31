@@ -59,7 +59,7 @@ public class AddHolidayServlet extends HttpServlet {
             dataModel.put("action", "add");
         }
         dataModel.put("holidayTypes", HolidayType.values());
-        dataModel.put("pluginCssTemplate", "plugin-css-add-holiday.ftlh");
+        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-add-holiday.ftlh");
 
         try {

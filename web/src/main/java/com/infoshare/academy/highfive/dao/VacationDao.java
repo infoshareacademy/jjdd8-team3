@@ -20,30 +20,37 @@ public class VacationDao {
   }
 
   public List<Vacation> getVacationList(VacationStatus vacationStatus) {
+
     return entityManager.createNamedQuery("Vacation.findVacationByStatus")
       .setParameter("status", vacationStatus)
       .getResultList();
+
   }
 
   public int getAmountOfAbsentToday() {
+
     return entityManager.createNamedQuery("Vacation.findAbsentToday")
       .setParameter("status", VacationStatus.APPROVED)
       .setParameter("today", LocalDate.now())
       .getResultList().size();
+
   }
 
   public Vacation getVacationById(Long vacationId) {
+
     return (Vacation) entityManager
       .createNamedQuery("Vacation.findVacationById")
       .setParameter("vacationId", vacationId)
       .getSingleResult();
+
   }
 
   public void updateVacationStatus(Vacation vacation) {
     entityManager.merge(vacation);
   }
 
-  public Integer getAmountOfAbsentThisMonth() {
+  public List<Vacation> getAmountOfAbsentThisMonth() {
+
     LocalDate currentTime = LocalDate.now();
 
     return entityManager
@@ -51,10 +58,12 @@ public class VacationDao {
       .setParameter("status", VacationStatus.APPROVED)
       .setParameter("firstDayOfMonth", currentTime.withDayOfMonth(1))
       .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
-      .getResultList().size();
+      .getResultList();
+
   }
 
-  public Integer getAmountOfAbsentNextMonth() {
+  public List<Vacation> getAmountOfAbsentNextMonth() {
+
     LocalDate currentTime = LocalDate.now().plusMonths(1);
 
     return entityManager
@@ -62,7 +71,8 @@ public class VacationDao {
       .setParameter("firstDayOfMonth", currentTime.withDayOfMonth(1))
       .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
       .setParameter("status", VacationStatus.APPROVED)
-      .getResultList().size();
+      .getResultList();
+
   }
 
 }
