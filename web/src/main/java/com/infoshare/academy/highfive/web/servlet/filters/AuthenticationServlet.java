@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-@WebServlet("")
+@WebServlet("/login")
 public class AuthenticationServlet extends HttpServlet {
     public static final String FILENAME = "Json_example.json";
 
