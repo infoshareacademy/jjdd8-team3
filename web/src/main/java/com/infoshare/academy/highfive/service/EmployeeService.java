@@ -2,43 +2,44 @@ package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.EmployeeDao;
 import com.infoshare.academy.highfive.domain.Employee;
-import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
-import com.infoshare.academy.highfive.dto.view.EmployeeView;
 import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Stateless
 public class EmployeeService {
 
     @Inject
     private EmployeeMapper employeeMapper;
-
     @Inject
     private EmployeeDao employeeDao;
+    @Inject
+    private EntitlementDao entitlementDao;
 
-    public void addNewEmployee(EmployeeRequest request) {
-        employeeDao.addEmployee(employeeMapper.mapRequestToEntity(request));
+    public void save(EmployeeRequest request) {
+        employeeDao.save(employeeMapper.mapRequestToEntity(request));
     }
 
-    public void editEmployee(EmployeeRequest request) {
-        employeeDao.editEmployee(employeeMapper.mapRequestToEntity(request));
+    public void update(Long id, EmployeeRequest request) {
+        Employee employee = employeeDao.getById(id).orElseThrow();
+
+        employeeMapper.mapRequestToEntity(request, employee);
+
+        employeeDao.update(employee);
     }
 
-    public void deleteEmployee(EmployeeRequest request) {
-        employeeDao.deleteEmployee(employeeMapper.mapRequestToEntity(request));
+    public EmployeeView remove(Long id) {
+        return employeeMapper.mapEntityToView(employeeDao.delete(id));
     }
 
-    public Employee getById(Long id) {
-        return this.employeeDao.getEmployeeById(id);
+    public EmployeeView findById(Long id) {
+        Employee employee = employeeDao.getById(id).orElseThrow();
+        return this.employeeMapper.mapEntityToView(employee);
     }
 
     public int listAllSize() {
@@ -68,6 +69,5 @@ public class EmployeeService {
     public Optional<EmployeeRequest> getEmployeeByEmail(String email) {
         return employeeDao.findByEmail(email).map(EmployeeMapper::mapEntityToRequest);
     }
-
 
 }

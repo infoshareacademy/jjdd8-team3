@@ -10,102 +10,102 @@ import java.time.LocalDate;
                 name = "Employee.findByEmail",
                 query = "SELECT u FROM Employee u WHERE u.email = :email"
         ),
+@NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee")
 })
 
 @Entity
 @Table(name = "employee")
 public class Employee {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Long id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+  @Column(name = "first_name", nullable = false)
+  private String firstName;
 
-    @Column(name = "surname", nullable = false)
-    private String surname;
+  @Column(name = "surname", nullable = false)
+  private String surname;
 
-    @Column(name = "hire_date", nullable = false)
-    private LocalDate hireDate;
+  @Column(name = "hire_date", nullable = false)
+  private LocalDate hireDate;
 
-    @Column(name = "holiday_entitlement", nullable = false)
-    private Integer holidayEntitlement;
+  @Column(name = "holiday_entitlement", nullable = false)
+  private Integer holidayEntitlement;
 
-    @Column(name = "additional_entitlement")
-    private Integer additionalEntitlement;
+  @Column(name = "additional_entitlement")
+  private Integer additionalEntitlement;
 
-    @Column(name = "login")
-    private String login;
+  @Column(name = "login")
+  private String login;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+  @Column(name = "email", nullable = false)
+  private String email;
 
-    @Column(name = "position")
-    private String position;
-
-    @Column(name = "google_id")
-    private String googleId;
-
+  @Column(name = "position")
+  private String position;
+  @Column(name = "google_id")
+  private String googleId;
     @JoinColumn(name = "team_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
 
-    public Employee() {
-    }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Enumerated(EnumType.STRING)
+  @Column(name = "role")
+  private Role role;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public Employee() { }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getSurname() {
-        return surname;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public LocalDate getHireDate() {
-        return hireDate;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public void setHireDate(LocalDate hireDate) {
-        this.hireDate = hireDate;
-    }
+  public String getSurname() {
+    return surname;
+  }
 
-    public int getHolidayEntitlement() {
-        return holidayEntitlement;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public void setHolidayEntitlement(Integer holidayEntitlement) {
-        this.holidayEntitlement = holidayEntitlement;
-    }
+  public LocalDate getHireDate() {
+    return hireDate;
+  }
 
-    public int getAdditionalEntitlement() {
-        return additionalEntitlement;
-    }
+  public void setHireDate(LocalDate hireDate) {
+    this.hireDate = hireDate;
+  }
+
+    public int getHolidayEntitlement() { return holidayEntitlement; }
+
+  public void setHolidayEntitlement(Integer holidayEntitlement) {
+    this.holidayEntitlement = holidayEntitlement;
+  }
+
+  public int getAdditionalEntitlement() {
+    return additionalEntitlement;
+  }
 
     public void setAdditionalEntitlement(Integer additionalEntitlement) {
-        this.additionalEntitlement = additionalEntitlement;
-    }
+        this.additionalEntitlement = additionalEntitlement; }
+
+    public String getEmail() { return email; }
 
     public String getGoogleId() {
         return googleId;
@@ -115,44 +115,27 @@ public class Employee {
         this.googleId = googleId;
     }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public Team getTeam() { return team; }
 
-    public Team getTeam() {
-        return team;
-    }
+    public void setTeam(Team team) { this.team = team; }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
+  public Role getRole() {
+    return role;
+  }
 
-    public Role getRole() {
-        return role;
-    }
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    public String getLogin() { return login; }
 
-    public String getLogin() {
-        return login;
-    }
+    public void setLogin(String login) { this.login = login; }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+    public String getPosition() { return position; }
 
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
+    public void setPosition(String position) { this.position = position; }
 }

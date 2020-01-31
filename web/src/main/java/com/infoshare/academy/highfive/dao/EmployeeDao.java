@@ -14,19 +14,10 @@ import java.util.Optional;
 
 @Stateless
 public class EmployeeDao {
-
-  public void addEmployee(Employee employee) {
-  }
-
-  public void editEmployee(Employee employee) {
-  }
-
-  public void deleteEmployee(Employee employee) {
-  }
-
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
-  @PersistenceContext
-  EntityManager entityManager;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
   public Employee getEmployeeById(Long id) {
     return entityManager.find(Employee.class, id);
@@ -40,6 +31,8 @@ public class EmployeeDao {
     return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
   }
 
+    public void update(Employee employee) { entityManager.merge(employee); }
+
   public Optional<Employee> findByEmail(String email) {
 
     Query query = entityManager.createNamedQuery("Employee.findByEmail");
@@ -52,9 +45,11 @@ public class EmployeeDao {
     }
     return Optional.of(employees.get(0));
   }
+    public Employee delete(Long id) {
 
-  public void update(Employee employee) {
-    entityManager.merge(employee);
-  }
+        Employee removedEmployee = getEmployeeById(id);
+        entityManager.remove(removedEmployee);
 
+        return removedEmployee;
+    }
 }
