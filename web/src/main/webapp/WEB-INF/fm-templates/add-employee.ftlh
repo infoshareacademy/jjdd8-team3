@@ -56,6 +56,8 @@
                   <div class="form-group">
                     <label for="team-name">team</label>
                     <select class="form-control" id="team-name" name="team">
+                      <#if action=="edit"><option value="${employee.team.getTeamName()}"
+                                                  selected>${employee.team.getTeamName()}</option></#if>
                       <#list teams as team>
                         <option value="${team.getId()!}">${team.getTeamName()!}</option>
                       </#list>
@@ -64,7 +66,8 @@
 
                   <div class="form-group">
                     <label for="hire-date">hire date</label>
-                    <input type="text" class="form-control form-control-user form-control-date" title = "please insert correct date format YYYY-MM-DD"
+                    <input type="text" class="form-control form-control-user form-control-date"
+                           title = "please insert correct date format YYYY-MM-DD"
                            pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
                            name="hire-date" id="hire-date" placeholder="2020-01-01"
                            value="<#if action == "edit">${employee.hireDate!}</#if>" required>
@@ -72,7 +75,8 @@
                   <div class="form-group">
                     <label for="holiday-entitlement">holiday entitlement</label>
                     <input type="text" class="form-control form-control-user" name="holiday-entitlement"
-                           id="holiday-entitlement" placeholder="Input employee's entitlement" value="<#if action =="edit">${employee.holidayEntitlment!}</#if>" required>
+                           id="holiday-entitlement" placeholder="Input employee's entitlement"
+                           value="<#if action =="edit">${employee.holidayEntitlement!}</#if>" required>
                   </div>
 
                   <div class="form-group">
