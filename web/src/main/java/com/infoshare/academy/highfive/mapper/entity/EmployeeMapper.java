@@ -69,11 +69,6 @@ public class EmployeeMapper {
         EmployeeRequest employeeRequest = new EmployeeRequest();
 
         employeeRequest.setId(employee.getId());
-        employeeRequest.setFirstName(employee.getFirstName());
-        employeeRequest.setSurname(employee.getSurname());
-        employeeRequest.setHireDate(employee.getHireDate());
-        employeeRequest.setHolidayEntitlement(employee.getHolidayEntitlement());
-        employeeRequest.setAdditionalEntitlement(employee.getAdditionalEntitlement());
         employeeRequest.setEmail(employee.getEmail());
         employeeRequest.setLogin(employee.getLogin());
         employeeRequest.setPosition(employee.getPosition());

@@ -23,6 +23,7 @@ public class EmployeeDao {
 
   public void deleteEmployee(Employee employee) {
   }
+
   private Logger logger = LoggerFactory.getLogger(getClass().getName());
   @PersistenceContext
   EntityManager entityManager;
@@ -38,9 +39,10 @@ public class EmployeeDao {
   public List<Employee> listAllEmployees() {
     return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
   }
+
   public Optional<Employee> findByEmail(String email) {
 
-    Query query = entityManager.createNamedQuery("employee.findByEmail");
+    Query query = entityManager.createNamedQuery("Employee.findByEmail");
     query.setParameter("email", email);
     List<Employee> employees = query.getResultList();
     logger.info("Object Employee: {} has been found", email);
@@ -50,8 +52,9 @@ public class EmployeeDao {
     }
     return Optional.of(employees.get(0));
   }
-    public void update(Employee employee) { entityManager.merge(employee); }
 
-    public Employee delete(Long id) {
+  public void update(Employee employee) {
+    entityManager.merge(employee);
+  }
 
 }

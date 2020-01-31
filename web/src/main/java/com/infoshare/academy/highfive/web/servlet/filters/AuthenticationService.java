@@ -1,65 +1,46 @@
 package com.infoshare.academy.highfive.web.servlet.filters;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.*;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Properties;
 
+
+@Stateless
 public class AuthenticationService {
+
+    @Inject
+    private GoogleOauthConfiguration googleOauthConfiguration;
 
     Logger logger = LoggerFactory.getLogger(getClass().getName());
 
+    Properties settings = new Properties();
     String GOOGLE_PROPERTIES_FILE = "google.properties";
-    String googleClientId = "";
-    String googleClientSecret = "";
-    String googleCallbackUri = "";
-
-    private static final Collection<String> SCOPE = Arrays.asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email".split(";"));
-    private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo";
-    private static final JsonFactory JSON_FACTORY = new JacksonFactory();
-    private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-
     private String stateToken;
 
-    private GoogleAuthorizationCodeFlow flow = null;
-
-    public void UserAuthenticationService() {
-
-        Properties settings = new Properties();
-
-        try {
-            settings.load(Thread.currentThread().getContextClassLoader().getResource(GOOGLE_PROPERTIES_FILE).openStream());
-
-            googleClientId = settings.getProperty("google.ouath.client_id");
-            googleClientSecret = settings.getProperty("google.oauth.client.secret");
-            googleCallbackUri = settings.getProperty("google.oauth.client.callback_uri");
-
-            flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT,
-                    JSON_FACTORY, googleClientId, googleClientSecret, SCOPE).build();
-
-        } catch (IOException e) {
-            logger.error("Can't read GOOGLE PROPERTIES FILE {}", e.getMessage());
-        }
+    @PostConstruct
+    public void generateToken() {
+        googleOauthConfiguration.startConfiguration();
         generateStateToken();
     }
 
     public String buildLoginUrl() {
-        final GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl();
-        logger.info("Callback URI {}", googleCallbackUri);
+        final GoogleAuthorizationCodeRequestUrl url = googleOauthConfiguration.getFlow().newAuthorizationUrl();
+        logger.info("Callback URI {}", googleOauthConfiguration.getGoogleCallbackUri());
         logger.info("State token {}", stateToken);
-        return url.setRedirectUri(googleCallbackUri).setState(stateToken).build();
+        return url.setRedirectUri(googleOauthConfiguration.getGoogleCallbackUri()).setState(stateToken).build();
     }
 
     private void generateStateToken() {
@@ -71,17 +52,23 @@ public class AuthenticationService {
     }
 
     public String getUserInfoJson(final String authCode) throws IOException {
-        final GoogleTokenResponse response = flow.newTokenRequest(authCode).setRedirectUri(googleCallbackUri).execute();
-        final Credential credential = flow.createAndStoreCredential(response, null);
-        String myToken = credential.getAccessToken();
-        System.out.println("Token: " + myToken);
-        final HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(credential);
+        String userInfoUrl = "";
+        try {
+            settings.load(Thread.currentThread().getContextClassLoader().getResource(GOOGLE_PROPERTIES_FILE).openStream());
+            userInfoUrl = settings.getProperty("google.oauth.user.info.url");
+        } catch (IOException e) {
+            logger.error("Can't read GOOGLE PROPERTIES FILE {}", e.getMessage());
+        }
+
+        final GoogleTokenResponse response = googleOauthConfiguration.getFlow().newTokenRequest(authCode).setRedirectUri(googleOauthConfiguration.getGoogleCallbackUri()).execute();
+        final Credential credential = googleOauthConfiguration.getFlow().createAndStoreCredential(response, null);
+        String credentialAccessToken = credential.getAccessToken();
+        final HttpRequestFactory requestFactory = googleOauthConfiguration.getHttpTransport().createRequestFactory(credential);
         // Make an authenticated request
-        final GenericUrl url = new GenericUrl(USER_INFO_URL);
+        final GenericUrl url = new GenericUrl(userInfoUrl);
         final HttpRequest request = requestFactory.buildGetRequest(url);
         request.getHeaders().setContentType("text/plain");
         HttpResponse gResponse = request.execute();
-        logger.info("get headers: {}", gResponse.getHeaders());
         return request.execute().parseAsString();
     }
 }
