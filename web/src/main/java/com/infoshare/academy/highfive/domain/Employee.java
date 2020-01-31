@@ -6,7 +6,8 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @NamedQueries({
-@NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee")
+        @NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee"),
+        @NamedQuery(name = "Employee.findByEmail", query = "SELECT employee FROM Employee employee WHERE employee.email =:email")
 })
 
 @Entity
@@ -30,7 +31,7 @@ public class Employee {
     @Column(name = "holiday_entitlement", nullable = false)
     private Integer holidayEntitlement;
 
-    @Column(name = "additional_entitlement")
+    @Column(name = "additional_entitlement", nullable = false)
     private Integer additionalEntitlement;
 
     @Column(name = "login")
@@ -39,12 +40,15 @@ public class Employee {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "position")
+    @Column(name = "position", nullable = false)
     private String position;
 
     @JoinColumn(name = "team_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
+
+    @OneToOne (mappedBy = "employee", cascade = CascadeType.ALL)
+    private Entitlement entitlement;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
@@ -122,4 +126,8 @@ public class Employee {
     public String getPosition() { return position; }
 
     public void setPosition(String position) { this.position = position; }
+
+    public Entitlement getEntitlement() { return entitlement; }
+
+    public void setEntitlement(Entitlement entitlement) { this.entitlement = entitlement; }
 }
