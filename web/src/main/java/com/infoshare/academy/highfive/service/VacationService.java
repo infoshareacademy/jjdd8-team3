@@ -184,6 +184,7 @@ public class VacationService {
 
   }
 
+  @Transactional
   public void changeVacationStatus(Long vacationId, VacationStatus vacationStatus) throws IOException {
 
     Vacation vacation = vacationDao.getVacationById(vacationId);
@@ -196,9 +197,50 @@ public class VacationService {
 
     } else {
 
+      Entitlement entitlement = entitlementDao.getEntitlementByEmployeeId(vacation.getEmployee());
+      List<LocalDate> vacationDaysList = creatingVacationDaysListToReturn(vacation);
+      int daysOff = calculatingDaysAmount(vacationDaysList);
+      int vacationTaken = entitlement.getVacationTaken();
+      entitlement.setVacationTaken(vacationTaken - daysOff);
+      entitlementDao.save(entitlement);
+
+      if (vacation.getVacationType().equals(VacationType.VACATION)) {
+
+        int vacationLeft = entitlement.getVacationLeft();
+        entitlement.setVacationLeft(vacationLeft + daysOff);
+        entitlementDao.save(entitlement);
+
+      } else if (vacation.getVacationType().equals(VacationType.ON_DEMAND)) {
+
+        int onDemandLeft = entitlement.getOnDemandVacationLeft();
+        entitlement.setOnDemandVacationLeft(onDemandLeft + daysOff);
+        entitlementDao.save(entitlement);
+
+      } else if (vacation.getVacationType().equals(VacationType.PARENTAL)) {
+
+        int parentalLeft = entitlement.getAdditionalLeft();
+        entitlement.setAdditionalLeft(parentalLeft + daysOff);
+        entitlementDao.save(entitlement);
+
+      }
+
       mailSender.sendReject(vacation.getEmployee().getEmail());
 
     }
+
+  }
+
+  List<LocalDate> creatingVacationDaysListToReturn(Vacation vacation) {
+
+    LocalDate start = vacation.getVacationFrom();
+    LocalDate end = vacation.getVacationTo();
+    List<LocalDate> totalDates = new LinkedList<>();
+    while (!start.isAfter(end)) {
+      totalDates.add(start);
+      start = start.plusDays(1);
+    }
+
+    return totalDates;
 
   }
 
