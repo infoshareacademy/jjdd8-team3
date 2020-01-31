@@ -24,6 +24,10 @@ public class EmployeeDao {
         return entityManager.find(Employee.class, id);
     }
 
+    public Employee getByEmail(String email) {
+        return (Employee) this.entityManager.createNamedQuery("Employee.findByEmail").setParameter("email",email).getSingleResult();
+    }
+
     public List<Employee> listAllEmployees() {
         return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
     }

@@ -4,58 +4,24 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.infoshare.academy.highfive.freemarker.TemplateProvider;
-import com.infoshare.academy.highfive.service.EmployeeService;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
 
-    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
+@WebServlet("test")
+public class Test extends HttpServlet {
 
-    @Inject
-    private TemplateProvider templateProvider;
+//    private static final JsonFactory JSON_FACTORY = new JacksonFactory();
+//    private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-    @Inject
-    private EmployeeService employeeService;
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        PrintWriter writer = resp.getWriter();
-        Template template = templateProvider
-                .getTemplate(getServletContext(), "login.ftlh");
-
-        Map<String, Object> model = new HashMap<>();
-
-        String role = (String) req.getAttribute("role");
-        String user = (String) req.getAttribute("authorization");
-
-        model.put("role", role);
-        model.put("authorization", user);
-
-        try {
-            template.process(model, writer);
-        } catch (TemplateException e) {
-          LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
-        }
-    }
+    //private static final String CLIENT_ID =  ;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -83,28 +49,28 @@ public class LoginServlet extends HttpServlet {
 
             // Print user identifier
             String userId = payload.getSubject();
-            LOGGER.info("Google User ID: " + userId);
+            System.out.println("User ID: " + userId);
 
             // Get profile information from payload
             String email = payload.getEmail();
             boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            if(emailVerified){
-                employeeService.findByEmail(email);
-            }
             String name = (String) payload.get("name");
-
-
+            String pictureUrl = (String) payload.get("picture");
+            String locale = (String) payload.get("locale");
+            String familyName = (String) payload.get("family_name");
+            String givenName = (String) payload.get("given_name");
 
 
         } else {
-            LOGGER.info("Invalid ID token.");
-            String info = "Invalid ID token.";
-            resp.sendRedirect("/404.html");
+
+           String info = "Invalid ID token.";
         }
 
         resp.setContentType("text/html;charset=UTF-8");
 
-        resp.setStatus(200);
+        resp.sendRedirect("/");
+
+
 
     }
 }

@@ -6,14 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="google-signin-client_id" content="326852231702-jbh7kmdv8q7kd4dj8c3rancldhc1das1.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="326852231702-jbh7kmdv8q7kd4dj8c3rancldhc1das1.apps.googleusercontent.com">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>Vacation Mgnt. Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
+          type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
@@ -47,7 +49,7 @@
                                 <form class="user">
                                     <div class="form-group">
                                         <div class="g-signin2" data-width="350" data-height="50" data-longtitle="true"
-                                            data-onsuccess="onSignIn"></div>
+                                             data-onsuccess="onSignIn"></div>
                                     </div>
                                 </form>
                                 <hr>
@@ -74,28 +76,15 @@
 <script>
 
     function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
+        xhr.open('POST', '/login');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            console.log('Signed in as: ' + xhr.responseText);
-        };
-        xhr.send('idtoken=' + id_token);
-
-
+        xhr.send('idToken=' + id_token);
+        if (xhr.readyState === 1) {
+            window.location.href = "/";
+        }
     }
 </script>
 

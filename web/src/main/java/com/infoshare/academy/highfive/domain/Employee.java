@@ -3,10 +3,10 @@ package com.infoshare.academy.highfive.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NamedQueries({
-@NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee")
+@NamedQuery(name = "Employee.findAll", query = "SELECT employee FROM Employee employee"),
+        @NamedQuery(name = "Employee.findByEmail", query = "SELECT employee FROM Employee employee WHERE employee.email =:email")
 })
 
 @Entity
