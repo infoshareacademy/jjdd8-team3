@@ -22,6 +22,8 @@ public class MailSender {
         Mail mail = new Mail(from, subject, to, content);
 
 //        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
+//        https://www.sendinblue.com/
+//        https://mailchimp.com/
         SendGrid sg = new SendGrid("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");
         Request request = new Request();
         request.setMethod(Method.POST);

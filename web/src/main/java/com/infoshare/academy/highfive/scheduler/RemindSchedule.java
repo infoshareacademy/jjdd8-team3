@@ -22,7 +22,7 @@ public class RemindSchedule {
     public static final Logger LOGGER = LoggerFactory.getLogger(RemindSchedule.class);
     private static final int INITIAL_DURATION = 120_000;
     private static final int INTERVAL_DURATION = 60_000;
-    private static final int SEND_REQEST_OLDER_THEN = 15;
+    private static final int SEND_REQEST_OLDER_THEN = 5;
 
     @Inject
     private MailSender mailSender;
