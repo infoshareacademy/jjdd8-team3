@@ -1,8 +1,11 @@
 package com.infoshare.academy.highfive.service;
 
 import com.infoshare.academy.highfive.dao.EmployeeDao;
+import com.infoshare.academy.highfive.dao.EntitlementDao;
 import com.infoshare.academy.highfive.domain.Employee;
+import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
+import com.infoshare.academy.highfive.dto.view.EmployeeView;
 import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
 
 import javax.ejb.Stateless;
@@ -38,7 +41,7 @@ public class EmployeeService {
     }
 
     public EmployeeView findById(Long id) {
-        Employee employee = employeeDao.getById(id).orElseThrow();
+        Employee employee = employeeDao.getEmployeeById(id);
         return this.employeeMapper.mapEntityToView(employee);
     }
 
