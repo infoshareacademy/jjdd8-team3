@@ -48,7 +48,7 @@ public class RemindSchedule {
                 .map(vacation -> "- " + vacation.getEmployee().getFirstName() + " " + vacation.getEmployee().getSurname() + "\n")
                 .reduce("", (a, v) -> a + v);
         Content content = new Content("text/plain", "Please be advised that there are still vacation requests awaiting confirmation sent by \n"
-                + employeeWaitingList + "\n Sincerely,\n Your Administrative Mail");
+                + employeeWaitingList + "\n Sincerely,\n Your Administrative Mail " + LocalDateTime.now());
         if (requestsToSend.size() > 0) {
             LOGGER.info("Email will be send");
             mailSender.sendRequestReminder("jjdd8highfive@gmail.com", content);
