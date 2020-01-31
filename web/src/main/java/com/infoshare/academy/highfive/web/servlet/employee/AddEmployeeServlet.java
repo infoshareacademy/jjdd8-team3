@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.web.servlet.employee;
 
+import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import com.infoshare.academy.highfive.service.TeamService;
@@ -63,6 +64,7 @@ public class AddEmployeeServlet extends HttpServlet {
             dataModel.put("action", "add");
         }
         dataModel.put("teams", teamService.listAll());
+        dataModel.put("roles", Role.values());
         dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-add-employee.ftlh");
 

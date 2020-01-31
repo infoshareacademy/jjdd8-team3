@@ -52,9 +52,7 @@ public class HolidayView {
         return date.toString();
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    public void setDate(LocalDate date) { this.date = date; }
 
     public HolidayType getHolidayType() {
         return holidayType;

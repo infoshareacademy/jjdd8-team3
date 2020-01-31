@@ -191,6 +191,7 @@ public class VacationService {
 
   }
 
+  @Transactional
   public void changeVacationStatus(Long vacationId, VacationStatus vacationStatus) throws IOException {
 
     Vacation vacation = vacationDao.getVacationById(vacationId);
@@ -206,6 +207,20 @@ public class VacationService {
       mailSender.sendReject(vacation.getEmployee().getEmail());
 
     }
+
+  }
+
+  List<LocalDate> creatingVacationDaysListToReturn(Vacation vacation) {
+
+    LocalDate start = vacation.getVacationFrom();
+    LocalDate end = vacation.getVacationTo();
+    List<LocalDate> totalDates = new LinkedList<>();
+    while (!start.isAfter(end)) {
+      totalDates.add(start);
+      start = start.plusDays(1);
+    }
+
+    return totalDates;
 
   }
 

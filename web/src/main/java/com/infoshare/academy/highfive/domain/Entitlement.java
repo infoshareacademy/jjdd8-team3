@@ -41,7 +41,7 @@ public class Entitlement {
   @Column(name = "on_demand_holiday_left", nullable = false)
   private int onDemandVacationLeft;
 
-  @Column(name = "days_taken")
+  @Column(name = "vacation_taken")
   private int vacationTaken;
 
   @OneToOne
