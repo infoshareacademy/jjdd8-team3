@@ -73,6 +73,7 @@
                     <a class="collapse-item" href="/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/calendar">Calendar</a>
                     <a class="collapse-item" href="/holiday-search">Holiday search</a>
+                    <a class="collapse-item" href="/statistics">Statistics</a>
                     <a class="collapse-item" href="/list-teams">Teams - list</a>
                     <a class="collapse-item" href="/blank">Team vacation</a>
                     <a class="collapse-item" href="/blank">Employee vacation</a>
