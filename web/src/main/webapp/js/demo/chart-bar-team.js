@@ -26,10 +26,11 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-dataFromApi=[];
+countFromApi=[];
+teamsFromApi=[];
 $.ajax({
     type: "GET",
-    url: "/api/vacation/admin/popular-months",
+    url: "/api/vacation/admin/taken-by-team",
     enctype: 'application/json;charset=UTF-8',
     dataType: 'json',
     contentType: 'application/json;charset=UTF-8'
@@ -37,14 +38,19 @@ $.ajax({
     .done(
         function (data) {
             $.each(data, function (i, item) {
-                vacCount = item.vacation_days_count;
-                dataFromApi.push(
-                    vacCount
+                teamCount = item[0];
+                teamName = item[1];
+                countFromApi.push(
+                    teamCount
+                );
+                teamsFromApi.push(
+                    teamName
                 );
                 //$('#alert-list').show();
             });
-            myBarChart.config.data.datasets[0].data=dataFromApi; // Would update the first dataset's value of 'March' to be 50
-            myBarChart.update();
+            myBarTeam.config.data.datasets[0].data=countFromApi; // Would update the first dataset's value of 'March' to be 50
+            myBarTeam.config.data.labels=teamsFromApi; // Would update the first dataset's value of 'March' to be 50
+            myBarTeam.update();
         })
     .fail(
         function () {
@@ -54,17 +60,17 @@ $.ajax({
 
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
+var ctx = document.getElementById("myBarTeam");
+var myBarTeam = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        labels: teamsFromApi,
         datasets: [{
-            label: "Holidays",
-            backgroundColor: "#4e73df",
-            hoverBackgroundColor: "#2e59d9",
+            label: "Vacation taken",
+            backgroundColor: "#d96e5f",
+            hoverBackgroundColor: "#a62111",
             borderColor: "#4e73df",
-            data: dataFromApi,
+            data: countFromApi,
         }],
     },
     options: {
@@ -79,22 +85,19 @@ var myBarChart = new Chart(ctx, {
         },
         scales: {
             xAxes: [{
-                time: {
-                    unit: 'month'
-                },
                 gridLines: {
                     display: false,
                     drawBorder: false
                 },
                 ticks: {
-                    maxTicksLimit: 12
+                    maxTicksLimit: 5
                 },
-                maxBarThickness: 55,
+                maxBarThickness: 40,
             }],
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 50,
+                    max: 30,
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
