@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class EditEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF8");
         PrintWriter writer = resp.getWriter();
+        HttpSession session = req.getSession();
         Map<String, Object> dataModel = new HashMap<>();
         Template template = this.templateProvider
                 .getTemplate(getServletContext(), "template.ftlh");
@@ -52,6 +54,9 @@ public class EditEmployeeServlet extends HttpServlet {
         dataModel.put("pluginJsTemplate", "plugin-js-edit-employee.ftlh");
         dataModel.put("employees", employeeService.listAll());
         dataModel.put("teams", teamService.listAll());
+
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
         try {
             template.process(dataModel, writer);

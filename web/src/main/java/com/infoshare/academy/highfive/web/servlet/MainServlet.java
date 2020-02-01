@@ -55,6 +55,7 @@ public class MainServlet extends HttpServlet {
     dataModel.put("absentToday", vacationService.getDashboardStatistic().getAbsentToday());
     dataModel.put("totalEmployees", employeeService.listAllSize());
     dataModel.put("pendingRequests", vacationService.getDashboardStatistic().getPendingRequests());
+
     dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
     dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 

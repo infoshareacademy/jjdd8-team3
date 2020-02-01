@@ -75,11 +75,7 @@
                     <a class="collapse-item" href="/employee/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/employee/calendar">Calendar</a>
                     <a class="collapse-item" href="/employee/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/employee/statistics">Statistics</a>
-                    <a class="collapse-item" href="/employee/list-teams">Teams - list</a>
-                    <a class="collapse-item" href="/blank">Team vacation</a>
-                    <a class="collapse-item" href="/blank">Employee vacation</a>
-
+                    <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation</a>
                 </div>
             </div>
         </li>
@@ -101,18 +97,24 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
+        <#if loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN">
         <!-- Heading -->
         <div class="sidebar-heading">
             Manager
         </div>
-
         <!-- Approve requests -->
         <li class="nav-item">
             <a class="nav-link" href="/manager/pending-requests">
                 <i class="fas fa-hourglass-start"></i>
                 <span>Pending requests</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/employee/statistics">
+                <i class="fas fa-chart-bar"></i>
+                <span>Statistics</span></a>
+        </li>
+
+
 
         <!-- Nav Item - Employees -->
         <li class="nav-item">
@@ -130,7 +132,8 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
-
+</#if>
+        <#if loggedEmployeeRole =="ADMIN">
         <!-- Heading -->
         <div class="sidebar-heading">
             Administration
@@ -151,9 +154,6 @@
             </a>
             <div id="collapseConfig" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/blank">Date format</a>
-                    <a class="collapse-item" href="/blank">Sorting</a>
-                    <a class="collapse-item" href="/blank">Holidays database</a>
                     <a class="collapse-item" href="/admin/upload-json">Upload Holiday JSON<br /> form file</a>
                 </div>
             </div>
@@ -161,7 +161,7 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
-
+        </#if>
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -228,7 +228,6 @@
                             </form>
                         </div>
                     </li>
-
                     <!-- Nav Item - Calendar modal button -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="modal-calendar-button" role="button"
@@ -236,7 +235,7 @@
                             <i class="fas fa-calendar fa-fw"></i>
                         </a>
                     </li>
-
+                    <#if loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN">
                     <!-- Nav Item - Alerts -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -257,6 +256,7 @@
                                 All Requests</a>
                         </div>
                     </li>
+                    </#if>
 
                     <div class="topbar-divider d-none d-sm-block"></div>
 
