@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/holiday-search")
+@WebServlet("/employee/holiday-search")
 public class SearchHolidayServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
@@ -26,7 +25,7 @@ public class SearchHolidayServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
 

@@ -25,7 +25,7 @@ public class EmployeeDao {
     }
 
     public Employee getByEmail(String email) {
-        return (Employee) this.entityManager.createNamedQuery("Employee.findByEmail").setParameter("email",email).getSingleResult();
+       return (Employee) this.entityManager.createNamedQuery("Employee.findByEmail").setParameter("email",email).getResultStream().findFirst().orElse(null);
     }
 
     public List<Employee> listAllEmployees() {

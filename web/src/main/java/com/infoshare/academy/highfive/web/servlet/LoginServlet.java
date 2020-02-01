@@ -4,6 +4,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.infoshare.academy.highfive.dto.view.EmployeeView;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.EmployeeService;
 import freemarker.template.Template;
@@ -12,11 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
@@ -36,7 +37,24 @@ public class LoginServlet extends HttpServlet {
     private EmployeeService employeeService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        HttpSession session = req.getSession();
+        Object loggedUser = session.getAttribute("loggedUser");
+
+        if (req.getParameter("logout") != null) {
+
+            session.invalidate();
+            resp.sendRedirect("/login");
+
+        }
+
+        if (session.getAttribute("loggedUser") != null) {
+
+            LOGGER.info("Already logged user!");
+            resp.sendRedirect("/");
+
+        }
 
         PrintWriter writer = resp.getWriter();
         Template template = templateProvider
@@ -44,21 +62,15 @@ public class LoginServlet extends HttpServlet {
 
         Map<String, Object> model = new HashMap<>();
 
-        String role = (String) req.getAttribute("role");
-        String user = (String) req.getAttribute("authorization");
-
-        model.put("role", role);
-        model.put("authorization", user);
-
         try {
             template.process(model, writer);
         } catch (TemplateException e) {
-          LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
@@ -68,7 +80,7 @@ public class LoginServlet extends HttpServlet {
                 .build();
 
         String idTokenString = req.getParameter("idToken");
-
+        EmployeeView employeeView = null;
 
         GoogleIdToken idToken = null;
         try {
@@ -81,20 +93,30 @@ public class LoginServlet extends HttpServlet {
 
             GoogleIdToken.Payload payload = idToken.getPayload();
 
-            // Print user identifier
             String userId = payload.getSubject();
             LOGGER.info("Google User ID: " + userId);
 
             // Get profile information from payload
             String email = payload.getEmail();
-            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            if(emailVerified){
-                employeeService.findByEmail(email);
+            boolean emailVerified = payload.getEmailVerified();
+
+            if (emailVerified) {
+
+                employeeView = employeeService.findByEmail(email);
+
+                if (employeeView != null) {
+
+
+                    String name = (String) payload.get("name");
+
+                    HttpSession session = req.getSession();
+                    session.setAttribute("userName", name);
+                    session.setAttribute("userEmail", email);
+                    session.setAttribute("loggedEmployee", employeeView);
+                    session.setAttribute("loggedEmployeeRole", employeeView.getRole());
+                }
+
             }
-            String name = (String) payload.get("name");
-
-
-
 
         } else {
             LOGGER.info("Invalid ID token.");
@@ -103,8 +125,11 @@ public class LoginServlet extends HttpServlet {
         }
 
         resp.setContentType("text/html;charset=UTF-8");
-
-        resp.setStatus(200);
+        if (employeeView != null)
+            resp.sendRedirect("/");
+        else {
+            resp.sendRedirect("/login");
+        }
 
     }
 }

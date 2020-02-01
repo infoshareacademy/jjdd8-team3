@@ -46,6 +46,9 @@ public class EmployeeService {
 
     public EmployeeView findByEmail(String email) {
         Employee employee = employeeDao.getByEmail(email);
+        if (employee == null){
+            return null;
+        }
         return this.employeeMapper.mapEntityToView(employee);
     }
 

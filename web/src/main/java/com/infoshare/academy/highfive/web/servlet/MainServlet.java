@@ -9,11 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -34,9 +34,11 @@ public class MainServlet extends HttpServlet {
   EmployeeService employeeService;
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     resp.setContentType("text/html;charset=UTF-8");
+
+    HttpSession session = req.getSession();
 
     PrintWriter writer = resp.getWriter();
 
@@ -53,6 +55,8 @@ public class MainServlet extends HttpServlet {
     dataModel.put("absentToday", vacationService.getDashboardStatistic().getAbsentToday());
     dataModel.put("totalEmployees", employeeService.listAllSize());
     dataModel.put("pendingRequests", vacationService.getDashboardStatistic().getPendingRequests());
+    dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+    dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
     try {
       template.process(dataModel, writer);

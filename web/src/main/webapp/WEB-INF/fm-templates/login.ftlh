@@ -39,7 +39,12 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                         src="/img/undraw_personal_goals_edgd.svg" alt="women on vacation">
+                                </div>
+                            </div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -78,13 +83,12 @@
     function onSignIn(googleUser) {
         var id_token = googleUser.getAuthResponse().id_token;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/login');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('idToken=' + id_token);
-        if (xhr.readyState === 1) {
-            window.location.href = "/";
-        }
+        var form = $('<form action="/login" method="post">' +
+            '<input type="text" name="idToken" value="' +
+            id_token + '" />' +
+            '</form>');
+        $('body').append(form);
+        form.submit();
     }
 </script>
 
