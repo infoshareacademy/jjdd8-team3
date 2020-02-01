@@ -125,11 +125,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         resp.setContentType("text/html;charset=UTF-8");
-        if (employeeView != null)
-            resp.sendRedirect("/");
-        else {
-            resp.sendRedirect("/login");
-        }
+        resp.sendRedirect("/");
 
     }
 }
