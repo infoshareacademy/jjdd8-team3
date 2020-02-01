@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -186,9 +187,9 @@ public class VacationService {
   public List<VacationSSE> listAllPendingRequestsSSE() {
 
     return listAllPendingRequests()
-            .stream()
-            .map(vacation -> vacationMapper.mapEntityToSSE(vacation))
-            .collect(Collectors.toList());
+      .stream()
+      .map(vacation -> vacationMapper.mapEntityToSSE(vacation))
+      .collect(Collectors.toList());
 
   }
 
@@ -288,6 +289,28 @@ public class VacationService {
       forEach(v -> vacationMonthView.add(vacationMonthMapper.mapEntityToView(v)));
 
     return vacationMonthView;
+
+  }
+
+  @Transactional
+  public List<VacationView> getTeamVacationByDatesInRange(Long id, LocalDate startDate, LocalDate endDate) {
+    List<VacationView> vacationCalendarViewList = new ArrayList<>();
+    Optional<Employee> employee = employeeDao.getById(id);
+    Team team = employee.get().getTeam();
+    vacationDao.getVacationByTeamInDatesRange(team, startDate, endDate).
+      forEach(v -> vacationCalendarViewList.add(vacationMapper.mapEntityToView(v)));
+
+    return vacationCalendarViewList;
+
+  }
+
+  @Transactional
+  public List<VacationView> listAllVacation(LocalDate startDate, LocalDate endDate) {
+
+    return vacationDao.getAllVacation(startDate, endDate)
+      .stream()
+      .map(vacation -> vacationMapper.mapEntityToView(vacation))
+      .collect(Collectors.toList());
 
   }
 

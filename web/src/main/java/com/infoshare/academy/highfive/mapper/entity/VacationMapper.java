@@ -3,6 +3,7 @@ package com.infoshare.academy.highfive.mapper.entity;
 import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Vacation;
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.view.VacationCalendarView;
 import com.infoshare.academy.highfive.dto.view.VacationSSE;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 
@@ -53,9 +54,31 @@ public class VacationMapper {
     vacationSSE.setSurname(vacationView.getSurname());
     vacationSSE.setVacationStatus(vacationView.getVacationStatus());
     vacationSSE.setDateOfRequest(vacationView.getDateOfRequest());
-    vacationSSE.setDateOfRequestIso((vacationView.getDateOfRequest().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)).substring(0,19)+"Z");
+    vacationSSE.setDateOfRequestIso((vacationView.getDateOfRequest().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)).substring(0, 19) + "Z");
 
     return vacationSSE;
+  }
+
+  public VacationCalendarView mapEntityToViewDates(Vacation vacationEntity) {
+
+    VacationCalendarView vacationCalendarView = new VacationCalendarView();
+
+    vacationCalendarView.setEmployeeId(vacationEntity.getEmployee().getId());
+    vacationCalendarView.setFirstName(vacationEntity.getEmployee().getFirstName());
+    vacationCalendarView.setSurname(vacationEntity.getEmployee().getSurname());
+    vacationCalendarView.setVacationFrom(vacationEntity.getVacationFrom());
+    vacationCalendarView.setVacationTo(vacationEntity.getVacationTo());
+    vacationCalendarView.setVacationStatus(vacationEntity.getVacationStatus());
+    vacationCalendarView.setVacationType(vacationEntity.getVacationType());
+    vacationCalendarView.setYearFrom(vacationEntity.getVacationFrom().getYear());
+    vacationCalendarView.setMonthFrom(vacationEntity.getVacationFrom().getMonthValue());
+    vacationCalendarView.setDayFrom(vacationEntity.getVacationFrom().getDayOfMonth());
+    vacationCalendarView.setYearTo(vacationEntity.getVacationTo().getYear());
+    vacationCalendarView.setMonthTo(vacationEntity.getVacationTo().getMonthValue());
+    vacationCalendarView.setDayTo(vacationEntity.getVacationTo().getDayOfMonth());
+
+    return vacationCalendarView;
+
   }
 
 }

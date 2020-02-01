@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dao;
 
+import com.infoshare.academy.highfive.domain.Team;
 import com.infoshare.academy.highfive.domain.Vacation;
 import com.infoshare.academy.highfive.domain.VacationStatus;
 
@@ -73,6 +74,23 @@ public class VacationDao {
       .setParameter("status", VacationStatus.APPROVED)
       .getResultList();
 
+  }
+
+  public List<Vacation> getVacationByTeamInDatesRange(Team team, LocalDate startDate, LocalDate endDate) {
+    return entityManager
+      .createNamedQuery("Vacation.getByTeamInDateRange")
+      .setParameter("team", team)
+      .setParameter("startDate", startDate)
+      .setParameter("endDate", endDate)
+      .getResultList();
+  }
+
+  public List<Vacation> getAllVacation(LocalDate startDate, LocalDate endDate) {
+    return entityManager
+      .createNamedQuery("Vacation.getAllVacation")
+      .setParameter("startDate", startDate)
+      .setParameter("endDate", endDate)
+      .getResultList();
   }
 
 }

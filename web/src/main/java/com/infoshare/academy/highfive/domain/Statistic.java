@@ -7,8 +7,7 @@ import javax.persistence.*;
     "FROM Statistic statistic " +
     "WHERE statistic.monthNumber = :monthNumber"),
   @NamedQuery(name = "Statistic.findStatisticByVacationCount", query = "SELECT statistic " +
-    "FROM Statistic statistic " +
-    "ORDER BY statistic.vacationDaysCount DESC ")
+    "FROM Statistic statistic ")
 })
 
 @Entity
