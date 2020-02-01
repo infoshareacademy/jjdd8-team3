@@ -16,7 +16,7 @@ public class VacationApi {
   VacationService vacationService;
 
   @GET
-  @Path("/approved-denied-ratio")
+  @Path("/manager/approved-denied-ratio")
   @Produces(MediaType.TEXT_PLAIN)
   public Response getEmployeeApprovedToDeniedRatio() {
 
@@ -25,7 +25,7 @@ public class VacationApi {
   }
 
   @GET
-  @Path("/taken-by-employee")
+  @Path("/manager/taken-by-employee")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getVacationTakenByEmployee() {
 
@@ -34,7 +34,7 @@ public class VacationApi {
   }
 
   @GET
-  @Path("/taken-by-team")
+  @Path("/manager/taken-by-team")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getVacationTakenByTeam() {
 
@@ -43,7 +43,7 @@ public class VacationApi {
   }
 
   @GET
-  @Path("/popular-months")
+  @Path("/manager/popular-months")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getPopularMonths() {
 

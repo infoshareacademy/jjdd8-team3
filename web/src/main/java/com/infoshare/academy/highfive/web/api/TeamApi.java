@@ -20,21 +20,21 @@ public class TeamApi {
     private UploadJsonService uploadJsonService;
 
     @GET
-    @Path("/{id}")
+    @Path("/manager/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(@PathParam("id") Long id) {
         return Response.ok().entity(teamService.findById(id)).build();
     }
 
     @GET
-    @Path("/list")
+    @Path("/manager/list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response list() {
         return Response.ok().entity(teamService.listAll()).build();
     }
 
     @POST
-    @Path("/add")
+    @Path("/manager/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(TeamRequest teamRequest) {
@@ -44,7 +44,7 @@ public class TeamApi {
     }
 
     @PUT
-    @Path("/put/{id}")
+    @Path("/manager/put/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") Long id, TeamRequest teamRequest) {
@@ -54,7 +54,7 @@ public class TeamApi {
     }
 
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/manager/delete/{id}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {

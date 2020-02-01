@@ -49,7 +49,7 @@ public class HolidayApi {
     }
 
     @POST
-    @Path("/add")
+    @Path("/admin/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(HolidayRequest holidayRequest) {
@@ -60,7 +60,7 @@ public class HolidayApi {
     }
 
     @PUT
-    @Path("/put/{id}")
+    @Path("/admin/put/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") Long id, HolidayRequest holidayRequest) {
@@ -71,7 +71,7 @@ public class HolidayApi {
     }
 
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/admin/delete/{id}")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
@@ -80,7 +80,7 @@ public class HolidayApi {
     }
 
     @POST
-    @Path("/upload")
+    @Path("/admin/upload")
     @Consumes("multipart/form-data")
     @Produces(MediaType.TEXT_PLAIN)
     public Response post(MultipartFormDataInput input) {
