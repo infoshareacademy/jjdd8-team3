@@ -1,7 +1,5 @@
 package com.infoshare.academy.highfive.service.configuration;
 
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequestScoped
 public class MailSender {
@@ -58,48 +54,49 @@ public class MailSender {
             LOGGER.error(e.getMessage());
         }
 
-    public void sendApprove(String emailRecipient) throws IOException {
-
-            Optional<String> emailOpt = Optional
-                    .ofNullable(req.getSession().getAttribute("email").toString());
-            String email = emailOpt.get();
-            User user = userService.getUserByEmail(email);
-
-            reservationService.newReservation(idParam, email);
-            List<String> recipients = new ArrayList<>();
-            recipients.add(email);
-            String subject = "Rezerwacja książki " + "\"" + book.getTitle() + "\"";
-            emailSenderService.sendMessage(recipients, subject);
-
-        }
-
-    public void sendReject(String emailRecipient) throws IOException {
-
-        Email from = new Email("Vacation-Manager@HighFive.com");
-        String subject = "Vacation Manager notification. Your request has been rejected.";
-        Email to = new Email(emailRecipient);
-        Content content = new Content("text/plain", "Please be informed your vacation request has been rejected.");
-        createMail(from, subject, to, content);
-
+//    public void sendApprove(String emailRecipient) throws IOException {
+//
+//            Optional<String> emailOpt = Optional
+//                    .ofNullable(req.getSession().getAttribute("email").toString());
+//            String email = emailOpt.get();
+//            User user = userService.getUserByEmail(email);
+//
+//            reservationService.newReservation(idParam, email);
+//            List<String> recipients = new ArrayList<>();
+//            recipients.add(email);
+//            String subject = "Rezerwacja książki " + "\"" + book.getTitle() + "\"";
+//            emailSenderService.sendMessage(recipients, subject);
+//
+//        }
+//
+//    public void sendReject(String emailRecipient) throws IOException {
+//
+//        Email from = new Email("Vacation-Manager@HighFive.com");
+//        String subject = "Vacation Manager notification. Your request has been rejected.";
+//        Email to = new Email(emailRecipient);
+//        Content content = new Content("text/plain", "Please be informed your vacation request has been rejected.");
+//        createMail(from, subject, to, content);
+//
+//    }
+//
+//    public void sendNotification(String emailRecipient) throws IOException {
+//
+//        Email from = new Email("Vacation-Manager@HighFive.com");
+//        String subject = "Vacation Manager notification. New vacation request.";
+//        Email to = new Email(emailRecipient);
+//        Content content = new Content("text/plain", "Please be informed new vacation request is waiting for your approval");
+//        createMail(from, subject, to, content);
+//
+//    }
+//
+//    public void sendRequestReminder(String emailRecipient, Content content) throws IOException {
+//
+//        Email from = new Email("Vacation-Manager@HighFive.com");
+//        String subject = "Vacation Manager notification. Request reminder.";
+//        Email to = new Email(emailRecipient);
+//        createMail(from, subject, to, content);
+//
+//    }
+//
+//}
     }
-
-    public void sendNotification(String emailRecipient) throws IOException {
-
-        Email from = new Email("Vacation-Manager@HighFive.com");
-        String subject = "Vacation Manager notification. New vacation request.";
-        Email to = new Email(emailRecipient);
-        Content content = new Content("text/plain", "Please be informed new vacation request is waiting for your approval");
-        createMail(from, subject, to, content);
-
-    }
-
-    public void sendRequestReminder(String emailRecipient, Content content) throws IOException {
-
-        Email from = new Email("Vacation-Manager@HighFive.com");
-        String subject = "Vacation Manager notification. Request reminder.";
-        Email to = new Email(emailRecipient);
-        createMail(from, subject, to, content);
-
-    }
-
-}
