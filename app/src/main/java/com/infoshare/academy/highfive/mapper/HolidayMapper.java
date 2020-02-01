@@ -7,9 +7,9 @@ import com.infoshare.academy.highfive.view.HolidayView;
 public class HolidayMapper {
 
 
-    public HolidayView mapEntityToView(Holiday holiday) {
+  public HolidayView mapEntityToView(Holiday holiday) {
 
-        return new HolidayView(holiday.getName(), holiday.getDescription(), new HolidayDateView(holiday), holiday.getTypes());
-    }
+    return new HolidayView(holiday.getName(), holiday.getDescription(), new HolidayDateView(holiday), holiday.getTypes());
+  }
 
 }

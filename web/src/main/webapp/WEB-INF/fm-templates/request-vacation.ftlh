@@ -17,9 +17,6 @@
                 </div>
                 <form class="user" action="request-vacation" method="post">
                   <div class="form-group">
-                    <label for="employee_id">Employee ID</label>
-                    <input type="text" class="form-control form-control-user"
-                           id="employee_id" placeholder="Employee ID" required="" pattern="\d*" name="employee_id">
                   </div>
                   <div class="form-group">
                     <label for="date_from">Date from</label>

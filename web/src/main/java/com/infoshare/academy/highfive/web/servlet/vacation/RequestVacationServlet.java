@@ -46,9 +46,7 @@ public class RequestVacationServlet extends HttpServlet {
     resp.setContentType("text/html;charset=UTF-8");
 
     PrintWriter writer = resp.getWriter();
-
     HttpSession session = req.getSession();
-
     Map<String, Object> dataModel = new HashMap<>();
 
     Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
@@ -56,9 +54,8 @@ public class RequestVacationServlet extends HttpServlet {
     dataModel.put("method", req.getMethod());
     dataModel.put("contentTemplate", "request-vacation.ftlh");
     dataModel.put("title", "Request vacation");
-
-    dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
-    dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
+    dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+    dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
 
     LOGGER.info("User provided with vacation form.");
 
@@ -90,21 +87,29 @@ public class RequestVacationServlet extends HttpServlet {
 
     LOGGER.debug("Status {}", vacationService.getStatus());
 
+    HttpSession session = req.getSession();
+
     if (vacationService.getStatus().equals("ok")) {
 
       dataModel.put("contentTemplate", "request-vacation-success.ftlh");
       dataModel.put("title", "Success!");
+      dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+      dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
       mailSender.sendNotification("jjdd8highfive@gmail.com");
 
     } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
 
       dataModel.put("contentTemplate", "request-vacation-exceeding-entitlement.ftlh");
       dataModel.put("title", "Given days are exceeding entitlement.");
+      dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+      dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
 
     } else {
 
       dataModel.put("contentTemplate", "request-vacation-wrong-date.ftlh");
       dataModel.put("title", "Wrong dates given.");
+      dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+      dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
 
     }
 

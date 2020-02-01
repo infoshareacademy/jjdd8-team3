@@ -11,35 +11,39 @@ import java.util.Optional;
 @Stateless
 public class EmployeeDao {
 
-    @PersistenceContext
-    EntityManager entityManager;
+  @PersistenceContext
+  EntityManager entityManager;
 
-    public void save(Employee employee) { entityManager.persist(employee); }
+  public void save(Employee employee) {
+    entityManager.persist(employee);
+  }
 
-    public Optional<Employee> getById(Long id) {
-        return Optional.ofNullable(entityManager.find(Employee.class, id));
-    }
+  public Optional<Employee> getById(Long id) {
+    return Optional.ofNullable(entityManager.find(Employee.class, id));
+  }
 
-    public Employee findById(Long id) {
-        return entityManager.find(Employee.class, id);
-    }
+  public Employee findById(Long id) {
+    return entityManager.find(Employee.class, id);
+  }
 
-    public Employee getByEmail(String email) {
-       return (Employee) this.entityManager.createNamedQuery("Employee.findByEmail").setParameter("email",email).getResultStream().findFirst().orElse(null);
-    }
+  public Employee getByEmail(String email) {
+    return (Employee) this.entityManager.createNamedQuery("Employee.findByEmail").setParameter("email", email).getResultStream().findFirst().orElse(null);
+  }
 
-    public List<Employee> listAllEmployees() {
-        return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
-    }
+  public List<Employee> listAllEmployees() {
+    return this.entityManager.createNamedQuery("Employee.findAll").getResultList();
+  }
 
-    public void update(Employee employee) { entityManager.merge(employee); }
+  public void update(Employee employee) {
+    entityManager.merge(employee);
+  }
 
-    public Employee delete(Long id) {
+  public Employee delete(Long id) {
 
-        Employee removedEmployee = getById(id).orElseThrow();
-        entityManager.remove(removedEmployee);
+    Employee removedEmployee = getById(id).orElseThrow();
+    entityManager.remove(removedEmployee);
 
-        return removedEmployee;
-    }
+    return removedEmployee;
+  }
 
 }
