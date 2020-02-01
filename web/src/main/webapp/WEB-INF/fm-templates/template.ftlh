@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="HIGH-FIVE">
+    <meta name="google-signin-client_id"
+          content="326852231702-jbh7kmdv8q7kd4dj8c3rancldhc1das1.apps.googleusercontent.com">
     <#if title??>
         <title>${title!}</title>
     <#else>
@@ -70,11 +72,11 @@
             </a>
             <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/list-holidays">Holiday - List</a>
-                    <a class="collapse-item" href="/calendar">Calendar</a>
-                    <a class="collapse-item" href="/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/statistics">Statistics</a>
-                    <a class="collapse-item" href="/list-teams">Teams - list</a>
+                    <a class="collapse-item" href="/employee/list-holidays">Holiday - List</a>
+                    <a class="collapse-item" href="/employee/calendar">Calendar</a>
+                    <a class="collapse-item" href="/employee/holiday-search">Holiday search</a>
+                    <a class="collapse-item" href="/employee/statistics">Statistics</a>
+                    <a class="collapse-item" href="/employee/list-teams">Teams - list</a>
                     <a class="collapse-item" href="/blank">Team vacation</a>
                     <a class="collapse-item" href="/blank">Employee vacation</a>
 
@@ -262,7 +264,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><#if loggedEmployee??>${loggedEmployee.firstName!} ${loggedEmployee.surname!}</#if></span>
                             <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
                             <i class="fas fa-user-tie"></i>
                         </a>
@@ -324,7 +326,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login.html">Logout</a>
+                    <a class="btn btn-primary" onclick="signOut()" href="#">Logout</a>
                 </div>
             </div>
         </div>
@@ -345,7 +347,6 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
-                    <#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
                 </div>
             </div>
         </div>
@@ -367,7 +368,6 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
-<#--                    <a class="btn btn-primary" href="/login.html">Logout</a>-->
                 </div>
             </div>
         </div>
@@ -384,12 +384,28 @@
     <script src="/js/sb-admin-2.min.js"></script>
 
     <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
     <script>
         $('.form-control-date').datepicker({
             clearBtn: false,
             format: "yyyy-mm-dd"
         });
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                window.location.href = "/login?logout=true";
+            });
+        }
+
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+
+
     </script>
 
 <#--    <#if adminmanager??>-->
@@ -398,6 +414,7 @@
     <#--    <#if adminmanager??>-->
     <script src="/js/bootstrap-year-calendar_v2.js"></script>
     <script src="/js/modal-calendar.js"></script>
+
     <#--    </#if>-->
 
     <!-- Page level plugins -->

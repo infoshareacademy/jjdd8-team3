@@ -54,6 +54,16 @@ public class EmployeeService {
         return this.employeeMapper.mapEntityToView(employee);
     }
 
+
+    public EmployeeView findByEmail(String email) {
+        Employee employee = employeeDao.getByEmail(email);
+        if (employee == null){
+            return null;
+        }
+        return this.employeeMapper.mapEntityToView(employee);
+    }
+
+
   public int listAllSize() {
     return employeeDao.listAllEmployees().size();
   }

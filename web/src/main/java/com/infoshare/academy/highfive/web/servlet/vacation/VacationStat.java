@@ -1,4 +1,4 @@
-package com.infoshare.academy.highfive.web.servlet;
+package com.infoshare.academy.highfive.web.servlet.vacation;
 
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
 import com.infoshare.academy.highfive.service.EmployeeService;
@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/statistics")
+@WebServlet("/employee/statistics")
 public class VacationStat extends HttpServlet {
 
   Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
@@ -34,7 +33,7 @@ public class VacationStat extends HttpServlet {
   EmployeeService employeeService;
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
 
     resp.setContentType("text/html;charset=UTF-8");
 

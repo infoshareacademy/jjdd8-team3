@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/search-by-date")
+@WebServlet("/employee/search-by-date")
 public class SearchHolidayByDateServlet extends HttpServlet {
 
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
@@ -34,7 +33,7 @@ public class SearchHolidayByDateServlet extends HttpServlet {
     @Inject
     HolidayService holidayService;
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
         PrintWriter writer = resp.getWriter();
@@ -59,12 +58,12 @@ public class SearchHolidayByDateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String dateFrom = req.getParameter("date-from");
         String dateTo = req.getParameter("date-to");
 
         List<HolidayView> holidays = null;
-        Boolean validInputs = false;
+        boolean validInputs = false;
 
         LOGGER.info("Checking date format from inputs!");
 

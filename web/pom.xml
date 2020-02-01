@@ -20,9 +20,9 @@
     <dependencies>
       <!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
         <dependency>
-            <groupId>com.google.oauth-client</groupId>
-            <artifactId>google-oauth-client</artifactId>
-            <version>1.30.5</version>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-oauth2</artifactId>
+            <version>v2-rev151-1.25.0</version>
         </dependency>
       <dependency>
         <groupId>com.sendgrid</groupId>
