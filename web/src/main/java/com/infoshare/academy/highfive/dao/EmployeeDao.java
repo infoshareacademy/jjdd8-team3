@@ -41,4 +41,8 @@ public class EmployeeDao {
 
         return removedEmployee;
     }
+
+    public Employee getByEmail(String email) {
+        return (Employee) this.entityManager.createNamedQuery("Employee.findByEmail").setParameter("email",email).getSingleResult();
+    }
 }

@@ -19,7 +19,7 @@
           <thead>
           <tr>
             <th>Action</th>
-            <th>Fist Name</th>
+            <th>Name</th>
             <th>Surname</th>
             <th>Position</th>
             <th>Role</th>
@@ -29,7 +29,7 @@
           <tfoot>
           <tr>
             <th>Action</th>
-            <th>Fist Name</th>
+            <th>Name</th>
             <th>Surname</th>
             <th>Position</th>
             <th>Role</th>
@@ -45,7 +45,7 @@
                   <a href="#" class="btn btn-danger btn-circle btn-sm" onclick="deleteEmployee(${employee.id!})">
                   <i class="fas fa-trash"></i></a>
               </td>
-              <td>${employee.first_name!}</td>
+              <td>${employee.firstName!}</td>
               <td>${employee.surname!}</td>
               <td>${employee.position!}</td>
               <td>${employee.role!}</td>
