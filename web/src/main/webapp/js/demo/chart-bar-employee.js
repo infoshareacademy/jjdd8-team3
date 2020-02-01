@@ -10,7 +10,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
         sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
         dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
         s = '',
-        toFixedFix = function(n, prec) {
+        toFixedFix = function (n, prec) {
             var k = Math.pow(10, prec);
             return '' + Math.round(n * k) / k;
         };
@@ -26,10 +26,11 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
-dataFromApi=[];
+vacTakenFromApi = [];
+labelsFromApi = [];
 $.ajax({
     type: "GET",
-    url: "/api/vacation/admin/popular-months",
+    url: "/api/vacation/admin/taken-by-employee",
     enctype: 'application/json;charset=UTF-8',
     dataType: 'json',
     contentType: 'application/json;charset=UTF-8'
@@ -37,14 +38,18 @@ $.ajax({
     .done(
         function (data) {
             $.each(data, function (i, item) {
-                vacCount = item.vacation_days_count;
-                dataFromApi.push(
-                    vacCount
+                vacTaken = item.vacation_taken;
+                varLabel = item.first_name + " " + item.second_name;
+                vacTakenFromApi.push(
+                    vacTaken
                 );
-                //$('#alert-list').show();
+                labelsFromApi.push(
+                    varLabel
+                );
             });
-            myBarChart.config.data.datasets[0].data=dataFromApi; // Would update the first dataset's value of 'March' to be 50
-            myBarChart.update();
+            myBarEmployee.config.data.datasets[0].data = vacTakenFromApi; // Would update the first dataset's value of 'March' to be 50
+            myBarEmployee.config.data.labels = labelsFromApi; // Would update the first dataset's value of 'March' to be 50
+            myBarEmployee.update();
         })
     .fail(
         function () {
@@ -54,17 +59,17 @@ $.ajax({
 
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
+var ctx = document.getElementById("myBarEmployee");
+var myBarEmployee = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        labels: labelsFromApi,
         datasets: [{
-            label: "Holidays",
-            backgroundColor: "#4e73df",
-            hoverBackgroundColor: "#2e59d9",
+            label: "Vacation taken",
+            backgroundColor: "#698819",
+            hoverBackgroundColor: "#1b6316",
             borderColor: "#4e73df",
-            data: dataFromApi,
+            data: vacTakenFromApi,
         }],
     },
     options: {
@@ -79,26 +84,23 @@ var myBarChart = new Chart(ctx, {
         },
         scales: {
             xAxes: [{
-                time: {
-                    unit: 'month'
-                },
                 gridLines: {
                     display: false,
                     drawBorder: false
                 },
                 ticks: {
-                    maxTicksLimit: 12
+                    maxTicksLimit:5
                 },
-                maxBarThickness: 55,
+                maxBarThickness: 40,
             }],
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 50,
+                    max: 30,
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
-                    callback: function(value, index, values) {
+                    callback: function (value, index, values) {
                         return number_format(value);
                     }
                 },
@@ -127,7 +129,7 @@ var myBarChart = new Chart(ctx, {
             displayColors: false,
             caretPadding: 10,
             callbacks: {
-                label: function(tooltipItem, chart) {
+                label: function (tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                     return datasetLabel + ': Total days ' + number_format(tooltipItem.yLabel);
                 }

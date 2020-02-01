@@ -1,17 +1,44 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
+Chart.defaults.global.defaultFontColor = '#535562';
+
+ratioFromApi=[];
+$.ajax({
+  type: "GET",
+  url: "/api/vacation/admin/approved-denied-ratio",
+  enctype: 'text/html; charset=UTF-8',
+  dataType: 'json',
+  contentType: 'text/html; charset=UTF-8'
+})
+    .done(
+        function (data) {
+            ratio = data;
+            calcRatio = 100 - ratio;
+            ratioFromApi.push(
+                parseFloat(ratio).toFixed(2)
+            );
+            ratioFromApi.push(
+                parseFloat(calcRatio).toFixed(2)
+            );
+          myPieRatio.config.data.datasets[0].data=ratioFromApi; // Would update the first dataset's value of 'March' to be 50
+          myPieRatio.update();
+        })
+    .fail(
+        function () {
+          $('#modal-info-body').html("Ups... API request data Operation failed!!!");
+          $('#infoModal').modal('show');
+        });
 
 // Pie Chart Example
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
+var ctx = document.getElementById("myPieRatio");
+var myPieRatio = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["Approved", "Denied"],
     datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      data: ratioFromApi,
+      backgroundColor: ['#1cc88a','#4e73df'],
+      hoverBackgroundColor: ['#17a673','#2e59d9'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
@@ -28,8 +55,8 @@ var myPieChart = new Chart(ctx, {
       caretPadding: 10,
     },
     legend: {
-      display: false
+      display: true
     },
-    cutoutPercentage: 80,
+    cutoutPercentage: 60,
   },
 });
