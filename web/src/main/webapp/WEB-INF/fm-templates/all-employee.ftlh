@@ -13,7 +13,7 @@
           <thead>
           <tr>
             <th>Action</th>
-            <th>Fist Name</th>
+            <th>Name</th>
             <th>Surname</th>
             <th>Position</th>
             <th>Role</th>
@@ -23,7 +23,7 @@
           <tfoot>
           <tr>
             <th>Action</th>
-            <th>Fist Name</th>
+            <th>Name</th>
             <th>Surname</th>
             <th>Position</th>
             <th>Role</th>
@@ -33,7 +33,7 @@
           <tbody>
           <#list employees as employee>
             <tr>
-              <td>${employee.first_name!}</td>
+              <td>${employee.firstName!}</td>
               <td>${employee.surname!}</td>
               <td>${employee.position!}</td>
               <td>${employee.role.getRole!}</td>

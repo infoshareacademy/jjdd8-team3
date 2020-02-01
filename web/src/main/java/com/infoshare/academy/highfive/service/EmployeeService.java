@@ -29,7 +29,6 @@ public class EmployeeService {
     public void save(EmployeeRequest request) {
         employeeDao.save(employeeMapper.mapRequestToEntity(request));
         entitlementDao.save(entitlementMapper.mapRequestToEntity(request));
-//        entitlementDao.setEmployeeId
 
     }
 
