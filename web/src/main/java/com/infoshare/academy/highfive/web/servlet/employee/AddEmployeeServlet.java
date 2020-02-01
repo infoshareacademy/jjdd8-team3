@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class AddEmployeeServlet extends HttpServlet {
         }
 
         PrintWriter writer = resp.getWriter();
-
+        HttpSession session = req.getSession();
         Map<String, Object> dataModel = new HashMap<>();
 
         Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
@@ -67,6 +68,9 @@ public class AddEmployeeServlet extends HttpServlet {
         dataModel.put("roles", Role.values());
         dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-add-employee.ftlh");
+
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
         LOGGER.info("User (manager) provided with new employee adding form.");
 

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -37,6 +38,7 @@ public class SearchHolidayByDateServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         PrintWriter writer = resp.getWriter();
+        HttpSession session = req.getSession();
 
         Map<String, Object> dataModel = new HashMap<>();
 
@@ -47,6 +49,9 @@ public class SearchHolidayByDateServlet extends HttpServlet {
         dataModel.put("title", "Search result by date");
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
+
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
         try {
             template.process(dataModel, writer);
@@ -82,7 +87,7 @@ public class SearchHolidayByDateServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
-
+        HttpSession session = req.getSession();
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "holiday-search-result.ftlh");
         dataModel.put("title", "Search result by date");
@@ -91,6 +96,9 @@ public class SearchHolidayByDateServlet extends HttpServlet {
         dataModel.put("validInputs", validInputs);
         dataModel.put("searchType", "by date");
         dataModel.put("holidays", holidays);
+
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
         try {
             template.process(dataModel, writer);

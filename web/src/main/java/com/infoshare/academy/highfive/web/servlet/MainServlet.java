@@ -22,49 +22,54 @@ import java.util.Map;
 @WebServlet("")
 public class MainServlet extends HttpServlet {
 
-  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
+    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-  @Inject
-  private TemplateProvider templateProvider;
+    @Inject
+    private TemplateProvider templateProvider;
 
-  @Inject
-  VacationService vacationService;
+    @Inject
+    VacationService vacationService;
 
-  @Inject
-  EmployeeService employeeService;
+    @Inject
+    EmployeeService employeeService;
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-    resp.setContentType("text/html;charset=UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
 
-    HttpSession session = req.getSession();
+        HttpSession session = req.getSession();
 
-    PrintWriter writer = resp.getWriter();
+        if (session.getAttribute("userEmail") == null) {
+          resp.sendRedirect("/login");
+        }
 
-    Map<String, Object> dataModel = new HashMap<>();
+        PrintWriter writer = resp.getWriter();
 
-    Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+        Map<String, Object> dataModel = new HashMap<>();
 
-    dataModel.put("method", req.getMethod());
-    dataModel.put("contentTemplate", "main-content.ftlh");
-    dataModel.put("title", "Vacation Manager");
-    dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
-    dataModel.put("currentMonthTotal", vacationService.getDashboardStatistic().getCurrentMonthTotal());
-    dataModel.put("nextMonthTotal", vacationService.getDashboardStatistic().getNextMonthTotal());
-    dataModel.put("absentToday", vacationService.getDashboardStatistic().getAbsentToday());
-    dataModel.put("totalEmployees", employeeService.listAllSize());
-    dataModel.put("pendingRequests", vacationService.getDashboardStatistic().getPendingRequests());
-    dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
-    dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
+        Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
-    try {
-      template.process(dataModel, writer);
-    } catch (
-      TemplateException e) {
-      LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
+        dataModel.put("method", req.getMethod());
+        dataModel.put("contentTemplate", "main-content.ftlh");
+        dataModel.put("title", "Vacation Manager");
+        dataModel.put("pluginJsTemplate", "plugin-js-main-content.ftlh");
+        dataModel.put("currentMonthTotal", vacationService.getDashboardStatistic().getCurrentMonthTotal());
+        dataModel.put("nextMonthTotal", vacationService.getDashboardStatistic().getNextMonthTotal());
+        dataModel.put("absentToday", vacationService.getDashboardStatistic().getAbsentToday());
+        dataModel.put("totalEmployees", employeeService.listAllSize());
+        dataModel.put("pendingRequests", vacationService.getDashboardStatistic().getPendingRequests());
+
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+        dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
+
+        try {
+            template.process(dataModel, writer);
+        } catch (
+                TemplateException e) {
+            LOGGER.warn("Issue with processing Freemarker template.{}", e.getMessage());
+        }
+
     }
-
-  }
 
 }
