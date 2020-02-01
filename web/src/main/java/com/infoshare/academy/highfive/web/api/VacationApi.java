@@ -1,7 +1,6 @@
 package com.infoshare.academy.highfive.web.api;
 
 import com.infoshare.academy.highfive.dto.view.EmployeeView;
-import com.infoshare.academy.highfive.exception.NotAuthorizedException;
 import com.infoshare.academy.highfive.service.VacationService;
 
 import javax.inject.Inject;
@@ -61,7 +60,7 @@ public class VacationApi {
   @GET
   @Path("/employee/vacation-dates/{start}{end}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getVacationDates(@Context HttpServletRequest httpRequest, @PathParam("start") String start, @PathParam("end") String end) throws NotAuthorizedException {
+  public Response getVacationDates(@Context HttpServletRequest httpRequest, @PathParam("start") String start, @PathParam("end") String end) {
 
     HttpSession session = httpRequest.getSession();
     EmployeeView employee = (EmployeeView) session.getAttribute("loggedEmployee");
