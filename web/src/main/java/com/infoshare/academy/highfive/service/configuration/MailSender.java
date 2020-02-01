@@ -1,49 +1,77 @@
 package com.infoshare.academy.highfive.service.configuration;
 
-import com.sendgrid.Method;
-import com.sendgrid.Request;
-import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
-import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RequestScoped
 public class MailSender {
 
+    private static final String MAIL_TRANSPORT_PROTOCOL = "smtp";
     Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-    private void createMail(Email from, String subject, Email to, Content content) throws IOException {
-        Mail mail = new Mail(from, subject, to, content);
+    @EJB
+    private PropertiesLoaderService propertiesLoaderService;
 
-//        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
-//        https://www.sendinblue.com/
-//        https://mailchimp.com/
-        SendGrid sg = new SendGrid("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");
-        Request request = new Request();
-        request.setMethod(Method.POST);
-        request.setEndpoint("mail/send");
-        request.setBody(mail.build());
-        Response response = sg.api(request);
-        LOGGER.info("{}", response.getStatusCode());
-        LOGGER.info("{}", response.getBody());
-        LOGGER.info("{}", response.getHeaders());
-    }
+    public void sendMessage(List<String> recipients, String subject, String emailContent)
+            throws MessagingException {
+
+        try {
+            Session getMailSession = Session
+                    .getDefaultInstance(propertiesLoaderService.loadMailProperties(), null);
+
+            MimeMessage generateMailMessage = new MimeMessage(getMailSession);
+
+            for (String recipient : recipients) {
+                generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            }
+            generateMailMessage.setSubject(subject);
+            generateMailMessage.setContent(emailContent, "text/html");
+
+            Transport transport = getMailSession.getTransport(MAIL_TRANSPORT_PROTOCOL);
+
+            String username = propertiesLoaderService.loadCredentialsProperties()
+                    .getProperty("user.name");
+            String password = propertiesLoaderService.loadCredentialsProperties()
+                    .getProperty("user.password");
+            String server = propertiesLoaderService.loadServerProperties().getProperty("mail.smtp.host");
+
+            LOGGER.info("Email send to {}", username);
+            transport.connect(server, username, password);
+            transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+            transport.close();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+        }
 
     public void sendApprove(String emailRecipient) throws IOException {
 
-        Email from = new Email("Vacation-Manager@HighFive.com");
-        String subject = "Vacation Manager notification. Your request has been approved.";
-        Email to = new Email(emailRecipient);
-        Content content = new Content("text/plain", "Please be informed your vacation request has been approved.");
-        createMail(from, subject, to, content);
+            Optional<String> emailOpt = Optional
+                    .ofNullable(req.getSession().getAttribute("email").toString());
+            String email = emailOpt.get();
+            User user = userService.getUserByEmail(email);
 
-    }
+            reservationService.newReservation(idParam, email);
+            List<String> recipients = new ArrayList<>();
+            recipients.add(email);
+            String subject = "Rezerwacja książki " + "\"" + book.getTitle() + "\"";
+            emailSenderService.sendMessage(recipients, subject);
+
+        }
 
     public void sendReject(String emailRecipient) throws IOException {
 
