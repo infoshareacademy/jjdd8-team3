@@ -10,7 +10,9 @@ public enum Role {
 
     MANAGER("Manager", true),
 
-    EMPLOYEE("Employee", true);
+    EMPLOYEE("Employee", true),
+
+    AAA("AAA", true);
 
     @JsonValue
     private final String role;

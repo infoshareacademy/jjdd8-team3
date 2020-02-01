@@ -4,13 +4,20 @@ import com.infoshare.academy.highfive.domain.Role;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
 @WebFilter(filterName = "EmployeeAuthorizationFilter",
-        urlPatterns = {"*/employee/*"})
+        urlPatterns = {"*/employee/*"}
+                ,
+        initParams = {
+        @WebInitParam(name = "loggedEmployeeRole", value = "employee")
+        }
+        )
 public class EmployeeAuthorizationFilter implements Filter {
 
     @Override

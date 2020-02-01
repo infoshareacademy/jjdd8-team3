@@ -4,13 +4,17 @@ import com.infoshare.academy.highfive.domain.Role;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
 @WebFilter(filterName = "AdminAuthorizationFilter",
-        urlPatterns = {"*/admin/*"})
+        urlPatterns = {"/admin/*"}
+        , initParams = {
+        @WebInitParam(name = "loggedEmployeeRole", value = "admin")
+})
 public class AdminAuthorizationFilter implements Filter {
 
     @Override
@@ -26,7 +30,7 @@ public class AdminAuthorizationFilter implements Filter {
 
         Role role = Role.valueOf(session.getAttribute("loggedEmployeeRole").toString());
 
-        if (role == Role.ADMIN){
+        if (role == Role.ADMIN) {
             chain.doFilter(mainRequest, mainResponse);
         } else {
             destroy();
