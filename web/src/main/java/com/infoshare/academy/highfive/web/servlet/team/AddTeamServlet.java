@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class AddTeamServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        HttpSession session = req.getSession();
         String action = req.getParameter("action");
         String id = req.getParameter("get");
 
@@ -58,6 +60,8 @@ public class AddTeamServlet extends HttpServlet {
         dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-add-team.ftlh");
 
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
         try {
             template.process(dataModel, writer);
         } catch (

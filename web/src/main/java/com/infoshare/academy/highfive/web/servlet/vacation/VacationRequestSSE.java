@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -29,6 +30,7 @@ public class VacationRequestSSE extends HttpServlet {
         mapper.writer().withDefaultPrettyPrinter();
         resp.setContentType("text/event-stream");
         resp.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession();
 
         List<VacationSSE> vacationSSE = vacationService.listAllPendingRequestsSSE()
                 .stream()
