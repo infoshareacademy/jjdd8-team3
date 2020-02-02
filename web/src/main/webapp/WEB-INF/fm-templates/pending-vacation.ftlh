@@ -19,7 +19,7 @@
             <th>End date</th>
             <th>Vacation type</th>
             <th>Approve</th>
-            <th>Deny</th>
+            <th>Reject</th>
           </tr>
           </thead>
           <tfoot>
@@ -31,7 +31,7 @@
             <th>End date</th>
             <th>Vacation type</th>
             <th>Approve</th>
-            <th>Deny</th>
+            <th>Reject</th>
           </tr>
           </tfoot>
           <tbody>
@@ -43,15 +43,15 @@
               <td>${vacation.vacationFrom!}</td>
               <td>${vacation.vacationTo!}</td>
               <td>${vacation.vacationType!}</td>
-              <td>
-                <form class="user" action="approve-request" method="post">
-                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Approve
-                  </button>
-                </form>
+              <form class="user" action="approve-request" method="post">
+                <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Approve
+                </button>
+              </form>
               </td>
               <td>
                 <form class="user" action="reject-request" method="post">
-                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Deny</button>
+                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Reject
+                  </button>
                 </form>
               </td>
             </tr>

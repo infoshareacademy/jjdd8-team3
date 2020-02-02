@@ -15,12 +15,30 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Request vacation</h1>
                 </div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                  <tr>
+                    <th>Vacation</th>
+                    <th>On demand</th>
+                    <th>Parental</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>${entitlementVacation} left</td>
+                    <td>${entitlementOnDemand} left</td>
+                    <td>${entitlementParental} left</td>
+                  </tr>
+                  </tbody>
+                </table>
                 <form class="user" action="request-vacation" method="post">
                   <div class="form-group">
                   </div>
                   <div class="form-group">
                     <label for="date_from">Date from</label>
-                    <input type="text" class="form-control form-control-user form-control-date" title = "please insert correct date format YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                    <input type="text" class="form-control form-control-user form-control-date"
+                           title="please insert correct date format YYYY-MM-DD"
+                           pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
                            name="date_from" required="" placeholder="2020-01-01" id="date_from">
                   </div>
                   <div class="form-group">
