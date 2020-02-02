@@ -21,8 +21,6 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-
 
 </head>
 
@@ -48,15 +46,14 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome </h1>
-                                    <h3>Vacation Manager by HighFive team</h3>
+                                    <h1 class="h4 text-gray-900 mb-4">Vacation Manager by HighFive team</h1>
+                                    <h3>Who are you ???</h3>
                                 </div>
-                                <form class="user">
                                     <div class="form-group">
-                                        <div class="g-signin2" data-width="350" data-height="50" data-longtitle="true"
-                                             data-onsuccess="onSignIn"></div>
+                                        <a href="#"  onclick="signOut()" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i>Try again to Login with Google
+                                        </a>
                                     </div>
-                                </form>
                                 <hr>
                             </div>
                         </div>
@@ -73,26 +70,30 @@
 <script src="js/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-<script src="js/jquery.easing.min.js"></script>
+<!--<script src="js/jquery.easing.min.js"></script>-->
 
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-<script>
+<!--<script src="js/sb-admin-2.min.js"></script>-->
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+<script type="application/javascript">
 
-    function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-
-        var form = $('<form action="/login" method="post">' +
-            '<input type="text" name="idToken" value="' +
-            id_token + '" />' +
-            '</form>');
-        $('body').append(form);
-        form.submit();
+    function signOut() {
+        auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            window.location.href = "/login";
+        });
+        auth2.disconnect();
     }
+
+    function onLoad() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init();
+        });
+    }
+
+
 </script>
-
-
 </body>
 
 </html>

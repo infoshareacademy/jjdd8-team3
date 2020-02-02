@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         HttpSession session = req.getSession();
-        Object loggedUser = session.getAttribute("loggedUser");
+
 
         if (req.getParameter("logout") != null) {
 
@@ -53,8 +55,8 @@ public class LoginServlet extends HttpServlet {
 
         }
 
-        if (session.getAttribute("loggedUser") != null) {
-
+        if (req.getSession().getAttribute("loggedUser") != null) {
+            Object loggedUser = session.getAttribute("loggedUser");
             LOGGER.info("Already logged user!");
             resp.sendRedirect("/");
 
@@ -74,16 +76,14 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
-
                 .setAudience(Collections.singletonList("326852231702-jbh7kmdv8q7kd4dj8c3rancldhc1das1.apps.googleusercontent.com"))
-
                 .build();
 
         String idTokenString = req.getParameter("idToken");
@@ -121,16 +121,18 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("userEmail", email);
                     session.setAttribute("loggedEmployee", employeeView);
                     session.setAttribute("loggedEmployeeRole", employeeView.getRole());
-                } else{
-                    resp.sendRedirect("/login?logout=true");
+
+                } else {
+                    RequestDispatcher rd = req.getRequestDispatcher("/error.html");
+                    rd.forward(req, resp);
                 }
 
             }
 
+
         } else {
             LOGGER.info("Invalid ID token.");
-            String info = "Invalid ID token.";
-            resp.sendRedirect("/404.html");
+            resp.sendRedirect("/error.html");
         }
 
         resp.sendRedirect("/");
