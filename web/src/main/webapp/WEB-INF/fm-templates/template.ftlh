@@ -70,43 +70,43 @@
                 <i class="fas fa-calendar-alt"></i>
                 <span>Review</span>
             </a>
-            <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/employee/list-holidays">Holiday - List</a>
-                    <a class="collapse-item" href="/employee/calendar">Calendar</a>
-                    <a class="collapse-item" href="/employee/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation search</a>
-                </div>
+          <div id="reviewMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="/employee/list-holidays">Holiday - List</a>
+              <a class="collapse-item" href="/employee/calendar">Calendar</a>
+              <a class="collapse-item" href="/employee/holiday-search">Holiday search</a>
+              <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation search</a>
             </div>
+          </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#requestMenu"
-               aria-expanded="true" aria-controls="requestMenu">
-                <i class="fas fa-file-alt"></i>
-                <span>Requests</span>
-            </a>
-            <div id="requestMenu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/employee/request-vacation">Request vacation</a>
-                    <a class="collapse-item" href="/blank">Withdraw request</a>
-                </div>
-            </div>
-        </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#requestMenu"
+           aria-expanded="true" aria-controls="requestMenu">
+          <i class="fas fa-file-alt"></i>
+          <span>Requests</span>
+        </a>
+        <div id="requestMenu" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/employee/request-vacation">Request vacation</a>
+            <a class="collapse-item" href="/employee/withdraw-request">Withdraw request</a>
+          </div>
+        </div>
+      </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-        <#if loggedEmployeeRole?? && (loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN")>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      <#if loggedEmployeeRole?? && (loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN")>
         <!-- Heading -->
         <div class="sidebar-heading">
-            Manager
+          Manager
         </div>
         <!-- Approve requests -->
         <li class="nav-item">
-            <a class="nav-link" href="/manager/pending-requests">
-                <i class="fas fa-hourglass-start"></i>
-                <span>Pending requests</span></a>
+          <a class="nav-link" href="/manager/pending-requests">
+            <i class="fas fa-hourglass-start"></i>
+            <span>Pending requests</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/employee/statistics">
