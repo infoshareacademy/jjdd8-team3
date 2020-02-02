@@ -40,7 +40,7 @@ public class VacationMapper {
     vacationView.setVacationFrom(vacationEntity.getVacationFrom());
     vacationView.setVacationTo(vacationEntity.getVacationTo());
     vacationView.setDateOfRequest(vacationEntity.getDateOfRequest());
-    vacationView.setVacationType(vacationEntity.getVacationType());
+    vacationView.setVacationType(vacationEntity.getVacationType().getVacationType());
     vacationView.setVacationStatus(vacationEntity.getVacationStatus());
 
     return vacationView;

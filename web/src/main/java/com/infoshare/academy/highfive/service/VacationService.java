@@ -206,6 +206,40 @@ public class VacationService {
 
     } else {
 
+      Entitlement entitlement = entitlementDao.getEntitlementByEmployeeId(vacation.getEmployee());
+      List<LocalDate> vacationDaysList = creatingVacationDaysListToReturn(vacation);
+      int daysOff = calculatingDaysAmount(vacationDaysList);
+      int vacationTaken = entitlement.getVacationTaken();
+      entitlement.setVacationTaken(vacationTaken - daysOff);
+      entitlementDao.save(entitlement);
+
+      vacationDaysList.forEach(day -> {
+        Statistic statisticMonth = statisticDao.getStatisticByMonth(day.getMonthValue());
+        long vacationDaysCount = statisticMonth.getVacationDaysCount();
+        statisticMonth.setVacationDaysCount(vacationDaysCount - 1);
+        statisticDao.saveStatistic(statisticMonth);
+      });
+
+      if (vacation.getVacationType().equals(VacationType.VACATION)) {
+
+        int vacationLeft = entitlement.getVacationLeft();
+        entitlement.setVacationLeft(vacationLeft + daysOff);
+        entitlementDao.save(entitlement);
+
+      } else if (vacation.getVacationType().equals(VacationType.ON_DEMAND)) {
+
+        int onDemandLeft = entitlement.getOnDemandVacationLeft();
+        entitlement.setOnDemandVacationLeft(onDemandLeft + daysOff);
+        entitlementDao.save(entitlement);
+
+      } else if (vacation.getVacationType().equals(VacationType.PARENTAL)) {
+
+        int parentalLeft = entitlement.getAdditionalLeft();
+        entitlement.setAdditionalLeft(parentalLeft + daysOff);
+        entitlementDao.save(entitlement);
+
+      }
+
       mailSender.sendReject(vacation.getEmployee().getEmail());
 
     }
