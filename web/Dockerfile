@@ -1,7 +1,5 @@
 FROM jboss/wildfly
 
-ENV SENDGRID_API_KEY="${HF_SENDGRID_API_KEY}"
-
 RUN /opt/jboss/wildfly/bin/add-user.sh -s -u admin -p admin
 
 ADD standalone.conf /opt/jboss/wildfly/bin
