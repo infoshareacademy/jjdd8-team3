@@ -100,12 +100,14 @@ public class EmployeeVacationSearchServlet extends HttpServlet {
     dataModel.put("contentTemplate", "vacation-search-result.ftlh");
     dataModel.put("title", "Search result by date");
     dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
-    dataModel.put("pluginJsTemplate", "plugin-js-servlets.ftlh");
+    dataModel.put("pluginJsTemplate", "plugin-js-vacasion-search.ftlh");
     dataModel.put("validInputs", validInputs);
     dataModel.put("searchType", "by date");
     dataModel.put("vacations", vacationViewList);
     dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
     dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
+    dataModel.put("dateFrom", dateFrom);
+    dataModel.put("dateTo", dateTo);
 
     try {
       template.process(dataModel, writer);
