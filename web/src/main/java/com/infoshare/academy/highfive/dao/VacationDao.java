@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dao;
 
+import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Team;
 import com.infoshare.academy.highfive.domain.Vacation;
 import com.infoshare.academy.highfive.domain.VacationStatus;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
@@ -63,6 +65,15 @@ public class VacationDao {
 
   }
 
+  public List<Vacation> findPendingRequest(LocalDateTime olderThen) {
+
+    return entityManager.createNamedQuery("Vacation.findPendingOldRequests")
+            .setParameter("status", VacationStatus.APPLIED)
+            .setParameter("date", olderThen)
+            .getResultList();
+
+  }
+
   public List<Vacation> getAmountOfAbsentNextMonth() {
 
     LocalDate currentTime = LocalDate.now().plusMonths(1);
@@ -91,6 +102,22 @@ public class VacationDao {
       .setParameter("startDate", startDate)
       .setParameter("endDate", endDate)
       .getResultList();
+  }
+
+  public List<Vacation> getVacationByEmployee(Employee employee) {
+    return entityManager
+      .createNamedQuery("Vacation.getAllEmployeeVacation")
+      .setParameter("employee", employee)
+      .setParameter("applied", VacationStatus.APPLIED)
+      .setParameter("approved", VacationStatus.APPROVED)
+      .setParameter("today", LocalDate.now())
+      .getResultList();
+
+  }
+
+  public void removeVacation(Vacation vacation) {
+    entityManager.remove(vacation);
+
   }
 
 }

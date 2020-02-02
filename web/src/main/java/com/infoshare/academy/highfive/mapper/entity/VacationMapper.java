@@ -23,6 +23,7 @@ public class VacationMapper {
     vacationEntity.setVacationType(vacationRequest.getVacationType());
     vacationEntity.setVacationStatus(vacationRequest.getVacationStatus());
     vacationEntity.setDateOfRequest(LocalDateTime.now());
+    vacationEntity.setReminderEmailSent(vacationRequest.getReminderEmailSent());
 
     return vacationEntity;
 
@@ -40,7 +41,7 @@ public class VacationMapper {
     vacationView.setVacationFrom(vacationEntity.getVacationFrom());
     vacationView.setVacationTo(vacationEntity.getVacationTo());
     vacationView.setDateOfRequest(vacationEntity.getDateOfRequest());
-    vacationView.setVacationType(vacationEntity.getVacationType());
+    vacationView.setVacationType(vacationEntity.getVacationType().getVacationType());
     vacationView.setVacationStatus(vacationEntity.getVacationStatus());
 
     return vacationView;
