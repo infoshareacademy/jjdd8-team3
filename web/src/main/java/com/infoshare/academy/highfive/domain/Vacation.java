@@ -23,16 +23,19 @@ import java.time.LocalDateTime;
     "AND (vacation.vacationFrom BETWEEN :firstDayOfMonth AND :lastDayOfMonth " +
     "OR vacation.vacationTo BETWEEN :firstDayOfMonth AND :lastDayOfMonth)"),
   @NamedQuery(name = "Vacation.getByTeamInDateRange", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "JOIN FETCH Employee employee ON vacation.employee = employee " +
-    "JOIN FETCH Team team ON employee.team = team " +
-    "WHERE team = :team " +
-    "AND ((vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
-    "OR (vacation.vacationTo BETWEEN :startDate AND :endDate))"),
-  @NamedQuery(name = "Vacation.getAllVacation", query = "SELECT vacation " +
-    "FROM Vacation vacation " +
-    "WHERE (vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
-    "OR (vacation.vacationTo BETWEEN :startDate AND :endDate)"),
+          "FROM Vacation vacation " +
+          "JOIN FETCH Employee employee ON vacation.employee = employee " +
+          "JOIN FETCH Team team ON employee.team = team " +
+          "WHERE team = :team " +
+          "AND ((vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
+          "OR (vacation.vacationTo BETWEEN :startDate AND :endDate))"),
+        @NamedQuery(name = "Vacation.getAllVacation", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "WHERE (vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
+                "OR (vacation.vacationTo BETWEEN :startDate AND :endDate)"),
+        @NamedQuery(name = "Vacation.findPendingOldRequests", query = "SELECT vacation " +
+                "FROM Vacation vacation " +
+                "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent LIKE '0'")
 })
 
 @Entity
@@ -64,6 +67,17 @@ public class Vacation {
   @Enumerated(EnumType.STRING)
   @Column(name = "vacation_status")
   private VacationStatus vacationStatus;
+
+  @Column(name = "reminder_email_sent")
+  private String reminderEmailSent;
+
+  public String getReminderEmailSent() {
+    return reminderEmailSent;
+  }
+
+  public void setReminderEmailSent(String reminderEmailSent) {
+    this.reminderEmailSent = reminderEmailSent;
+  }
 
   public Long getId() {
     return id;

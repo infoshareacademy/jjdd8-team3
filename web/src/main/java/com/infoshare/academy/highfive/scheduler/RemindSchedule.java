@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.ejb.*;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -38,6 +40,10 @@ public class RemindSchedule {
         LOGGER.info("Created remind schedule been");
         timerService.createTimer(INITIAL_DURATION, INTERVAL_DURATION);
     }
+
+//    @Schedule(hour = "*", minute = "1", second = "*", info = "Every 1 minute timer")
+//    public void requestReminderSchedule() throws IOException {
+//    LOGGER.info("Created remind schedule been");
 
     @Timeout
     public void requestReminderSchedule(Timer timer) throws IOException {

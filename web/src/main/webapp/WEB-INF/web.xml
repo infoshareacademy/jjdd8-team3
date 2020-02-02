@@ -9,12 +9,12 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
   <data-source>
-    <name>java:ds/hfvDS</name>
-    <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-     <url>jdbc:mysql://mysql/hfvdb?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
-<!--        <url>jdbc:mysql://0.0.0.0:3306/hfvdb?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>-->
-    <user>root</user>
-    <password>root</password>
+      <name>java:ds/hfvDS</name>
+      <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
+      <!--     <url>jdbc:mysql://mysql/hfvdb?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>-->
+      <url>jdbc:mysql://0.0.0.0:3306/hfvdb?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+      <user>root</user>
+      <password>root</password>
   </data-source>
 
 </web-app>
