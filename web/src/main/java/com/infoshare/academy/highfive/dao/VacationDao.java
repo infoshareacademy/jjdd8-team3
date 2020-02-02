@@ -8,8 +8,8 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
@@ -108,6 +108,9 @@ public class VacationDao {
     return entityManager
       .createNamedQuery("Vacation.getAllEmployeeVacation")
       .setParameter("employee", employee)
+      .setParameter("applied", VacationStatus.APPLIED)
+      .setParameter("approved", VacationStatus.APPROVED)
+      .setParameter("today", LocalDate.now())
       .getResultList();
 
   }
