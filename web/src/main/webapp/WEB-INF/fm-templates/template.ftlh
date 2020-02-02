@@ -75,7 +75,7 @@
                     <a class="collapse-item" href="/employee/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/employee/calendar">Calendar</a>
                     <a class="collapse-item" href="/employee/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation</a>
+                    <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation search</a>
                 </div>
             </div>
         </li>
@@ -364,7 +364,7 @@
                     </button>
                 </div>
                 <div id="modal-info-body" class="modal-body">
-                    <div id="calendar"></div>
+                    <div id="calendar-modal"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>

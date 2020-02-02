@@ -58,7 +58,7 @@ public class VacationApi {
   }
 
   @GET
-  @Path("/employee/vacation-dates/{start}{end}")
+  @Path("/employee/vacation-dates/{start}/{end}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getVacationDates(@Context HttpServletRequest httpRequest, @PathParam("start") String start, @PathParam("end") String end) {
 

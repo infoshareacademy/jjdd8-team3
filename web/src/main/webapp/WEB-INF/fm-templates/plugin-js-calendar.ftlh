@@ -44,6 +44,7 @@
                     name: '${holiday.name!}',
                     location: '${holiday.description!}',
                     type:'${holiday.holidayType.getType()!}',
+                    typeStyle: 'box',
                     <#if holiday.holidayType.getType() == 'National holiday'>color:'red'<#elseif holiday.holidayType.getType() == 'Custom'>color:'green'<#else>color:'orange'</#if>,
                     startDate: new Date(${holiday.date?substring(0, 4)},${holiday.month-1},${holiday.day}),
                     endDate: new Date(${holiday.date?substring(0, 4)},${holiday.month-1},${holiday.day})

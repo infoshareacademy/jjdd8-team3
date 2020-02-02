@@ -39,6 +39,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+
         HttpSession session = req.getSession();
         Object loggedUser = session.getAttribute("loggedUser");
 
@@ -72,6 +76,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
 
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
 
@@ -124,7 +131,6 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("/404.html");
         }
 
-        resp.setContentType("text/html;charset=UTF-8");
         resp.sendRedirect("/");
 
     }

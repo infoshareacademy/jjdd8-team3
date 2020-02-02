@@ -1,10 +1,10 @@
 $(function () {
 
-    $('#modal-calendar-button').click(function(){
-        $('#calendarModal').modal('show');
+    $('#modal-calendar-search-button').click(function(){
+        $('#calendarModal-search').modal('show');
     });
 
-    $('#calendar-modal').calendar({
+    $('#calendar-modal-search').calendar({
         enableContextMenu: true,
         enableRangeSelection: false,
         weekStart: 1,
@@ -47,6 +47,7 @@ $(function () {
         url: "/api/holiday/list",
         enctype: 'application/json;charset=UTF-8',
         dataType: 'json',
+        async:false,
         contentType: 'application/json;charset=UTF-8'
     })
         .done(
@@ -62,12 +63,43 @@ $(function () {
                         endDate: new Date(item.year, item.month - 1, item.day)
                     });
                 });
-                $('#calendar-modal').data('calendar').setDataSource(dataS);
+
             })
         .fail(
             function () {
                 $('#modal-info-body').html("Ups... Operation failed!!!");
                 $('#infoModal').modal('show');
             });
+
+    var dataEmployee = [];
+    $.ajax({
+        type: "GET",
+        url: "/api/vacation/admin/vacations/2020-01-01/2020-12-31",
+        enctype: 'application/json;charset=UTF-8',
+        dataType: 'json',
+        async: false,
+        contentType: 'application/json;charset=UTF-8'
+    })
+        .done(
+            function (data) {
+                $.each(data, function (i, item) {
+                    dataEmployee.push({
+                        id: item.id,
+                        name: item.first_name + " " +item.surname,
+                        location: item.vacation_status,
+                        type: item.vacation_type,
+                        typeStyle: null,
+                        startDate: new Date(item.vacation_from.year, item.vacation_from.monthValue - 1, item.vacation_from.dayOfMonth),
+                        endDate: new Date(item.vacation_to.year, item.vacation_to.monthValue - 1, item.vacation_to.dayOfMonth)
+                    });
+                });
+            })
+        .fail(
+            function () {
+                $('#modal-info-body').html("Ups... Operation failed!!!");
+                $('#infoModal').modal('show');
+            });
+    dataCalendar = dataS.concat(dataEmployee);
+    $('#calendar-modal-search').data('calendar').setDataSource(dataCalendar);
 
 });
