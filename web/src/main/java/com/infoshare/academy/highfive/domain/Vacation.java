@@ -33,6 +33,9 @@ import java.time.LocalDateTime;
     "FROM Vacation vacation " +
     "WHERE ((:startDate BETWEEN vacation.vacationFrom AND vacation.vacationTo) " +
     "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo))"),
+  @NamedQuery(name = "Vacation.findPendingOldRequests", query = "SELECT vacation " +
+    "FROM Vacation vacation " +
+    "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent LIKE '0'")
 })
 
 @Entity
@@ -64,6 +67,17 @@ public class Vacation {
   @Enumerated(EnumType.STRING)
   @Column(name = "vacation_status")
   private VacationStatus vacationStatus;
+
+  @Column(name = "reminder_email_sent")
+  private String reminderEmailSent;
+
+  public String getReminderEmailSent() {
+    return reminderEmailSent;
+  }
+
+  public void setReminderEmailSent(String reminderEmailSent) {
+    this.reminderEmailSent = reminderEmailSent;
+  }
 
   public Long getId() {
     return id;
