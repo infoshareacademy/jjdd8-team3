@@ -8,6 +8,7 @@ import com.infoshare.academy.highfive.domain.VacationStatus;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -61,6 +62,15 @@ public class VacationDao {
       .setParameter("firstDayOfMonth", currentTime.withDayOfMonth(1))
       .setParameter("lastDayOfMonth", currentTime.withDayOfMonth(currentTime.lengthOfMonth()))
       .getResultList();
+
+  }
+
+  public List<Vacation> findPendingRequest(LocalDateTime olderThen) {
+
+    return entityManager.createNamedQuery("Vacation.findPendingOldRequests")
+            .setParameter("status", VacationStatus.APPLIED)
+            .setParameter("date", olderThen)
+            .getResultList();
 
   }
 

@@ -24,6 +24,16 @@ public class VacationRequest {
 
   private LocalDateTime dateOfRequest;
 
+  private String reminderEmailSent;
+
+  public String getReminderEmailSent() {
+    return reminderEmailSent;
+  }
+
+  public void setReminderEmailSent(String reminderEmailSent) {
+    this.reminderEmailSent = reminderEmailSent;
+  }
+
   public LocalDateTime getDataOfRequest() {
     return dateOfRequest;
   }
