@@ -30,7 +30,7 @@ public class RemindSchedule {
 
     @Schedule(hour = "*", minute = "*/1", second = "*", info = "Every 1 minute timer")
     public void requestReminderSchedule() throws IOException {
-        LOGGER.info("Created remind schedule been");
+        LOGGER.info("Remind schedule are still working...");
 
         List<Vacation> requestsToSend = vacationDao.findPendingRequest(LocalDateTime.now().minusMinutes(SEND_REQEST_OLDER_THEN));
         LOGGER.debug("Lenght of requestToSend list {}", requestsToSend.size());
@@ -43,6 +43,7 @@ public class RemindSchedule {
             LOGGER.info("Email will be send");
             mailSender.sendRequestReminder("jjdd8highfive@gmail.com", content);
             requestsToSend.forEach(vacation -> vacation.setReminderEmailSent("1"));
+            LOGGER.info("Email was sent");
         }
     }
 }
