@@ -61,7 +61,7 @@ public class MailSender {
   public void sendNotification(VacationRequest vacationRequest, String emailRecipient) throws IOException {
     EmployeeView employeeView = employeeService.findById(vacationRequest.getEmployeeId());
     String contentValue = "Please be informed new vacation request is waiting for your approval. Vacation requested by " + employeeView.getFirstName()
-            + " " + employeeView.getSurname() + ". " + vacationRequest.getVacationType() + " from:" + vacationRequest.getDateFrom() + " to " + vacationRequest.getDateTo();
+      + " " + employeeView.getSurname() + ". " + vacationRequest.getVacationType().getVacationType() + " from: " + vacationRequest.getDateFrom() + " to " + vacationRequest.getDateTo();
     Email from = new Email("Vacation-Manager@HighFive.com");
     String subject = "Vacation Manager notification. New vacation request.";
     Email to = new Email(emailRecipient);

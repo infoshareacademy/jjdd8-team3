@@ -14,6 +14,9 @@
               <div class="p-5">
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Request approved.</h1>
+                  <form class="user" action="/" method="get">
+                    <span><button type="submit" class="btn btn-primary" name="vacation_id">Back to main</button></span>
+                  </form>
                 </div>
               </div>
             </div>

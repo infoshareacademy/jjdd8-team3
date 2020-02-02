@@ -399,5 +399,16 @@ public class VacationService {
 
   }
 
+  public int getVacationEntitlement(Employee employee) {
+    return entitlementDao.getEntitlementByEmployee(employee).getVacationLeft();
+  }
+
+  public int getOnDemandEntitlement(Employee employee) {
+    return entitlementDao.getEntitlementByEmployee(employee).getOnDemandVacationLeft();
+  }
+
+  public int getParentalEntitlement(Employee employee) {
+    return entitlementDao.getEntitlementByEmployee(employee).getAdditionalLeft();
+  }
 }
 

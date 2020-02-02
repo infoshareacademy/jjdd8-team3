@@ -32,7 +32,7 @@ insert into vacation (employee_id, from_date, vacation_status, to_date, vacation
 insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type, date_of_request, reminder_email_sent) values (5, '2020-06-17', 'APPROVED', '2020-06-27', 'VACATION','2020-02-20 16:21:25.829997', '1');
 insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type, date_of_request, reminder_email_sent) values (6, '2020-07-17', 'APPROVED', '2020-07-27', 'VACATION','2020-02-20 16:21:25.829997', '1');
 insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type, date_of_request, reminder_email_sent) values (7, '2020-07-17', 'APPROVED', '2020-07-25', 'VACATION','2020-02-20 16:21:25.829997', '1');
-insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type, date_of_request, reminder_email_sent) values (8, '2020-08-03', 'APPROVED', '2020-02-24', 'VACATION','2020-02-20 16:21:25.829997', '1');
+insert into vacation (employee_id, from_date, vacation_status, to_date, vacation_type, date_of_request, reminder_email_sent) values (8, '2020-08-03', 'APPROVED', '2020-08-24', 'VACATION','2020-02-20 16:21:25.829997', '1');
 
 insert into statistic (month_number, month_name, vacation_days_count) values (1, 'JANUARY', 14);
 insert into statistic (month_number, month_name, vacation_days_count) values (2, 'FEBRUARY', 5);

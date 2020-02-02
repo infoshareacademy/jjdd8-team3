@@ -29,25 +29,47 @@ public class EmployeeMapper {
         employeeView.setFirstName(employee.getFirstName());
         employeeView.setSurname(employee.getSurname());
         employeeView.setEmail(employee.getEmail());
-        employeeView.setPosition(employee.getPosition());
-        employeeView.setTeam(teamMapper.mapEntityToView(employee.getTeam()));
-        employeeView.setHireDate(employee.getHireDate());
-        employeeView.setHolidayEntitlement(employee.getHolidayEntitlement());
-        employeeView.setAdditionalEntitlement(employee.getAdditionalEntitlement());
-        employeeView.setRole(employee.getRole());
+      employeeView.setPosition(employee.getPosition());
+      employeeView.setTeam(teamMapper.mapEntityToView(employee.getTeam()));
+      employeeView.setHireDate(employee.getHireDate());
+      employeeView.setHolidayEntitlement(employee.getHolidayEntitlement());
+      employeeView.setAdditionalEntitlement(employee.getAdditionalEntitlement());
+      employeeView.setRole(employee.getRole());
 
-        return employeeView;
+      return employeeView;
     }
 
-    //for save
-    public Employee mapRequestToEntity(EmployeeRequest request) {
+  public Employee mapViewToEntity(EmployeeView employeeView) {
 
-        Employee employee = new Employee();
+    Employee employee = new Employee();
 
-        return mapRequestToEntity(request, employee);
+    if (employee == null) {
+      return employee;
     }
 
-    //for update
+    employee.setId(employeeView.getId());
+    employee.setFirstName(employeeView.getFirstName());
+    employee.setSurname(employeeView.getSurname());
+    employee.setEmail(employeeView.getEmail());
+    employee.setPosition(employeeView.getPosition());
+    employee.setHireDate(employeeView.getHireDate());
+    employee.setHolidayEntitlement(employeeView.getHolidayEntitlement());
+    employee.setAdditionalEntitlement(employeeView.getAdditionalEntitlement());
+    employee.setRole(employeeView.getRole());
+
+    return employee;
+  }
+
+
+  //for save
+  public Employee mapRequestToEntity(EmployeeRequest request) {
+
+    Employee employee = new Employee();
+
+    return mapRequestToEntity(request, employee);
+  }
+
+  //for update
     public Employee mapRequestToEntity(EmployeeRequest request, Employee employee) {
 
         employee.setFirstName(request.getFirstName());

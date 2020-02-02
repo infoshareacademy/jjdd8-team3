@@ -14,6 +14,9 @@
               <div class="p-5">
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Request sent to your manager.</h1>
+                  <form class="user" action="/" method="get">
+                    <span><button type="submit" class="btn btn-primary" name="vacation_id">Back to main</button></span>
+                  </form>
                   <p> Please patiently wait for approval.</p>
                 </div>
               </div>

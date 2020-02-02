@@ -1,7 +1,9 @@
 package com.infoshare.academy.highfive.web.servlet.vacation;
 
 import com.infoshare.academy.highfive.dto.request.VacationRequest;
+import com.infoshare.academy.highfive.dto.view.EmployeeView;
 import com.infoshare.academy.highfive.freemarker.TemplateProvider;
+import com.infoshare.academy.highfive.mapper.entity.EmployeeMapper;
 import com.infoshare.academy.highfive.mapper.request.VacationRequestMapper;
 import com.infoshare.academy.highfive.service.VacationService;
 import com.infoshare.academy.highfive.service.configuration.MailSender;
@@ -40,6 +42,9 @@ public class RequestVacationServlet extends HttpServlet {
   @Inject
   MailSender mailSender;
 
+  @Inject
+  EmployeeMapper employeeMapper;
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -51,11 +56,18 @@ public class RequestVacationServlet extends HttpServlet {
 
     Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
 
+    EmployeeView employee = (EmployeeView) session.getAttribute("loggedEmployee");
+    Long id = employee.getId();
+
+
     dataModel.put("method", req.getMethod());
     dataModel.put("contentTemplate", "request-vacation.ftlh");
     dataModel.put("title", "Request vacation");
     dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
     dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
+    dataModel.put("entitlementVacation", vacationService.getVacationEntitlement(employeeMapper.mapViewToEntity(employee)));
+    dataModel.put("entitlementOnDemand", vacationService.getOnDemandEntitlement(employeeMapper.mapViewToEntity(employee)));
+    dataModel.put("entitlementParental", vacationService.getParentalEntitlement(employeeMapper.mapViewToEntity(employee)));
 
     LOGGER.info("User provided with vacation form.");
 
