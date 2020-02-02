@@ -348,5 +348,20 @@ public class VacationService {
 
   }
 
+  public List<VacationView> listAllEmployeeVacation(Long id) {
+    Optional<Employee> employee = employeeDao.getById(id);
+    return vacationDao.getVacationByEmployee(employee.get()).stream()
+      .map(vacation -> vacationMapper.mapEntityToView(vacation))
+      .collect(Collectors.toList());
+
+  }
+
+  @Transactional
+  public void removeVacation(Long id) {
+
+    vacationDao.removeVacation(vacationDao.getVacationById(id));
+
+  }
+
 }
 

@@ -1,5 +1,6 @@
 package com.infoshare.academy.highfive.dao;
 
+import com.infoshare.academy.highfive.domain.Employee;
 import com.infoshare.academy.highfive.domain.Team;
 import com.infoshare.academy.highfive.domain.Vacation;
 import com.infoshare.academy.highfive.domain.VacationStatus;
@@ -101,6 +102,19 @@ public class VacationDao {
       .setParameter("startDate", startDate)
       .setParameter("endDate", endDate)
       .getResultList();
+  }
+
+  public List<Vacation> getVacationByEmployee(Employee employee) {
+    return entityManager
+      .createNamedQuery("Vacation.getAllEmployeeVacation")
+      .setParameter("employee", employee)
+      .getResultList();
+
+  }
+
+  public void removeVacation(Vacation vacation) {
+    entityManager.remove(vacation);
+
   }
 
 }
