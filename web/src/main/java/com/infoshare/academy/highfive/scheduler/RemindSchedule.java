@@ -20,7 +20,7 @@ import java.util.List;
 public class RemindSchedule {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(RemindSchedule.class);
-    private static final int SEND_REQEST_OLDER_THEN = 5;
+    private static final int SEND_REQEST_OLDER_THEN = 15;
 
     @Inject
     private MailSender mailSender;
@@ -28,7 +28,7 @@ public class RemindSchedule {
     @Inject
     private VacationDao vacationDao;
 
-    @Schedule(hour = "*", minute = "*/1", second = "*", info = "Every 1 minute timer")
+    @Schedule(hour = "*", minute = "*", second = "*/60", info = "Every 1 minute timer")
     public void requestReminderSchedule() throws IOException {
         LOGGER.info("Remind schedule are still working...");
 
