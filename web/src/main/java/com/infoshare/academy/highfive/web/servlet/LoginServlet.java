@@ -129,7 +129,6 @@ public class LoginServlet extends HttpServlet {
 
             }
 
-
         } else {
             LOGGER.info("Invalid ID token.");
             resp.sendRedirect("/error.html");
