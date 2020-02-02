@@ -7,23 +7,19 @@ import com.sendgrid.helpers.mail.objects.Content;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-import javax.ejb.TimerService;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//@Singleton
-//@Startup
+@Singleton
+@Startup
 public class RemindSchedule {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(RemindSchedule.class);
-    private static final int INITIAL_DURATION = 120_000;
-    private static final int INTERVAL_DURATION = 60_000;
     private static final int SEND_REQEST_OLDER_THEN = 5;
 
     @Inject
@@ -32,21 +28,9 @@ public class RemindSchedule {
     @Inject
     private VacationDao vacationDao;
 
-    @Resource
-    TimerService timerService;
-
-    @PostConstruct
-    public void init() {
+    @Schedule(hour = "*", minute = "*/1", second = "*", info = "Every 1 minute timer")
+    public void requestReminderSchedule() throws IOException {
         LOGGER.info("Created remind schedule been");
-        timerService.createTimer(INITIAL_DURATION, INTERVAL_DURATION);
-    }
-
-//    @Schedule(hour = "*", minute = "1", second = "*", info = "Every 1 minute timer")
-//    public void requestReminderSchedule() throws IOException {
-//    LOGGER.info("Created remind schedule been");
-
-    @Timeout
-    public void requestReminderSchedule(Timer timer) throws IOException {
 
         List<Vacation> requestsToSend = vacationDao.findPendingRequest(LocalDateTime.now().minusMinutes(SEND_REQEST_OLDER_THEN));
         LOGGER.debug("Lenght of requestToSend list {}", requestsToSend.size());
