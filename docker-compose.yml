@@ -19,7 +19,7 @@ services:
     build:
       context: ./web
     ports:
-      - 4300:8080
+      - 8080:8080
       - 4301:9990
     depends_on:
       - mysql
