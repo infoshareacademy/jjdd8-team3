@@ -28,14 +28,18 @@ import java.time.LocalDateTime;
     "JOIN FETCH Team team ON employee.team = team " +
     "WHERE team = :team " +
     "AND ((:startDate BETWEEN vacation.vacationFrom AND vacation.vacationTo) " +
-    "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo))"),
+    "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo)) " +
+    "OR (vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
+    "OR (vacation.vacationTo BETWEEN :startDate AND :endDate)"),
   @NamedQuery(name = "Vacation.getAllVacation", query = "SELECT vacation " +
     "FROM Vacation vacation " +
     "WHERE ((:startDate BETWEEN vacation.vacationFrom AND vacation.vacationTo) " +
     "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo))"),
   @NamedQuery(name = "Vacation.getAllEmployeeVacation", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "WHERE vacation.employee = :employee"),
+    "WHERE vacation.employee = :employee " +
+    "AND (vacation.vacationStatus = :approved OR vacation.vacationStatus = :applied) " +
+    "AND vacation.vacationFrom > :today"),
   @NamedQuery(name = "Vacation.findPendingOldRequests", query = "SELECT vacation " +
     "FROM Vacation vacation " +
     "WHERE vacation.vacationStatus = :status AND vacation.dateOfRequest < :date AND vacation.reminderEmailSent LIKE '0'")

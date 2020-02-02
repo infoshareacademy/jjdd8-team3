@@ -37,9 +37,6 @@
                   <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Withdraw
                   </button>
                 </form>
-              </td>
-              <td>
-              </td>
             </tr>
           </#list>
           </tbody>
