@@ -397,6 +397,7 @@
             auth2.signOut().then(function () {
                 window.location.href = "/login?logout=true";
             });
+            auth2.disconnect();
         }
 
         function onLoad() {

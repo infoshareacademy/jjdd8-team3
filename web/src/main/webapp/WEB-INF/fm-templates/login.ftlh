@@ -21,7 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 
 </head>
@@ -90,6 +90,22 @@
         $('body').append(form);
         form.submit();
     }
+   // if(urlParams.has('logout')) {
+   //     function signOut() {
+   //         var auth2 = gapi.auth2.getAuthInstance();
+   //         auth2.signOut().then(function () {
+   //             window.location.href = "/login?logout=true";
+   //         });
+   //         auth2.disconnect();
+   //         window.location.href = "/login?logout=true";
+   //     }
+   // }
+   //
+   //  function onLoad() {
+   //      gapi.load('auth2', function() {
+   //          gapi.auth2.init();
+   //      });
+   //  }
 </script>
 
 

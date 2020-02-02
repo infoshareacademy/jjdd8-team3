@@ -121,6 +121,8 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("userEmail", email);
                     session.setAttribute("loggedEmployee", employeeView);
                     session.setAttribute("loggedEmployeeRole", employeeView.getRole());
+                } else{
+                    resp.sendRedirect("/login?logout=true");
                 }
 
             }
