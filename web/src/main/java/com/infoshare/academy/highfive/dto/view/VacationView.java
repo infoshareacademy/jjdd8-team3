@@ -2,7 +2,6 @@ package com.infoshare.academy.highfive.dto.view;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infoshare.academy.highfive.domain.VacationStatus;
-import com.infoshare.academy.highfive.domain.VacationType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,7 +32,7 @@ public class VacationView {
     private LocalDateTime dateOfRequest;
 
     @JsonProperty("vacation_type")
-    private VacationType vacationType;
+    private String vacationType;
 
     @JsonProperty("vacation_status")
     private VacationStatus vacationStatus;
@@ -110,13 +109,13 @@ public class VacationView {
         this.dateOfRequest = dateOfRequest;
     }
 
-    public VacationType getVacationType() {
-        return vacationType;
-    }
+  public String getVacationType() {
+    return vacationType;
+  }
 
-    public void setVacationType(VacationType vacationType) {
-        this.vacationType = vacationType;
-    }
+  public void setVacationType(String vacationType) {
+    this.vacationType = vacationType;
+  }
 
     public VacationStatus getVacationStatus() {
         return vacationStatus;
