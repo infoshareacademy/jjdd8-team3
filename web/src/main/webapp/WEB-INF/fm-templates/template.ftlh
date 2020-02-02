@@ -75,7 +75,7 @@
                     <a class="collapse-item" href="/employee/list-holidays">Holiday - List</a>
                     <a class="collapse-item" href="/employee/calendar">Calendar</a>
                     <a class="collapse-item" href="/employee/holiday-search">Holiday search</a>
-                    <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation</a>
+                    <a class="collapse-item" href="/employee/vacation/search-by-date">Vacation search</a>
                 </div>
             </div>
         </li>
@@ -97,7 +97,7 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-        <#if loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN">
+        <#if loggedEmployeeRole?? && (loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN")>
         <!-- Heading -->
         <div class="sidebar-heading">
             Manager
@@ -133,7 +133,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 </#if>
-        <#if loggedEmployeeRole =="ADMIN">
+        <#if loggedEmployeeRole?? && loggedEmployeeRole =="ADMIN">
         <!-- Heading -->
         <div class="sidebar-heading">
             Administration
@@ -189,18 +189,18 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                               aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+<#--                <!-- Topbar Search &ndash;&gt;-->
+<#--                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">-->
+<#--                    <div class="input-group">-->
+<#--                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
+<#--                               aria-label="Search" aria-describedby="basic-addon2">-->
+<#--                        <div class="input-group-append">-->
+<#--                            <button class="btn btn-primary" type="button">-->
+<#--                                <i class="fas fa-search fa-sm"></i>-->
+<#--                            </button>-->
+<#--                        </div>-->
+<#--                    </div>-->
+<#--                </form>-->
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -235,7 +235,7 @@
                             <i class="fas fa-calendar fa-fw"></i>
                         </a>
                     </li>
-                    <#if loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN">
+                    <#if loggedEmployeeRole?? && (loggedEmployeeRole =="MANAGER" || loggedEmployeeRole =="ADMIN")>
                     <!-- Nav Item - Alerts -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -364,7 +364,7 @@
                     </button>
                 </div>
                 <div id="modal-info-body" class="modal-body">
-                    <div id="calendar"></div>
+                    <div id="calendar-modal"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-button" type="button" data-dismiss="modal">Ok</button>
@@ -397,6 +397,7 @@
             auth2.signOut().then(function () {
                 window.location.href = "/login?logout=true";
             });
+            auth2.disconnect();
         }
 
         function onLoad() {

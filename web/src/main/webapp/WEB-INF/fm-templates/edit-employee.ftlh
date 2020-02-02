@@ -48,7 +48,7 @@
               <td>${employee.firstName!}</td>
               <td>${employee.surname!}</td>
               <td>${employee.position!}</td>
-              <td>${employee.role!}</td>
+              <td>${employee.role.getRole()!}</td>
               <td>${employee.team.getTeamName()!}</td>
             </tr>
           </#list>

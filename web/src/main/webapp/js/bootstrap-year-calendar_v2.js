@@ -377,7 +377,7 @@
 					if(events.length == 1) {
 						weight = 4;
 					}
-					else if(events.length <= 3) {
+					else if(events.length <= 8) {
 						weight = 2;
 					}
 					else {
@@ -393,23 +393,25 @@
 							if(boxShadow != '') {
 								boxShadow += ",";
 							}
-							
-							boxShadow += 'inset 0 -' + (parseInt(i) + 1) * weight + 'px 0 0 ' + events[i].color;
-						}
-
-						if(events[events.length - 1].typeStyle == 'box') {
-							if(events[events.length - 1].type == 'National holiday') {
-								elt.parent().css('border', "2px inset red");
-							} else if(events[events.length - 1].type == 'Custom'){
-								elt.parent().css('border', "2px inset green");
+							if (events[i].typeStyle != 'box') {
+								boxShadow += 'inset 0 -' + (parseInt(i) + 1) * weight + 'px 0 0 ' + events[i].color;
 							} else {
-								elt.parent().css('border', "2px inset orange");
+								if (events[i].type == 'National holiday') {
+									//elt.parent().css('border', "2px inset red");
+									elt.parent().css('background-color', "rgba(255, 0, 0,0.4)");
+								} else if (events[i].type == 'Custom') {
+									//elt.parent().css('border', "2px inset green");
+									elt.parent().css('background-color', "rgba(0, 255, 0,0.4)");
+								} else {
+									elt.parent().css('background-color', "rgba(255, 153, 51,0.4)");
+									//elt.parent().css('border', "2px inset orange");
+								}
 							}
-
-						} else {
-							elt.parent().css('box-shadow', boxShadow);
 						}
+
+							elt.parent().css('box-shadow', boxShadow);
 					}
+
 					break;
 			
 				case 'background':
