@@ -1,10 +1,9 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
+Chart.defaults.global.defaultFontColor = '#535562';
 
 function number_format(number, decimals, dec_point, thousands_sep) {
-    // *     example: number_format(1234.56, 2, ',', ' ');
-    // *     return: '1 234,56'
+
     number = (number + '').replace(',', '').replace(' ', '');
     var n = !isFinite(+number) ? 0 : +number,
         prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -27,6 +26,33 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
+dataFromApi=[];
+$.ajax({
+    type: "GET",
+    url: "/api/vacation/admin/popular-months",
+    enctype: 'application/json;charset=UTF-8',
+    dataType: 'json',
+    contentType: 'application/json;charset=UTF-8'
+})
+    .done(
+        function (data) {
+            $.each(data, function (i, item) {
+                vacCount = item.vacation_days_count;
+                dataFromApi.push(
+                    vacCount
+                );
+                //$('#alert-list').show();
+            });
+            myBarChart.config.data.datasets[0].data=dataFromApi; // Would update the first dataset's value of 'March' to be 50
+            myBarChart.update();
+        })
+    .fail(
+        function () {
+            $('#modal-info-body').html("Ups... API request data Operation failed!!!");
+            $('#infoModal').modal('show');
+        });
+
+
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
@@ -34,11 +60,11 @@ var myBarChart = new Chart(ctx, {
     data: {
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [{
-            label: "Revenue",
+            label: "Holidays",
             backgroundColor: "#4e73df",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            data: [10, 7, 20, 23, 21, 5, 5, 5, 5, 5, 11, 12],
+            data: dataFromApi,
         }],
     },
     options: {
@@ -63,12 +89,12 @@ var myBarChart = new Chart(ctx, {
                 ticks: {
                     maxTicksLimit: 12
                 },
-                maxBarThickness: 25,
+                maxBarThickness: 55,
             }],
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100,
+                    max: 50,
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
@@ -103,7 +129,7 @@ var myBarChart = new Chart(ctx, {
             callbacks: {
                 label: function(tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ': Total days' + number_format(tooltipItem.yLabel);
+                    return datasetLabel + ': Total days ' + number_format(tooltipItem.yLabel);
                 }
             }
         },

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class UploadJsonServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         PrintWriter writer = resp.getWriter();
+        HttpSession session = req.getSession();
 
         Map<String, Object> dataModel = new HashMap<>();
 
@@ -41,6 +43,9 @@ public class UploadJsonServlet extends HttpServlet {
         dataModel.put("contentTemplate", "upload-json.ftlh");
         dataModel.put("title", "Upload JSON Holidays");
         dataModel.put("pluginJsTemplate", "plugin-js-upload-json.ftlh");
+
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
         try {
             template.process(dataModel, writer);

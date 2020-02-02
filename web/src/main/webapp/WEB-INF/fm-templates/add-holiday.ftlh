@@ -37,8 +37,9 @@
                   <div class="form-group">
                     <label for="holiday-type">Holiday type</label>
                     <select class="form-control" id="holiday-type" name="holiday-type">
+                      <#if action=="edit"><option value="${holiday.holidayType.getType()}" selected>${holiday.holidayType.getType()}</option></#if>
                       <#list holidayTypes as holidayType>
-                      <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
+                        <option value="${holidayType.getType()!}">${holidayType.getType()!}</option>
                       </#list>
                     </select>
                   </div>

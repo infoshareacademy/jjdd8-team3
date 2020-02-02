@@ -3,13 +3,42 @@ package com.infoshare.academy.highfive.dao;
 import com.infoshare.academy.highfive.domain.Team;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class TeamDao {
 
-    public void addTeam(Team team){}
+    @PersistenceContext
+    EntityManager entityManager;
 
-    public void editTeam(Team team){}
+    public void save(Team team) {
+        entityManager.persist(team);
+    }
 
-    public void deleteTeam (Team team){}
+    public List<Team> listAllTeam() {
+        return this.entityManager
+                .createNamedQuery("Team.findAll")
+                .getResultList();
+    }
+
+    public Optional<Team> getById(Long id) {
+        return Optional.ofNullable(entityManager.find(Team.class, id));
+    }
+
+    public void update(Team team) {
+        entityManager.merge(team);
+    }
+
+    public void edit() { }
+
+    public Team delete(Long id) {
+
+        Team removedTeam = getById(id).orElseThrow();
+        entityManager.remove(removedTeam);
+
+        return removedTeam;
+    }
 }

@@ -4,14 +4,19 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @NamedQueries({
-  @NamedQuery(name = "Entitlement.findEntitlementByEmployeeId", query = "SELECT entitlement " +
+  @NamedQuery(name = "Entitlement.findEntitlementByEmployee", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
-    "WHERE entitlement.employee = :employeeId"),
-  @NamedQuery(name = "Entitlement.findRemainingEntitlement", query = "SELECT (entitlement.previousYearLeft + entitlement.vacationLeft + entitlement.additionalLeft + entitlement.onDemandHolidayLeft) AS entitlementSum, entitlement.employee " +
+    "WHERE entitlement.employee = :employee"),
+  @NamedQuery(name = "Entitlement.findEmployeeVacationTaken", query = "SELECT entitlement " +
     "FROM Entitlement entitlement " +
-    "ORDER BY entitlementSum")
-}
-)
+    "ORDER BY entitlement.vacationTaken DESC"),
+  @NamedQuery(name = "Entitlement.findTeamVacationTaken", query = "SELECT SUM(entitlement.vacationTaken), team.teamName " +
+    "FROM Entitlement entitlement " +
+    "JOIN FETCH Employee employee ON entitlement.employee = employee " +
+    "JOIN FETCH Team team ON employee.team = team " +
+    "GROUP BY team.teamName"),
+
+})
 
 @Entity
 @Table(name = "entitlement")
@@ -35,11 +40,14 @@ public class Entitlement {
   private int additionalLeft;
 
   @Column(name = "on_demand_holiday_left", nullable = false)
-  private int onDemandHolidayLeft;
+  private int onDemandVacationLeft;
+
+  @Column(name = "vacation_taken")
+  private int vacationTaken;
 
   @OneToOne
-  @JoinColumn(unique = true, name = "employee_id")
-  Employee employee;
+  @JoinColumn(unique = true, name = "employee_id", nullable = false)
+  private Employee employee;
 
   public int getId() {
     return id;
@@ -77,11 +85,27 @@ public class Entitlement {
     this.additionalLeft = additionalLeft;
   }
 
-  public int getOnDemandHolidayLeft() {
-    return onDemandHolidayLeft;
+  public int getOnDemandVacationLeft() {
+    return onDemandVacationLeft;
   }
 
-  public void setOnDemandHolidayLeft(int onDemandHolidayLeft) {
-    this.onDemandHolidayLeft = onDemandHolidayLeft;
+  public void setOnDemandVacationLeft(int onDemandHolidayLeft) {
+    this.onDemandVacationLeft = onDemandHolidayLeft;
+  }
+
+  public int getVacationTaken() {
+    return vacationTaken;
+  }
+
+  public void setVacationTaken(int holidayTaken) {
+    this.vacationTaken = holidayTaken;
+  }
+
+  public Employee getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
   }
 }

@@ -16,23 +16,22 @@ import java.io.IOException;
 @RequestScoped
 public class MailSender {
 
-    Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
+  Logger LOGGER = LoggerFactory.getLogger(getClass().getName());
 
-    private void createMail(Email from, String subject, Email to, Content content) throws IOException {
-        Mail mail = new Mail(from, subject, to, content);
+//    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
+//    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
 
-//        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
-//        https://www.sendinblue.com/
-//        https://mailchimp.com/
-        SendGrid sg = new SendGrid("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");
-        Request request = new Request();
-        request.setMethod(Method.POST);
-        request.setEndpoint("mail/send");
-        request.setBody(mail.build());
-        Response response = sg.api(request);
-        LOGGER.info("{}", response.getStatusCode());
-        LOGGER.info("{}", response.getBody());
-        LOGGER.info("{}", response.getHeaders());
+  private void createMail(Email from, String subject, Email to, Content content) throws IOException {
+    Mail mail = new Mail(from, subject, to, content);
+    SendGrid sg = new SendGrid("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");
+    Request request = new Request();
+    request.setMethod(Method.POST);
+    request.setEndpoint("mail/send");
+    request.setBody(mail.build());
+    Response response = sg.api(request);
+    System.out.println(response.getStatusCode());
+        System.out.println(response.getBody());
+        System.out.println(response.getHeaders());
     }
 
     public void sendApprove(String emailRecipient) throws IOException {

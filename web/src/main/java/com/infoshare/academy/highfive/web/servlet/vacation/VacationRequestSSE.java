@@ -2,6 +2,8 @@ package com.infoshare.academy.highfive.web.servlet.vacation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshare.academy.highfive.domain.VacationStatus;
+import com.infoshare.academy.highfive.dto.view.VacationSSE;
+import com.infoshare.academy.highfive.service.VacationService;
 import com.infoshare.academy.highfive.dto.view.VacationView;
 import com.infoshare.academy.highfive.service.VacationService;
 
@@ -11,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,27 +27,26 @@ public class VacationRequestSSE extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+            throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writer().withDefaultPrettyPrinter();
         resp.setContentType("text/event-stream");
         resp.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession();
 
-        //resp.getWriter().write("retry: 20000\n");
-
-        List<VacationView> vacationViews = vacationService.listAllPendingRequests()
+        List<VacationSSE> vacationSSE = vacationService.listAllPendingRequestsSSE()
                 .stream()
                 .filter(v -> v.getVacationStatus().equals(VacationStatus.APPLIED))
-                .sorted((o1, o2) -> o2.getDateOfRequest().compareTo(o1.getDateOfRequest()))
-                .limit(2)
+                .sorted((a, b) -> (int) (Timestamp.valueOf(b.getDateOfRequest()).getTime() - Timestamp.valueOf(a.getDateOfRequest()).getTime()))
+                .limit(1)
                 .collect(Collectors.toList());
 
-        String listToJson = mapper.writeValueAsString(vacationViews);
 
-        resp.getWriter().write(listToJson);
+        String listToJson = mapper.writeValueAsString(vacationSSE);
 
-        //  String aaa = resp.getWriter().write(listToJson);
+        resp.getWriter().write("retry: 10000\n");
+        resp.getWriter().write("data:" + listToJson + "\n\n");
 
     }
 

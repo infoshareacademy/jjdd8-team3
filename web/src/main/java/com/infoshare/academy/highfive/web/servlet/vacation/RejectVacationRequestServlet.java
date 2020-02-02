@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -40,11 +41,14 @@ public class RejectVacationRequestServlet extends HttpServlet {
 
     resp.setContentType("text/html;charset=UTF-8");
     PrintWriter writer = resp.getWriter();
+    HttpSession session = req.getSession();
     Map<String, Object> dataModel = new HashMap<>();
 
     dataModel.put("contentTemplate", "pending-vacation-reject.ftlh");
     dataModel.put("title", "Success!");
 
+    dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
+    dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
 
     try {
       template.process(dataModel, writer);

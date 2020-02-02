@@ -37,7 +37,7 @@
           <tbody>
           <#list holidays as holiday>
             <tr>
-              <td><a href="/admin/add-holiday?action=edit&get=${holiday.id!}" class="btn btn-info btn-circle btn-sm">
+              <td style="white-space:nowrap"><a href="/admin/add-holiday?action=edit&get=${holiday.id!}" class="btn btn-info btn-circle btn-sm">
                   <i class="fas fa-info-circle"></i>
                 </a>
                   <a href="#" class="btn btn-danger btn-circle btn-sm" onclick="deleteHoliday(${holiday.id!})">

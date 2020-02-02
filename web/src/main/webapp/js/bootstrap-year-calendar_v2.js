@@ -396,8 +396,19 @@
 							
 							boxShadow += 'inset 0 -' + (parseInt(i) + 1) * weight + 'px 0 0 ' + events[i].color;
 						}
-						
-						elt.parent().css('box-shadow', boxShadow);
+
+						if(events[events.length - 1].typeStyle == 'box') {
+							if(events[events.length - 1].type == 'National holiday') {
+								elt.parent().css('border', "2px inset red");
+							} else if(events[events.length - 1].type == 'Custom'){
+								elt.parent().css('border', "2px inset green");
+							} else {
+								elt.parent().css('border', "2px inset orange");
+							}
+
+						} else {
+							elt.parent().css('box-shadow', boxShadow);
+						}
 					}
 					break;
 			

@@ -2,8 +2,8 @@ package com.infoshare.academy.highfive.service.configuration;
 
 import com.infoshare.academy.highfive.domain.Holiday;
 import com.infoshare.academy.highfive.exception.JsonFileNotFound;
+import com.infoshare.academy.highfive.util.ApiJsonParserWeb;
 import com.infoshare.academy.highfive.service.HolidayService;
-import com.infoshare.academy.highfive.util.ApiJsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class UploadJsonService {
     HolidayService holidayService;
 
     public Integer uploadJsonHoliday(InputStream fileName) throws IOException, JsonFileNotFound {
-        ApiJsonParser apiJsonParser = new ApiJsonParser();
+        ApiJsonParserWeb apiJsonParser = new ApiJsonParserWeb();
         List<Holiday> holidayListFromUpload = apiJsonParser.parseFromInputStream(fileName);
         holidayListFromUpload.forEach(holiday -> holidayService.saveFromParser(holiday));
         LOGGER.info("Uploading Json holiday file!");

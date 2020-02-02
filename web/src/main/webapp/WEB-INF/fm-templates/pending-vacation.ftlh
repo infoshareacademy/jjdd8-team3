@@ -12,34 +12,31 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
           <tr>
-            <th>Request ID</th>
             <th>First name</th>
             <th>Surname</th>
             <th>Position</th>
             <th>Start date</th>
             <th>End date</th>
             <th>Vacation type</th>
-            <th>Approve request</th>
-            <th>Reject request</th>
+            <th>Approve</th>
+            <th>Deny</th>
           </tr>
           </thead>
           <tfoot>
           <tr>
-            <th>EmployeeID</th>
             <th>First name</th>
             <th>Surname</th>
             <th>Position</th>
             <th>Start date</th>
             <th>End date</th>
             <th>Vacation type</th>
-            <th>Approve request</th>
-            <th>Reject request</th>
+            <th>Approve</th>
+            <th>Deny</th>
           </tr>
           </tfoot>
           <tbody>
           <#list vacations as vacation>
             <tr>
-              <td>${vacation.id!}</td>
               <td>${vacation.firstName!}</td>
               <td>${vacation.surname!}</td>
               <td>${vacation.position!}</td>
@@ -48,12 +45,13 @@
               <td>${vacation.vacationType!}</td>
               <td>
                 <form class="user" action="approve-request" method="post">
-                <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Approve request</button>
+                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Approve
+                  </button>
                 </form>
               </td>
               <td>
                 <form class="user" action="reject-request" method="post">
-                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Reject request</button>
+                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Deny</button>
                 </form>
               </td>
             </tr>
