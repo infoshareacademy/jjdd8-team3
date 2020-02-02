@@ -27,12 +27,12 @@ import java.time.LocalDateTime;
     "JOIN FETCH Employee employee ON vacation.employee = employee " +
     "JOIN FETCH Team team ON employee.team = team " +
     "WHERE team = :team " +
-    "AND ((vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
-    "OR (vacation.vacationTo BETWEEN :startDate AND :endDate))"),
+    "AND ((:startDate BETWEEN vacation.vacationFrom AND vacation.vacationTo) " +
+    "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo))"),
   @NamedQuery(name = "Vacation.getAllVacation", query = "SELECT vacation " +
     "FROM Vacation vacation " +
-    "WHERE (vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
-    "OR (vacation.vacationTo BETWEEN :startDate AND :endDate)"),
+    "WHERE ((:startDate BETWEEN vacation.vacationFrom AND vacation.vacationTo) " +
+    "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo))"),
 })
 
 @Entity
