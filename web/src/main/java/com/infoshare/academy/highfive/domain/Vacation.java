@@ -34,7 +34,9 @@ import java.time.LocalDateTime;
   @NamedQuery(name = "Vacation.getAllVacation", query = "SELECT vacation " +
     "FROM Vacation vacation " +
     "WHERE ((:startDate BETWEEN vacation.vacationFrom AND vacation.vacationTo) " +
-    "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo))"),
+    "OR (:endDate BETWEEN vacation.vacationFrom AND vacation.vacationTo)) " +
+    "OR (vacation.vacationFrom BETWEEN :startDate AND :endDate) " +
+    "OR (vacation.vacationTo BETWEEN :startDate AND :endDate)"),
   @NamedQuery(name = "Vacation.getAllEmployeeVacation", query = "SELECT vacation " +
     "FROM Vacation vacation " +
     "WHERE vacation.employee = :employee " +
