@@ -72,51 +72,53 @@ public class RequestVacationServlet extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     try {
+
       VacationRequest vacationRequest = vacationRequestMapper.mapParamsToRequest(req);
       this.vacationService.addVacation(vacationRequest);
 
+      Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
+
+      resp.setContentType("text/html;charset=UTF-8");
+      PrintWriter writer = resp.getWriter();
+      Map<String, Object> dataModel = new HashMap<>();
+
+      LOGGER.debug("Status {}", vacationService.getStatus());
+
+      HttpSession session = req.getSession();
+
+      if (vacationService.getStatus().equals("ok")) {
+
+        dataModel.put("contentTemplate", "request-vacation-success.ftlh");
+        dataModel.put("title", "Success!");
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+        dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
+        mailSender.sendNotification(vacationRequest, "jjdd8highfive@gmail.com ");
+
+      } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
+
+        dataModel.put("contentTemplate", "request-vacation-exceeding-entitlement.ftlh");
+        dataModel.put("title", "Given days are exceeding entitlement.");
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+        dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
+
+      } else {
+
+        dataModel.put("contentTemplate", "request-vacation-wrong-date.ftlh");
+        dataModel.put("title", "Wrong dates given.");
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+        dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
+
+      }
+
+      try {
+        template.process(dataModel, writer);
+      } catch (
+        TemplateException e) {
+        LOGGER.error(e.getMessage(), e);
+      }
+
+
     } catch (ParseException e) {
-      LOGGER.error(e.getMessage(), e);
-    }
-
-    Template template = this.templateProvider.getTemplate(getServletContext(), "template.ftlh");
-
-    resp.setContentType("text/html;charset=UTF-8");
-    PrintWriter writer = resp.getWriter();
-    Map<String, Object> dataModel = new HashMap<>();
-
-    LOGGER.debug("Status {}", vacationService.getStatus());
-
-    HttpSession session = req.getSession();
-
-    if (vacationService.getStatus().equals("ok")) {
-
-      dataModel.put("contentTemplate", "request-vacation-success.ftlh");
-      dataModel.put("title", "Success!");
-      dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
-      dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
-      mailSender.sendNotification("jjdd8highfive@gmail.com");
-
-    } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
-
-      dataModel.put("contentTemplate", "request-vacation-exceeding-entitlement.ftlh");
-      dataModel.put("title", "Given days are exceeding entitlement.");
-      dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
-      dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
-
-    } else {
-
-      dataModel.put("contentTemplate", "request-vacation-wrong-date.ftlh");
-      dataModel.put("title", "Wrong dates given.");
-      dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
-      dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
-
-    }
-
-    try {
-      template.process(dataModel, writer);
-    } catch (
-      TemplateException e) {
       LOGGER.error(e.getMessage(), e);
     }
 

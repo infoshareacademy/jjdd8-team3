@@ -7,6 +7,7 @@ services:
       MYSQL_DATABASE: "hfvdb"
       MYSQL_USER: "root"
       MYSQL_ROOT_PASSWORD: "root"
+
     ports:
       - 4306:3306
     command: ["mysqld",
@@ -27,3 +28,4 @@ services:
       - mysql
     environment:
       - TZ=Europe/Warsaw
+      - SENDGRID_API_KEY=${HF_SENDGRID_API_KEY}
