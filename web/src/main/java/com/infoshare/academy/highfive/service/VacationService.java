@@ -100,6 +100,7 @@ public class VacationService {
     } else if (vacationRequest.getVacationType().equals(VacationType.ON_DEMAND)) {
 
       entitlement.setOnDemandVacationLeft(entitlement.getOnDemandVacationLeft() - daysOff);
+      entitlement.setVacationLeft(entitlement.getVacationLeft() - daysOff);
 
     } else {
 
@@ -230,6 +231,7 @@ public class VacationService {
 
         int onDemandLeft = entitlement.getOnDemandVacationLeft();
         entitlement.setOnDemandVacationLeft(onDemandLeft + daysOff);
+        entitlement.setVacationLeft(entitlement.getVacationLeft() + daysOff);
         entitlementDao.save(entitlement);
 
       } else if (vacation.getVacationType().equals(VacationType.PARENTAL)) {
