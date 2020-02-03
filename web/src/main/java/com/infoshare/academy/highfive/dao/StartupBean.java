@@ -28,7 +28,7 @@ public class StartupBean {
         LOGGER.info("Initializing service;");
         try {
             ApiJsonParserWeb apiJsonParser = new ApiJsonParserWeb();
-            List<Holiday> holidayList = apiJsonParser.parseFromURL("https://calendarific.com/api/v2/holidays?&api_key=c2ddb57bb630fc01911bbcd01ae5907afaaced8e058cc0f33a938f517c0321e3&country=PL&year=2020");
+            List<Holiday> holidayList = apiJsonParser.parseFromURL("https://calendarific.com/api/v2/holidays?&api_key=c2ddb57bb630fc01911bbcd01ae5907afaaced8e058cc0f33a938f517c0321e3&country=PL&year=2021");
             if (holidayList != null) {
                 holidayList.forEach(holiday -> holidayService.saveFromParser(holiday));
             }

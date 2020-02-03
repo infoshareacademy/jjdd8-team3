@@ -47,8 +47,8 @@ public class SearchHolidayByNameServlet extends HttpServlet {
         dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
         dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
 
-        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
-        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+        dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
 
         try {
             template.process(dataModel, writer);
@@ -64,6 +64,7 @@ public class SearchHolidayByNameServlet extends HttpServlet {
 
         String searchByName = req.getParameter("search_by_name");
 
+        HttpSession session = req.getSession();
         List<HolidayView> holidays = null;
         boolean validInputs = false;
 
@@ -78,7 +79,6 @@ public class SearchHolidayByNameServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
-        HttpSession session = req.getSession();
         Map<String, Object> dataModel = new HashMap<>();
 
         dataModel.put("method", req.getMethod());
@@ -90,8 +90,8 @@ public class SearchHolidayByNameServlet extends HttpServlet {
         dataModel.put("searchType", "by name");
         dataModel.put("holidays", holidays);
 
-        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee") );
-        dataModel.put("loggedEmployeeRole",session.getAttribute("loggedEmployeeRole") );
+        dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
+        dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
 
 
         try {
