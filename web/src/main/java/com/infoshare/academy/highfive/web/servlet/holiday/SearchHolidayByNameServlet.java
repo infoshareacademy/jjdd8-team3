@@ -84,8 +84,8 @@ public class SearchHolidayByNameServlet extends HttpServlet {
         dataModel.put("method", req.getMethod());
         dataModel.put("contentTemplate", "holiday-search-result.ftlh");
         dataModel.put("title", "Search result by name");
-        dataModel.put("pluginCssTemplate", "plugin-css-all-holiday.ftlh");
-        dataModel.put("pluginJsTemplate", "plugin-js-all-holiday.ftlh");
+        dataModel.put("pluginCssTemplate", "plugin-css-stylesheet.ftlh");
+        dataModel.put("pluginJsTemplate", "plugin-js-servlets.ftlh");
         dataModel.put("validInputs", validInputs);
         dataModel.put("searchType", "by name");
         dataModel.put("holidays", holidays);
