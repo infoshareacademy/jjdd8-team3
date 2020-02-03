@@ -104,7 +104,7 @@ public class RequestVacationServlet extends HttpServlet {
         dataModel.put("title", "Success!");
         dataModel.put("loggedEmployee", session.getAttribute("loggedEmployee"));
         dataModel.put("loggedEmployeeRole", session.getAttribute("loggedEmployeeRole"));
-        mailSender.sendNotification(vacationRequest, "jjdd8highfive@gmail.com ");
+        mailSender.sendNotification(vacationRequest, "jjdd8highfive@gmail.com");
 
       } else if (vacationService.getStatus().equals("exceeding_entitlement")) {
 
