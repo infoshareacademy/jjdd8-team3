@@ -2,6 +2,7 @@ package com.infoshare.academy.highfive.mapper.entity;
 
 import com.infoshare.academy.highfive.dao.TeamDao;
 import com.infoshare.academy.highfive.domain.Employee;
+import com.infoshare.academy.highfive.domain.Role;
 import com.infoshare.academy.highfive.dto.request.EmployeeRequest;
 import com.infoshare.academy.highfive.dto.view.EmployeeView;
 
@@ -81,7 +82,7 @@ public class EmployeeMapper {
         employee.setLogin(request.getLogin());
         employee.setPosition(request.getPosition());
         employee.setTeam(teamDao.getById(request.getTeam()).orElse(null));
-        employee.setRole(request.getRole());
+        employee.setRole(request.getRole() == null ? Role.EMPLOYEE : request.getRole());
 
         return employee;
     }
