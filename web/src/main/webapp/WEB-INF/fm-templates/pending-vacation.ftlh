@@ -43,10 +43,11 @@
               <td>${vacation.vacationFrom!}</td>
               <td>${vacation.vacationTo!}</td>
               <td>${vacation.vacationType!}</td>
-              <form class="user" action="approve-request" method="post">
-                <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Approve
-                </button>
-              </form>
+              <td>
+                <form class="user" action="approve-request" method="post">
+                  <button type="submit" class="btn btn-primary" name="vacation_id" value="${vacation.id}">Approve
+                  </button>
+                </form>
               </td>
               <td>
                 <form class="user" action="reject-request" method="post">
