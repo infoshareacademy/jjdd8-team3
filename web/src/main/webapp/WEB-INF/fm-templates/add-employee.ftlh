@@ -26,7 +26,7 @@
                   <#if action == "edit"><input id="employee-id" name="employee-id"
                                                type="hidden" value="${employee.id!}"></#if>
                   <div class="form-group">
-                    <label for="first-name">first name</label>
+                    <label for="first-name">name</label>
                     <input type="text" class="form-control form-control-user" name="first-name"
                            id="first-name" placeholder="Employee's first name"
                            value="<#if action == "edit">${employee.firstName!}</#if>" required>
@@ -86,6 +86,7 @@
                            value="<#if action == "edit">${employee.additionalEntitlement!}</#if>" required>
                   </div>
 
+                  <#if loggedEmployeeRole?? && (loggedEmployeeRole =="ADMIN")>
                   <div class="form-group">
                     <label for="role">Role</label>
                     <select class="form-control" id="role" name="role">
@@ -95,7 +96,7 @@
                         <option value="${role.getRole()!}">${role.getRole()!}</option>
                       </#list>
                     </select>
-                  </div>
+                  </div></#if>
 
                   <button type="submit" class="btn btn-primary"><span class="icon text-white-50">
                     <i class="fas fa-calendar-plus"></i>
