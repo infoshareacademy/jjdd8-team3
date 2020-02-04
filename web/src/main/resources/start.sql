@@ -4,14 +4,14 @@ insert into team(team_name) values ('HighFive');
 insert into team(team_name) values ('Sales');
 insert into team(team_name) values ('HR');
 insert into team(team_name) values ('Admins');
-insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'mich.chmielewski@gmail.com', 'Michał', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Chmielewski', 1);
-insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'bartosz.dagiel@gmail.com', 'Bartek', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Dagiel', 1);
-insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'bandurskim@gmail.com', 'Maciej', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Bandurski', 1);
-insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'slezak.robert88@gmail.com', 'Robert', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Ślęzak', 1);
+insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Michał', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Chmielewski', 1);
+insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Bartek', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Dagiel', 1);
+insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Maciej', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Bandurski', 1);
+insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Robert', '2012-12-23', 26,  'Java developer', 'ADMIN', 'Ślęzak', 1);
 insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Jan', '2012-12-23', 26,  'Specialist', 'EMPLOYEE', 'Jankowski', 2);
 insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Janusz', '2015-12-23', 26, 'Specialist', 'EMPLOYEE', 'Kowaslki', 2);
 insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Lukasz', '2015-12-23', 26, 'Specialist', 'EMPLOYEE', 'Szukasz', 3);
-insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'marek.wladyslaw.zajac@gmail.com', 'Marek', '2015-12-23', 26, 'Java developer', 'ADMIN', 'Zając', 1);
+insert into employee(additional_entitlement, email, first_name, hire_date, holiday_entitlement, position, role, surname, team_id) values (2, 'jjdd8highfive@gmail.com', 'Marek', '2015-12-23', 26, 'Java developer', 'ADMIN', 'Zając', 1);
 
 
 insert into entitlement(additional_left, current_year, on_demand_holiday_left, previous_year_left, vacation_left, vacation_taken, employee_id) values (1, '2020-01-01', 4, 0, 26, 12, 1);
